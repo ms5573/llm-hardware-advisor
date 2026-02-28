@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LLM Hardware Advisor</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card: #161616;
+    --card-2: #1c1c1c;
+    --text: #ffffff;
+    --muted: #bdbdbd;
+    --accent: #4CAF50;
+    --accent-2: #2e7d32;
+    --border: #2a2a2a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Space Grotesk", "Satoshi", "Avenir Next", "Segoe UI", sans-serif;
+    background: radial-gradient(1200px 800px at 80% -10%, #1a2a1a, transparent),
+                radial-gradient(900px 600px at 0% 110%, #0a1a12, transparent),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .progress {
+    width: 100%;
+    height: 8px;
+    background: #101010;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 18px 0 30px;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #8bc34a);
+    transition: width 300ms ease;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .question {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .answers { display: grid; gap: 12px; }
+  .answer {
+    width: 100%;
+    text-align: left;
+    border: 1px solid var(--border);
+    background: var(--card-2);
+    color: var(--text);
+    padding: 16px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+  }
+  .answer:hover {
+    border-color: var(--accent);
+    background: #1f2a1f;
+    transform: translateY(-1px);
+  }
+  .fade-enter { opacity: 0; transform: translateY(6px); }
+  .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 220ms ease; }
+  .result-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .primary {
+    border: 1px solid var(--accent);
+    background: linear-gradient(180deg, #162116, #141414);
+  }
+  .tag {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #143214;
+    border: 1px solid #1d4d1d;
+    color: #b7f3b7;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .product-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 6px 0 8px;
+  }
+  .product-sub {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .btn {
+    background: var(--accent);
+    color: #0b0b0b;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn.secondary {
+    background: #1c1c1c;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  details {
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: #141414;
+  }
+  summary { cursor: pointer; font-weight: 600; }
+  .model-list { margin: 10px 0 0 0; padding: 0; list-style: none; color: var(--muted); }
+  .model-list li { margin: 6px 0; }
+  .callout {
+    border: 1px solid #2c5a2c;
+    background: #0f1a0f;
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .callout a { color: #9be79b; text-decoration: none; font-weight: 600; }
+  .why {
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .footer {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 24px;
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .title { font-size: 22px; }
+    .question { font-size: 20px; }
+    .product-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="title">LLM Hardware Advisor</div>
+        <div class="subtitle">5 quick questions to pick the right local AI setup</div>
+      </div>
+      <div class="subtitle" id="stepLabel">Question 1 of 5</div>
+    </header>
+
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+    <main id="app"></main>
+
+    <div class="footer">Affiliate links support this project. No price change for you.</div>
+  </div>
+
+<script>
+const questions = [
+  {
+    text: "What do you want to use AI for?",
+    options: [
+      "Local coding assistant (autocomplete, explain code, write functions)",
+      "Chat / personal assistant (ask questions, summarize, write)",
+      "Research & reasoning (deep analysis, chain-of-thought, complex tasks)",
+      "Agents & automation (run overnight pipelines, agentic workflows)",
+      "All of the above / building AI products"
+    ]
+  },
+  {
+    text: "How fast does it need to respond?",
+    options: [
+      "Real-time — I'm typing and need instant replies",
+      "A few seconds is fine — I'll wait for quality",
+      "Doesn't matter — I run it overnight in batches"
+    ]
+  },
+  {
+    text: "What's your budget?",
+    options: [
+      "Under $800",
+      "$800 – $2,000",
+      "$2,000 – $4,500",
+      "$4,500+ — I want the best"
+    ]
+  },
+  {
+    text: "What OS do you use?",
+    options: [
+      "macOS",
+      "Windows",
+      "Linux / I don't care"
+    ]
+  },
+  {
+    text: "How technical are you?",
+    options: [
+      "Non-technical — I want plug-and-play",
+      "Somewhat — I can follow a tutorial",
+      "Developer — I'll configure anything"
+    ]
+  }
+];
+
+const llmfit = {
+  "Mac Mini M4 16GB": [
+    { name: "Llama-3.2-11B", toks: "~12 tok/s", use: "chat/assistant" },
+    { name: "Mistral-7B", toks: "~18 tok/s", use: "coding/chat" },
+    { name: "Phi-3.5-Mini", toks: "~25 tok/s", use: "fast assistant" }
+  ],
+  "Mac Mini M4 Pro 24GB": [
+    { name: "Llama-3.2-11B", toks: "~20 tok/s", use: "fast chat" },
+    { name: "Qwen2.5-Coder-14B", toks: "~12 tok/s", use: "coding" },
+    { name: "Mistral-7B", toks: "~25 tok/s", use: "assistant" }
+  ],
+  "RTX 4060 Ti 16GB": [
+    { name: "Llama-3.2-11B", toks: "~40 tok/s", use: "chat/assistant" },
+    { name: "Mistral-7B", toks: "~55 tok/s", use: "coding" },
+    { name: "CodeGemma-7B", toks: "~35 tok/s", use: "coding assistant" }
+  ],
+  "RTX 4090 24GB": [
+    { name: "Llama-3.3-70B Q4", toks: "~40 tok/s", use: "best quality chat" },
+    { name: "Qwen2.5-Coder-32B", toks: "~35 tok/s", use: "coding agent" },
+    { name: "DeepSeek-R1-32B", toks: "~30 tok/s", use: "reasoning" }
+  ],
+  "Mac Studio M4 Max 64GB": [
+    { name: "DeepSeek-R1-32B", toks: "~8 tok/s", use: "reasoning" },
+    { name: "Llama-3.3-70B Q4", toks: "~4 tok/s", use: "best quality chat" },
+    { name: "Qwen2.5-Coder-32B", toks: "~8 tok/s", use: "coding agent" }
+  ],
+  "DGX Spark 128GB": [
+    { name: "DeepSeek-R1-70B", toks: "~15 tok/s", use: "serious reasoning" },
+    { name: "Qwen3.5-122B", toks: "~8 tok/s", use: "frontier model" },
+    { name: "2x Spark: DeepSeek R1 671B", toks: "full", use: "maximum scale" }
+  ]
+};
+
+const tiers = {
+  tier1: {
+    name: "Tier 1 — Budget",
+    primary: {
+      title: "Mac Mini M4 16GB",
+      runs: "Runs 7–14B models smoothly with unified memory, great for assistants and code help.",
+      bestFor: "macOS users, plug-and-play, chat & coding",
+      amazon: "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+2024&tag=ms5573-20",
+      why: "Budget-friendly and quiet with strong unified memory bandwidth. Ideal for local assistants and small models."
+    },
+    runner: {
+      title: "RTX 4060 Ti 16GB",
+      runs: "Great budget GPU for Windows/Linux with solid 7–13B model performance.",
+      bestFor: "Windows/Linux users who want raw GPU speed",
+      amazon: "https://www.amazon.com/s?k=ZOTAC+RTX+4060+Ti+16GB&tag=ms5573-20",
+      why: "Best performance per dollar for local inference on a PC."
+    }
+  },
+  tier2: {
+    name: "Tier 2 — Mid",
+    primary: {
+      title: "Mac Mini M4 Pro 24GB",
+      runs: "Runs 30B-class models and local pipelines with strong efficiency.",
+      bestFor: "Mac users who want higher capacity without a big tower",
+      amazon: "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+Pro&tag=ms5573-20",
+      why: "Best plug-and-play mid-tier system for real work."
+    },
+    runner: {
+      title: "RTX 4090 24GB",
+      runs: "Fastest consumer GPU; runs 30B at real-time speed.",
+      bestFor: "Windows/Linux power users and agentic workflows",
+      amazon: "https://www.amazon.com/s?k=ASUS+ROG+RTX+4090&tag=ms5573-20",
+      why: "Unmatched speed for local inference if you can build a PC."
+    }
+  },
+  tier3: {
+    name: "Tier 3 — Serious",
+    primary: {
+      title: "Mac Studio M4 Max 64GB",
+      runs: "Runs 32B at production speed and 70B slowly; massive memory bandwidth.",
+      bestFor: "Developers, agentic pipelines, research workflows",
+      amazon: "https://www.amazon.com/s?k=Apple+Mac+Studio+M4+Max&tag=ms5573-20",
+      why: "The best unified-memory desktop under $4K for serious local AI."
+    },
+    runner: {
+      title: "RTX 4090 + 64GB RAM rig",
+      runs: "High-end PC build for large models and multi-agent tools.",
+      bestFor: "Windows/Linux builders who want max performance",
+      amazon: "https://www.amazon.com/s?k=RTX+4090+PC+build&tag=ms5573-20",
+      why: "Great flexibility and performance with a DIY build."
+    }
+  },
+  tier4: {
+    name: "Tier 4 — All-in",
+    primary: {
+      title: "NVIDIA DGX Spark",
+      runs: "128GB unified memory, Grace Blackwell GB10, 1 PFLOP FP4.",
+      bestFor: "Building AI products, 24/7 agent pipelines, serious research",
+      amazon: "https://www.amazon.com/dp/B0DYTDXK26?tag=ms5573-20",
+      why: "The only desktop-class system that runs frontier models and agent pipelines nonstop."
+    },
+    runner: {
+      title: "2x DGX Spark + NVLink",
+      runs: "256GB unified memory for huge models like DeepSeek R1 671B.",
+      bestFor: "Teams or founders needing maximum on-desk scale",
+      amazon: "https://www.amazon.com/s?k=NVLink+cable&tag=ms5573-20",
+      why: "Pairs two Sparks into a single massive inference box."
+    }
+  }
+};
+
+const accessories = [
+  { name: "Samsung T9 2TB External SSD", link: "https://www.amazon.com/s?k=Samsung+T9+2TB&tag=ms5573-20", note: "Fast model storage" },
+  { name: "NVLink cable (for 2x DGX Spark)", link: "https://www.amazon.com/s?k=NVLink+cable&tag=ms5573-20", note: "~$200–300" }
+];
+
+let current = 0;
+const answers = [];
+
+const app = document.getElementById("app");
+const progressBar = document.getElementById("progressBar");
+const stepLabel = document.getElementById("stepLabel");
+
+function renderQuestion() {
+  const q = questions[current];
+  stepLabel.textContent = `Question ${current + 1} of ${questions.length}`;
+  progressBar.style.width = `${((current) / questions.length) * 100}%`;
+
+  const card = document.createElement("div");
+  card.className = "card fade-enter";
+  card.innerHTML = `
+    <div class="question">${q.text}</div>
+    <div class="answers">
+      ${q.options.map((opt, idx) => `<button class="answer" data-idx="${idx}">${opt}</button>`).join("")}
+    </div>
+  `;
+
+  app.innerHTML = "";
+  app.appendChild(card);
+  requestAnimationFrame(() => card.classList.add("fade-enter-active"));
+
+  card.querySelectorAll(".answer").forEach(btn => {
+    btn.addEventListener("click", () => {
+      answers[current] = parseInt(btn.dataset.idx, 10);
+      if (current < questions.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        renderResults();
+      }
+    });
+  });
+}
+
+function chooseTier() {
+  const purpose = answers[0];
+  const speed = answers[1];
+  const budget = answers[2];
+  const os = answers[3];
+  const tech = answers[4];
+
+  if (budget === 3 || purpose === 4 || purpose === 3) return "tier4";
+  if (budget === 2) return "tier3";
+  if (budget === 1) return "tier2";
+  return "tier1";
+}
+
+function tailorPrimary(tierKey) {
+  const os = answers[3];
+  const tech = answers[4];
+  const tier = tiers[tierKey];
+
+  if (tierKey === "tier1") {
+    if (os === 0 || tech === 0) return tier.primary;
+    return tier.runner;
+  }
+  if (tierKey === "tier2") {
+    if (os === 0) return tier.primary;
+    return tier.runner;
+  }
+  if (tierKey === "tier3") {
+    if (os === 0) return tier.primary;
+    return tier.runner;
+  }
+  return tier.primary;
+}
+
+function runnerUp(tierKey, primary) {
+  const tier = tiers[tierKey];
+  return primary.title === tier.primary.title ? tier.runner : tier.primary;
+}
+
+function buildWhy(primary) {
+  const purpose = answers[0];
+  const speed = answers[1];
+  const tech = answers[4];
+
+  const purposeText = [
+    "You want a strong local coding assistant.",
+    "You want a fast, friendly assistant for daily tasks.",
+    "You need deeper reasoning and research models.",
+    "You want overnight automation and agent pipelines.",
+    "You're building AI products and need flexibility."
+  ][purpose];
+
+  const speedText = [
+    "Real-time responses matter for your workflow.",
+    "You're willing to wait a few seconds for quality.",
+    "Batch and overnight processing are fine."
+  ][speed];
+
+  const techText = [
+    "Plug-and-play simplicity is a priority.",
+    "You can follow setup guides.",
+    "You're comfortable configuring anything."
+  ][tech];
+
+  return `${purposeText} ${speedText} ${techText} ${primary.title} fits that balance.`;
+}
+
+function modelListHtml(primary) {
+  const list = llmfit[primary.title] || [];
+  return list.map(m => `<li><strong>${m.name}</strong> — ${m.toks} (${m.use})</li>`).join("");
+}
+
+function renderResults() {
+  progressBar.style.width = "100%";
+  stepLabel.textContent = "Results";
+
+  const tierKey = chooseTier();
+  const primary = tailorPrimary(tierKey);
+  const runner = runnerUp(tierKey, primary);
+  const why = buildWhy(primary);
+  const purpose = answers[0];
+  const showOpenClaw = purpose === 3 || purpose === 4;
+
+  app.innerHTML = `
+    <div class="result-grid">
+      <div class="card primary">
+        <div class="tag">Primary Recommendation</div>
+        <div class="product-title">${primary.title}</div>
+        <div class="product-sub">${primary.bestFor}</div>
+        <p class="why">${primary.runs}</p>
+        <p class="why">${why}</p>
+        <div class="cta-row">
+          <a class="btn" href="${primary.amazon}" target="_blank" rel="noopener">Amazon search</a>
+          <button class="btn secondary" id="retake1">Retake quiz</button>
+        </div>
+        <details>
+          <summary>What models can I run?</summary>
+          <ul class="model-list">${modelListHtml(primary)}</ul>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="tag">Runner-up</div>
+        <div class="product-title">${runner.title}</div>
+        <div class="product-sub">${runner.bestFor}</div>
+        <p class="why">${runner.runs}</p>
+        <div class="cta-row">
+          <a class="btn secondary" href="${runner.amazon}" target="_blank" rel="noopener">Amazon search</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tag">Recommended Add-ons</div>
+        ${accessories.map(a => `
+          <p class="why"><strong>${a.name}</strong> — ${a.note}<br />
+          <a class="btn secondary" href="${a.link}" target="_blank" rel="noopener">Amazon search</a></p>
+        `).join("")}
+      </div>
+
+      ${showOpenClaw ? `
+      <div class="callout">
+        <strong>Running OpenClaw?</strong> The DGX Spark is the only desktop machine that runs full agentic pipelines 24/7 without thermal throttling. Connect via direct ethernet to your Mac for zero-latency inference. <a href="https://openclaw.ai" target="_blank" rel="noopener">Learn more about OpenClaw →</a>
+      </div>
+      ` : ""}
+
+      <div class="cta-row">
+        <button class="btn secondary" id="retake2">Retake quiz</button>
+      </div>
+    </div>
+  `;
+
+  const r1 = document.getElementById("retake1");
+  const r2 = document.getElementById("retake2");
+  if (r1) r1.addEventListener("click", resetQuiz);
+  if (r2) r2.addEventListener("click", resetQuiz);
+}
+
+function resetQuiz() {
+  current = 0;
+  answers.length = 0;
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
