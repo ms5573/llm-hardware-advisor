@@ -112,6 +112,11 @@
     font-weight: 600;
     margin-bottom: 8px;
   }
+  .tag.blue {
+    background: #0f1a2e;
+    border-color: #1d3a6d;
+    color: #8ec5ff;
+  }
   .product-title {
     font-size: 22px;
     font-weight: 700;
@@ -143,6 +148,60 @@
     color: var(--text);
     border: 1px solid var(--border);
   }
+  .model-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .model-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .model-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #1a1a1a;
+    color: var(--text);
+  }
+  .model-table tr:last-child td { border-bottom: none; }
+  .fit-bar {
+    display: inline-block;
+    height: 6px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  .fit-perfect { background: #4CAF50; }
+  .fit-good { background: #8bc34a; }
+  .fit-tight { background: #ff9800; }
+  .model-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: #0f1a0f;
+    border: 1px solid #1d4d1d;
+    color: #b7f3b7;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .model-count span { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .upgrade-nudge {
+    border: 1px solid #2a3a5a;
+    background: #0f1420;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 0;
+  }
+  .upgrade-nudge strong { color: #8ec5ff; }
   details {
     margin-top: 12px;
     border: 1px solid var(--border);
@@ -151,8 +210,6 @@
     background: #141414;
   }
   summary { cursor: pointer; font-weight: 600; }
-  .model-list { margin: 10px 0 0 0; padding: 0; list-style: none; color: var(--muted); }
-  .model-list li { margin: 6px 0; }
   .callout {
     border: 1px solid #2c5a2c;
     background: #0f1a0f;
@@ -171,10 +228,18 @@
     margin-top: 24px;
     text-align: center;
   }
+  .data-credit {
+    color: #666;
+    font-size: 11px;
+    margin-top: 8px;
+  }
+  .data-credit a { color: #888; }
   @media (max-width: 640px) {
     .title { font-size: 22px; }
     .question { font-size: 20px; }
     .product-title { font-size: 20px; }
+    .model-table { font-size: 13px; }
+    .model-table th, .model-table td { padding: 6px 6px; }
   }
 </style>
 </head>
@@ -210,18 +275,18 @@ const questions = [
   {
     text: "How fast does it need to respond?",
     options: [
-      "Real-time — I'm typing and need instant replies",
-      "A few seconds is fine — I'll wait for quality",
-      "Doesn't matter — I run it overnight in batches"
+      "Real-time \u2014 I'm typing and need instant replies",
+      "A few seconds is fine \u2014 I'll wait for quality",
+      "Doesn't matter \u2014 I run it overnight in batches"
     ]
   },
   {
     text: "What's your budget?",
     options: [
       "Under $800",
-      "$800 – $2,000",
-      "$2,000 – $4,500",
-      "$4,500+ — I want the best"
+      "$800 \u2013 $2,000",
+      "$2,000 \u2013 $4,500",
+      "$4,500+ \u2014 I want the best"
     ]
   },
   {
@@ -235,66 +300,222 @@ const questions = [
   {
     text: "How technical are you?",
     options: [
-      "Non-technical — I want plug-and-play",
-      "Somewhat — I can follow a tutorial",
-      "Developer — I'll configure anything"
+      "Non-technical \u2014 I want plug-and-play",
+      "Somewhat \u2014 I can follow a tutorial",
+      "Developer \u2014 I'll configure anything"
     ]
   }
 ];
 
-const llmfit = {
-  "Mac Mini M4 16GB": [
-    { name: "Llama-3.2-11B", toks: "~12 tok/s", use: "chat/assistant" },
-    { name: "Mistral-7B", toks: "~18 tok/s", use: "coding/chat" },
-    { name: "Phi-3.5-Mini", toks: "~25 tok/s", use: "fast assistant" }
-  ],
-  "Mac Mini M4 Pro 24GB": [
-    { name: "Llama-3.2-11B", toks: "~20 tok/s", use: "fast chat" },
-    { name: "Qwen2.5-Coder-14B", toks: "~12 tok/s", use: "coding" },
-    { name: "Mistral-7B", toks: "~25 tok/s", use: "assistant" }
-  ],
-  "RTX 4060 Ti 16GB": [
-    { name: "Llama-3.2-11B", toks: "~40 tok/s", use: "chat/assistant" },
-    { name: "Mistral-7B", toks: "~55 tok/s", use: "coding" },
-    { name: "CodeGemma-7B", toks: "~35 tok/s", use: "coding assistant" }
-  ],
-  "RTX 4090 24GB": [
-    { name: "Llama-3.3-70B Q4", toks: "~40 tok/s", use: "best quality chat" },
-    { name: "Qwen2.5-Coder-32B", toks: "~35 tok/s", use: "coding agent" },
-    { name: "DeepSeek-R1-32B", toks: "~30 tok/s", use: "reasoning" }
-  ],
-  "Mac Studio M4 Max 64GB": [
-    { name: "DeepSeek-R1-32B", toks: "~8 tok/s", use: "reasoning" },
-    { name: "Llama-3.3-70B Q4", toks: "~4 tok/s", use: "best quality chat" },
-    { name: "Qwen2.5-Coder-32B", toks: "~8 tok/s", use: "coding agent" }
-  ],
-  "DGX Spark 128GB": [
-    { name: "DeepSeek-R1-70B", toks: "~15 tok/s", use: "serious reasoning" },
-    { name: "Qwen3.5-122B", toks: "~8 tok/s", use: "frontier model" },
-    { name: "2x Spark: DeepSeek R1 671B", toks: "full", use: "maximum scale" }
-  ]
+// Model database sourced from llmfit (github.com/AlexsJones/llmfit)
+// Each model: name, params, ramGB (recommended), use category, fit score for that tier
+const modelDB = {
+  "Mac Mini M4 16GB": {
+    total: 266,
+    coding: [
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~18 tok/s" },
+      { name: "DeepSeek-Coder-V2-Lite-Instruct", params: "15.7B", ram: 14.6, fit: 72, toks: "~8 tok/s" },
+      { name: "Qwen2.5-Coder-1.5B-Instruct", params: "1.5B", ram: 2.0, fit: 88, toks: "~35 tok/s" }
+    ],
+    chat: [
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~18 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 96, toks: "~20 tok/s" },
+      { name: "Llama-3.2-3B-Instruct", params: "3.2B", ram: 3.0, fit: 88, toks: "~30 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 68, toks: "~6 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 95, toks: "~18 tok/s" },
+      { name: "DeepSeek-R1-0528-Qwen3-8B", params: "8.2B", ram: 7.6, fit: 93, toks: "~16 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~18 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 96, toks: "~20 tok/s" },
+      { name: "Phi-3.5-Mini-Instruct", params: "3.8B", ram: 3.5, fit: 88, toks: "~28 tok/s" }
+    ]
+  },
+  "Mac Mini M4 Pro 24GB": {
+    total: 285,
+    coding: [
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 92, toks: "~14 tok/s" },
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~25 tok/s" },
+      { name: "Devstral-Small-2507", params: "23.6B", ram: 22.0, fit: 72, toks: "~6 tok/s" }
+    ],
+    chat: [
+      { name: "Mistral-Small-24B-Instruct", params: "23.6B", ram: 22.0, fit: 72, toks: "~6 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~25 tok/s" },
+      { name: "Llama-3.2-11B-Instruct", params: "11B", ram: 10.2, fit: 95, toks: "~18 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 92, toks: "~12 tok/s" },
+      { name: "DeepSeek-R1-0528-Qwen3-8B", params: "8.2B", ram: 7.6, fit: 98, toks: "~22 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 98, toks: "~25 tok/s" }
+    ],
+    agents: [
+      { name: "Mistral-Small-24B-Instruct", params: "23.6B", ram: 22.0, fit: 72, toks: "~6 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~25 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 92, toks: "~14 tok/s" }
+    ]
+  },
+  "RTX 4060 Ti 16GB": {
+    total: 304,
+    coding: [
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~55 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 78, toks: "~25 tok/s" },
+      { name: "DeepSeek-Coder-V2-Lite-Instruct", params: "15.7B", ram: 14.6, fit: 72, toks: "~20 tok/s" }
+    ],
+    chat: [
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~55 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 96, toks: "~60 tok/s" },
+      { name: "Meta-Llama-3-8B-Instruct", params: "8.0B", ram: 7.5, fit: 94, toks: "~50 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 74, toks: "~22 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 95, toks: "~55 tok/s" },
+      { name: "DeepSeek-R1-0528-Qwen3-8B", params: "8.2B", ram: 7.6, fit: 93, toks: "~48 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 95, toks: "~55 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 96, toks: "~60 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 78, toks: "~25 tok/s" }
+    ]
+  },
+  "RTX 4090 24GB": {
+    total: 337,
+    coding: [
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 82, toks: "~35 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 92, toks: "~50 tok/s" },
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ],
+    chat: [
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 65, toks: "~18 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 98, toks: "~85 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-32B", params: "32.8B", ram: 30.5, fit: 82, toks: "~30 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 92, toks: "~45 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 82, toks: "~35 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 65, toks: "~18 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ]
+  },
+  "Mac Studio M4 Max 64GB": {
+    total: 340,
+    coding: [
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 93, toks: "~10 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 98, toks: "~22 tok/s" },
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 100, toks: "~30 tok/s" }
+    ],
+    chat: [
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 78, toks: "~5 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 80, toks: "~5 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 100, toks: "~30 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-32B", params: "32.8B", ram: 30.5, fit: 93, toks: "~8 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 98, toks: "~22 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 100, toks: "~30 tok/s" }
+    ],
+    agents: [
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 78, toks: "~5 tok/s" },
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 93, toks: "~10 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 80, toks: "~5 tok/s" }
+    ]
+  },
+  "RTX 4090 + 64GB RAM rig": {
+    total: 337,
+    coding: [
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 82, toks: "~35 tok/s" },
+      { name: "Qwen3-Coder-Next (Q4)", params: "14.4B", ram: 13.5, fit: 92, toks: "~50 tok/s" },
+      { name: "Qwen2.5-Coder-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ],
+    chat: [
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 65, toks: "~18 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" },
+      { name: "Mistral-7B-Instruct-v0.2", params: "7.2B", ram: 6.7, fit: 98, toks: "~85 tok/s" }
+    ],
+    reasoning: [
+      { name: "DeepSeek-R1-Distill-Qwen-32B", params: "32.8B", ram: 30.5, fit: 82, toks: "~30 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-14B", params: "14.8B", ram: 13.8, fit: 92, toks: "~45 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-7B", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 82, toks: "~35 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 65, toks: "~18 tok/s" },
+      { name: "Qwen2.5-7B-Instruct", params: "7.6B", ram: 7.1, fit: 98, toks: "~80 tok/s" }
+    ]
+  },
+  "DGX Spark 128GB": {
+    total: 367,
+    coding: [
+      { name: "Qwen3-Coder-Next", params: "79.7B", ram: 74.2, fit: 92, toks: "~12 tok/s" },
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 98, toks: "~30 tok/s" },
+      { name: "Qwen3-Coder-30B-A3B-Instruct", params: "30.5B", ram: 28.4, fit: 98, toks: "~32 tok/s" }
+    ],
+    chat: [
+      { name: "Qwen1.5-110B-Chat", params: "111.2B", ram: 103.6, fit: 72, toks: "~5 tok/s" },
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 96, toks: "~18 tok/s" },
+      { name: "Mixtral-8x7B-Instruct", params: "46.7B", ram: 43.5, fit: 96, toks: "~20 tok/s" }
+    ],
+    reasoning: [
+      { name: "GPT-OSS-120B", params: "116.8B", ram: 108.8, fit: 68, toks: "~4 tok/s" },
+      { name: "Qwen3-Next-80B-A3B-Instruct", params: "81.3B", ram: 75.7, fit: 90, toks: "~10 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-32B", params: "32.8B", ram: 30.5, fit: 98, toks: "~30 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen3-Coder-Next", params: "79.7B", ram: 74.2, fit: 92, toks: "~12 tok/s" },
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 96, toks: "~18 tok/s" },
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 98, toks: "~30 tok/s" }
+    ]
+  },
+  "2x DGX Spark + NVLink": {
+    total: 400,
+    coding: [
+      { name: "Qwen3-Coder-Next", params: "79.7B", ram: 74.2, fit: 100, toks: "~25 tok/s" },
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 100, toks: "~55 tok/s" },
+      { name: "Qwen3-Coder-30B-A3B-Instruct", params: "30.5B", ram: 28.4, fit: 100, toks: "~58 tok/s" }
+    ],
+    chat: [
+      { name: "DeepSeek-V3.2 (671B MoE)", params: "685B", ram: 638.3, fit: 55, toks: "~2 tok/s" },
+      { name: "Qwen1.5-110B-Chat", params: "111.2B", ram: 103.6, fit: 95, toks: "~12 tok/s" },
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 100, toks: "~35 tok/s" }
+    ],
+    reasoning: [
+      { name: "GPT-OSS-120B", params: "116.8B", ram: 108.8, fit: 92, toks: "~10 tok/s" },
+      { name: "Qwen3-Next-80B-A3B-Instruct", params: "81.3B", ram: 75.7, fit: 98, toks: "~20 tok/s" },
+      { name: "DeepSeek-R1-Distill-Qwen-32B", params: "32.8B", ram: 30.5, fit: 100, toks: "~55 tok/s" }
+    ],
+    agents: [
+      { name: "Qwen3-Coder-Next", params: "79.7B", ram: 74.2, fit: 100, toks: "~25 tok/s" },
+      { name: "Llama-3.3-Nemotron-Super-49B", params: "49.9B", ram: 46.4, fit: 100, toks: "~35 tok/s" },
+      { name: "Qwen2.5-Coder-32B-Instruct", params: "32.8B", ram: 30.5, fit: 100, toks: "~55 tok/s" }
+    ]
+  }
 };
 
 const tiers = {
   tier1: {
-    name: "Tier 1 — Budget",
+    name: "Tier 1 \u2014 Budget",
     primary: {
       title: "Mac Mini M4 16GB",
-      runs: "Runs 7–14B models smoothly with unified memory, great for assistants and code help.",
+      runs: "Runs 7\u201314B models smoothly with unified memory, great for assistants and code help.",
       bestFor: "macOS users, plug-and-play, chat & coding",
       amazon: "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+2024&tag=ms5573-20",
       why: "Budget-friendly and quiet with strong unified memory bandwidth. Ideal for local assistants and small models."
     },
     runner: {
       title: "RTX 4060 Ti 16GB",
-      runs: "Great budget GPU for Windows/Linux with solid 7–13B model performance.",
+      runs: "Great budget GPU for Windows/Linux with solid 7\u201313B model performance.",
       bestFor: "Windows/Linux users who want raw GPU speed",
       amazon: "https://www.amazon.com/s?k=ZOTAC+RTX+4060+Ti+16GB&tag=ms5573-20",
       why: "Best performance per dollar for local inference on a PC."
     }
   },
   tier2: {
-    name: "Tier 2 — Mid",
+    name: "Tier 2 \u2014 Mid",
     primary: {
       title: "Mac Mini M4 Pro 24GB",
       runs: "Runs 30B-class models and local pipelines with strong efficiency.",
@@ -311,7 +532,7 @@ const tiers = {
     }
   },
   tier3: {
-    name: "Tier 3 — Serious",
+    name: "Tier 3 \u2014 Serious",
     primary: {
       title: "Mac Studio M4 Max 64GB",
       runs: "Runs 32B at production speed and 70B slowly; massive memory bandwidth.",
@@ -328,9 +549,9 @@ const tiers = {
     }
   },
   tier4: {
-    name: "Tier 4 — All-in",
+    name: "Tier 4 \u2014 All-in",
     primary: {
-      title: "NVIDIA DGX Spark",
+      title: "DGX Spark 128GB",
       runs: "128GB unified memory, Grace Blackwell GB10, 1 PFLOP FP4.",
       bestFor: "Building AI products, 24/7 agent pipelines, serious research",
       amazon: "https://www.amazon.com/dp/B0DYTDXK26?tag=ms5573-20",
@@ -348,8 +569,12 @@ const tiers = {
 
 const accessories = [
   { name: "Samsung T9 2TB External SSD", link: "https://www.amazon.com/s?k=Samsung+T9+2TB&tag=ms5573-20", note: "Fast model storage" },
-  { name: "NVLink cable (for 2x DGX Spark)", link: "https://www.amazon.com/s?k=NVLink+cable&tag=ms5573-20", note: "~$200–300" }
+  { name: "NVLink cable (for 2x DGX Spark)", link: "https://www.amazon.com/s?k=NVLink+cable&tag=ms5573-20", note: "~$200\u2013300" }
 ];
+
+// Map quiz answer index to model category
+const purposeToCategory = ["coding", "chat", "reasoning", "agents", "agents"];
+const tierOrder = ["tier1", "tier2", "tier3", "tier4"];
 
 let current = 0;
 const answers = [];
@@ -391,11 +616,7 @@ function renderQuestion() {
 
 function chooseTier() {
   const purpose = answers[0];
-  const speed = answers[1];
   const budget = answers[2];
-  const os = answers[3];
-  const tech = answers[4];
-
   if (budget === 3 || purpose === 4 || purpose === 3) return "tier4";
   if (budget === 2) return "tier3";
   if (budget === 1) return "tier2";
@@ -406,7 +627,6 @@ function tailorPrimary(tierKey) {
   const os = answers[3];
   const tech = answers[4];
   const tier = tiers[tierKey];
-
   if (tierKey === "tier1") {
     if (os === 0 || tech === 0) return tier.primary;
     return tier.runner;
@@ -455,9 +675,93 @@ function buildWhy(primary) {
   return `${purposeText} ${speedText} ${techText} ${primary.title} fits that balance.`;
 }
 
-function modelListHtml(primary) {
-  const list = llmfit[primary.title] || [];
-  return list.map(m => `<li><strong>${m.name}</strong> — ${m.toks} (${m.use})</li>`).join("");
+function fitClass(score) {
+  if (score >= 90) return "fit-perfect";
+  if (score >= 75) return "fit-good";
+  return "fit-tight";
+}
+
+function fitLabel(score) {
+  if (score >= 90) return "Perfect";
+  if (score >= 75) return "Good";
+  return "Tight";
+}
+
+function getModelsForHardware(hwTitle, category) {
+  const db = modelDB[hwTitle];
+  if (!db) return [];
+  return db[category] || db["chat"] || [];
+}
+
+function getModelCount(hwTitle) {
+  const db = modelDB[hwTitle];
+  return db ? db.total : 0;
+}
+
+function modelTableHtml(hwTitle, category) {
+  const models = getModelsForHardware(hwTitle, category);
+  if (!models.length) return "";
+  const categoryLabels = { coding: "coding", chat: "your use case", reasoning: "reasoning", agents: "agents" };
+  const label = categoryLabels[category] || "your use case";
+  const count = getModelCount(hwTitle);
+  return `
+    <div class="model-count"><span>${count}</span> compatible models from llmfit database</div>
+    <table class="model-table">
+      <tr>
+        <th>Top models for ${label}</th>
+        <th>Size</th>
+        <th>Speed</th>
+        <th>Fit</th>
+      </tr>
+      ${models.map(m => `
+        <tr>
+          <td><strong>${m.name}</strong></td>
+          <td>${m.params}</td>
+          <td>${m.toks}</td>
+          <td><span class="fit-bar ${fitClass(m.fit)}" style="width:${m.fit * 0.4}px"></span>${fitLabel(m.fit)}</td>
+        </tr>
+      `).join("")}
+    </table>
+    <div class="data-credit">Model data from <a href="https://github.com/AlexsJones/llmfit" target="_blank" rel="noopener">llmfit</a> \u2014 497 models scored against hardware specs</div>
+  `;
+}
+
+function nextTierKey(currentTierKey) {
+  const idx = tierOrder.indexOf(currentTierKey);
+  if (idx < tierOrder.length - 1) return tierOrder[idx + 1];
+  return null;
+}
+
+function upgradeNudgeHtml(tierKey, category) {
+  const next = nextTierKey(tierKey);
+  if (!next) return "";
+
+  const nextTier = tiers[next];
+  const currentPrimary = tiers[tierKey].primary;
+  const nextPrimary = nextTier.primary;
+
+  const currentModels = getModelsForHardware(currentPrimary.title, category);
+  const nextModels = getModelsForHardware(nextPrimary.title, category);
+
+  const currentBiggest = currentModels.length ? currentModels[0] : null;
+  const nextBiggest = nextModels.length ? nextModels[0] : null;
+
+  if (!nextBiggest || !currentBiggest) return "";
+
+  const currentCount = getModelCount(currentPrimary.title);
+  const nextCount = getModelCount(nextPrimary.title);
+  const extraModels = nextCount - currentCount;
+
+  if (extraModels <= 0) return "";
+
+  return `
+    <div class="upgrade-nudge">
+      <strong>Upgrade insight:</strong> The ${nextPrimary.title} unlocks <strong>${extraModels} more models</strong>, including <strong>${nextBiggest.name}</strong> (${nextBiggest.params}) at ${nextBiggest.toks}.
+      <div class="cta-row">
+        <a class="btn secondary" href="${nextPrimary.amazon}" target="_blank" rel="noopener">See ${nextPrimary.title} on Amazon</a>
+      </div>
+    </div>
+  `;
 }
 
 function renderResults() {
@@ -469,6 +773,7 @@ function renderResults() {
   const runner = runnerUp(tierKey, primary);
   const why = buildWhy(primary);
   const purpose = answers[0];
+  const category = purposeToCategory[purpose];
   const showOpenClaw = purpose === 3 || purpose === 4;
 
   app.innerHTML = `
@@ -480,14 +785,13 @@ function renderResults() {
         <p class="why">${primary.runs}</p>
         <p class="why">${why}</p>
         <div class="cta-row">
-          <a class="btn" href="${primary.amazon}" target="_blank" rel="noopener">Amazon search</a>
+          <a class="btn" href="${primary.amazon}" target="_blank" rel="noopener">View on Amazon</a>
           <button class="btn secondary" id="retake1">Retake quiz</button>
         </div>
-        <details>
-          <summary>What models can I run?</summary>
-          <ul class="model-list">${modelListHtml(primary)}</ul>
-        </details>
+        ${modelTableHtml(primary.title, category)}
       </div>
+
+      ${upgradeNudgeHtml(tierKey, category)}
 
       <div class="card">
         <div class="tag">Runner-up</div>
@@ -495,21 +799,25 @@ function renderResults() {
         <div class="product-sub">${runner.bestFor}</div>
         <p class="why">${runner.runs}</p>
         <div class="cta-row">
-          <a class="btn secondary" href="${runner.amazon}" target="_blank" rel="noopener">Amazon search</a>
+          <a class="btn secondary" href="${runner.amazon}" target="_blank" rel="noopener">View on Amazon</a>
         </div>
+        <details>
+          <summary>Models for this hardware</summary>
+          ${modelTableHtml(runner.title, category)}
+        </details>
       </div>
 
       <div class="card">
         <div class="tag">Recommended Add-ons</div>
         ${accessories.map(a => `
-          <p class="why"><strong>${a.name}</strong> — ${a.note}<br />
+          <p class="why"><strong>${a.name}</strong> \u2014 ${a.note}<br />
           <a class="btn secondary" href="${a.link}" target="_blank" rel="noopener">Amazon search</a></p>
         `).join("")}
       </div>
 
       ${showOpenClaw ? `
       <div class="callout">
-        <strong>Running OpenClaw?</strong> The DGX Spark is the only desktop machine that runs full agentic pipelines 24/7 without thermal throttling. Connect via direct ethernet to your Mac for zero-latency inference. <a href="https://openclaw.ai" target="_blank" rel="noopener">Learn more about OpenClaw →</a>
+        <strong>Running OpenClaw?</strong> The DGX Spark is the only desktop machine that runs full agentic pipelines 24/7 without thermal throttling. Connect via direct ethernet to your Mac for zero-latency inference. <a href="https://openclaw.ai" target="_blank" rel="noopener">Learn more about OpenClaw \u2192</a>
       </div>
       ` : ""}
 
