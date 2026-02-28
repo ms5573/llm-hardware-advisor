@@ -119,6 +119,72 @@ svg{display:block}
 
 /* Price badge */
 .price-badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;background:rgba(255,153,0,0.1);color:var(--amazon);border:1px solid rgba(255,153,0,0.2)}
+
+/* Quiz Overlay */
+.quiz-fab{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:300;padding:12px 24px;border-radius:12px;border:1px solid var(--accent);background:linear-gradient(135deg,rgba(124,106,255,0.15),rgba(34,211,238,0.1));backdrop-filter:blur(16px);color:var(--text);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 4px 24px rgba(124,106,255,0.2)}
+.quiz-fab:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 8px 32px rgba(124,106,255,0.35);border-color:rgba(124,106,255,0.6)}
+.quiz-fab svg{width:18px;height:18px}
+.quiz-overlay{position:fixed;inset:0;z-index:400;background:rgba(8,8,13,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
+.quiz-overlay.open{display:flex}
+.quiz-card{width:440px;max-width:92vw;max-height:90vh;overflow-y:auto;background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:28px;backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+.quiz-card::-webkit-scrollbar{width:4px}
+.quiz-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px}
+.quiz-close{position:absolute;top:16px;right:16px;width:30px;height:30px;border:none;background:rgba(255,255,255,0.05);border-radius:8px;color:var(--text-dim);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.quiz-close:hover{background:rgba(255,255,255,0.1);color:var(--text)}
+.quiz-q{font-size:18px;font-weight:700;margin-bottom:16px;line-height:1.3}
+.quiz-step{font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:500}
+.quiz-opts{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{width:100%;text-align:left;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;transition:all .15s}
+.quiz-opt:hover{border-color:var(--accent);background:rgba(124,106,255,0.06);transform:translateY(-1px)}
+.quiz-progress{height:4px;background:rgba(255,255,255,0.04);border-radius:2px;margin-bottom:16px;overflow:hidden}
+.quiz-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--coding));border-radius:2px;transition:width .3s}
+.quiz-result-hw{padding:16px;border-radius:14px;border:1px solid var(--accent);background:rgba(124,106,255,0.06);margin-bottom:12px}
+.quiz-result-hw .product-title{font-size:18px;font-weight:700;margin:4px 0 6px}
+.quiz-result-models{margin-top:10px;font-size:12px;color:var(--text-dim);line-height:1.6}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+  body{overflow:auto;height:auto}
+  #canvas-container{display:none}
+  .bg-grad{display:block}
+  .header{position:relative;padding:14px 16px;background:rgba(8,8,13,0.97);pointer-events:auto;flex-wrap:wrap;gap:10px}
+  .header>*{pointer-events:auto}
+  .controls{width:100%;order:3}
+  .search-box{flex:1}
+  .search-box input{width:100%}
+  .search-box input:focus{width:100%}
+  .breadcrumb{display:none}
+  .panel{display:none}
+  .tip{display:none}
+  .legend{display:none}
+  .stats{display:none}
+  .footer{position:relative;bottom:auto;left:auto;transform:none;margin:16px;display:block;background:transparent;border:none}
+  .quiz-fab{bottom:16px;font-size:13px;padding:10px 20px}
+  .quiz-card{padding:20px}
+  .quiz-q{font-size:16px}
+  .quiz-opt{font-size:13px;padding:12px 14px}
+  .mobile-view{display:block!important}
+}
+.mobile-view{display:none;padding:16px;padding-bottom:80px}
+.m-section{margin-bottom:20px}
+.m-section-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:0.3px}
+.m-hw-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:all .2s}
+.m-hw-card.featured{border-color:rgba(118,185,0,0.3);background:rgba(118,185,0,0.04)}
+.m-hw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.m-hw-name{font-size:14px;font-weight:600}
+.m-hw-desc{font-size:12px;color:var(--text-dim);line-height:1.4;margin-bottom:8px}
+.m-hw-stats{display:flex;gap:12px;font-size:11px;color:var(--text-dim);margin-bottom:10px}
+.m-hw-stat{display:flex;align-items:center;gap:4px}
+.m-hw-stat strong{color:var(--text);font-family:'JetBrains Mono',monospace}
+.m-models-toggle{width:100%;text-align:left;padding:8px 0;border:none;background:none;color:var(--text-dim);font-family:inherit;font-size:11px;font-weight:500;cursor:pointer}
+.m-models-list{display:none;margin-top:6px}
+.m-models-list.open{display:block}
+.m-model-row{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:4px;font-size:11px}
+.m-model-name{font-weight:500}
+.m-model-meta{color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:10px}
+.m-uc-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.m-uc-tab{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text-dim);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.m-uc-tab.active{border-color:var(--accent);color:var(--text);background:rgba(124,106,255,0.08)}
 </style>
 </head>
 <body>
@@ -177,6 +243,17 @@ svg{display:block}
 </div>
 
 <div class="footer">Affiliate links support this project at no extra cost to you. Data via <a href="https://github.com/AlexsJones/llmfit" style="color:var(--accent);text-decoration:none">llmfit</a> (497 models scored).</div>
+
+<button class="quiz-fab" id="quizFab" onclick="openQuiz()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Help me choose
+</button>
+
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-card" style="position:relative" id="quizCard"></div>
+</div>
+
+<div class="mobile-view" id="mobileView"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1012,9 +1089,203 @@ window.addEventListener('resize',function(){
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// QUIZ OVERLAY
+// ═══════════════════════════════════════════════════════════════════════════════
+var quizQuestions = [
+  { text:'What will you use local AI for?', opts:[
+    {label:'Coding assistant', val:'coding'},
+    {label:'Chat & personal assistant', val:'chat'},
+    {label:'Research & reasoning', val:'reasoning'},
+    {label:'Agents & automation', val:'agents'}
+  ]},
+  { text:"What's your budget?", opts:[
+    {label:'Under $600', val:'budget'},
+    {label:'$600 \u2013 $2,000', val:'mid'},
+    {label:'$2,000 \u2013 $4,500', val:'serious'},
+    {label:'$4,500+', val:'allin'}
+  ]},
+  { text:'Mac or PC?', opts:[
+    {label:'macOS', val:'mac'},
+    {label:'Windows / Linux', val:'pc'},
+    {label:'No preference', val:'any'}
+  ]}
+];
+var quizStep=0, quizAnswers=[];
+
+function openQuiz(){ quizStep=0; quizAnswers=[]; document.getElementById('quizOverlay').classList.add('open'); renderQuizStep(); }
+function closeQuiz(){ document.getElementById('quizOverlay').classList.remove('open'); }
+
+document.getElementById('quizOverlay').addEventListener('click',function(e){ if(e.target===this) closeQuiz(); });
+
+function renderQuizStep(){
+  var card=document.getElementById('quizCard');
+  if(quizStep>=quizQuestions.length){ renderQuizResult(); return; }
+  var q=quizQuestions[quizStep];
+  var pct=((quizStep)/quizQuestions.length*100);
+  var h='<button class="quiz-close" onclick="closeQuiz()">&times;</button>';
+  h+='<div class="quiz-step">Question '+(quizStep+1)+' of '+quizQuestions.length+'</div>';
+  h+='<div class="quiz-progress"><div class="quiz-progress-bar" style="width:'+pct+'%"></div></div>';
+  h+='<div class="quiz-q">'+q.text+'</div>';
+  h+='<div class="quiz-opts">';
+  q.opts.forEach(function(o,i){
+    h+='<button class="quiz-opt" onclick="quizAnswer(\''+o.val+'\')">'+o.label+'</button>';
+  });
+  h+='</div>';
+  card.innerHTML=h;
+}
+
+function quizAnswer(val){
+  quizAnswers.push(val);
+  quizStep++;
+  renderQuizStep();
+}
+
+function quizPickHardware(){
+  var uc=quizAnswers[0], budget=quizAnswers[1], os=quizAnswers[2];
+  var candidates=HARDWARE.slice();
+  // Filter by OS preference
+  if(os==='mac') candidates=candidates.filter(function(h){return h.backend.indexOf('Apple')>=0;});
+  else if(os==='pc') candidates=candidates.filter(function(h){return h.backend.indexOf('NVIDIA')>=0;});
+  // Filter by budget
+  var maxPrice={budget:600,mid:2000,serious:4500,allin:Infinity}[budget]||Infinity;
+  var inBudget=candidates.filter(function(h){return parseFloat(h.price.replace(/[$,]/g,''))<=maxPrice;});
+  if(inBudget.length===0) inBudget=candidates;
+  // Sort by model count for their use case, then by total models
+  inBudget.sort(function(a,b){
+    var am=(a.models[uc]||[]).length, bm=(b.models[uc]||[]).length;
+    if(bm!==am) return bm-am;
+    return b.total-a.total;
+  });
+  return inBudget[0];
+}
+
+function renderQuizResult(){
+  var card=document.getElementById('quizCard');
+  var uc=quizAnswers[0];
+  var hw=quizPickHardware();
+  var models=hw.models[uc]||hw.models.chat||[];
+  var ucLabel={coding:'Coding',chat:'Chat & Assistant',reasoning:'Reasoning',agents:'Agents'}[uc]||uc;
+
+  var h='<button class="quiz-close" onclick="closeQuiz()">&times;</button>';
+  h+='<div class="quiz-step">YOUR RECOMMENDATION</div>';
+  h+='<div class="quiz-progress"><div class="quiz-progress-bar" style="width:100%"></div></div>';
+  h+='<div class="quiz-result-hw">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center">';
+  h+='<div class="product-title">'+hw.label+'</div>';
+  h+='<span class="price-badge">'+hw.price+'</span></div>';
+  h+='<div style="font-size:12px;color:var(--text-dim);margin:4px 0 8px">'+hw.desc+'</div>';
+  h+='<div style="display:flex;gap:16px;font-size:11px;color:var(--text-dim);margin-bottom:10px">';
+  h+='<span><strong style="color:var(--text)">'+hw.mem+'GB</strong> memory</span>';
+  h+='<span><strong style="color:var(--text)">'+hw.total+'</strong> models</span>';
+  h+='<span>'+hw.backend+'</span></div>';
+  h+='<div class="quiz-result-models"><strong style="color:var(--text);font-size:11px">Top '+ucLabel+' models you can run:</strong><br>';
+  models.forEach(function(m){
+    h+='<span style="color:var(--text)">'+m.name+'</span> <span style="font-family:\'JetBrains Mono\',monospace;font-size:10px">'+m.params+' \u00B7 '+m.toks+' t/s \u00B7 Fit '+m.fit+'%</span><br>';
+  });
+  h+='</div></div>';
+  h+=amazonBtnHTML(hw.amazon,'Buy '+hw.label+' on Amazon');
+  h+='<div style="display:flex;gap:8px;margin-top:8px">';
+  h+='<button class="btn" style="flex:1" onclick="closeQuiz();showHWPanel(HARDWARE.find(function(x){return x.id===\''+hw.id+'\';}));updateHash(\'hw\',\''+hw.id+'\');">Explore in map</button>';
+  h+='<button class="btn" style="flex:1" onclick="quizStep=0;quizAnswers=[];renderQuizStep();">Retake</button>';
+  h+='</div>';
+  card.innerHTML=h;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// DEEP LINKING (URL HASH)
+// ═══════════════════════════════════════════════════════════════════════════════
+function updateHash(type,id){
+  if(type==='overview') history.replaceState(null,'','#');
+  else if(type==='uc') history.replaceState(null,'','#'+id);
+  else if(type==='hw') history.replaceState(null,'','#hw/'+id);
+}
+
+function handleHash(){
+  var hash=location.hash.replace('#','');
+  if(!hash){ renderOverview(); return; }
+  if(hash.indexOf('hw/')===0){
+    var hwId=hash.slice(3);
+    var hw=HARDWARE.find(function(h){return h.id===hwId;});
+    if(hw){ renderOverview(false); showHWPanel(hw); }
+    return;
+  }
+  var uc=USE_CASES.find(function(u){return u.id===hash;});
+  if(uc){ renderUCView(uc); return; }
+  renderOverview();
+}
+
+// Patch existing navigation to update hash
+var _origRenderOverview=renderOverview;
+renderOverview=function(anim){ _origRenderOverview(anim); updateHash('overview'); };
+var _origRenderUCView=renderUCView;
+renderUCView=function(uc){ _origRenderUCView(uc); updateHash('uc',uc.id); };
+var _origShowHWPanel=showHWPanel;
+showHWPanel=function(hw){ _origShowHWPanel(hw); updateHash('hw',hw.id); };
+
+window.addEventListener('hashchange', handleHash);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MOBILE VIEW
+// ═══════════════════════════════════════════════════════════════════════════════
+var mobileUC='coding';
+function renderMobile(){
+  var mv=document.getElementById('mobileView');
+  if(!mv) return;
+  var h='';
+  // UC tabs
+  h+='<div class="m-uc-tabs">';
+  USE_CASES.forEach(function(uc){
+    h+='<button class="m-uc-tab'+(mobileUC===uc.id?' active':'')+'" onclick="mobileUC=\''+uc.id+'\';renderMobile();" style="'+(mobileUC===uc.id?'border-color:'+uc.color+';color:'+uc.color:'')+'">'+uc.icon+' '+uc.label+'</button>';
+  });
+  h+='</div>';
+
+  // Group by tier
+  var tiers=['Budget','Mid-Range','Serious','All-In'];
+  tiers.forEach(function(tier){
+    var hwInTier=HARDWARE.filter(function(hw){return hw.tier===tier;});
+    if(!hwInTier.length) return;
+    h+='<div class="m-section">';
+    h+='<div class="m-section-title">'+tier+'</div>';
+    hwInTier.forEach(function(hw){
+      var models=hw.models[mobileUC]||[];
+      var isFeatured=hw.featured;
+      h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'">';
+      h+='<div class="m-hw-header"><div class="m-hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</div><span class="price-badge">'+hw.price+'</span></div>';
+      h+='<div class="m-hw-desc">'+hw.desc+'</div>';
+      h+='<div class="m-hw-stats">';
+      h+='<div class="m-hw-stat"><strong>'+hw.mem+'</strong>GB</div>';
+      h+='<div class="m-hw-stat"><strong>'+hw.total+'</strong> models</div>';
+      h+='<div class="m-hw-stat">'+hw.backend+'</div>';
+      h+='</div>';
+      if(models.length){
+        h+='<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide models \u25B2\':\'Show '+models.length+' models \u25BC\'">Show '+models.length+' models \u25BC</button>';
+        h+='<div class="m-models-list">';
+        models.forEach(function(m){
+          var fc=m.fit>=90?'var(--fit-perfect)':m.fit>=75?'var(--fit-good)':m.fit>=60?'var(--fit-marginal)':'var(--fit-tight)';
+          h+='<div class="m-model-row"><div class="m-model-name">'+m.name+'</div><div class="m-model-meta">'+m.params+' \u00B7 '+m.toks+'t/s \u00B7 <span style="color:'+fc+'">'+m.fit+'%</span></div></div>';
+        });
+        h+='</div>';
+      }
+      h+=amazonBtnHTML(hw.amazon);
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+
+  mv.innerHTML=h;
+}
+
+// Detect mobile and render
+function isMobile(){ return window.innerWidth<=768; }
+if(isMobile()){ renderMobile(); }
+window.addEventListener('resize',function(){
+  if(isMobile()) renderMobile();
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════════════════════
-renderOverview();
+if(location.hash && location.hash!=='#'){ handleHash(); } else { renderOverview(); }
 </script>
 </body>
 </html>
