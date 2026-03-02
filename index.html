@@ -178,13 +178,37 @@ svg{display:block}
   .quiz-result-hw{padding:12px}
   .quiz-result-models{font-size:11px}
   .mobile-view{display:block!important}
-  .nav-tabs{top:auto;position:sticky;padding:6px 12px;z-index:99}
-  .nav-tab{padding:6px 12px;font-size:11px}
-  .page-view{padding:16px 16px 80px}
+  .nav-tabs{position:sticky;top:0;padding:6px 10px;z-index:99;gap:3px;background:rgba(8,8,13,0.97);backdrop-filter:blur(12px)}
+  .nav-tab{padding:6px 10px;font-size:11px}
+  .page-view{padding:12px 14px 80px;min-height:auto}
+  .page-view h2{font-size:18px!important}
+  .page-view p{font-size:12px!important}
   .setup-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .compare-wrap{margin:0 -16px;border-radius:0;border-left:none;border-right:none}
+  .setup-card{padding:10px}
+  .setup-card-name{font-size:11px}
+  .setup-card-spec{font-size:10px}
+  .setup-section-title{font-size:12px;margin-top:16px;margin-bottom:8px}
+  .compare-wrap{margin:0 -14px;border-radius:0;border-left:none;border-right:none}
+  .compare-table{min-width:650px;font-size:11px}
+  .compare-table th{padding:8px 10px;font-size:9px}
+  .compare-table td{padding:8px 10px}
+  .compare-filters{gap:4px}
+  .compare-chip{padding:5px 10px;font-size:11px}
+  .model-search-wrap{margin-bottom:20px}
   .model-search-input{font-size:14px;padding:12px 14px 12px 40px}
-  .model-hw-match{flex-direction:column;align-items:flex-start;gap:8px}
+  .model-result-card{padding:12px}
+  .model-hw-match{flex-direction:column;align-items:stretch;gap:8px;padding:10px}
+  .model-hw-match>div:last-child{display:flex;justify-content:space-between;align-items:center}
+  .upgrade-nudge{padding:14px}
+  .upgrade-nudge-title{font-size:14px}
+  .upgrade-nudge-sub{font-size:11px}
+}
+@media(max-width:380px){
+  .setup-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .setup-card{padding:8px}
+  .setup-card-name{font-size:10px}
+  .nav-tab{padding:5px 8px;font-size:10px}
+  .compare-table{min-width:550px}
 }
 @media(max-width:380px){
   .m-hw-header{flex-wrap:wrap;gap:6px}
@@ -1587,6 +1611,8 @@ function switchView(view) {
   var footer = document.querySelector('.footer');
   var quizFab = document.getElementById('quizFab');
 
+  var headerSearch = document.querySelector('.search-box');
+
   if(view === 'explorer') {
     if(canvas) canvas.style.display = '';
     if(mobile && isMobile()) mobile.style.display = 'block';
@@ -1595,6 +1621,8 @@ function switchView(view) {
     if(stats) stats.style.display = '';
     if(footer) footer.style.display = '';
     if(quizFab) quizFab.style.display = '';
+    if(headerSearch) headerSearch.style.display = '';
+    if(!isMobile()) { document.body.style.overflow = 'hidden'; document.body.style.height = '100vh'; }
     updateHash('overview');
   } else {
     if(canvas) canvas.style.display = 'none';
@@ -1604,12 +1632,14 @@ function switchView(view) {
     if(stats) stats.style.display = 'none';
     if(footer) footer.style.display = 'none';
     if(quizFab) quizFab.style.display = 'none';
+    if(headerSearch) headerSearch.style.display = 'none';
     panel.classed('open', false);
+    document.body.style.overflow = 'auto';
+    document.body.style.height = 'auto';
     var target = document.getElementById('view-'+view);
     if(target) {
       target.classList.add('active');
-      document.body.style.overflow = 'auto';
-      document.body.style.height = 'auto';
+      window.scrollTo(0,0);
     }
     if(view === 'model-search') { renderModelSearchView(); updateHash('modelsearch'); }
     else if(view === 'compare') { renderCompareView(); updateHash('compare'); }
@@ -1825,10 +1855,10 @@ function renderModelDetail(model) {
     h += '<div style="font-size:14px;font-weight:600">'+item.hw.label+'</div>';
     h += '<div style="font-size:11px;color:var(--text-dim)">'+item.hw.mem+'GB · '+item.hw.backend+' · '+item.hw.tier+'</div>';
     h += '</div>';
-    h += '<div style="display:flex;align-items:center;gap:10px;flex-shrink:0">';
+    h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
     h += fitBadgeHTML(item.fit);
     h += '<span class="price-badge">'+item.hw.price+'</span>';
-    h += '<a href="'+item.hw.amazon+'" target="_blank" rel="noopener" class="compare-table buy-btn">Buy</a>';
+    h += '<a href="'+item.hw.amazon+'" target="_blank" rel="noopener" class="buy-btn" style="padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none">Buy</a>';
     h += '</div></div>';
   });
 
@@ -1875,32 +1905,60 @@ function renderCompareView() {
   });
   h += '</div>';
 
-  // Table
-  var arrow = function(col){ return compareSort===col ? (compareSortDir>0?'&#9650;':'&#9660;') : '&#9650;'; };
-  h += '<div class="compare-wrap"><table class="compare-table">';
-  h += '<thead><tr>';
-  h += '<th onclick="toggleCompareSort(\'name\')">Hardware <span class="sort-arrow">'+arrow('name')+'</span></th>';
-  h += '<th onclick="toggleCompareSort(\'price\')">Price <span class="sort-arrow">'+arrow('price')+'</span></th>';
-  h += '<th onclick="toggleCompareSort(\'mem\')">Memory <span class="sort-arrow">'+arrow('mem')+'</span></th>';
-  h += '<th>Backend</th>';
-  h += '<th onclick="toggleCompareSort(\'models\')">Models <span class="sort-arrow">'+arrow('models')+'</span></th>';
-  h += '<th>Tier</th>';
-  h += '<th>Buy</th>';
-  h += '</tr></thead><tbody>';
-
-  filtered.forEach(function(hw){
-    var isFeatured = hw.featured;
-    h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
-    h += '<td class="hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</td>';
-    h += '<td><span class="price-badge">'+hw.price+'</span></td>';
-    h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
-    h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
-    h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent)">'+hw.total+'</td>';
-    h += '<td><span class="tag">'+hw.tier+'</span></td>';
-    h += '<td><a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">Buy</a></td>';
-    h += '</tr>';
+  // Sort chips (mobile-friendly)
+  h += '<div class="compare-filters" style="margin-bottom:12px">';
+  h += '<span style="font-size:10px;color:var(--text-muted);padding:5px 0;flex-shrink:0">Sort:</span>';
+  ['price','mem','models','name'].forEach(function(s){
+    var labels = {price:'Price',mem:'Memory',models:'Models',name:'Name'};
+    var arrow = compareSort===s?(compareSortDir>0?' \u2191':' \u2193'):'';
+    h += '<button class="compare-chip'+(compareSort===s?' active':'')+'" onclick="toggleCompareSort(\''+s+'\')">'+labels[s]+arrow+'</button>';
   });
-  h += '</tbody></table></div>';
+  h += '</div>';
+
+  if(isMobile()) {
+    // Mobile: card layout
+    filtered.forEach(function(hw){
+      var isFeatured = hw.featured;
+      h += '<div style="padding:14px;border-radius:12px;border:1px solid '+(isFeatured?'rgba(118,185,0,0.3)':'var(--border)')+';background:'+(isFeatured?'rgba(118,185,0,0.04)':'var(--bg-card)')+';margin-bottom:10px">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;flex-wrap:wrap">';
+      h += '<div style="font-size:14px;font-weight:600;color:'+(isFeatured?'#76b900':'var(--text)')+';min-width:0">'+hw.label+'</div>';
+      h += '<span class="price-badge">'+hw.price+'</span></div>';
+      h += '<div style="display:flex;gap:10px;font-size:11px;color:var(--text-dim);margin-bottom:10px;flex-wrap:wrap">';
+      h += '<span><strong style="color:var(--text);font-family:\'JetBrains Mono\',monospace">'+hw.mem+'GB</strong> memory</span>';
+      h += '<span><strong style="color:var(--accent);font-family:\'JetBrains Mono\',monospace">'+hw.total+'</strong> models</span>';
+      h += '<span>'+hw.backend+'</span>';
+      h += '<span class="tag" style="font-size:10px">'+hw.tier+'</span></div>';
+      h += '<a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn" style="display:flex;align-items:center;justify-content:center;gap:4px;width:100%;padding:10px;border-radius:8px;font-size:12px">Buy on Amazon</a>';
+      h += '</div>';
+    });
+  } else {
+    // Desktop: table
+    var arrow = function(col){ return compareSort===col ? (compareSortDir>0?'&#9650;':'&#9660;') : '&#9650;'; };
+    h += '<div class="compare-wrap"><table class="compare-table">';
+    h += '<thead><tr>';
+    h += '<th onclick="toggleCompareSort(\'name\')">Hardware <span class="sort-arrow">'+arrow('name')+'</span></th>';
+    h += '<th onclick="toggleCompareSort(\'price\')">Price <span class="sort-arrow">'+arrow('price')+'</span></th>';
+    h += '<th onclick="toggleCompareSort(\'mem\')">Memory <span class="sort-arrow">'+arrow('mem')+'</span></th>';
+    h += '<th>Backend</th>';
+    h += '<th onclick="toggleCompareSort(\'models\')">Models <span class="sort-arrow">'+arrow('models')+'</span></th>';
+    h += '<th>Tier</th>';
+    h += '<th>Buy</th>';
+    h += '</tr></thead><tbody>';
+
+    filtered.forEach(function(hw){
+      var isFeatured = hw.featured;
+      h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
+      h += '<td class="hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</td>';
+      h += '<td><span class="price-badge">'+hw.price+'</span></td>';
+      h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
+      h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
+      h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent)">'+hw.total+'</td>';
+      h += '<td><span class="tag">'+hw.tier+'</span></td>';
+      h += '<td><a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">Buy</a></td>';
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+  }
   h += '<div style="text-align:center;font-size:10px;color:var(--text-muted);padding:16px 0">Affiliate links support this project at no extra cost to you.</div>';
 
   el.innerHTML = h;
