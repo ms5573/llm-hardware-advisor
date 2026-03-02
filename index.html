@@ -155,9 +155,11 @@ svg{display:block}
   body{overflow:auto;height:auto}
   #canvas-container{display:none}
   .bg-grad{display:block}
-  .header{position:relative;padding:14px 16px;background:rgba(8,8,13,0.97);pointer-events:auto;flex-wrap:wrap;gap:10px}
+  .header{position:sticky;top:0;padding:12px 16px;background:rgba(8,8,13,0.97);pointer-events:auto;flex-wrap:wrap;gap:8px;backdrop-filter:blur(12px)}
   .header>*{pointer-events:auto}
-  .controls{width:100%;order:3}
+  .logo-text{font-size:15px}
+  .logo-text span{font-size:12px}
+  .controls{width:100%;order:3;gap:6px}
   .search-box{flex:1}
   .search-box input{width:100%}
   .search-box input:focus{width:100%}
@@ -166,31 +168,43 @@ svg{display:block}
   .tip{display:none}
   .legend{display:none}
   .stats{display:none}
-  .footer{position:relative;bottom:auto;left:auto;transform:none;margin:16px;display:block;background:transparent;border:none}
-  .quiz-fab{bottom:16px;font-size:13px;padding:10px 20px}
-  .quiz-card{padding:20px}
+  .footer{position:relative;bottom:auto;left:auto;transform:none;margin:16px;display:block;background:transparent;border:none;white-space:normal;line-height:1.4}
+  .quiz-fab{bottom:16px;font-size:13px;padding:10px 20px;z-index:300}
+  .quiz-card{padding:18px;max-width:95vw;border-radius:14px}
   .quiz-q{font-size:16px}
   .quiz-opt{font-size:13px;padding:12px 14px}
+  .quiz-result-hw .product-title{font-size:15px}
+  .quiz-result-hw{padding:12px}
+  .quiz-result-models{font-size:11px}
   .mobile-view{display:block!important}
 }
+@media(max-width:380px){
+  .m-hw-header{flex-wrap:wrap;gap:6px}
+  .m-hw-name{font-size:13px;width:100%}
+  .m-hw-stats{flex-wrap:wrap;gap:8px}
+  .m-model-row{flex-direction:column;align-items:flex-start;gap:2px}
+  .m-uc-tab{padding:6px 10px;font-size:11px}
+}
 .mobile-view{display:none;padding:16px;padding-bottom:80px}
-.m-section{margin-bottom:20px}
+.m-section{margin-bottom:24px}
 .m-section-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:0.3px}
 .m-hw-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:all .2s}
 .m-hw-card.featured{border-color:rgba(118,185,0,0.3);background:rgba(118,185,0,0.04)}
-.m-hw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.m-hw-name{font-size:14px;font-weight:600}
+.m-hw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.m-hw-name{font-size:14px;font-weight:600;min-width:0}
 .m-hw-desc{font-size:12px;color:var(--text-dim);line-height:1.4;margin-bottom:8px}
-.m-hw-stats{display:flex;gap:12px;font-size:11px;color:var(--text-dim);margin-bottom:10px}
+.m-hw-stats{display:flex;gap:12px;font-size:11px;color:var(--text-dim);margin-bottom:10px;flex-wrap:wrap}
 .m-hw-stat{display:flex;align-items:center;gap:4px}
 .m-hw-stat strong{color:var(--text);font-family:'JetBrains Mono',monospace}
-.m-models-toggle{width:100%;text-align:left;padding:8px 0;border:none;background:none;color:var(--text-dim);font-family:inherit;font-size:11px;font-weight:500;cursor:pointer}
+.m-models-toggle{width:100%;text-align:left;padding:8px 0;border:none;background:none;color:var(--accent);font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:color .15s}
+.m-models-toggle:active{color:var(--text)}
 .m-models-list{display:none;margin-top:6px}
 .m-models-list.open{display:block}
-.m-model-row{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:4px;font-size:11px}
-.m-model-name{font-weight:500}
-.m-model-meta{color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:10px}
-.m-uc-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.m-model-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:4px;font-size:11px;gap:8px}
+.m-model-name{font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-model-meta{color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap;flex-shrink:0}
+.m-uc-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+.m-uc-tabs::-webkit-scrollbar{display:none}
 .m-uc-tab{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text-dim);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .m-uc-tab.active{border-color:var(--accent);color:var(--text);background:rgba(124,106,255,0.08)}
 </style>
@@ -252,6 +266,8 @@ svg{display:block}
 
 <div class="footer">Affiliate links support this project at no extra cost to you. Data via <a href="https://github.com/AlexsJones/llmfit" style="color:var(--accent);text-decoration:none">llmfit</a> (497 models scored).</div>
 
+<div class="mobile-view" id="mobileView"></div>
+
 <button class="quiz-fab" id="quizFab" onclick="openQuiz()">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
   Help me choose
@@ -260,8 +276,6 @@ svg{display:block}
 <div class="quiz-overlay" id="quizOverlay">
   <div class="quiz-card" style="position:relative" id="quizCard"></div>
 </div>
-
-<div class="mobile-view" id="mobileView"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1236,6 +1250,7 @@ window.addEventListener('hashchange', handleHash);
 // MOBILE VIEW
 // ═══════════════════════════════════════════════════════════════════════════════
 var mobileUC='coding';
+var mobileSearch='';
 function renderMobile(){
   var mv=document.getElementById('mobileView');
   if(!mv) return;
@@ -1250,7 +1265,16 @@ function renderMobile(){
   // Group by tier
   var tiers=['Budget','Mid-Range','Serious','All-In'];
   tiers.forEach(function(tier){
-    var hwInTier=HARDWARE.filter(function(hw){return hw.tier===tier;});
+    var hwInTier=HARDWARE.filter(function(hw){
+      if(hw.tier!==tier) return false;
+      if(!mobileSearch) return true;
+      var q=mobileSearch;
+      // Search in hardware name, backend, models
+      if(hw.label.toLowerCase().indexOf(q)>=0) return true;
+      if(hw.backend.toLowerCase().indexOf(q)>=0) return true;
+      var models=hw.models[mobileUC]||[];
+      return models.some(function(m){return m.name.toLowerCase().indexOf(q)>=0;});
+    });
     if(!hwInTier.length) return;
     h+='<div class="m-section">';
     h+='<div class="m-section-title">'+tier+'</div>';
@@ -1288,6 +1312,13 @@ function isMobile(){ return window.innerWidth<=768; }
 if(isMobile()){ renderMobile(); }
 window.addEventListener('resize',function(){
   if(isMobile()) renderMobile();
+});
+
+// Mobile search: filter hardware cards via the same search input
+d3.select('#searchInput').on('input.mobile',function(){
+  if(!isMobile()) return;
+  mobileSearch=this.value.toLowerCase().trim();
+  renderMobile();
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
