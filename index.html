@@ -630,41 +630,69 @@ var mobileSearch='';
 function renderMobile(){
   var mv=document.getElementById('mobileView');
   if(!mv) return;
+  var activeUC=USE_CASES.find(function(u){return u.id===mobileUC;})||USE_CASES[0];
   var h='';
   h+='<div class="m-uc-tabs">';
   USE_CASES.forEach(function(uc){
     h+='<button class="m-uc-tab'+(mobileUC===uc.id?' active':'')+'" onclick="mobileUC=\''+uc.id+'\';renderMobile();" style="'+(mobileUC===uc.id?'border-color:'+uc.color+';color:'+uc.color:'')+'">'+uc.icon+' '+uc.label+'</button>';
   });
   h+='</div>';
-  var tiers=['Budget','Mid-Range','Serious','All-In'];
-  tiers.forEach(function(tier){
-    var hwInTier=HARDWARE.filter(function(hw){
-      if(hw.tier!==tier) return false;
-      if(!mobileSearch) return true;
+
+  // Sort hardware by relevance: best fit score for this use case, then by model count
+  var sorted=HARDWARE.slice().sort(function(a,b){
+    var am=a.models[mobileUC]||[], bm=b.models[mobileUC]||[];
+    var aTop=am.length?am[0].fit:0, bTop=bm.length?bm[0].fit:0;
+    if(bTop!==aTop) return bTop-aTop;
+    return bm.length-am.length;
+  });
+
+  // Apply search filter
+  if(mobileSearch){
+    sorted=sorted.filter(function(hw){
       var q=mobileSearch;
       if(hw.label.toLowerCase().indexOf(q)>=0) return true;
       if(hw.backend.toLowerCase().indexOf(q)>=0) return true;
       var models=hw.models[mobileUC]||[];
       return models.some(function(m){return m.name.toLowerCase().indexOf(q)>=0;});
     });
+  }
+
+  // Group by tier (preserving sort within each tier)
+  var tiers=['Budget','Mid-Range','Serious','All-In'];
+  tiers.forEach(function(tier){
+    var hwInTier=sorted.filter(function(hw){return hw.tier===tier;});
     if(!hwInTier.length) return;
     h+='<div class="m-section">';
     h+='<div class="m-section-title">'+tier+'</div>';
     hwInTier.forEach(function(hw){
       var models=hw.models[mobileUC]||[];
       var isFeatured=hw.featured;
+      var topModel=models[0];
+      var fitColor=topModel?(topModel.fit>=90?'var(--fit-perfect)':topModel.fit>=75?'var(--fit-good)':topModel.fit>=60?'var(--fit-marginal)':'var(--fit-tight)'):'var(--text-muted)';
+
       h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'">';
       h+='<div class="m-hw-header"><div class="m-hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</div><span class="price-badge">'+hw.price+'</span></div>';
-      h+='<div class="m-hw-desc">'+hw.desc+'</div>';
       h+='<div class="m-hw-stats">';
       h+='<div class="m-hw-stat"><strong>'+hw.mem+'</strong>GB</div>';
-      h+='<div class="m-hw-stat"><strong>'+hw.total+'</strong> models</div>';
+      h+='<div class="m-hw-stat"><strong>'+models.length+'</strong> '+activeUC.label.split(' ')[0]+' models</div>';
       h+='<div class="m-hw-stat">'+hw.backend+'</div>';
       h+='</div>';
-      if(models.length){
-        h+='<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide models ▲\':\'Show '+models.length+' models ▼\'">Show '+models.length+' models ▼</button>';
+
+      // Show top model inline (always visible, changes per use case)
+      if(topModel){
+        h+='<div style="padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);margin-bottom:8px">';
+        h+='<div style="font-size:10px;color:'+activeUC.color+';font-weight:600;margin-bottom:4px">Best '+activeUC.label+' model</div>';
+        h+='<div style="display:flex;justify-content:space-between;align-items:center">';
+        h+='<div><div style="font-size:12px;font-weight:500">'+topModel.name+'</div>';
+        h+='<div style="font-size:10px;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace">'+topModel.params+' · '+topModel.ram+'GB · '+topModel.toks+' t/s</div></div>';
+        h+='<div style="font-size:14px;font-weight:700;color:'+fitColor+';font-family:\'JetBrains Mono\',monospace">'+topModel.fit+'%</div>';
+        h+='</div></div>';
+      }
+
+      if(models.length>1){
+        h+='<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide '+(models.length-1)+' more ▲\':\'Show '+(models.length-1)+' more models ▼\'">Show '+(models.length-1)+' more models ▼</button>';
         h+='<div class="m-models-list">';
-        models.forEach(function(m){
+        models.slice(1).forEach(function(m){
           var fc=m.fit>=90?'var(--fit-perfect)':m.fit>=75?'var(--fit-good)':m.fit>=60?'var(--fit-marginal)':'var(--fit-tight)';
           h+='<div class="m-model-row"><div class="m-model-name">'+m.name+'</div><div class="m-model-meta">'+m.params+' · '+m.toks+'t/s · <span style="color:'+fc+'">'+m.fit+'%</span></div></div>';
         });
