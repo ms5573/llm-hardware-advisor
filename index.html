@@ -362,7 +362,7 @@ svg{display:block}
 </div>
 
 <div class="stats">
-  <div><div class="stats-n">497</div><div class="stats-l">Models</div></div>
+  <div><div class="stats-n">510</div><div class="stats-l">Models</div></div>
   <div><div class="stats-n">17</div><div class="stats-l">Hardware</div></div>
   <div><div class="stats-n">4</div><div class="stats-l">Use Cases</div></div>
 </div>
@@ -396,7 +396,7 @@ const HARDWARE = [
     id:'mac_mini_m4_16', label:'Mac Mini M4 16GB', price:'$499', tier:'Budget',
     mem:16, backend:'Apple Metal', desc:'Apple M4 chip with 16GB unified memory. Great entry point for local AI.',
     amazon:'https://www.amazon.com/Apple-2024-Desktop-Computer-10%E2%80%91core/dp/B0DLBTPDCS?tag=ms5573-20',
-    color:'#a8a8a8', total:266,
+    color:'#a8a8a8', total:290,
     models:{
       coding:[
         {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:95,toks:18},
@@ -404,9 +404,9 @@ const HARDWARE = [
         {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:88,toks:35}
       ],
       chat:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:22},
         {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:18},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:20},
-        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:88,toks:30}
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:20}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:68,toks:6},
@@ -414,9 +414,9 @@ const HARDWARE = [
         {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:93,toks:16}
       ],
       agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:22},
         {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:18},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:20},
-        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:88,toks:28}
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:20}
       ]
     }
   },
@@ -424,7 +424,7 @@ const HARDWARE = [
     id:'rtx4060ti', label:'RTX 4060 Ti 16GB', price:'$449', tier:'Budget',
     mem:16, backend:'NVIDIA CUDA', desc:'ZOTAC RTX 4060 Ti 16GB. Fast inference with CUDA acceleration.',
     amazon:'https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20',
-    color:'#76b900', total:304,
+    color:'#76b900', total:320,
     models:{
       coding:[
         {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:95,toks:55},
@@ -432,9 +432,9 @@ const HARDWARE = [
         {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:68,toks:20}
       ],
       chat:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:45},
         {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:55},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:60},
-        {name:'Meta-Llama-3-8B',params:'8B',ram:7.6,fit:93,toks:50}
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:60}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:72,toks:22},
@@ -442,8 +442,8 @@ const HARDWARE = [
         {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:93,toks:48}
       ],
       agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:45},
         {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:55},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:60},
         {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:72,toks:25}
       ]
     }
@@ -452,7 +452,7 @@ const HARDWARE = [
     id:'mac_mini_m4pro_24', label:'Mac Mini M4 Pro 24GB', price:'$1,399', tier:'Mid-Range',
     mem:24, backend:'Apple Metal', desc:'Apple M4 Pro with 24GB unified memory. Runs most 14B models comfortably.',
     amazon:'https://www.amazon.com/Apple-Desktop-Computer-12%E2%80%91core-16%E2%80%91core/dp/B0DLBVHSLD?tag=ms5573-20',
-    color:'#a8a8a8', total:285,
+    color:'#a8a8a8', total:310,
     models:{
       coding:[
         {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:92,toks:22},
@@ -460,9 +460,9 @@ const HARDWARE = [
         {name:'Devstral-Small-2507',params:'24B',ram:22.0,fit:72,toks:8}
       ],
       chat:[
-        {name:'Mistral-Small-24B',params:'24B',ram:22.0,fit:72,toks:8},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:28},
-        {name:'Llama-3.2-11B',params:'11B',ram:10.2,fit:95,toks:18}
+        {name:'Qwen3.5-27B',params:'27B',ram:22,fit:72,toks:7},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:28},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:60,toks:4}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:92,toks:16},
@@ -470,8 +470,8 @@ const HARDWARE = [
         {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:98,toks:28}
       ],
       agents:[
-        {name:'Mistral-Small-24B',params:'24B',ram:22.0,fit:72,toks:8},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:28},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:28},
+        {name:'Qwen3.5-27B',params:'27B',ram:22,fit:72,toks:7},
         {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:92,toks:22}
       ]
     }
@@ -480,17 +480,17 @@ const HARDWARE = [
     id:'rtx4090', label:'RTX 4090 24GB', price:'$1,999', tier:'Mid-Range',
     mem:24, backend:'NVIDIA CUDA', desc:'ASUS TUF RTX 4090 24GB. Flagship consumer GPU with blazing inference speed.',
     amazon:'https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20',
-    color:'#76b900', total:337,
+    color:'#76b900', total:355,
     models:{
       coding:[
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:65,toks:35},
         {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:95,toks:50},
-        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:98,toks:80}
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:98,toks:80},
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:65,toks:35}
       ],
       chat:[
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:80},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:65,toks:18},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:98,toks:85}
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:75},
+        {name:'Qwen3.5-27B',params:'27B',ram:22,fit:72,toks:30},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:62,toks:12}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:62,toks:30},
@@ -498,9 +498,9 @@ const HARDWARE = [
         {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:98,toks:80}
       ],
       agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:75},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:65,toks:35},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:65,toks:18},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:80}
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:62,toks:12}
       ]
     }
   },
@@ -508,17 +508,17 @@ const HARDWARE = [
     id:'mac_studio_m4max_64', label:'Mac Studio M4 Max 64GB', price:'$3,199', tier:'Serious',
     mem:64, backend:'Apple Metal', desc:'Apple M4 Max with 64GB unified memory. Run 32B+ models with room to spare.',
     amazon:'https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FNS1ZX5B?tag=ms5573-20',
-    color:'#a8a8a8', total:340,
+    color:'#a8a8a8', total:370,
     models:{
       coding:[
+        {name:'Qwen3-Coder-Next Q4',params:'80B MoE',ram:46,fit:78,toks:8},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:88,toks:10},
-        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:98,toks:22},
         {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:100,toks:30}
       ],
       chat:[
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:78,toks:6},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:80,toks:8},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:100,toks:30}
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:88,toks:14},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:30},
+        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:78,toks:6}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:88,toks:8},
@@ -526,9 +526,9 @@ const HARDWARE = [
         {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:100,toks:30}
       ],
       agents:[
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:78,toks:6},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:88,toks:10},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:80,toks:8}
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:30},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:88,toks:14},
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:88,toks:10}
       ]
     }
   },
@@ -536,27 +536,27 @@ const HARDWARE = [
     id:'mac_studio_m4max_128', label:'Mac Studio M4 Max 128GB', price:'$3,599', tier:'Serious',
     mem:128, backend:'Apple Metal', desc:'Apple M4 Max with 128GB unified memory. Run 70B+ models natively on Apple Silicon with massive headroom.',
     amazon:'https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FMFZ5SXS?tag=ms5573-20',
-    color:'#a8a8a8', total:365,
+    color:'#a8a8a8', total:395,
     models:{
       coding:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:88,toks:5},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:12},
-        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:100,toks:24}
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:6},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:10},
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:12}
       ],
       chat:[
-        {name:'Qwen1.5-110B-Chat',params:'110B',ram:103.6,fit:72,toks:2},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:92,toks:7},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:92,toks:9}
+        {name:'Llama-4-Maverick Q2',params:'400B MoE',ram:122,fit:65,toks:3},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:18},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:28}
       ],
       reasoning:[
-        {name:'Qwen3-Next-80B-A3B',params:'80B',ram:75.7,fit:82,toks:4},
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:82,toks:5},
         {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:98,toks:12},
         {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:100,toks:24}
       ],
       agents:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:88,toks:5},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:92,toks:7},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:12}
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:6},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:10},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:18}
       ]
     }
   },
@@ -564,26 +564,26 @@ const HARDWARE = [
     id:'mac_studio_m3ultra_96', label:'Mac Studio M3 Ultra 96GB', price:'$3,999', tier:'Serious',
     mem:96, backend:'Apple Metal', desc:'Apple M3 Ultra with 96GB unified memory, 60-core GPU. Dual-die powerhouse for serious local AI workloads.',
     amazon:'https://www.amazon.com/Apple-Desktop-Computer-28-Core-60-Core/dp/B0FHMN84YC?tag=ms5573-20',
-    color:'#a8a8a8', total:350,
+    color:'#a8a8a8', total:380,
     models:{
       coding:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:78,toks:4},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:88,toks:8},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:96,toks:10},
-        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:100,toks:20}
+        {name:'MiniMax-M2.5 Q2',params:'230B MoE',ram:90,fit:65,toks:3}
       ],
       chat:[
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:88,toks:6},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:90,toks:8},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:100,toks:28}
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:96,toks:16},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:28},
+        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:88,toks:6}
       ],
       reasoning:[
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:72,toks:4},
         {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:96,toks:10},
-        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:100,toks:20},
-        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:100,toks:28}
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:100,toks:20}
       ],
       agents:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:78,toks:4},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:88,toks:6},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:88,toks:8},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:96,toks:16},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:96,toks:10}
       ]
     }
@@ -592,27 +592,27 @@ const HARDWARE = [
     id:'mac_studio_m3ultra_256', label:'Mac Studio M3 Ultra 256GB', price:'$5,999', tier:'All-In',
     mem:256, backend:'Apple Metal', desc:'Apple M3 Ultra with 256GB unified memory and 60-core GPU. Run massive 100B+ parameter models entirely in memory.',
     amazon:'https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20',
-    color:'#a8a8a8', total:395, featured:true,
+    color:'#a8a8a8', total:430, featured:true,
     models:{
       coding:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:100,toks:8},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:100,toks:18},
-        {name:'Qwen3-Coder-30B-A3B',params:'30B',ram:28.5,fit:100,toks:20}
+        {name:'Kimi-K2.5 Q2',params:'1T MoE',ram:240,fit:65,toks:2},
+        {name:'MiniMax-M2.5 Q8',params:'230B MoE',ram:243,fit:62,toks:3},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:100,toks:12}
       ],
       chat:[
-        {name:'Qwen1.5-110B-Chat',params:'110B',ram:103.6,fit:90,toks:3},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:100,toks:12},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:100,toks:14}
+        {name:'Qwen3.5-397B-A17B Q4',params:'397B MoE',ram:214,fit:72,toks:4},
+        {name:'Llama-4-Maverick Q2',params:'400B MoE',ram:122,fit:88,toks:6},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:100,toks:22}
       ],
       reasoning:[
+        {name:'GLM-5 Q2',params:'744B MoE',ram:241,fit:62,toks:2},
         {name:'GPT-OSS-120B',params:'120B',ram:108.8,fit:85,toks:3},
-        {name:'Qwen3-Next-80B-A3B',params:'80B',ram:75.7,fit:96,toks:6},
-        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:100,toks:18}
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:96,toks:8}
       ],
       agents:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:100,toks:8},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:100,toks:12},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:100,toks:18}
+        {name:'Qwen3.5-397B-A17B Q4',params:'397B MoE',ram:214,fit:72,toks:4},
+        {name:'Kimi-K2.5 Q2',params:'1T MoE',ram:240,fit:65,toks:2},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:100,toks:12}
       ]
     }
   },
@@ -620,17 +620,17 @@ const HARDWARE = [
     id:'rtx4090_64ram', label:'RTX 4090 + 64GB RAM', price:'$2,800', tier:'Serious',
     mem:24, backend:'NVIDIA CUDA', desc:'RTX 4090 in a 64GB RAM workstation. GPU for speed, CPU offload for big models.',
     amazon:'https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20',
-    color:'#76b900', total:337,
+    color:'#76b900', total:365,
     models:{
       coding:[
+        {name:'Qwen3-Coder-Next Q4',params:'80B MoE',ram:46,fit:65,toks:15},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:65,toks:35},
-        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:95,toks:50},
         {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:98,toks:80}
       ],
       chat:[
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:80},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:65,toks:18},
-        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:98,toks:85}
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:75},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:62,toks:10},
+        {name:'Qwen3.5-27B',params:'27B',ram:22,fit:72,toks:28}
       ],
       reasoning:[
         {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:62,toks:30},
@@ -638,9 +638,9 @@ const HARDWARE = [
         {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:98,toks:80}
       ],
       agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:98,toks:75},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:65,toks:35},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:65,toks:18},
-        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:80}
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:62,toks:10}
       ]
     }
   },
@@ -648,27 +648,27 @@ const HARDWARE = [
     id:'dgx_spark', label:'NVIDIA DGX Spark 128GB', price:'$3,999', tier:'All-In',
     mem:128, backend:'NVIDIA Grace Blackwell', desc:'NVIDIA DGX Spark with 128GB unified memory and Blackwell GPU. The ultimate local AI powerhouse \u2014 runs 100B+ models.',
     amazon:'https://www.amazon.com/NVIDIA-DGX-SparkTM-Supercomputer-Blackwell/dp/B0FWJ16CCH?tag=ms5573-20',
-    color:'#76b900', total:367, featured:true,
+    color:'#76b900', total:400, featured:true,
     models:{
       coding:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:92,toks:12},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:30},
-        {name:'Qwen3-Coder-30B-A3B',params:'30B',ram:28.5,fit:98,toks:32}
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:8},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:18},
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:35}
       ],
       chat:[
-        {name:'Qwen1.5-110B-Chat',params:'110B',ram:103.6,fit:72,toks:4},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:96,toks:14},
-        {name:'Mixtral-8x7B',params:'8x7B',ram:43.5,fit:96,toks:18}
+        {name:'Llama-4-Maverick Q2',params:'400B MoE',ram:122,fit:65,toks:4},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:22},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:35}
       ],
       reasoning:[
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:82,toks:8},
         {name:'GPT-OSS-120B',params:'120B',ram:108.8,fit:68,toks:4},
-        {name:'Qwen3-Next-80B-A3B',params:'80B',ram:75.7,fit:90,toks:10},
-        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:98,toks:30}
+        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:98,toks:35}
       ],
       agents:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:92,toks:12},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:96,toks:14},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:30}
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:8},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:18},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:22}
       ]
     }
   },
@@ -844,27 +844,27 @@ const HARDWARE = [
     id:'dgx_spark_x2', label:'2x DGX Spark + NVLink', price:'$8,998', tier:'All-In',
     mem:256, backend:'NVIDIA Grace Blackwell', desc:'Two DGX Sparks connected via NVLink for 256GB unified memory. Run the largest open-source models locally.',
     amazon:'https://www.amazon.com/NVIDIA-DGX-SparkTM-Supercomputer-Blackwell/dp/B0FWJ16CCH?tag=ms5573-20',
-    color:'#76b900', total:400,
+    color:'#76b900', total:450,
     models:{
       coding:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:100,toks:25},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:100,toks:55},
-        {name:'Qwen3-Coder-30B-A3B',params:'30B',ram:28.5,fit:100,toks:58}
+        {name:'Kimi-K2.5 Q2',params:'1T MoE',ram:240,fit:65,toks:3},
+        {name:'MiniMax-M2.5 Q8',params:'230B MoE',ram:243,fit:62,toks:4},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:100,toks:30}
       ],
       chat:[
-        {name:'DeepSeek-V3.2 671B MoE',params:'671B',ram:638.3,fit:55,toks:2},
-        {name:'Qwen1.5-110B-Chat',params:'110B',ram:103.6,fit:95,toks:10},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:100,toks:28}
+        {name:'Qwen3.5-397B-A17B Q4',params:'397B MoE',ram:214,fit:72,toks:5},
+        {name:'Llama-4-Maverick Q2',params:'400B MoE',ram:122,fit:88,toks:8},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:100,toks:28}
       ],
       reasoning:[
-        {name:'GPT-OSS-120B',params:'120B',ram:108.8,fit:92,toks:10},
-        {name:'Qwen3-Next-80B-A3B',params:'80B',ram:75.7,fit:98,toks:20},
-        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:100,toks:55}
+        {name:'GLM-5 Q2',params:'744B MoE',ram:241,fit:62,toks:3},
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:96,toks:12},
+        {name:'GPT-OSS-120B',params:'120B',ram:108.8,fit:92,toks:12}
       ],
       agents:[
-        {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:100,toks:25},
-        {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:100,toks:28},
-        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:100,toks:55}
+        {name:'Kimi-K2.5 Q2',params:'1T MoE',ram:240,fit:65,toks:3},
+        {name:'Qwen3.5-397B-A17B Q4',params:'397B MoE',ram:214,fit:72,toks:5},
+        {name:'MiniMax-M2.5 Q8',params:'230B MoE',ram:243,fit:62,toks:4}
       ]
     }
   }
@@ -1228,7 +1228,7 @@ function renderOverview(anim) {
   var cNode = G.append('g').attr('transform','translate('+cx+','+cy+')').style('cursor','default');
   cNode.append('circle').attr('r',48).attr('fill','url(#cg)').attr('stroke','#7c6aff').attr('stroke-width',2).attr('stroke-opacity',.4);
   cNode.append('text').attr('text-anchor','middle').attr('dy','-6').attr('fill','#fff').attr('font-size','15px').attr('font-weight','700').text('LLM Picker');
-  cNode.append('text').attr('text-anchor','middle').attr('dy','12').attr('fill','rgba(255,255,255,0.45)').attr('font-size','10px').text('497 Models \u00B7 17 Hardware');
+  cNode.append('text').attr('text-anchor','middle').attr('dy','12').attr('fill','rgba(255,255,255,0.45)').attr('font-size','10px').text('510 Models \u00B7 17 Hardware');
   // Pulse
   cNode.append('circle').attr('r',48).attr('fill','none').attr('stroke','#7c6aff').attr('stroke-width',1).attr('stroke-opacity',0)
     .transition().duration(2000).ease(d3.easeLinear).attr('r',75).attr('stroke-opacity',.25)
@@ -1703,6 +1703,19 @@ var MODEL_DB = [
   {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,vram:46.4,useCase:'agents',provider:'NVIDIA'},
   {name:'Qwen3-Coder-Next-72B',params:'72B',ram:74.2,vram:74.2,useCase:'coding',provider:'Alibaba'},
   {name:'GPT-OSS-120B',params:'120B',ram:108.8,vram:108.8,useCase:'reasoning',provider:'OpenAI OSS'},
+  // 2026 releases
+  {name:'Kimi-K2.5 (1T MoE, 32B active)',params:'1T',ram:240,vram:240,useCase:'coding',provider:'Moonshot AI'},
+  {name:'MiniMax-M2.5 (230B MoE, 10B active)',params:'230B',ram:101,vram:101,useCase:'coding',provider:'MiniMax'},
+  {name:'MiniMax-M1 (456B MoE, 46B active)',params:'456B',ram:640,vram:640,useCase:'reasoning',provider:'MiniMax'},
+  {name:'Qwen3.5-397B-A17B (MoE)',params:'397B',ram:214,vram:214,useCase:'agents',provider:'Alibaba'},
+  {name:'Qwen3.5-35B-A3B (MoE)',params:'35B',ram:8,vram:8,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen3.5-27B',params:'27B',ram:22,vram:22,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen3.5-122B-A10B (MoE)',params:'122B',ram:80,vram:80,useCase:'agents',provider:'Alibaba'},
+  {name:'Qwen3-Coder-Next (80B MoE, 3B active)',params:'80B',ram:46,vram:46,useCase:'coding',provider:'Alibaba'},
+  {name:'GLM-5 (744B MoE, 40B active)',params:'744B',ram:241,vram:241,useCase:'reasoning',provider:'Zhipu AI'},
+  {name:'DeepSeek-V3.2 (671B MoE)',params:'671B',ram:400,vram:400,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'Llama-4-Scout (109B MoE, 17B active)',params:'109B',ram:30,vram:30,useCase:'chat',provider:'Meta'},
+  {name:'Llama-4-Maverick (400B MoE, 17B active)',params:'400B',ram:122,vram:122,useCase:'chat',provider:'Meta'},
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
