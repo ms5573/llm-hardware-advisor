@@ -168,7 +168,7 @@ svg{display:block}
   .tip{display:none}
   .legend{display:none}
   .stats{display:none}
-  .footer{position:relative;bottom:auto;left:auto;transform:none;margin:16px;display:block;background:transparent;border:none;white-space:normal;line-height:1.4}
+  .footer{display:none}
   .quiz-fab{bottom:16px;font-size:13px;padding:10px 20px;z-index:300}
   .quiz-card{padding:18px;max-width:95vw;border-radius:14px}
   .quiz-q{font-size:16px}
@@ -229,6 +229,8 @@ svg{display:block}
   </div>
 </div>
 
+<div class="mobile-view" id="mobileView"></div>
+
 <div class="breadcrumb" id="breadcrumb">
   <div class="bc-item cur" data-level="root">Overview</div>
 </div>
@@ -265,8 +267,6 @@ svg{display:block}
 </div>
 
 <div class="footer">Affiliate links support this project at no extra cost to you. Data via <a href="https://github.com/AlexsJones/llmfit" style="color:var(--accent);text-decoration:none">llmfit</a> (497 models scored).</div>
-
-<div class="mobile-view" id="mobileView"></div>
 
 <button class="quiz-fab" id="quizFab" onclick="openQuiz()">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -619,7 +619,82 @@ HARDWARE.forEach(hw => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// VIS ENGINE
+// MOBILE DETECTION
+// ═══════════════════════════════════════════════════════════════════════════════
+function isMobile(){ return window.innerWidth<=768; }
+
+// Render mobile view immediately if on mobile (before D3 init)
+var mobileUC='coding';
+var mobileSearch='';
+function renderMobile(){
+  var mv=document.getElementById('mobileView');
+  if(!mv) return;
+  var h='';
+  h+='<div class="m-uc-tabs">';
+  USE_CASES.forEach(function(uc){
+    h+='<button class="m-uc-tab'+(mobileUC===uc.id?' active':'')+'" onclick="mobileUC=\''+uc.id+'\';renderMobile();" style="'+(mobileUC===uc.id?'border-color:'+uc.color+';color:'+uc.color:'')+'">'+uc.icon+' '+uc.label+'</button>';
+  });
+  h+='</div>';
+  var tiers=['Budget','Mid-Range','Serious','All-In'];
+  tiers.forEach(function(tier){
+    var hwInTier=HARDWARE.filter(function(hw){
+      if(hw.tier!==tier) return false;
+      if(!mobileSearch) return true;
+      var q=mobileSearch;
+      if(hw.label.toLowerCase().indexOf(q)>=0) return true;
+      if(hw.backend.toLowerCase().indexOf(q)>=0) return true;
+      var models=hw.models[mobileUC]||[];
+      return models.some(function(m){return m.name.toLowerCase().indexOf(q)>=0;});
+    });
+    if(!hwInTier.length) return;
+    h+='<div class="m-section">';
+    h+='<div class="m-section-title">'+tier+'</div>';
+    hwInTier.forEach(function(hw){
+      var models=hw.models[mobileUC]||[];
+      var isFeatured=hw.featured;
+      h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'">';
+      h+='<div class="m-hw-header"><div class="m-hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</div><span class="price-badge">'+hw.price+'</span></div>';
+      h+='<div class="m-hw-desc">'+hw.desc+'</div>';
+      h+='<div class="m-hw-stats">';
+      h+='<div class="m-hw-stat"><strong>'+hw.mem+'</strong>GB</div>';
+      h+='<div class="m-hw-stat"><strong>'+hw.total+'</strong> models</div>';
+      h+='<div class="m-hw-stat">'+hw.backend+'</div>';
+      h+='</div>';
+      if(models.length){
+        h+='<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide models ▲\':\'Show '+models.length+' models ▼\'">Show '+models.length+' models ▼</button>';
+        h+='<div class="m-models-list">';
+        models.forEach(function(m){
+          var fc=m.fit>=90?'var(--fit-perfect)':m.fit>=75?'var(--fit-good)':m.fit>=60?'var(--fit-marginal)':'var(--fit-tight)';
+          h+='<div class="m-model-row"><div class="m-model-name">'+m.name+'</div><div class="m-model-meta">'+m.params+' · '+m.toks+'t/s · <span style="color:'+fc+'">'+m.fit+'%</span></div></div>';
+        });
+        h+='</div>';
+      }
+      h+=amazonBtnHTML(hw.amazon);
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  h+='<div style="text-align:center;font-size:10px;color:var(--text-muted);padding:20px 0 10px">Affiliate links support this project at no extra cost to you.</div>';
+  mv.innerHTML=h;
+}
+
+// Wire up mobile search
+document.getElementById('searchInput').addEventListener('input',function(){
+  if(!isMobile()) return;
+  mobileSearch=this.value.toLowerCase().trim();
+  renderMobile();
+});
+
+// Render mobile immediately
+if(isMobile()){ renderMobile(); }
+
+// On resize, toggle between mobile and desktop
+window.addEventListener('resize',function(){
+  if(isMobile()){ renderMobile(); }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// VIS ENGINE (desktop only)
 // ═══════════════════════════════════════════════════════════════════════════════
 const W = window.innerWidth, H = window.innerHeight;
 let curView = 'overview', curUC = null;
@@ -1245,81 +1320,6 @@ var _origShowHWPanel=showHWPanel;
 showHWPanel=function(hw){ _origShowHWPanel(hw); updateHash('hw',hw.id); };
 
 window.addEventListener('hashchange', handleHash);
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// MOBILE VIEW
-// ═══════════════════════════════════════════════════════════════════════════════
-var mobileUC='coding';
-var mobileSearch='';
-function renderMobile(){
-  var mv=document.getElementById('mobileView');
-  if(!mv) return;
-  var h='';
-  // UC tabs
-  h+='<div class="m-uc-tabs">';
-  USE_CASES.forEach(function(uc){
-    h+='<button class="m-uc-tab'+(mobileUC===uc.id?' active':'')+'" onclick="mobileUC=\''+uc.id+'\';renderMobile();" style="'+(mobileUC===uc.id?'border-color:'+uc.color+';color:'+uc.color:'')+'">'+uc.icon+' '+uc.label+'</button>';
-  });
-  h+='</div>';
-
-  // Group by tier
-  var tiers=['Budget','Mid-Range','Serious','All-In'];
-  tiers.forEach(function(tier){
-    var hwInTier=HARDWARE.filter(function(hw){
-      if(hw.tier!==tier) return false;
-      if(!mobileSearch) return true;
-      var q=mobileSearch;
-      // Search in hardware name, backend, models
-      if(hw.label.toLowerCase().indexOf(q)>=0) return true;
-      if(hw.backend.toLowerCase().indexOf(q)>=0) return true;
-      var models=hw.models[mobileUC]||[];
-      return models.some(function(m){return m.name.toLowerCase().indexOf(q)>=0;});
-    });
-    if(!hwInTier.length) return;
-    h+='<div class="m-section">';
-    h+='<div class="m-section-title">'+tier+'</div>';
-    hwInTier.forEach(function(hw){
-      var models=hw.models[mobileUC]||[];
-      var isFeatured=hw.featured;
-      h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'">';
-      h+='<div class="m-hw-header"><div class="m-hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</div><span class="price-badge">'+hw.price+'</span></div>';
-      h+='<div class="m-hw-desc">'+hw.desc+'</div>';
-      h+='<div class="m-hw-stats">';
-      h+='<div class="m-hw-stat"><strong>'+hw.mem+'</strong>GB</div>';
-      h+='<div class="m-hw-stat"><strong>'+hw.total+'</strong> models</div>';
-      h+='<div class="m-hw-stat">'+hw.backend+'</div>';
-      h+='</div>';
-      if(models.length){
-        h+='<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide models \u25B2\':\'Show '+models.length+' models \u25BC\'">Show '+models.length+' models \u25BC</button>';
-        h+='<div class="m-models-list">';
-        models.forEach(function(m){
-          var fc=m.fit>=90?'var(--fit-perfect)':m.fit>=75?'var(--fit-good)':m.fit>=60?'var(--fit-marginal)':'var(--fit-tight)';
-          h+='<div class="m-model-row"><div class="m-model-name">'+m.name+'</div><div class="m-model-meta">'+m.params+' \u00B7 '+m.toks+'t/s \u00B7 <span style="color:'+fc+'">'+m.fit+'%</span></div></div>';
-        });
-        h+='</div>';
-      }
-      h+=amazonBtnHTML(hw.amazon);
-      h+='</div>';
-    });
-    h+='</div>';
-  });
-
-  mv.innerHTML=h;
-}
-
-// Detect mobile and render
-function isMobile(){ return window.innerWidth<=768; }
-if(isMobile()){ renderMobile(); }
-window.addEventListener('resize',function(){
-  if(isMobile()) renderMobile();
-});
-
-// Mobile search: filter hardware cards via the same search input
-d3.select('#searchInput').on('input.mobile',function(){
-  if(!isMobile()) return;
-  mobileSearch=this.value.toLowerCase().trim();
-  renderMobile();
-});
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // INIT
