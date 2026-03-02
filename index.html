@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>LLM Hardware Picker — Find the Perfect Hardware for Local AI</title>
 <meta name="description" content="Interactive explorer mapping LLM models to the hardware that runs them best. Find your perfect local AI setup.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,7 +230,7 @@ svg{display:block}
   </div>
 </div>
 
-<div class="mobile-view" id="mobileView"></div>
+<div class="mobile-view" id="mobileView"><div style="text-align:center;padding:40px 20px;color:#8888a8">Loading hardware recommendations...</div></div>
 
 <div class="breadcrumb" id="breadcrumb">
   <div class="bc-item cur" data-level="root">Overview</div>
@@ -686,7 +687,12 @@ document.getElementById('searchInput').addEventListener('input',function(){
 });
 
 // Render mobile immediately
-if(isMobile()){ renderMobile(); }
+if(isMobile()){
+  try{ renderMobile(); }catch(e){
+    var mv=document.getElementById('mobileView');
+    if(mv) mv.innerHTML='<div style="padding:20px;color:red;font-size:12px">Error: '+e.message+'</div>';
+  }
+}
 
 // On resize, toggle between mobile and desktop
 window.addEventListener('resize',function(){
