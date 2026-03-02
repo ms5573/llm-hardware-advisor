@@ -59,7 +59,7 @@ svg{display:block}
 .search-box svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
 
 /* Breadcrumb */
-.breadcrumb{position:fixed;top:60px;left:28px;z-index:100;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim)}
+.breadcrumb{position:fixed;top:92px;left:28px;z-index:100;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim)}
 .bc-item{cursor:pointer;padding:3px 9px;border-radius:5px;transition:all .2s}
 .bc-item:hover{background:rgba(255,255,255,0.05);color:var(--text)}
 .bc-item.cur{color:var(--text);font-weight:500}
@@ -178,6 +178,13 @@ svg{display:block}
   .quiz-result-hw{padding:12px}
   .quiz-result-models{font-size:11px}
   .mobile-view{display:block!important}
+  .nav-tabs{top:auto;position:sticky;padding:6px 12px;z-index:99}
+  .nav-tab{padding:6px 12px;font-size:11px}
+  .page-view{padding:16px 16px 80px}
+  .setup-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .compare-wrap{margin:0 -16px;border-radius:0;border-left:none;border-right:none}
+  .model-search-input{font-size:14px;padding:12px 14px 12px 40px}
+  .model-hw-match{flex-direction:column;align-items:flex-start;gap:8px}
 }
 @media(max-width:380px){
   .m-hw-header{flex-wrap:wrap;gap:6px}
@@ -186,6 +193,63 @@ svg{display:block}
   .m-model-row{flex-direction:column;align-items:flex-start;gap:2px}
   .m-uc-tab{padding:6px 10px;font-size:11px}
 }
+/* Nav Tabs */
+.nav-tabs{position:fixed;top:56px;left:0;right:0;z-index:99;display:flex;gap:4px;padding:6px 28px;background:rgba(8,8,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{padding:7px 16px;border-radius:8px;border:1px solid transparent;background:none;color:var(--text-dim);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.nav-tab:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.nav-tab.active{border-color:var(--accent);color:var(--text);background:rgba(124,106,255,0.08)}
+
+/* Page Views */
+.page-view{display:none;padding:100px 28px 80px;min-height:100vh;position:relative;z-index:10;max-width:1200px;margin:0 auto}
+.page-view.active{display:block}
+
+/* Model Search */
+.model-search-wrap{max-width:600px;margin:0 auto 32px}
+.model-search-input{width:100%;padding:14px 18px 14px 44px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-family:inherit;font-size:15px;outline:none;transition:all .2s;backdrop-filter:blur(12px)}
+.model-search-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.model-search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+.model-results{display:grid;gap:10px;margin-top:16px}
+.model-result-card{padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;transition:all .2s}
+.model-result-card:hover{border-color:var(--border-h);background:var(--bg-card-hover)}
+.model-hw-match{padding:12px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.02);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.model-hw-match.best{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.04)}
+
+/* Comparison Table */
+.compare-filters{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.compare-chip{padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text-dim);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.compare-chip.active{border-color:var(--accent);color:var(--text);background:rgba(124,106,255,0.08)}
+.compare-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.compare-table{width:100%;border-collapse:collapse;font-size:12px;min-width:800px}
+.compare-table th{position:sticky;top:0;background:rgba(14,14,26,0.95);backdrop-filter:blur(12px);padding:12px 14px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);border-bottom:1px solid var(--border);cursor:pointer;white-space:nowrap;user-select:none}
+.compare-table th:hover{color:var(--text)}
+.compare-table th .sort-arrow{margin-left:4px;font-size:8px;opacity:0.5}
+.compare-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.compare-table tr:hover td{background:rgba(255,255,255,0.02)}
+.compare-table .hw-name{font-weight:600;white-space:nowrap}
+.compare-table .buy-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all .15s}
+.compare-table .buy-btn:hover{transform:translateY(-1px);box-shadow:0 2px 10px rgba(255,153,0,0.3)}
+
+/* My Setup */
+.setup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:24px}
+.setup-card{padding:14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;transition:all .2s;text-align:center}
+.setup-card:hover{border-color:var(--border-h);background:var(--bg-card-hover);transform:translateY(-1px)}
+.setup-card.selected{border-color:var(--accent);background:rgba(124,106,255,0.06)}
+.setup-card-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.setup-card-spec{font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.setup-section-title{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:12px;margin-top:24px}
+.setup-results{display:grid;gap:12px}
+.upgrade-nudge{padding:20px;border-radius:14px;border:1px solid rgba(255,153,0,0.2);background:rgba(255,153,0,0.04);margin-top:24px;text-align:center}
+.upgrade-nudge-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.upgrade-nudge-sub{font-size:12px;color:var(--text-dim);margin-bottom:12px}
+
+/* Fit badge */
+.fit-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.fit-perfect{background:rgba(34,197,94,0.12);color:var(--fit-perfect)}
+.fit-good{background:rgba(59,130,246,0.12);color:var(--fit-good)}
+.fit-marginal{background:rgba(245,158,11,0.12);color:var(--fit-marginal)}
+.fit-tight{background:rgba(239,68,68,0.12);color:var(--fit-tight)}
+
 .mobile-view{display:none;padding:16px;padding-bottom:80px;position:relative;z-index:10}
 .m-section{margin-bottom:24px}
 .m-section-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:0.3px}
@@ -230,7 +294,19 @@ svg{display:block}
   </div>
 </div>
 
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" data-view="explorer" onclick="switchView('explorer')">Explorer</button>
+  <button class="nav-tab" data-view="model-search" onclick="switchView('model-search')">Find by Model</button>
+  <button class="nav-tab" data-view="compare" onclick="switchView('compare')">Compare</button>
+  <button class="nav-tab" data-view="mysetup" onclick="switchView('mysetup')">My Setup</button>
+  <button class="nav-tab" data-view="quiz-tab" onclick="openQuiz()">Quiz</button>
+</div>
+
 <div class="mobile-view" id="mobileView"><div style="text-align:center;padding:40px 20px;color:#8888a8">Loading hardware recommendations...</div></div>
+
+<div class="page-view" id="view-model-search"></div>
+<div class="page-view" id="view-compare"></div>
+<div class="page-view" id="view-mysetup"></div>
 
 <div class="breadcrumb" id="breadcrumb">
   <div class="bc-item cur" data-level="root">Overview</div>
@@ -263,7 +339,7 @@ svg{display:block}
 
 <div class="stats">
   <div><div class="stats-n">497</div><div class="stats-l">Models</div></div>
-  <div><div class="stats-n">11</div><div class="stats-l">Hardware</div></div>
+  <div><div class="stats-n">17</div><div class="stats-l">Hardware</div></div>
   <div><div class="stats-n">4</div><div class="stats-l">Use Cases</div></div>
 </div>
 
@@ -569,6 +645,174 @@ const HARDWARE = [
         {name:'Qwen3-Coder-Next (full)',params:'72B',ram:74.2,fit:92,toks:12},
         {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,fit:96,toks:14},
         {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:30}
+      ]
+    }
+  },
+  {
+    id:'minisforum_um890', label:'Minisforum UM890 Pro 32GB', price:'$529', tier:'Budget',
+    mem:32, backend:'AMD CPU (llama.cpp)', desc:'Compact mini PC with AMD Ryzen 9 8945HS and 32GB DDR5. Runs 7B–14B quantized models via CPU inference.',
+    amazon:'https://www.amazon.com/dp/B0D9YJLZP6?tag=ms5573-20',
+    color:'#e44d26', total:180, category:'minipc',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:92,toks:12},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:98,toks:28},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:75,toks:5}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:92,toks:12},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:94,toks:14},
+        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:98,toks:25}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:78,toks:4},
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:92,toks:12},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:90,toks:10}
+      ],
+      agents:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:92,toks:12},
+        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:98,toks:22},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:94,toks:14}
+      ]
+    }
+  },
+  {
+    id:'beelink_ser7', label:'Beelink SER7 32GB', price:'$449', tier:'Budget',
+    mem:32, backend:'AMD CPU (llama.cpp)', desc:'Budget mini PC with AMD Ryzen 7 7840HS and 32GB DDR5. Great value entry into local AI.',
+    amazon:'https://www.amazon.com/dp/B0CJB9FBMM?tag=ms5573-20',
+    color:'#e44d26', total:170, category:'minipc',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:90,toks:10},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:98,toks:24},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:72,toks:4}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:90,toks:10},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:92,toks:12},
+        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:98,toks:22}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:90,toks:10},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:88,toks:8},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:75,toks:3}
+      ],
+      agents:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:90,toks:10},
+        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:98,toks:20},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:92,toks:12}
+      ]
+    }
+  },
+  {
+    id:'geekom_a8', label:'GEEKOM A8 32GB', price:'$499', tier:'Budget',
+    mem:32, backend:'AMD CPU (llama.cpp)', desc:'GEEKOM A8 with AMD Ryzen 9 8945HS and 32GB DDR5. Sleek mini PC for private local AI.',
+    amazon:'https://www.amazon.com/dp/B0D22FYFL4?tag=ms5573-20',
+    color:'#e44d26', total:175, category:'minipc',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:92,toks:11},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:98,toks:26},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:74,toks:4}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:92,toks:11},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:94,toks:13},
+        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:98,toks:24}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:76,toks:4},
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:92,toks:11},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:89,toks:9}
+      ],
+      agents:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:92,toks:11},
+        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:98,toks:21},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:94,toks:13}
+      ]
+    }
+  },
+  {
+    id:'rtx3060_12', label:'RTX 3060 12GB Build', price:'$800', tier:'Budget',
+    mem:12, backend:'NVIDIA CUDA', desc:'MSI RTX 3060 12GB in a budget build. Entry-level CUDA inference for quantized models.',
+    amazon:'https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20',
+    color:'#76b900', total:210, category:'gpu',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:82,toks:35},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:98,toks:65},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:55,toks:12}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:82,toks:35},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:85,toks:40},
+        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:98,toks:60}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:82,toks:35},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:78,toks:28},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:52,toks:8}
+      ],
+      agents:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:82,toks:35},
+        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:98,toks:55},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:85,toks:40}
+      ]
+    }
+  },
+  {
+    id:'rtx3090_24', label:'RTX 3090 24GB (Renewed)', price:'$900', tier:'Mid-Range',
+    mem:24, backend:'NVIDIA CUDA', desc:'Renewed RTX 3090 with 24GB VRAM. Excellent value for serious CUDA inference.',
+    amazon:'https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20',
+    color:'#76b900', total:320, category:'gpu',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:60,toks:28},
+        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:92,toks:42},
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:98,toks:70}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:70},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:98,toks:75},
+        {name:'Meta-Llama-3-8B',params:'8B',ram:7.6,fit:95,toks:60}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:92,toks:38},
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:98,toks:70},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:95,toks:58}
+      ],
+      agents:[
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:60,toks:28},
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:98,toks:70},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:98,toks:75}
+      ]
+    }
+  },
+  {
+    id:'arc_b580', label:'Intel Arc B580 12GB', price:'$250', tier:'Budget',
+    mem:12, backend:'Intel oneAPI', desc:'ASRock Intel Arc B580 12GB. Budget GPU option with growing LLM support via SYCL/oneAPI.',
+    amazon:'https://www.amazon.com/dp/B0DNV4NWF7?tag=ms5573-20',
+    color:'#0068b5', total:160, category:'gpu',
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:78,toks:22},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:98,toks:45},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:50,toks:6}
+      ],
+      chat:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:78,toks:22},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:80,toks:25},
+        {name:'Llama-3.2-3B',params:'3B',ram:3.0,fit:98,toks:42}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:78,toks:22},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:72,toks:18},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:48,toks:5}
+      ],
+      agents:[
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:78,toks:22},
+        {name:'Phi-3.5-Mini',params:'3.8B',ram:3.5,fit:98,toks:38},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:80,toks:25}
       ]
     }
   },
@@ -960,7 +1204,7 @@ function renderOverview(anim) {
   var cNode = G.append('g').attr('transform','translate('+cx+','+cy+')').style('cursor','default');
   cNode.append('circle').attr('r',48).attr('fill','url(#cg)').attr('stroke','#7c6aff').attr('stroke-width',2).attr('stroke-opacity',.4);
   cNode.append('text').attr('text-anchor','middle').attr('dy','-6').attr('fill','#fff').attr('font-size','15px').attr('font-weight','700').text('LLM Picker');
-  cNode.append('text').attr('text-anchor','middle').attr('dy','12').attr('fill','rgba(255,255,255,0.45)').attr('font-size','10px').text('497 Models \u00B7 11 Hardware');
+  cNode.append('text').attr('text-anchor','middle').attr('dy','12').attr('fill','rgba(255,255,255,0.45)').attr('font-size','10px').text('497 Models \u00B7 17 Hardware');
   // Pulse
   cNode.append('circle').attr('r',48).attr('fill','none').attr('stroke','#7c6aff').attr('stroke-width',1).attr('stroke-opacity',0)
     .transition().duration(2000).ease(d3.easeLinear).attr('r',75).attr('stroke-opacity',.25)
@@ -1235,9 +1479,10 @@ var quizQuestions = [
     {label:'$2,000 \u2013 $4,500', val:'serious'},
     {label:'$4,500+', val:'allin'}
   ]},
-  { text:'Mac or PC?', opts:[
-    {label:'macOS', val:'mac'},
-    {label:'Windows / Linux', val:'pc'},
+  { text:'What type of hardware?', opts:[
+    {label:'Mac (Apple Silicon)', val:'mac'},
+    {label:'Windows PC / GPU', val:'pc'},
+    {label:'Mini PC (compact & quiet)', val:'minipc'},
     {label:'No preference', val:'any'}
   ]}
 ];
@@ -1274,9 +1519,10 @@ function quizAnswer(val){
 function quizPickHardware(){
   var uc=quizAnswers[0], budget=quizAnswers[1], os=quizAnswers[2];
   var candidates=HARDWARE.slice();
-  // Filter by OS preference
+  // Filter by OS/type preference
   if(os==='mac') candidates=candidates.filter(function(h){return h.backend.indexOf('Apple')>=0;});
-  else if(os==='pc') candidates=candidates.filter(function(h){return h.backend.indexOf('NVIDIA')>=0;});
+  else if(os==='pc') candidates=candidates.filter(function(h){return h.backend.indexOf('NVIDIA')>=0 || h.backend.indexOf('Intel')>=0;});
+  else if(os==='minipc') candidates=candidates.filter(function(h){return h.category==='minipc';});
   // Filter by budget
   var maxPrice={budget:600,mid:2000,serious:4500,allin:Infinity}[budget]||Infinity;
   var inBudget=candidates.filter(function(h){return parseFloat(h.price.replace(/[$,]/g,''))<=maxPrice;});
@@ -1323,26 +1569,474 @@ function renderQuizResult(){
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// VIEW SWITCHING
+// ═══════════════════════════════════════════════════════════════════════════════
+var currentView = 'explorer';
+function switchView(view) {
+  currentView = view;
+  // Update tab states
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.view===view); });
+  // Hide all page views
+  document.querySelectorAll('.page-view').forEach(function(v){ v.classList.remove('active'); });
+  // Toggle explorer vs page views
+  var canvas = document.getElementById('canvas-container');
+  var mobile = document.getElementById('mobileView');
+  var breadcrumb = document.getElementById('breadcrumb');
+  var legend = document.querySelector('.legend');
+  var stats = document.querySelector('.stats');
+  var footer = document.querySelector('.footer');
+  var quizFab = document.getElementById('quizFab');
+
+  if(view === 'explorer') {
+    if(canvas) canvas.style.display = '';
+    if(mobile && isMobile()) mobile.style.display = 'block';
+    if(breadcrumb) breadcrumb.style.display = '';
+    if(legend) legend.style.display = '';
+    if(stats) stats.style.display = '';
+    if(footer) footer.style.display = '';
+    if(quizFab) quizFab.style.display = '';
+    updateHash('overview');
+  } else {
+    if(canvas) canvas.style.display = 'none';
+    if(mobile) mobile.style.display = 'none';
+    if(breadcrumb) breadcrumb.style.display = 'none';
+    if(legend) legend.style.display = 'none';
+    if(stats) stats.style.display = 'none';
+    if(footer) footer.style.display = 'none';
+    if(quizFab) quizFab.style.display = 'none';
+    panel.classed('open', false);
+    var target = document.getElementById('view-'+view);
+    if(target) {
+      target.classList.add('active');
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    }
+    if(view === 'model-search') { renderModelSearchView(); updateHash('modelsearch'); }
+    else if(view === 'compare') { renderCompareView(); updateHash('compare'); }
+    else if(view === 'mysetup') { renderMySetupView(); updateHash('mysetup'); }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MODEL DATABASE (from llmfit — top models by popularity)
+// ═══════════════════════════════════════════════════════════════════════════════
+var MODEL_DB = [
+  {name:'Llama-3.3-70B-Instruct',params:'70B',ram:68,vram:68,useCase:'chat',provider:'Meta'},
+  {name:'Llama-3.2-3B-Instruct',params:'3B',ram:3,vram:3,useCase:'chat',provider:'Meta'},
+  {name:'Llama-3.2-1B-Instruct',params:'1B',ram:1.5,vram:1.5,useCase:'chat',provider:'Meta'},
+  {name:'Llama-3.1-8B-Instruct',params:'8B',ram:7.6,vram:7.6,useCase:'chat',provider:'Meta'},
+  {name:'Llama-3.1-70B-Instruct',params:'70B',ram:68,vram:68,useCase:'chat',provider:'Meta'},
+  {name:'Meta-Llama-3-8B-Instruct',params:'8B',ram:7.6,vram:7.6,useCase:'chat',provider:'Meta'},
+  {name:'Meta-Llama-3-70B-Instruct',params:'70B',ram:68,vram:68,useCase:'chat',provider:'Meta'},
+  {name:'Qwen2.5-72B-Instruct',params:'72B',ram:74,vram:74,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen2.5-32B-Instruct',params:'32B',ram:30,vram:30,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen2.5-14B-Instruct',params:'14B',ram:13.5,vram:13.5,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen2.5-7B-Instruct',params:'7B',ram:7.1,vram:7.1,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen2.5-3B-Instruct',params:'3B',ram:3,vram:3,useCase:'chat',provider:'Alibaba'},
+  {name:'Qwen2.5-Coder-32B-Instruct',params:'32B',ram:30.4,vram:30.4,useCase:'coding',provider:'Alibaba'},
+  {name:'Qwen2.5-Coder-14B-Instruct',params:'14B',ram:13.5,vram:13.5,useCase:'coding',provider:'Alibaba'},
+  {name:'Qwen2.5-Coder-7B-Instruct',params:'7B',ram:7.1,vram:7.1,useCase:'coding',provider:'Alibaba'},
+  {name:'Qwen2.5-Coder-1.5B-Instruct',params:'1.5B',ram:2,vram:2,useCase:'coding',provider:'Alibaba'},
+  {name:'DeepSeek-R1',params:'671B',ram:640,vram:640,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,vram:30.4,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,vram:13.8,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,vram:7.1,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-R1-Distill-Llama-70B',params:'70B',ram:68,vram:68,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-R1-Distill-Llama-8B',params:'8B',ram:7.6,vram:7.6,useCase:'reasoning',provider:'DeepSeek'},
+  {name:'DeepSeek-V3',params:'671B',ram:640,vram:640,useCase:'chat',provider:'DeepSeek'},
+  {name:'DeepSeek-Coder-V2-Instruct',params:'236B',ram:225,vram:225,useCase:'coding',provider:'DeepSeek'},
+  {name:'DeepSeek-Coder-V2-Lite-Instruct',params:'16B',ram:14.6,vram:14.6,useCase:'coding',provider:'DeepSeek'},
+  {name:'Mistral-7B-Instruct-v0.3',params:'7B',ram:6.7,vram:6.7,useCase:'chat',provider:'Mistral'},
+  {name:'Mixtral-8x7B-Instruct-v0.1',params:'46.7B',ram:43.5,vram:43.5,useCase:'chat',provider:'Mistral'},
+  {name:'Mistral-Small-24B-Instruct',params:'24B',ram:22,vram:22,useCase:'chat',provider:'Mistral'},
+  {name:'Mistral-Large-2411',params:'123B',ram:116,vram:116,useCase:'chat',provider:'Mistral'},
+  {name:'Codestral-22B-v0.1',params:'22B',ram:20,vram:20,useCase:'coding',provider:'Mistral'},
+  {name:'Devstral-Small-2507',params:'24B',ram:22,vram:22,useCase:'coding',provider:'Mistral'},
+  {name:'Phi-3.5-Mini-Instruct',params:'3.8B',ram:3.5,vram:3.5,useCase:'chat',provider:'Microsoft'},
+  {name:'Phi-3.5-MoE-Instruct',params:'42B',ram:38,vram:38,useCase:'chat',provider:'Microsoft'},
+  {name:'Phi-4',params:'14B',ram:13,vram:13,useCase:'reasoning',provider:'Microsoft'},
+  {name:'Gemma-2-27B-IT',params:'27B',ram:25,vram:25,useCase:'chat',provider:'Google'},
+  {name:'Gemma-2-9B-IT',params:'9B',ram:8.5,vram:8.5,useCase:'chat',provider:'Google'},
+  {name:'Gemma-2-2B-IT',params:'2B',ram:2.5,vram:2.5,useCase:'chat',provider:'Google'},
+  {name:'CodeGemma-7B-IT',params:'7B',ram:6.8,vram:6.8,useCase:'coding',provider:'Google'},
+  {name:'StarCoder2-15B',params:'15B',ram:14,vram:14,useCase:'coding',provider:'BigCode'},
+  {name:'StarCoder2-7B',params:'7B',ram:6.5,vram:6.5,useCase:'coding',provider:'BigCode'},
+  {name:'StarCoder2-3B',params:'3B',ram:3,vram:3,useCase:'coding',provider:'BigCode'},
+  {name:'Yi-1.5-34B-Chat',params:'34B',ram:32,vram:32,useCase:'chat',provider:'01.AI'},
+  {name:'Yi-1.5-9B-Chat',params:'9B',ram:8.5,vram:8.5,useCase:'chat',provider:'01.AI'},
+  {name:'Falcon-40B-Instruct',params:'40B',ram:38,vram:38,useCase:'chat',provider:'TII'},
+  {name:'Falcon-7B-Instruct',params:'7B',ram:6.5,vram:6.5,useCase:'chat',provider:'TII'},
+  {name:'Command-R-35B',params:'35B',ram:33,vram:33,useCase:'agents',provider:'Cohere'},
+  {name:'Command-R-Plus-104B',params:'104B',ram:98,vram:98,useCase:'agents',provider:'Cohere'},
+  {name:'Internlm2.5-20B-Chat',params:'20B',ram:18.5,vram:18.5,useCase:'chat',provider:'Shanghai AI Lab'},
+  {name:'Internlm2.5-7B-Chat',params:'7B',ram:6.8,vram:6.8,useCase:'chat',provider:'Shanghai AI Lab'},
+  {name:'Llama-3.3-Nemotron-Super-49B',params:'49B',ram:46.4,vram:46.4,useCase:'agents',provider:'NVIDIA'},
+  {name:'Qwen3-Coder-Next-72B',params:'72B',ram:74.2,vram:74.2,useCase:'coding',provider:'Alibaba'},
+  {name:'GPT-OSS-120B',params:'120B',ram:108.8,vram:108.8,useCase:'reasoning',provider:'OpenAI OSS'},
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// "I OWN" HARDWARE OPTIONS
+// ═══════════════════════════════════════════════════════════════════════════════
+var OWNED_HARDWARE = [
+  {label:'RTX 3060',vram:12,ram:12,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 3070',vram:8,ram:8,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 3080',vram:10,ram:10,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 3090',vram:24,ram:24,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 4060 Ti',vram:16,ram:16,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 4070',vram:12,ram:12,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 4080',vram:16,ram:16,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 4090',vram:24,ram:24,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'RTX 5090',vram:32,ram:32,type:'gpu',backend:'NVIDIA CUDA'},
+  {label:'Intel Arc B580',vram:12,ram:12,type:'gpu',backend:'Intel oneAPI'},
+  {label:'Mac M1 8GB',vram:8,ram:8,type:'mac',backend:'Apple Metal'},
+  {label:'Mac M1/M2 16GB',vram:16,ram:16,type:'mac',backend:'Apple Metal'},
+  {label:'Mac M2/M3 24GB',vram:24,ram:24,type:'mac',backend:'Apple Metal'},
+  {label:'Mac M3/M4 32GB',vram:32,ram:32,type:'mac',backend:'Apple Metal'},
+  {label:'Mac 64GB',vram:64,ram:64,type:'mac',backend:'Apple Metal'},
+  {label:'Mac 96GB',vram:96,ram:96,type:'mac',backend:'Apple Metal'},
+  {label:'Mac 128GB',vram:128,ram:128,type:'mac',backend:'Apple Metal'},
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FEATURE 2: MODEL SEARCH VIEW
+// ═══════════════════════════════════════════════════════════════════════════════
+var modelSearchQuery = '';
+var selectedModelResult = null;
+
+function fitBadgeHTML(fit) {
+  var cls = fit>=90?'fit-perfect':fit>=75?'fit-good':fit>=60?'fit-marginal':'fit-tight';
+  var label = fit>=90?'Perfect':fit>=75?'Good':fit>=60?'Marginal':'Tight';
+  return '<span class="fit-badge '+cls+'">'+label+' '+fit+'%</span>';
+}
+
+function calcModelFit(modelRam, hwMem) {
+  var ratio = (hwMem - modelRam) / hwMem;
+  if(ratio >= 0.5) return 98;
+  if(ratio >= 0.3) return 90;
+  if(ratio >= 0.15) return 80;
+  if(ratio >= 0.05) return 70;
+  if(ratio >= 0) return 62;
+  return 40;
+}
+
+function findHardwareForModel(model) {
+  var results = [];
+  HARDWARE.forEach(function(hw) {
+    var memAvail = hw.mem;
+    var ramNeeded = model.ram || model.vram || 0;
+    if(memAvail >= ramNeeded * 0.85) {
+      var fit = calcModelFit(ramNeeded, memAvail);
+      results.push({hw:hw, fit:fit});
+    }
+  });
+  results.sort(function(a,b){
+    var pa = parseFloat(a.hw.price.replace(/[$,]/g,''));
+    var pb = parseFloat(b.hw.price.replace(/[$,]/g,''));
+    return pa - pb;
+  });
+  return results;
+}
+
+function renderModelSearchView() {
+  var el = document.getElementById('view-model-search');
+  var filtered = MODEL_DB;
+  if(modelSearchQuery) {
+    var q = modelSearchQuery.toLowerCase();
+    filtered = MODEL_DB.filter(function(m) {
+      return m.name.toLowerCase().indexOf(q)>=0 || m.provider.toLowerCase().indexOf(q)>=0 || m.useCase.toLowerCase().indexOf(q)>=0;
+    });
+  }
+
+  var h = '<div style="text-align:center;margin-bottom:24px"><h2 style="font-size:22px;font-weight:700;margin-bottom:6px">Find Hardware for Any Model</h2><p style="color:var(--text-dim);font-size:13px">Search for a model to see which hardware can run it — sorted by price.</p></div>';
+  h += '<div class="model-search-wrap" style="position:relative">';
+  h += '<svg class="model-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+  h += '<input class="model-search-input" type="text" placeholder="Search models... (e.g. Llama, Qwen, DeepSeek)" value="'+modelSearchQuery+'" id="modelSearchInput">';
+  h += '</div>';
+
+  if(selectedModelResult) {
+    h += renderModelDetail(selectedModelResult);
+  } else {
+    h += '<div class="model-results">';
+    var toShow = filtered.slice(0, 30);
+    if(!modelSearchQuery) {
+      h += '<div style="text-align:center;color:var(--text-muted);font-size:12px;margin-bottom:8px">Showing '+toShow.length+' of '+MODEL_DB.length+' models — type to filter</div>';
+    } else {
+      h += '<div style="text-align:center;color:var(--text-muted);font-size:12px;margin-bottom:8px">'+filtered.length+' model'+(filtered.length!==1?'s':'')+' found</div>';
+    }
+    toShow.forEach(function(m) {
+      var hwMatches = findHardwareForModel(m);
+      var cheapest = hwMatches[0];
+      var ucColor = m.useCase==='coding'?'var(--coding)':m.useCase==='reasoning'?'var(--reasoning)':m.useCase==='agents'?'var(--multimodal)':'var(--chat)';
+      h += '<div class="model-result-card" onclick="selectedModelResult=MODEL_DB.find(function(x){return x.name===\''+m.name.replace(/'/g,"\\'")+'\'});renderModelSearchView()">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+      h += '<div style="font-size:14px;font-weight:600">'+m.name+'</div>';
+      h += '<span class="tag" style="border-color:'+ucColor+';color:'+ucColor+'">'+m.useCase+'</span></div>';
+      h += '<div style="font-size:11px;color:var(--text-dim);display:flex;gap:12px">';
+      h += '<span>'+m.params+' params</span><span>'+m.ram+'GB RAM</span><span>'+m.provider+'</span>';
+      if(cheapest) h += '<span style="color:var(--amazon)">from '+cheapest.hw.price+'</span>';
+      else h += '<span style="color:var(--fit-tight)">No matching hardware</span>';
+      h += '</div></div>';
+    });
+    h += '</div>';
+  }
+
+  el.innerHTML = h;
+
+  // Wire up search
+  var input = document.getElementById('modelSearchInput');
+  if(input) {
+    input.addEventListener('input', function() {
+      modelSearchQuery = this.value;
+      selectedModelResult = null;
+      renderModelSearchView();
+    });
+    if(modelSearchQuery) input.focus();
+  }
+}
+
+function renderModelDetail(model) {
+  var hwMatches = findHardwareForModel(model);
+  var ucColor = model.useCase==='coding'?'var(--coding)':model.useCase==='reasoning'?'var(--reasoning)':model.useCase==='agents'?'var(--multimodal)':'var(--chat)';
+  var h = '<div style="margin-bottom:16px"><button class="btn" onclick="selectedModelResult=null;renderModelSearchView()" style="font-size:12px">&larr; Back to search</button></div>';
+  h += '<div style="padding:20px;border-radius:14px;border:1px solid var(--border);background:var(--bg-card);margin-bottom:20px">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">';
+  h += '<h2 style="font-size:20px;font-weight:700;margin:0">'+model.name+'</h2>';
+  h += '<span class="tag" style="border-color:'+ucColor+';color:'+ucColor+';font-size:11px">'+model.useCase+'</span></div>';
+  h += '<div style="display:flex;gap:20px;font-size:13px;color:var(--text-dim);flex-wrap:wrap">';
+  h += '<span><strong style="color:var(--text)">'+model.params+'</strong> parameters</span>';
+  h += '<span><strong style="color:var(--text)">'+model.ram+'GB</strong> RAM needed</span>';
+  h += '<span>'+model.provider+'</span></div></div>';
+
+  h += '<h3 style="font-size:16px;font-weight:700;margin-bottom:14px">'+hwMatches.length+' Hardware Option'+(hwMatches.length!==1?'s':'')+' <span style="color:var(--text-dim);font-weight:400;font-size:12px">sorted by price</span></h3>';
+
+  if(hwMatches.length === 0) {
+    h += '<div style="text-align:center;padding:32px;color:var(--text-dim)">This model requires '+model.ram+'GB — no current hardware options fit. Consider a <strong>2x DGX Spark + NVLink</strong> setup.</div>';
+  }
+
+  hwMatches.forEach(function(item, i) {
+    var isBest = i === 0;
+    h += '<div class="model-hw-match'+(isBest?' best':'')+'">';
+    h += '<div style="flex:1;min-width:0">';
+    if(isBest) h += '<div style="font-size:9px;font-weight:600;color:var(--fit-perfect);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">Best Value</div>';
+    h += '<div style="font-size:14px;font-weight:600">'+item.hw.label+'</div>';
+    h += '<div style="font-size:11px;color:var(--text-dim)">'+item.hw.mem+'GB · '+item.hw.backend+' · '+item.hw.tier+'</div>';
+    h += '</div>';
+    h += '<div style="display:flex;align-items:center;gap:10px;flex-shrink:0">';
+    h += fitBadgeHTML(item.fit);
+    h += '<span class="price-badge">'+item.hw.price+'</span>';
+    h += '<a href="'+item.hw.amazon+'" target="_blank" rel="noopener" class="compare-table buy-btn">Buy</a>';
+    h += '</div></div>';
+  });
+
+  return h;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FEATURE 3: COMPARISON TABLE
+// ═══════════════════════════════════════════════════════════════════════════════
+var compareFilter = 'all';
+var compareSort = 'price';
+var compareSortDir = 1; // 1=asc, -1=desc
+
+function renderCompareView() {
+  var el = document.getElementById('view-compare');
+  var filtered = HARDWARE.slice();
+
+  // Apply filter
+  if(compareFilter === 'mac') filtered = filtered.filter(function(h){ return h.backend.indexOf('Apple')>=0; });
+  else if(compareFilter === 'gpu') filtered = filtered.filter(function(h){ return h.backend.indexOf('NVIDIA')>=0 || h.backend.indexOf('Intel')>=0; });
+  else if(compareFilter === 'minipc') filtered = filtered.filter(function(h){ return h.category==='minipc'; });
+  else if(compareFilter === 'budget') filtered = filtered.filter(function(h){ return parseFloat(h.price.replace(/[$,]/g,''))<=600; });
+  else if(compareFilter === 'mid') filtered = filtered.filter(function(h){ var p=parseFloat(h.price.replace(/[$,]/g,'')); return p>600&&p<=2000; });
+  else if(compareFilter === 'high') filtered = filtered.filter(function(h){ return parseFloat(h.price.replace(/[$,]/g,''))>2000; });
+
+  // Sort
+  filtered.sort(function(a,b){
+    var va,vb;
+    if(compareSort==='price'){ va=parseFloat(a.price.replace(/[$,]/g,'')); vb=parseFloat(b.price.replace(/[$,]/g,'')); }
+    else if(compareSort==='mem'){ va=a.mem; vb=b.mem; }
+    else if(compareSort==='models'){ va=a.total; vb=b.total; }
+    else if(compareSort==='name'){ return compareSortDir * a.label.localeCompare(b.label); }
+    else { va=0; vb=0; }
+    return compareSortDir * (va-vb);
+  });
+
+  var h = '<div style="text-align:center;margin-bottom:24px"><h2 style="font-size:22px;font-weight:700;margin-bottom:6px">Hardware Comparison</h2><p style="color:var(--text-dim);font-size:13px">Compare all '+HARDWARE.length+' hardware options side by side.</p></div>';
+
+  // Filter chips
+  h += '<div class="compare-filters">';
+  ['all','mac','gpu','minipc','budget','mid','high'].forEach(function(f){
+    var labels = {all:'All',mac:'Mac',gpu:'PC / GPU',minipc:'Mini PC',budget:'Under $600',mid:'$600–$2K',high:'$2K+'};
+    h += '<button class="compare-chip'+(compareFilter===f?' active':'')+'" onclick="compareFilter=\''+f+'\';renderCompareView()">'+labels[f]+'</button>';
+  });
+  h += '</div>';
+
+  // Table
+  var arrow = function(col){ return compareSort===col ? (compareSortDir>0?'&#9650;':'&#9660;') : '&#9650;'; };
+  h += '<div class="compare-wrap"><table class="compare-table">';
+  h += '<thead><tr>';
+  h += '<th onclick="toggleCompareSort(\'name\')">Hardware <span class="sort-arrow">'+arrow('name')+'</span></th>';
+  h += '<th onclick="toggleCompareSort(\'price\')">Price <span class="sort-arrow">'+arrow('price')+'</span></th>';
+  h += '<th onclick="toggleCompareSort(\'mem\')">Memory <span class="sort-arrow">'+arrow('mem')+'</span></th>';
+  h += '<th>Backend</th>';
+  h += '<th onclick="toggleCompareSort(\'models\')">Models <span class="sort-arrow">'+arrow('models')+'</span></th>';
+  h += '<th>Tier</th>';
+  h += '<th>Buy</th>';
+  h += '</tr></thead><tbody>';
+
+  filtered.forEach(function(hw){
+    var isFeatured = hw.featured;
+    h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
+    h += '<td class="hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</td>';
+    h += '<td><span class="price-badge">'+hw.price+'</span></td>';
+    h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
+    h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
+    h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent)">'+hw.total+'</td>';
+    h += '<td><span class="tag">'+hw.tier+'</span></td>';
+    h += '<td><a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">Buy</a></td>';
+    h += '</tr>';
+  });
+  h += '</tbody></table></div>';
+  h += '<div style="text-align:center;font-size:10px;color:var(--text-muted);padding:16px 0">Affiliate links support this project at no extra cost to you.</div>';
+
+  el.innerHTML = h;
+}
+
+function toggleCompareSort(col) {
+  if(compareSort === col) compareSortDir *= -1;
+  else { compareSort = col; compareSortDir = 1; }
+  renderCompareView();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FEATURE 4: MY SETUP VIEW
+// ═══════════════════════════════════════════════════════════════════════════════
+var selectedOwned = null;
+
+function renderMySetupView() {
+  var el = document.getElementById('view-mysetup');
+  var h = '<div style="text-align:center;margin-bottom:24px"><h2 style="font-size:22px;font-weight:700;margin-bottom:6px">What Can My Hardware Run?</h2><p style="color:var(--text-dim);font-size:13px">Select your GPU or Mac to see compatible models.</p></div>';
+
+  // GPU section
+  h += '<div class="setup-section-title">NVIDIA GPUs</div>';
+  h += '<div class="setup-grid">';
+  OWNED_HARDWARE.filter(function(o){return o.backend==='NVIDIA CUDA';}).forEach(function(o){
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card-name">'+o.label+'</div>';
+    h += '<div class="setup-card-spec">'+o.vram+'GB VRAM</div></div>';
+  });
+  h += '</div>';
+
+  // Intel
+  h += '<div class="setup-section-title">Intel GPUs</div>';
+  h += '<div class="setup-grid">';
+  OWNED_HARDWARE.filter(function(o){return o.backend==='Intel oneAPI';}).forEach(function(o){
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card-name">'+o.label+'</div>';
+    h += '<div class="setup-card-spec">'+o.vram+'GB VRAM</div></div>';
+  });
+  h += '</div>';
+
+  // Mac section
+  h += '<div class="setup-section-title">Apple Silicon</div>';
+  h += '<div class="setup-grid">';
+  OWNED_HARDWARE.filter(function(o){return o.type==='mac';}).forEach(function(o){
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card-name">'+o.label+'</div>';
+    h += '<div class="setup-card-spec">'+o.ram+'GB unified</div></div>';
+  });
+  h += '</div>';
+
+  // Results
+  if(selectedOwned) {
+    h += renderOwnedResults(selectedOwned);
+  }
+
+  el.innerHTML = h;
+}
+
+function renderOwnedResults(owned) {
+  var mem = owned.vram || owned.ram;
+  var compatible = MODEL_DB.filter(function(m) {
+    return m.ram <= mem * 1.15;
+  });
+  compatible.sort(function(a,b){ return b.ram - a.ram; });
+
+  var h = '<div class="setup-section-title" style="margin-top:32px">Compatible Models for '+owned.label+' <span style="color:var(--text-dim);font-weight:400;font-size:12px">('+compatible.length+' models)</span></div>';
+
+  if(compatible.length === 0) {
+    h += '<div style="text-align:center;padding:24px;color:var(--text-dim)">No models fit in '+mem+'GB. Consider upgrading your hardware.</div>';
+  }
+
+  // Group by use case
+  var groups = {coding:[],chat:[],reasoning:[],agents:[]};
+  compatible.forEach(function(m){
+    if(groups[m.useCase]) groups[m.useCase].push(m);
+    else if(groups.chat) groups.chat.push(m);
+  });
+
+  Object.keys(groups).forEach(function(uc){
+    var models = groups[uc];
+    if(!models.length) return;
+    var ucInfo = USE_CASES.find(function(u){return u.id===uc;}) || {label:uc,color:'#60a5fa',icon:''};
+    h += '<div style="margin-bottom:16px">';
+    h += '<div style="font-size:12px;font-weight:600;color:'+ucInfo.color+';margin-bottom:8px">'+ucInfo.icon+' '+ucInfo.label+' ('+models.length+')</div>';
+    models.forEach(function(m){
+      var fit = calcModelFit(m.ram, mem);
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid var(--border);margin-bottom:4px;gap:8px;flex-wrap:wrap">';
+      h += '<div style="min-width:0"><div style="font-size:12px;font-weight:500">'+m.name+'</div>';
+      h += '<div style="font-size:10px;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace">'+m.params+' · '+m.ram+'GB · '+m.provider+'</div></div>';
+      h += '<div style="flex-shrink:0">'+fitBadgeHTML(fit)+'</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  });
+
+  // Upgrade nudge
+  var nextUp = HARDWARE.filter(function(hw){ return hw.mem > mem; }).sort(function(a,b){
+    return parseFloat(a.price.replace(/[$,]/g,'')) - parseFloat(b.price.replace(/[$,]/g,''));
+  })[0];
+
+  if(nextUp) {
+    var extraModels = MODEL_DB.filter(function(m){ return m.ram > mem && m.ram <= nextUp.mem; }).length;
+    h += '<div class="upgrade-nudge">';
+    h += '<div class="upgrade-nudge-title">Want to run bigger models?</div>';
+    h += '<div class="upgrade-nudge-sub">Upgrade to <strong>'+nextUp.label+'</strong> ('+nextUp.mem+'GB) and unlock <strong>'+extraModels+' more models</strong></div>';
+    h += amazonBtnHTML(nextUp.amazon, 'View '+nextUp.label+' on Amazon');
+    h += '</div>';
+  }
+
+  return h;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // DEEP LINKING (URL HASH)
 // ═══════════════════════════════════════════════════════════════════════════════
 function updateHash(type,id){
   if(type==='overview') history.replaceState(null,'','#');
   else if(type==='uc') history.replaceState(null,'','#'+id);
   else if(type==='hw') history.replaceState(null,'','#hw/'+id);
+  else if(type==='modelsearch') history.replaceState(null,'','#models');
+  else if(type==='compare') history.replaceState(null,'','#compare');
+  else if(type==='mysetup') history.replaceState(null,'','#mysetup');
 }
 
 function handleHash(){
   var hash=location.hash.replace('#','');
-  if(!hash){ renderOverview(); return; }
+  if(!hash){ switchView('explorer'); renderOverview(); return; }
+  if(hash==='models'){ switchView('model-search'); return; }
+  if(hash==='compare'){ switchView('compare'); return; }
+  if(hash==='mysetup'){ switchView('mysetup'); return; }
   if(hash.indexOf('hw/')===0){
     var hwId=hash.slice(3);
     var hw=HARDWARE.find(function(h){return h.id===hwId;});
-    if(hw){ renderOverview(false); showHWPanel(hw); }
+    if(hw){ switchView('explorer'); renderOverview(false); showHWPanel(hw); }
     return;
   }
   var uc=USE_CASES.find(function(u){return u.id===hash;});
-  if(uc){ renderUCView(uc); return; }
-  renderOverview();
+  if(uc){ switchView('explorer'); renderUCView(uc); return; }
+  switchView('explorer'); renderOverview();
 }
 
 // Patch existing navigation to update hash
