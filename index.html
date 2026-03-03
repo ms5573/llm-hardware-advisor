@@ -1181,6 +1181,17 @@ function showHWPanel(hw) {
     });
   }
 
+  // Email capture at bottom of panel
+  html += '<div class="email-capture" style="margin-top:20px">';
+  html += '<div class="email-capture-title">&#128140; Stay updated</div>';
+  html += '<div class="email-capture-sub">Get notified when we add new hardware or benchmarks.</div>';
+  html += '<div class="email-capture-form">';
+  html += '<input type="email" class="email-capture-input" id="emailInput" placeholder="your@email.com">';
+  html += '<button class="email-capture-btn" onclick="submitEmail()">Notify me</button>';
+  html += '</div>';
+  html += '<div class="email-capture-success" id="emailSuccess">&#10003; You\'re on the list!</div>';
+  html += '</div>';
+
   d3.select('#pBody').html(html);
   panel.classed('open',true);
 }
@@ -1712,7 +1723,6 @@ function switchView(view) {
   var stats = document.querySelector('.stats');
   var footer = document.querySelector('.footer');
   var quizFab = document.getElementById('quizFab');
-  var emailWidget = document.getElementById('email-capture-widget');
 
   var headerSearch = document.querySelector('.search-box');
 
@@ -1724,7 +1734,6 @@ function switchView(view) {
     if(stats) stats.style.display = '';
     if(footer) footer.style.display = '';
     if(quizFab) quizFab.style.display = '';
-    if(emailWidget) emailWidget.style.display = '';
     if(headerSearch) headerSearch.style.display = '';
     if(!isMobile()) { document.body.style.overflow = 'hidden'; document.body.style.height = '100vh'; }
     if(isMobile()) renderMobile();
@@ -1737,7 +1746,6 @@ function switchView(view) {
     if(stats) stats.style.display = 'none';
     if(footer) footer.style.display = 'none';
     if(quizFab) quizFab.style.display = 'none';
-    if(emailWidget) emailWidget.style.display = 'none';
     if(headerSearch) headerSearch.style.display = 'none';
     panel.classed('open', false);
     document.body.style.overflow = 'auto';
@@ -2246,17 +2254,6 @@ window.addEventListener('hashchange', handleHash);
 // ═══════════════════════════════════════════════════════════════════════════════
 if(location.hash && location.hash!=='#'){ handleHash(); } else { renderOverview(); }
 </script>
-<div id="email-capture-widget" style="position:fixed;bottom:160px;left:50%;transform:translateX(-50%);z-index:99;width:340px">
-  <div class="email-capture">
-    <div class="email-capture-title">\ud83d\udcec Get new hardware guides</div>
-    <div class="email-capture-sub">Notified when we add new GPUs, benchmarks, or buying guides.</div>
-    <div class="email-capture-form">
-      <input type="email" class="email-capture-input" id="emailInput" placeholder="your@email.com">
-      <button class="email-capture-btn" onclick="submitEmail()">Notify me</button>
-    </div>
-    <div class="email-capture-success" id="emailSuccess">\u2713 You're on the list!</div>
-  </div>
-</div>
 <div id="runpod-footer" style="position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(8,8,13,0.95);border-top:1px solid rgba(100,200,100,0.15);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:12px;backdrop-filter:blur(12px)">
   <span style="font-size:12px;color:#555570">New to local AI?</span>
   <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:#7ddf7d;text-decoration:none">Try cloud GPUs on RunPod — no hardware needed</a>
