@@ -101,6 +101,9 @@ svg{display:block}
 .amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
 .amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
 .amazon-btn svg{width:16px;height:16px}
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin:6px 0 4px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+.runpod-try-label{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
 .amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
 
 /* Tooltip */
@@ -397,6 +400,7 @@ const HARDWARE = [
     id:'mac_mini_m4_16', label:'Mac Mini M4 16GB', price:'$499', tier:'Budget',
     mem:16, backend:'Apple Metal', desc:'Apple M4 chip with 16GB unified memory. Great entry point for local AI.',
     amazon:'https://www.amazon.com/Apple-2024-Desktop-Computer-10%E2%80%91core/dp/B0DLBTPDCS?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:290,
     models:{
       coding:[
@@ -425,6 +429,7 @@ const HARDWARE = [
     id:'rtx4060ti', label:'RTX 4060 Ti 16GB', price:'$449', tier:'Budget',
     mem:16, backend:'NVIDIA CUDA', desc:'ZOTAC RTX 4060 Ti 16GB. Fast inference with CUDA acceleration.',
     amazon:'https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20',
+    runpod:{ gpu:'RTX 4060 Ti', price:'$0.28/hr' },
     color:'#76b900', total:320,
     models:{
       coding:[
@@ -453,6 +458,7 @@ const HARDWARE = [
     id:'mac_mini_m4pro_24', label:'Mac Mini M4 Pro 24GB', price:'$1,399', tier:'Mid-Range',
     mem:24, backend:'Apple Metal', desc:'Apple M4 Pro with 24GB unified memory. Runs most 14B models comfortably.',
     amazon:'https://www.amazon.com/Apple-Desktop-Computer-12%E2%80%91core-16%E2%80%91core/dp/B0DLBVHSLD?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:310,
     models:{
       coding:[
@@ -481,6 +487,7 @@ const HARDWARE = [
     id:'rtx4090', label:'RTX 4090 24GB', price:'$1,999', tier:'Mid-Range',
     mem:24, backend:'NVIDIA CUDA', desc:'ASUS TUF RTX 4090 24GB. Flagship consumer GPU with blazing inference speed.',
     amazon:'https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20',
+    runpod:{ gpu:'RTX 4090', price:'$0.74/hr' },
     color:'#76b900', total:355,
     models:{
       coding:[
@@ -509,6 +516,7 @@ const HARDWARE = [
     id:'mac_studio_m4max_64', label:'Mac Studio M4 Max 64GB', price:'$3,199', tier:'Serious',
     mem:64, backend:'Apple Metal', desc:'Apple M4 Max with 64GB unified memory. Run 32B+ models with room to spare.',
     amazon:'https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FNS1ZX5B?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:370,
     models:{
       coding:[
@@ -537,6 +545,7 @@ const HARDWARE = [
     id:'mac_studio_m4max_128', label:'Mac Studio M4 Max 128GB', price:'$3,599', tier:'Serious',
     mem:128, backend:'Apple Metal', desc:'Apple M4 Max with 128GB unified memory. Run 70B+ models natively on Apple Silicon with massive headroom.',
     amazon:'https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FMFZ5SXS?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:395,
     models:{
       coding:[
@@ -565,6 +574,7 @@ const HARDWARE = [
     id:'mac_studio_m3ultra_96', label:'Mac Studio M3 Ultra 96GB', price:'$3,999', tier:'Serious',
     mem:96, backend:'Apple Metal', desc:'Apple M3 Ultra with 96GB unified memory, 60-core GPU. Dual-die powerhouse for serious local AI workloads.',
     amazon:'https://www.amazon.com/Apple-Desktop-Computer-28-Core-60-Core/dp/B0FHMN84YC?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:380,
     models:{
       coding:[
@@ -593,6 +603,7 @@ const HARDWARE = [
     id:'mac_studio_m3ultra_256', label:'Mac Studio M3 Ultra 256GB', price:'$5,999', tier:'All-In',
     mem:256, backend:'Apple Metal', desc:'Apple M3 Ultra with 256GB unified memory and 60-core GPU. Run massive 100B+ parameter models entirely in memory.',
     amazon:'https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20',
+    runpod:null,
     color:'#a8a8a8', total:430, featured:true,
     models:{
       coding:[
@@ -621,6 +632,7 @@ const HARDWARE = [
     id:'rtx4090_64ram', label:'RTX 4090 + 64GB RAM', price:'$2,800', tier:'Serious',
     mem:24, backend:'NVIDIA CUDA', desc:'RTX 4090 in a 64GB RAM workstation. GPU for speed, CPU offload for big models.',
     amazon:'https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20',
+    runpod:{ gpu:'RTX 4090', price:'$0.74/hr' },
     color:'#76b900', total:365,
     models:{
       coding:[
@@ -649,6 +661,7 @@ const HARDWARE = [
     id:'dgx_spark', label:'NVIDIA DGX Spark 128GB', price:'$3,999', tier:'All-In',
     mem:128, backend:'NVIDIA Grace Blackwell', desc:'NVIDIA DGX Spark with 128GB unified memory and Blackwell GPU. The ultimate local AI powerhouse \u2014 runs 100B+ models.',
     amazon:'https://www.amazon.com/NVIDIA-DGX-SparkTM-Supercomputer-Blackwell/dp/B0FWJ16CCH?tag=ms5573-20',
+    runpod:{ gpu:'H100 PCIe', price:'$2.89/hr' },
     color:'#76b900', total:400, featured:true,
     models:{
       coding:[
@@ -677,6 +690,7 @@ const HARDWARE = [
     id:'minisforum_um890', label:'Minisforum UM890 Pro 32GB', price:'$529', tier:'Budget',
     mem:32, backend:'AMD CPU (llama.cpp)', desc:'Compact mini PC with AMD Ryzen 9 8945HS and 32GB DDR5. Runs 7B–14B quantized models via CPU inference.',
     amazon:'https://www.amazon.com/dp/B0D9YJLZP6?tag=ms5573-20',
+    runpod:null,
     color:'#e44d26', total:180, category:'minipc',
     models:{
       coding:[
@@ -705,6 +719,7 @@ const HARDWARE = [
     id:'beelink_ser7', label:'Beelink SER7 32GB', price:'$449', tier:'Budget',
     mem:32, backend:'AMD CPU (llama.cpp)', desc:'Budget mini PC with AMD Ryzen 7 7840HS and 32GB DDR5. Great value entry into local AI.',
     amazon:'https://www.amazon.com/dp/B0CJB9FBMM?tag=ms5573-20',
+    runpod:null,
     color:'#e44d26', total:170, category:'minipc',
     models:{
       coding:[
@@ -733,6 +748,7 @@ const HARDWARE = [
     id:'geekom_a8', label:'GEEKOM A8 32GB', price:'$499', tier:'Budget',
     mem:32, backend:'AMD CPU (llama.cpp)', desc:'GEEKOM A8 with AMD Ryzen 9 8945HS and 32GB DDR5. Sleek mini PC for private local AI.',
     amazon:'https://www.amazon.com/dp/B0D22FYFL4?tag=ms5573-20',
+    runpod:null,
     color:'#e44d26', total:175, category:'minipc',
     models:{
       coding:[
@@ -761,6 +777,7 @@ const HARDWARE = [
     id:'rtx3060_12', label:'RTX 3060 12GB Build', price:'$800', tier:'Budget',
     mem:12, backend:'NVIDIA CUDA', desc:'MSI RTX 3060 12GB in a budget build. Entry-level CUDA inference for quantized models.',
     amazon:'https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20',
+    runpod:null,
     color:'#76b900', total:210, category:'gpu',
     models:{
       coding:[
@@ -789,6 +806,7 @@ const HARDWARE = [
     id:'rtx3090_24', label:'RTX 3090 24GB (Renewed)', price:'$900', tier:'Mid-Range',
     mem:24, backend:'NVIDIA CUDA', desc:'Renewed RTX 3090 with 24GB VRAM. Excellent value for serious CUDA inference.',
     amazon:'https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20',
+    runpod:null,
     color:'#76b900', total:320, category:'gpu',
     models:{
       coding:[
@@ -817,6 +835,7 @@ const HARDWARE = [
     id:'arc_b580', label:'Intel Arc B580 12GB', price:'$250', tier:'Budget',
     mem:12, backend:'Intel oneAPI', desc:'ASRock Intel Arc B580 12GB. Budget GPU option with growing LLM support via SYCL/oneAPI.',
     amazon:'https://www.amazon.com/dp/B0DNV4NWF7?tag=ms5573-20',
+    runpod:null,
     color:'#0068b5', total:160, category:'gpu',
     models:{
       coding:[
@@ -845,6 +864,7 @@ const HARDWARE = [
     id:'dgx_spark_x2', label:'2x DGX Spark + NVLink', price:'$8,998', tier:'All-In',
     mem:256, backend:'NVIDIA Grace Blackwell', desc:'Two DGX Sparks connected via NVLink for 256GB unified memory. Run the largest open-source models locally.',
     amazon:'https://www.amazon.com/NVIDIA-DGX-SparkTM-Supercomputer-Blackwell/dp/B0FWJ16CCH?tag=ms5573-20',
+    runpod:{ gpu:'H100 SXM', price:'$3.99/hr' },
     color:'#76b900', total:450,
     models:{
       coding:[
@@ -968,6 +988,7 @@ function renderMobile(){
         h+='</div>';
       }
       h+=amazonBtnHTML(hw.amazon);
+      h+=runpodBtnHTML(hw.runpod);
       h+='</div>';
     });
     h+='</div>';
@@ -1046,6 +1067,13 @@ function amazonBtnHTML(url, label) {
     '<div class="amazon-sub">Affiliate link \u00B7 No extra cost to you</div>';
 }
 
+function runpodBtnHTML(runpod) {
+  if (!runpod) return "";
+  return '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" class="runpod-btn">' +
+    'Try ' + runpod.gpu + ' on RunPod \u00b7 ' + runpod.price + '</a>' +
+    '<div class="runpod-try-label">No hardware needed \u00b7 Pay per hour</div>';
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // PANEL RENDERERS
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1062,6 +1090,7 @@ function showHWPanel(hw) {
   html += '<div class="stat-card"><div class="stat-label">Tier</div><div class="stat-val" style="font-size:12px">'+hw.tier+'</div></div>';
   html += '</div>';
   html += amazonBtnHTML(hw.amazon);
+  html += runpodBtnHTML(hw.runpod);
 
   html += '<div class="sec-title">Top Models by Use Case</div>';
   USE_CASES.forEach(function(uc){
@@ -1167,6 +1196,7 @@ function showModelPanel(m, hw) {
     html += '<div style="font-size:10px;color:var(--fit-perfect);font-weight:500;margin-bottom:2px">\u2714 Cheapest option that runs this model comfortably</div>';
     html += '</div>';
     html += amazonBtnHTML(best.hw.amazon, 'Buy '+best.hw.label+' on Amazon');
+    html += runpodBtnHTML(best.hw.runpod);
   }
 
   // Other options (skip the best value one, show rest)
@@ -1586,6 +1616,7 @@ function renderQuizResult(){
   });
   h+='</div></div>';
   h+=amazonBtnHTML(hw.amazon,'Buy '+hw.label+' on Amazon');
+  h+=runpodBtnHTML(hw.runpod);
   h+='<div style="display:flex;gap:8px;margin-top:8px">';
   h+='<button class="btn" style="flex:1" onclick="closeQuiz();showHWPanel(HARDWARE.find(function(x){return x.id===\''+hw.id+'\';}));updateHash(\'hw\',\''+hw.id+'\');">Explore in map</button>';
   h+='<button class="btn" style="flex:1" onclick="quizStep=0;quizAnswers=[];renderQuizStep();">Retake</button>';
@@ -2091,6 +2122,7 @@ function renderOwnedResults(owned) {
     h += '<div class="upgrade-nudge-title">Want to run bigger models?</div>';
     h += '<div class="upgrade-nudge-sub">Upgrade to <strong>'+nextUp.label+'</strong> ('+nextUp.mem+'GB) and unlock <strong>'+extraModels+' more models</strong></div>';
     h += amazonBtnHTML(nextUp.amazon, 'View '+nextUp.label+' on Amazon');
+    h += runpodBtnHTML(nextUp.runpod);
     h += '</div>';
   }
 
@@ -2141,5 +2173,9 @@ window.addEventListener('hashchange', handleHash);
 // ═══════════════════════════════════════════════════════════════════════════════
 if(location.hash && location.hash!=='#'){ handleHash(); } else { renderOverview(); }
 </script>
+<div id="runpod-footer" style="position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(8,8,13,0.95);border-top:1px solid rgba(100,200,100,0.15);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:12px;backdrop-filter:blur(12px)">
+  <span style="font-size:12px;color:#555570">New to local AI?</span>
+  <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:#7ddf7d;text-decoration:none">Try cloud GPUs on RunPod — no hardware needed</a>
+</div>
 </body>
 </html>
