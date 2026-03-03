@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best GPU for Running LLMs Locally in 2026: The No-BS Guide</title>
+<meta name="description" content="TL;DR">
+<link rel="canonical" href="https://llmpicker.blog/posts/best-gpu-for-running-llms-locally/">
+<meta property="og:title" content="Best GPU for Running LLMs Locally in 2026: The No-BS Guide">
+<meta property="og:description" content="TL;DR">
+<meta property="og:url" content="https://llmpicker.blog/posts/best-gpu-for-running-llms-locally/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="best-gpu-for-running-llms-locally-in-2026-the-no-bs-guide">Best GPU for Running LLMs Locally in 2026: The No-BS Guide</h1>
+<p><strong>TL;DR</strong><br />
+- The RTX 5090 (32GB GDDR7) is the best GPU for running LLMs locally in 2026 — full stop. It hits 5,841 tokens/sec and handles 70B models without breaking a sweat.<br />
+- The RTX 4090 remains the smartest value play: 24GB VRAM, capable of running 70B models at INT4, and available for $1,600–$2,000.<br />
+- AMD's ROCm ecosystem is still 50% slower than CUDA for LLM workloads — the 7900 XTX is a budget option, not a performance one.<br />
+- VRAM is the hard constraint. 24GB is the practical minimum for 70B models at 4-bit quantization. Don't let anyone talk you into less.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<p>Running large language models locally has shifted from a hobbyist curiosity to a legitimate workflow for developers, researchers, and privacy-conscious power users. But the hardware decisions are genuinely confusing — and getting them wrong means either a GPU that can't load your model or $3,000 spent on overkill for 7B inference.</p>
+<p>This guide cuts through the noise. We'll cover VRAM requirements, real benchmark numbers, NVIDIA vs AMD tradeoffs, and concrete build recommendations for every budget.</p>
+<hr />
+<h2 id="why-your-gpu-choice-makes-or-breaks-local-llm-performance">Why Your GPU Choice Makes or Breaks Local LLM Performance</h2>
+<p>The core bottleneck in local LLM inference isn't compute — it's memory bandwidth and VRAM capacity. When you run a model, the entire set of weights needs to live in GPU memory. If it doesn't fit, you're either quantizing aggressively (losing quality) or offloading to system RAM (losing speed, badly).</p>
+<p>Here's the practical reality in 2026:</p>
+<ul>
+<li><strong>7B–13B models</strong> need 12GB minimum, 16GB to run comfortably with 4K context</li>
+<li><strong>30B–70B models</strong> need 24GB at 4-bit quantization — this is the baseline, not the ideal</li>
+<li><strong>70B+ unquantized</strong> requires 32GB or more</li>
+</ul>
+<p>The other factor is quantization. Running a 70B model at INT4 (4-bit) versus INT8 (8-bit) roughly halves the VRAM requirement but introduces some quality degradation. For most use cases — coding assistants, document summarization, local chatbots — 4-bit is perfectly acceptable. For research or fine-tuning, you want to stay at higher precision, which means more VRAM.</p>
+<p>A real-world example: Llama 3.1 70B at INT4 needs right around 24GB of VRAM. That's exactly what the RTX 4090 offers. Comfortable? Barely. Workable? Yes.</p>
+<hr />
+<h2 id="the-vram-frontier-2026-requirements-by-model-size">The VRAM Frontier: 2026 Requirements by Model Size</h2>
+<p>Let's be concrete about what you actually need.</p>
+<h3 id="7b13b-models-1216gb-vram">7B–13B Models (12–16GB VRAM)</h3>
+<p>This is the sweet spot for most local users. Models like Mistral 7B, Llama 3.1 8B, and Qwen2.5-7B run fast and fit easily on mid-range hardware. A 16GB card like the RTX 4060 Ti handles these without issue.</p><a href="https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>If you're only running 7B models, you don't need a $2,000 GPU. A $499 RTX 4060 Ti 16GB gets you there — though it's 38% slower than the 4090 in raw throughput.</p><a href="https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<h3 id="30b70b-models-24gb-minimum">30B–70B Models (24GB Minimum)</h3>
+<p>This is where most serious local AI users live in 2026. The 24GB tier — RTX 4090, RTX 3090, RX 7900 XTX — is the practical entry point. You can run 70B models at 4-bit quantization, but you're working at the edge of the VRAM envelope.</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The failure case worth knowing: the RX 7900 XTX (also 24GB) struggles with 70B models at EXL2-3.5bpw quantization. It's not just a VRAM issue — it's memory bandwidth and ROCm optimization gaps. More on that below.</p>
+<h3 id="70b-and-moe-models-32gb">70B+ and MoE Models (32GB+)</h3>
+<p>Mixture-of-Experts models like the 80B variants are increasingly common in 2026. These need 32GB or more to run without heavy quantization. The RTX 5090's 32GB GDDR7 is purpose-built for this tier. AMD's Strix Halo APU with 128GB unified RAM is a wildcard option here — more on that in the AMD section.</p>
+<hr />
+<h2 id="nvidia-vs-amd-the-architecture-reality-check">NVIDIA vs AMD: The Architecture Reality Check</h2>
+<h3 id="cuda-vs-rocm-the-ecosystem-gap">CUDA vs ROCm: The Ecosystem Gap</h3>
+<p>About 83% of developers working with local LLMs use NVIDIA hardware, and it's not brand loyalty — it's tooling. CUDA has a decade-plus head start, and the LLM inference stack is built around it.</p>
+<p>TensorRT-LLM, llama.cpp's CUDA backend, vLLM, ExLlamaV2 — all of these are optimized first for NVIDIA, with AMD support added later (if at all). The practical result is roughly a <strong>2.1x speed advantage</strong> for NVIDIA over AMD at equivalent VRAM tiers when using optimized inference backends.</p>
+<p>The RTX 4090 delivers approximately 2,890 tokens/sec on standard benchmarks. The RX 7900 XTX — same 24GB VRAM, lower price — manages around 1,450 tokens/sec. That's a 50% performance gap on identical model workloads. The VRAM is the same. The gap is entirely software and architecture.</p>
+<h3 id="where-amd-actually-wins">Where AMD Actually Wins</h3>
+<p>AMD isn't irrelevant — it's just situational. The <strong>Strix Halo APU</strong> is genuinely interesting for a specific use case: researchers who need to run 80B+ MoE models without quantization and can't afford dual RTX 5090s.</p>
+<p>With 128GB of unified RAM accessible to the GPU, the Strix Halo hits 40–60 tokens/sec on 80B MoE models. That's slow by GPU standards, but it's running models that simply won't fit on any single discrete GPU. If your priority is model quality over inference speed, this is a legitimate option.</p>
+<p>For everyone else? The RX 7900 XTX at $999–$1,100 is a budget play, not a performance one. You're paying for 24GB of VRAM at a discount and accepting the ROCm performance penalty.</p>
+<hr />
+<h2 id="benchmark-deep-dive-tokens-per-dollar">Benchmark Deep Dive: Tokens Per Dollar</h2>
+<p>Raw speed matters, but so does cost efficiency. Here's how the major options stack up on tokens/$ analysis:</p>
+<table>
+<thead>
+<tr>
+<th>GPU</th>
+<th>Tokens/Sec</th>
+<th>Price</th>
+<th>Cost per 1K Tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTX 5090</td>
+<td>5,841</td>
+<td>$2,500–$3,800</td>
+<td>~$0.43</td>
+</tr>
+<tr>
+<td>RTX 4090</td>
+<td>2,890</td>
+<td>$1,600–$2,000</td>
+<td>~$0.55</td>
+</tr>
+<tr>
+<td>RX 7900 XTX</td>
+<td>1,450</td>
+<td>$999–$1,100</td>
+<td>~$0.68</td>
+</tr>
+</tbody>
+</table>
+<p>A few things jump out here.</p>
+<p>The RTX 5090 is actually the most cost-efficient option per token despite being the most expensive GPU. At 2.4x the RTX 4090's speed for 1.6x the cost, the math works out in its favor if you're running inference at scale or doing long-context work regularly.</p>
+<p>The 7900 XTX looks cheap until you factor in performance. You're paying the most per token of any option here, and you're accepting the ROCm ecosystem limitations on top of it.</p>
+<p>The RTX 4090 sits in the middle — not the cheapest, not the fastest, but the most predictable and well-supported option at a price point that's actually achievable.</p>
+<h3 id="rtx-5090-specifics">RTX 5090 Specifics</h3>
+<p>The RTX 5090's 32GB GDDR7 isn't just more VRAM — GDDR7 has significantly higher memory bandwidth than the GDDR6X in the 4090. On the Qwen2.5-Coder-7B benchmark, it hits 5,841 tokens/sec, which is 2.6x faster than an A100. For a consumer GPU, that's remarkable.</p>
+<p>The price range ($2,500–$3,800 depending on AIB partner and availability) is steep, but if you're building a workstation that needs to last 3+ years and handle models that don't exist yet, this is the investment that makes sense.</p>
+<hr />
+<h2 id="build-recommendations-by-use-case">Build Recommendations by Use Case</h2>
+<h3 id="budget-build-under-500">Budget Build: Under $500</h3>
+<p><strong>GPU:</strong> Used RTX 3090 (24GB) or RX 6800 (16GB)</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The RTX 3090 is the best budget play for anyone who needs 24GB VRAM. Yes, it's a previous-generation card with older tensor cores, and it gets outperformed by 40-series hardware. But 24GB is 24GB — you can still run 70B models at INT4, and used prices have dropped significantly.</p>
+<p>The RX 6800 at 16GB is the AMD budget option. It handles 7B–13B models well and costs less than $300 used. If you're just experimenting with local LLMs and not committed to 70B inference, this is a reasonable starting point.</p>
+<p><strong>System RAM:</strong> 32GB DDR4 minimum. 64GB if you're doing any CPU offloading.</p>
+<h3 id="mid-range-build-around-1500">Mid-Range Build: Around $1,500</h3>
+<p><strong>GPU:</strong> RTX 4090 (24GB)</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>This is the recommendation for most serious local LLM users. The 4090 handles 70B models at INT4, has excellent software support across every inference framework, and will remain relevant for years. Pair it with 64GB DDR5 system RAM and a modern AMD or Intel platform.</p>
+<p>At $1,600–$2,000 for the GPU alone, this isn't cheap — but it's the most balanced option between capability, ecosystem support, and longevity.</p>
+<p><strong>Suggested full build:</strong><br />
+- RTX 4090 24GB<br />
+- AMD Ryzen 9 or Intel Core Ultra processor<br />
+- 64GB DDR5-6000<br />
+- 2TB NVMe SSD (models are large — plan accordingly)</p>
+<h3 id="high-end-build-3500">High-End Build: $3,500+</h3>
+<p><strong>GPU:</strong> RTX 5090 (32GB)</p>
+<p>If budget isn't the primary constraint, the RTX 5090 is the answer. 32GB GDDR7 means you're not fighting VRAM limits on 70B models, and you have headroom for the larger models coming in 2026 and beyond.</p>
+<p>For researchers or power users who need even more capacity, dual RTX 5090s with NVLink gives you 64GB effective VRAM — enough to run truly massive models unquantized.</p>
+<p><strong>Suggested full build:</strong><br />
+- RTX 5090 32GB<br />
+- High-end AMD or Intel platform with PCIe 5.0<br />
+- 128GB DDR5-6400<br />
+- 4TB NVMe SSD</p>
+<h3 id="the-amd-wildcard-strix-halo-apu-128gb-ram">The AMD Wildcard: Strix Halo APU + 128GB RAM</h3>
+<p>This isn't a traditional GPU build — it's an APU (integrated CPU+GPU) with access to a massive unified memory pool. If you need to run 80B+ MoE models without quantization and you're willing to accept 40–60 tokens/sec, the Strix Halo platform with 128GB RAM is genuinely unique.</p>
+<p>It's not fast. But it's the only consumer option that can load these models at full precision without a multi-GPU setup. For academic researchers or anyone where model quality matters more than inference speed, this deserves serious consideration.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="can-i-run-a-70b-model-on-24gb-vram">Can I run a 70B model on 24GB VRAM?</h3>
+<p>Yes, at 4-bit quantization. Llama 3.1 70B at INT4 fits in 24GB. You won't have much headroom for long contexts, but it works. For 8-bit or unquantized, you need 32GB+.</p>
+<h3 id="is-the-rtx-3090-still-worth-buying-in-2026">Is the RTX 3090 still worth buying in 2026?</h3>
+<p>For budget builds targeting 70B inference, yes — if you can find one under $400. The 24GB VRAM is the key advantage. Performance is noticeably behind 40-series cards, but it's functional for most use cases.</p>
+<h3 id="why-is-amd-so-much-slower-for-llms-despite-similar-specs">Why is AMD so much slower for LLMs despite similar specs?</h3>
+<p>It's primarily the software stack. ROCm is less mature than CUDA, and most inference frameworks (ExLlamaV2, TensorRT-LLM, vLLM) are CUDA-first. The hardware isn't inherently slower — the optimization gap is. This may narrow over time, but in 2026, the gap is real and significant.</p>
+<h3 id="do-i-need-nvlink-for-dual-gpu-setups">Do I need NVLink for dual GPU setups?</h3>
+<p>For LLM inference specifically, NVLink matters because it allows the two GPUs to share a unified VRAM pool. Without NVLink, you can still use multiple GPUs, but the memory isn't pooled the same way. For a dual RTX 5090 setup targeting 64GB effective VRAM, NVLink is essential.</p>
+<hr />
+<h2 id="bottom-line-the-actual-recommendations">Bottom Line: The Actual Recommendations</h2>
+<p>Stop hedging. Here's what to buy:</p>
+<p><strong>Best Overall: RTX 5090</strong><br />
+32GB GDDR7, 5,841 tokens/sec, handles everything from 7B to 70B+ without compromise. The price is high, but the performance-per-dollar math actually works out, and you're buying 3+ years of headroom. If you can afford it, this is the answer.</p>
+<p><strong>Best Value: RTX 4090</strong><br />
+24GB VRAM, ~2,890 tokens/sec, excellent ecosystem support, available for $1,600–$2,000. It delivers 82% of the RTX 5090's performance at roughly 55% of the cost. For most users, this is the practical sweet spot.</p>
+<p><strong>AMD Alternative: Strix Halo APU + 128GB RAM</strong><br />
+Not for everyone — but if you're a researcher who needs to run 80B+ MoE models at full precision and you're willing to trade speed for capacity, this is the only consumer option that makes it possible.</p>
+<p><strong>Budget Pick: Used RTX 3090</strong><br />
+24GB VRAM at a fraction of current-gen prices. Slower, older, but functional for 70B inference at INT4. The right choice if you're getting started and don't want to commit $1,500+ yet.</p>
+<p>The single most important thing to remember: <strong>VRAM capacity is non-negotiable</strong>. A faster GPU with less VRAM will always lose to a slower GPU with more VRAM when the model doesn't fit. Buy the most VRAM you can afford, then worry about everything else.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>
