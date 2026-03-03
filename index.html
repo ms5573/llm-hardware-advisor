@@ -293,7 +293,8 @@ svg{display:block}
 .fit-marginal{background:rgba(245,158,11,0.12);color:var(--fit-marginal)}
 .fit-tight{background:rgba(239,68,68,0.12);color:var(--fit-tight)}
 
-.mobile-view{display:none;padding:16px;padding-bottom:80px;position:relative;z-index:10}
+.mobile-view{padding:16px;padding-bottom:80px;position:relative;z-index:10;display:none}
+@media(max-width:768px){.mobile-view{display:block!important}}
 .m-section{margin-bottom:24px}
 .m-section-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:0.3px}
 .m-hw-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:all .2s}
