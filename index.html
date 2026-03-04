@@ -2207,14 +2207,15 @@ function renderCompareView() {
 
     filtered.forEach(function(hw){
       var isFeatured = hw.featured;
+      var hwId = hw.id;
       h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
-      h += '<td class="hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</td>';
+      h += '<td class="hw-name"><span style="color:'+(isFeatured?'#76b900':'var(--text)')+';cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.15);text-underline-offset:3px" onclick="switchView(\'explorer\');setTimeout(function(){showHWPanel(HARDWARE.find(function(x){return x.id===\''+hwId+'\';}))},200)">'+hw.label+'</span></td>';
       h += '<td><span class="price-badge">'+hw.price+'</span></td>';
       h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
       h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
-      h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent)">'+hw.total+'</td>';
+      h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent);cursor:pointer" onclick="switchView(\'explorer\');setTimeout(function(){showHWPanel(HARDWARE.find(function(x){return x.id===\''+hwId+'\';}))},200)" title="View models">'+hw.total+' <span style="font-size:9px;opacity:0.5">↗</span></td>';
       h += '<td><span class="tag">'+hw.tier+'</span></td>';
-      h += '<td><a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">Buy</a></td>';
+      h += '<td>'+(hw.amazon?'<a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">'+(hw.amazonLabel?'Buy ↗':'Buy')+'</a>':'<span style="color:var(--text-muted);font-size:11px">—</span>')+'</td>';
       h += '</tr>';
     });
     h += '</tbody></table></div>';
