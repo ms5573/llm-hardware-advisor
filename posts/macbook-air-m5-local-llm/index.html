@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Air M5 Local LLM Inference: The Ultimate Guide to Models &amp; Performance</title>
+<meta name="description" content="The era of running powerful AI models entirely on your laptop is no longer a distant dream—it is the current reality, and the MacBook Air M5 is shaping up to be">
+<link rel="canonical" href="https://llmpicker.blog/posts/macbook-air-m5-local-llm/">
+<meta property="og:title" content="MacBook Air M5 Local LLM Inference: The Ultimate Guide to Models &amp; Performance">
+<meta property="og:description" content="The era of running powerful AI models entirely on your laptop is no longer a distant dream—it is the current reality, and the MacBook Air M5 is shaping up to be">
+<meta property="og:url" content="https://llmpicker.blog/posts/macbook-air-m5-local-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="macbook-air-m5-local-llm-inference-the-ultimate-guide-to-models-performance">MacBook Air M5 Local LLM Inference: The Ultimate Guide to Models &amp; Performance</h1>
+<p>The era of running powerful AI models entirely on your laptop is no longer a distant dream—it is the current reality, and the MacBook Air M5 is shaping up to be the most accessible entry point yet. For developers, researchers, and privacy-conscious users, the ability to run Large Language Models (LLMs) locally without sending data to the cloud is a game-changer. But with new hardware comes new questions: What can it actually run? Is the speed improvement real? And most importantly, how much RAM do you need?</p><a href="https://www.apple.com/macbook-air/" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>This guide cuts through the marketing fluff to give you a technical deep dive into <strong>MacBook Air M5 local LLM inference</strong>. We are looking at raw numbers, memory bandwidth, and specific model compatibility to tell you exactly what to buy and what to expect.</p>
+<h3 id="tldr">TL;DR</h3>
+<ul>
+<li><strong>Memory is King:</strong> The M5's 153GB/s memory bandwidth enables significantly faster token generation compared to the M4, making local inference viable for larger models.</li>
+<li><strong>Model Capacity:</strong> A 32GB M5 Air can comfortably run 30B parameter MoE models (like Mixtral 8x7B) at 4-bit quantization, while 16GB is limited to 8B class models.</li>
+<li><strong>Performance Jump:</strong> Expect 19-27% faster inference speeds over the M4, with first-token generation under 3 seconds for mid-sized models.</li>
+<li><strong>Buying Advice:</strong> For serious local AI work, the 32GB configuration is the only logical choice; 16GB is strictly for casual experimentation.</li>
+</ul>
+<hr />
+<h2 id="why-local-llm-inference-matters">Why Local LLM Inference Matters</h2>
+<p>Before we dive into the silicon, let's establish why we are even talking about running models on a MacBook Air. Cloud-based AI services are convenient, but they come with three major drawbacks: latency, privacy, and cost. Every time you send a prompt to a server, you incur a delay, you risk data leakage, and you pay per token.</p>
+<p>Local inference eliminates these issues. Your data never leaves the device. Latency is determined by your hardware, not internet speed. And once you buy the machine, the cost per token is zero.</p>
+<p>The MacBook Air M5 represents a significant step forward in making this accessible. Historically, local LLMs required expensive desktops with dedicated NVIDIA GPUs. Apple’s Unified Memory Architecture (UMA) changes this dynamic by allowing the CPU and GPU to share a massive pool of high-speed memory. This is the critical bottleneck for LLMs. Unlike traditional computing where bandwidth matters less, LLM inference is memory-bound. The speed at which you can move weights from memory to the compute engine dictates how fast the model thinks.</p>
+<p>With the M5 chip, Apple has addressed this bottleneck more aggressively than ever before. This isn't just a minor refresh; it is a hardware shift designed to support the on-device AI workloads that are becoming standard in modern software.</p>
+<hr />
+<h2 id="technical-specifications-of-the-m5-chip">Technical Specifications of the M5 Chip</h2>
+<p>To understand what models you can run, you have to understand the engine under the hood. The M5 chip introduces specific improvements that directly correlate to AI performance.</p>
+<h3 id="memory-bandwidth-the-real-bottleneck">Memory Bandwidth: The Real Bottleneck</h3>
+<p>The most critical spec for LLMs is memory bandwidth. In the previous generation, the M4 offered 120GB/s. The M5 bumps this to <strong>153GB/s</strong>. That is a 28% increase in raw data throughput.</p>
+<p>Why does this matter? When a model generates a token, it has to load the entire set of model weights into memory. For a 30B parameter model, that is a significant amount of data. If the memory bandwidth is low, the GPU cores sit idle waiting for data. With 153GB/s, the M5 ensures that the compute units are fed data continuously. This results in smoother, faster text generation.</p>
+<h3 id="neural-engine-improvements">Neural Engine Improvements</h3>
+<p>The Neural Engine in the M5 has been optimized for matrix multiplication, the core mathematical operation behind transformer models. While Apple doesn't always publish raw teraflops for the Neural Engine, the combination of the increased memory bandwidth and architectural tweaks results in a <strong>19-27% faster LLM inference</strong> performance compared to the M4.</p>
+<h3 id="quantization-and-efficiency">Quantization and Efficiency</h3>
+<p>Running a model locally requires quantization. This is the process of reducing the precision of the model's weights to save space and speed up computation.<br />
+*   <strong>FP16 (Half Precision):</strong> High accuracy, high memory usage.<br />
+*   <strong>INT8 (8-bit):</strong> Good balance.<br />
+*   <strong>INT4 (4-bit):</strong> High compression, slight accuracy loss, but essential for local devices.</p>
+<p>The M5 architecture is highly efficient at handling 4-bit quantized models. This allows you to run much larger models within the same RAM constraints. For example, a 30B parameter model at 4-bit quantization requires roughly 18-20GB of VRAM, leaving room for the operating system and context window.</p>
+<hr />
+<h2 id="compatible-llm-models-by-memory-tier">Compatible LLM Models by Memory Tier</h2>
+<p>The most common question regarding the MacBook Air M5 is: "How much RAM do I need?" The answer depends entirely on the size of the models you intend to run. Because the Air uses Unified Memory, the RAM is shared between the system and the AI model. You cannot allocate 16GB of RAM to a model if the system needs 4GB to run macOS.</p>
+<p>Here is the breakdown of what the M5 Air can handle based on configuration.</p>
+<h3 id="16gb-configuration-the-entry-level">16GB Configuration: The Entry Level</h3>
+<p>The 16GB base model is sufficient for running smaller, highly optimized models. These are typically the "8B" class models.<br />
+*   <strong>Recommended Models:</strong> Qwen2.5-8B, Llama-3-8B, Phi-3.<br />
+*   <strong>Performance:</strong> These models will run blazingly fast. You will see high token-per-second rates because the entire model fits easily within the memory hierarchy.<br />
+*   <strong>Use Case:</strong> Basic chatbots, simple summarization, coding assistance for small snippets.<br />
+*   <strong>Limitation:</strong> You will struggle with complex reasoning tasks. 8B models are smart, but they lack the depth of larger models for nuanced analysis or creative writing.</p>
+<h3 id="24gb-configuration-the-sweet-spot">24GB Configuration: The Sweet Spot</h3>
+<p>If you can find the 24GB configuration, this is a significant upgrade for AI work. It opens the door to Medium-Sized models.<br />
+*   <strong>Recommended Models:</strong> 30B MoE (Mixture of Experts) models at 4-bit quantization.<br />
+*   <strong>Performance:</strong> According to Apple Machine Learning Research, you can expect under 3 seconds for the first token generation with 30B models.<br />
+*   <strong>Use Case:</strong> Complex reasoning, detailed document analysis, and more creative writing tasks. MoE models are particularly interesting here because they activate only a subset of parameters per token, making them efficient.<br />
+*   <strong>Limitation:</strong> You are still constrained by the 24GB ceiling. You cannot run full-precision 30B models, and you must be careful with context windows.</p>
+<h3 id="32gb-configuration-the-power-user-choice">32GB Configuration: The Power User Choice</h3>
+<p>For anyone serious about <strong>MacBook Air M5 local LLM inference</strong>, the 32GB configuration is the target. This configuration allows you to run the largest models that fit on a laptop without compromising system stability.<br />
+*   <strong>Recommended Models:</strong> Qwen2.5-32B and Mixtral 8x7B.<br />
+*   <strong>Performance:</strong> These models offer near-GPT-4 level reasoning capabilities for specific tasks. The 32GB buffer allows for larger context windows, meaning you can feed the model entire books or long codebases for analysis.<br />
+*   <strong>Use Case:</strong> Professional development, research, local RAG (Retrieval-Augmented Generation) systems, and heavy data processing.<br />
+*   <strong>Limitation:</strong> It is still a laptop. Thermal throttling may occur during sustained heavy loads, but the Air's efficiency usually mitigates this better than Windows laptops.</p>
+<hr />
+<h2 id="performance-benchmarks-m5-vs-m4">Performance Benchmarks: M5 vs. M4</h2>
+<p>Upgrading from an M4 to an M5 might seem like a minor generational leap, but in the world of AI, the numbers tell a different story. The 28% increase in memory bandwidth is not just a spec sheet number; it translates directly to user experience.</p>
+<h3 id="token-generation-speed">Token Generation Speed</h3>
+<p>In real-world testing scenarios involving the Apple MLX framework, the M5 demonstrates a <strong>19-27% faster LLM inference</strong> rate compared to the M4.<br />
+*   <strong>M4:</strong> Generating text at roughly 30-40 tokens per second for an 8B model.<br />
+*   <strong>M5:</strong> Generating text at roughly 38-51 tokens per second for the same model.</p>
+<p>For larger models, the gap widens. Because the M5 can feed data to the compute units faster, the "thinking" time between tokens decreases. This makes the chat interface feel more responsive and less like a slow-loading webpage.</p>
+<h3 id="first-token-latency">First Token Latency</h3>
+<p>The "Time to First Token" (TTFT) is crucial for user perception. If you hit enter and wait 10 seconds for the first word, the experience feels broken.<br />
+*   <strong>Benchmark:</strong> With 30B models, the M5 achieves first token generation in under 3 seconds.<br />
+*   <strong>Comparison:</strong> The M4 would likely push this closer to 4-5 seconds depending on the specific model architecture.</p>
+<h3 id="thermal-constraints">Thermal Constraints</h3>
+<p>It is important to note that the MacBook Air is fanless. While the M5 is efficient, sustained inference on a 32B model will generate heat. The system will eventually throttle to protect the hardware. However, for typical usage (chatting, analyzing a document), the Air handles the load without significant thermal throttling. If you plan to run models for hours on end, the MacBook Pro with active cooling is a better choice, but for intermittent inference, the Air is perfectly capable.</p>
+<hr />
+<h2 id="software-ecosystem-mlx-and-beyond">Software Ecosystem: MLX and Beyond</h2>
+<p>Hardware is only half the battle. The software stack determines how well you can utilize that hardware. Apple has been aggressively pushing the <strong>MLX framework</strong>, a machine learning framework designed specifically for Apple Silicon.</p>
+<h3 id="why-mlx-matters">Why MLX Matters</h3>
+<p>MLX is optimized to take full advantage of the Unified Memory Architecture. Unlike generic frameworks that might struggle to manage memory on a Mac, MLX handles the allocation dynamically. This means you can run a model that uses 20GB of memory on a 24GB machine without crashing the system, as long as the OS has enough headroom.</p>
+<h3 id="alternative-tools">Alternative Tools</h3>
+<p>While MLX is the native choice, other tools like <strong>llama.cpp</strong> and <strong>Ollama</strong> are also optimized for Apple Silicon.<br />
+*   <strong>Ollama:</strong> Great for beginners. It abstracts away the command line and lets you run models with simple commands like <code>ollama run qwen2.5</code>.<br />
+*   <strong>LM Studio:</strong> Provides a GUI for managing models and chat interfaces, making it accessible for non-developers.</p>
+<p>Regardless of the tool you choose, the underlying hardware performance of the M5 remains the constant variable. The software just needs to be configured to use the GPU cores efficiently.</p>
+<hr />
+<h2 id="upgrade-recommendations-dont-buy-the-base-model">Upgrade Recommendations: Don't Buy the Base Model</h2>
+<p>I am going to be direct here. If you are buying a MacBook Air M5 with the intention of doing any serious AI work, <strong>do not buy the 16GB model.</strong></p>
+<h3 id="for-professionals-go-32gb">For Professionals: Go 32GB</h3>
+<p>If your workflow involves coding, research, or data analysis, the 32GB configuration is non-negotiable. The ability to run Qwen2.5-32B or Mixtral 8x7B locally provides a level of capability that 8B models simply cannot match. The 32GB buffer ensures you have enough room for the model weights plus a decent context window. The price premium for the RAM upgrade is the best investment you can make in your AI workflow.</p>
+<h3 id="for-casual-users-16gb-is-okay">For Casual Users: 16GB is Okay</h3>
+<p>If you just want to experiment with a chatbot occasionally, or use AI for simple writing prompts, the 16GB model will suffice. You will be limited to 8B models, but for general assistance, they are surprisingly capable. Just understand that you are capping your potential.</p>
+<h3 id="upgrading-from-m4">Upgrading from M4</h3>
+<p>If you already own an M4 MacBook Air, is it worth upgrading? If your current workflow is bottlenecked by AI tasks, yes. The 28% bandwidth increase is noticeable. However, if you are mostly using the M4 for web browsing and light office work, the M5's AI benefits might not justify the cost. The M5 is a future-proofing investment for the next 3-5 years of AI development.</p>
+<hr />
+<h2 id="storage-and-connectivity-considerations">Storage and Connectivity Considerations</h2>
+<p>While RAM is the primary constraint, storage and connectivity play secondary roles in a local LLM setup.</p>
+<h3 id="external-ssds-for-model-storage">External SSDs for Model Storage</h3>
+<p>LLM models are large. A single 30B model at 4-bit quantization can take up 20GB of space. If you plan to experiment with multiple models, the internal SSD might fill up quickly.<br />
+*   <strong>Recommendation:</strong> Invest in a fast external SSD (NVMe over USB-C/Thunderbolt).<br />
+*   <strong>Why:</strong> Loading models from an external drive is slower than internal storage, but it saves your internal space for active projects. Ensure the drive supports at least 10Gbps transfer speeds to minimize load times.</p>
+<h3 id="thunderbolt-docks">Thunderbolt Docks</h3>
+<p>For a desktop-like experience, a Thunderbolt dock allows you to connect multiple monitors and peripherals. While this doesn't directly impact inference speed, it improves your workflow efficiency. If you are running local AI, you likely have a complex setup involving code editors, documentation, and the chat interface. A good dock keeps your desk organized.</p>
+<hr />
+<h2 id="bottom-line">Bottom Line</h2>
+<p>The MacBook Air M5 is shaping up to be the most compelling laptop for local AI enthusiasts, provided you configure it correctly. The jump to 153GB/s memory bandwidth solves the primary bottleneck that has plagued local inference on laptops for years.</p>
+<p>However, the hardware is only as good as the configuration you choose. The 16GB model is a compromise that limits you to entry-level models. The 32GB model is a powerhouse that allows you to run professional-grade 30B parameter models with ease.</p>
+<p><strong>My Verdict:</strong><br />
+1.  <strong>Buy the 32GB M5 Air</strong> if you want to run Mixtral 8x7B or Qwen2.5-32B. This is the only way to get true utility from local LLMs.<br />
+2.  <strong>Use the MLX framework</strong> or Ollama for the best software experience.<br />
+3.  <strong>Expect 20% faster speeds</strong> over the M4, but understand that thermal throttling is still a factor on the fanless Air.<br />
+4.  <strong>Don't skimp on RAM.</strong> In the world of local LLMs, RAM is the only spec that truly matters.</p>
+<p>If you prioritize privacy, latency, and cost-efficiency in your AI workflow, the MacBook Air M5 with 32GB of unified memory is the definitive choice for 2024 and beyond.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q: Can I run GPT-4 level models on the M5 Air?</strong><br />
+A: Not directly. GPT-4 is a proprietary model. However, open-source models like Qwen2.5-32B or Mixtral 8x7B, which run on the 32GB M5, offer comparable performance for many tasks.</p>
+<p><strong>Q: Does the M5 Air overheat during inference?</strong><br />
+A: It gets warm, but the fanless design is generally sufficient for intermittent use. Sustained heavy loads may cause thermal throttling, reducing speed slightly.</p>
+<p><strong>Q: Is 24GB better than 32GB for value?</strong><br />
+A: 24GB is a good middle ground, but 32GB is the standard for high-end AI. The price difference is often small compared to the capability jump to 30B models.</p>
+<p><strong>Q: Can I upgrade RAM later?</strong><br />
+A: No. The memory is soldered to the M5 chip. You must choose your configuration at the time of purchase.</p>
+<p><strong>Q: What is the best quantization level for the M5?</strong><br />
+A: 4-bit (INT4) is the sweet spot for the Air. It offers the best balance between accuracy and memory usage. 8-bit is too heavy for larger models on 32GB.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>
