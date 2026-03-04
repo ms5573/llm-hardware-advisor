@@ -1070,12 +1070,14 @@ function renderMobile(){
 
   // Apply search filter
   if(mobileSearch){
+    var mTokens=mobileSearch.split(/\s+/).filter(Boolean);
+    function mTok(s){var sl=s.toLowerCase();return mTokens.every(function(t){return sl.indexOf(t)>=0;});}
     sorted=sorted.filter(function(hw){
-      var q=mobileSearch;
-      if(hw.label.toLowerCase().indexOf(q)>=0) return true;
-      if(hw.backend.toLowerCase().indexOf(q)>=0) return true;
+      if(mTok(hw.label)) return true;
+      if(mTok(hw.backend)) return true;
+      if(hw.desc&&mTok(hw.desc)) return true;
       var models=hw.models[mobileUC]||[];
-      return models.some(function(m){return m.name.toLowerCase().indexOf(q)>=0;});
+      return models.some(function(m){return mTok(m.name);});
     });
   }
 
@@ -1666,10 +1668,12 @@ function updateBC() {
 d3.select('#searchInput').on('input',function(){
   var q = this.value.toLowerCase().trim();
   if(!q){ renderOverview(false); return; }
+  var tokens = q.split(/\s+/).filter(Boolean);
+  function tokMatch(str){ var s=str.toLowerCase(); return tokens.every(function(t){return s.indexOf(t)>=0;}); }
 
-  var mHW = HARDWARE.filter(function(h){ return h.label.toLowerCase().indexOf(q)>=0||h.backend.toLowerCase().indexOf(q)>=0||h.tier.toLowerCase().indexOf(q)>=0; });
-  var mUC = USE_CASES.filter(function(u){ return u.label.toLowerCase().indexOf(q)>=0||u.id.indexOf(q)>=0; });
-  var mModels = ALL_MODELS.filter(function(m){ return m.name.toLowerCase().indexOf(q)>=0; });
+  var mHW = HARDWARE.filter(function(h){ return tokMatch(h.label)||tokMatch(h.backend)||tokMatch(h.tier)||(h.desc&&tokMatch(h.desc)); });
+  var mUC = USE_CASES.filter(function(u){ return tokMatch(u.label)||u.id.indexOf(q)>=0; });
+  var mModels = ALL_MODELS.filter(function(m){ return tokMatch(m.name); });
 
   G.selectAll('*').remove(); panel.classed('open',false);
   var cx=W/2, cy=H/2;
