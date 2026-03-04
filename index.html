@@ -110,6 +110,18 @@ svg{display:block}
 .runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin:6px 0 4px}
 .runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
 .runpod-try-label{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+.runpod-gap-nudge{padding:12px 14px;border-radius:10px;border:1px solid rgba(100,200,100,0.15);border-left:3px solid rgba(100,200,100,0.5);background:rgba(20,40,20,0.3);margin:10px 0 4px;font-size:12px;color:var(--text-body);line-height:1.5}
+.runpod-gap-nudge a{color:#7ddf7d;font-weight:600;text-decoration:none}
+.runpod-gap-nudge a:hover{text-decoration:underline}
+.runpod-gap-nudge .nudge-label{font-size:11px;color:var(--text-dim);margin-bottom:4px}
+.runpod-try-link{display:block;text-align:center;font-size:11px;color:var(--text-dim);margin:4px 0 8px;line-height:1.4}
+.runpod-try-link a{color:#7ddf7d;font-weight:500;text-decoration:none}
+.runpod-try-link a:hover{text-decoration:underline}
+.runpod-models-cant{padding:16px;border-radius:12px;border:1px solid rgba(100,200,100,0.15);background:rgba(20,40,20,0.2);margin:20px 0 12px}
+.runpod-models-cant .cant-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px}
+.runpod-models-cant .cant-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid var(--border);margin-bottom:4px;gap:8px;flex-wrap:wrap}
+.runpod-models-cant .cant-row a{color:#7ddf7d;font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.runpod-models-cant .cant-row a:hover{text-decoration:underline}
 .amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
 
 /* Tooltip */
@@ -1354,6 +1366,13 @@ function renderRecommendationsView() {
 
       h += amazonBtnHTML(hw.amazon, hw.amazonLabel);
 
+      // "Try before you buy" for $1,500+ hardware
+      var hwPrice = parseFloat(hw.price.replace(/[$,]/g,''));
+      if(hwPrice >= 1500) {
+        var tbySugg = getRunpodSuggestion(hw.mem);
+        h += '<div class="runpod-try-link">Test these models first? <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try on RunPod</a> from '+tbySugg.price+'</div>';
+      }
+
       if(models.length > 1) {
         h += '<button class="m-models-toggle" onclick="this.nextElementSibling.classList.toggle(\'open\');this.textContent=this.nextElementSibling.classList.contains(\'open\')?\'Hide '+(models.length-1)+' more ▲\':\'Show '+(models.length-1)+' more models ▼\'">Show '+(models.length-1)+' more models ▼</button>';
         h += '<div class="m-models-list">';
@@ -1362,6 +1381,29 @@ function renderRecommendationsView() {
           h += '<div class="m-model-row"><div class="m-model-name">'+m.name+'</div><div class="m-model-meta">'+m.params+' · '+speedLabel(m.toks)+' · <span style="color:'+fc+'">'+m.fit+'%</span></div></div>';
         });
         h += '</div>';
+      }
+
+      // Gap nudge for Budget/Mid-Range cards with < 64GB
+      if((tier === 'Budget' || tier === 'Mid-Range') && hw.mem < 64) {
+        var gapModels = [];
+        var gapNames = {};
+        MODEL_DB.forEach(function(m) {
+          var mram = m.ram || m.vram || 0;
+          if(mram > hw.mem && mram >= 40 && !gapNames[m.name]) {
+            gapNames[m.name] = true;
+            gapModels.push(m);
+          }
+        });
+        if(gapModels.length > 0) {
+          gapModels.sort(function(a,b){ return (a.ram||a.vram) - (b.ram||b.vram); });
+          var exampleModel = gapModels[0];
+          var exampleRam = exampleModel.ram || exampleModel.vram;
+          var suggestion = getRunpodSuggestion(exampleRam);
+          h += '<div class="runpod-gap-nudge">';
+          h += '<div class="nudge-label">Can\'t run '+exampleModel.params+' models locally?</div>';
+          h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try a '+suggestion.gpu+' on RunPod</a> \u2014 '+suggestion.price+', no hardware needed';
+          h += '</div>';
+        }
       }
 
       h += runpodBtnHTML(hw.runpod);
@@ -1435,6 +1477,13 @@ function runpodBtnHTML(runpod) {
   return '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" class="runpod-btn">' +
     'Try ' + runpod.gpu + ' on RunPod \u00b7 ' + runpod.price + '</a>' +
     '<div class="runpod-try-label">No hardware needed \u00b7 Pay per hour</div>';
+}
+
+function getRunpodSuggestion(ramNeeded) {
+  if (ramNeeded <= 16) return {gpu:'RTX 4060 Ti', price:'$0.28/hr'};
+  if (ramNeeded <= 24) return {gpu:'RTX 4090', price:'$0.74/hr'};
+  if (ramNeeded <= 80) return {gpu:'H100 PCIe', price:'$2.89/hr'};
+  return {gpu:'H100 SXM', price:'$3.99/hr'};
 }
 
 function getRelatedHW(hw, count) {
@@ -2048,6 +2097,22 @@ function renderQuizResult(){
   h+='</div></div>';
   h+=amazonBtnHTML(hw.amazon,'Buy '+hw.label+' on Amazon');
   h+=runpodBtnHTML(hw.runpod);
+
+  // Gap-aware RunPod suggestion for Budget/Mid-Range
+  if((hw.tier==='Budget'||hw.tier==='Mid-Range') && hw.mem < 64) {
+    var bigModels = MODEL_DB.filter(function(m){ return (m.ram||m.vram||0) > hw.mem && (m.ram||m.vram||0) >= 40; });
+    if(bigModels.length > 0) {
+      bigModels.sort(function(a,b){ return (b.ram||b.vram) - (a.ram||a.vram); });
+      var biggest = bigModels[0];
+      var bigRam = biggest.ram || biggest.vram;
+      var qSugg = getRunpodSuggestion(bigRam);
+      h+='<div class="runpod-gap-nudge" style="margin-top:12px">';
+      h+='<div class="nudge-label">Want to run bigger models like '+biggest.name+'?</div>';
+      h+='<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try cloud GPUs on RunPod</a> \u2014 from '+qSugg.price;
+      h+='</div>';
+    }
+  }
+
   h+='<div style="display:flex;gap:8px;margin-top:8px">';
   h+='<button class="btn" style="flex:1" onclick="closeQuiz();showHWPanel(HARDWARE.find(function(x){return x.id===\''+hw.id+'\';}));updateHash(\'hw\',\''+hw.id+'\');">Explore in map</button>';
   h+='<button class="btn" style="flex:1" onclick="quizStep=0;quizAnswers=[];renderQuizStep();">Retake</button>';
@@ -2563,6 +2628,27 @@ function renderOwnedResults(owned) {
     });
     h += '</div>';
   });
+
+  // Models that DON'T fit — RunPod suggestions
+  var cantRun = MODEL_DB.filter(function(m) {
+    return (m.ram || m.vram || 0) > mem * 1.15;
+  });
+  cantRun.sort(function(a,b){ return (a.ram||a.vram) - (b.ram||b.vram); });
+  var topCantRun = cantRun.slice(0, 3);
+  if(topCantRun.length > 0) {
+    h += '<div class="runpod-models-cant">';
+    h += '<div class="cant-title">These models need more memory than your '+owned.label+':</div>';
+    topCantRun.forEach(function(m) {
+      var mram = m.ram || m.vram;
+      var sugg = getRunpodSuggestion(mram);
+      h += '<div class="cant-row">';
+      h += '<div style="min-width:0"><div style="font-size:12px;font-weight:500">'+m.name+'</div>';
+      h += '<div style="font-size:10px;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace">'+m.params+' \u00b7 '+mram+'GB needed</div></div>';
+      h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try on RunPod \u2014 '+sugg.gpu+' '+sugg.price+'</a>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
 
   // Upgrade nudge
   var nextUp = HARDWARE.filter(function(hw){ return hw.mem > mem; }).sort(function(a,b){
