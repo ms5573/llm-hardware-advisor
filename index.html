@@ -443,6 +443,64 @@ const HARDWARE = [
     }
   },
   {
+    id:'macbook_air_m5_16', label:'MacBook Air M5 16GB', price:'$1,099', tier:'Budget',
+    mem:16, backend:'Apple Metal', desc:'Apple M5 chip, 16GB unified memory, 153GB/s bandwidth. 28% faster than M4. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    amazon:'https://www.apple.com/macbook-air/', amazonLabel:'Pre-order on Apple Store →',
+    runpod:null,
+    color:'#a8a8a8', total:300,
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:95,toks:23},
+        {name:'DeepSeek-Coder-V2-Lite',params:'16B',ram:14.6,fit:72,toks:10},
+        {name:'Qwen2.5-Coder-1.5B',params:'1.5B',ram:2.0,fit:99,toks:44}
+      ],
+      chat:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:28},
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:23},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:26}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:68,toks:8},
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:95,toks:23},
+        {name:'DeepSeek-R1-0528-Qwen3-8B',params:'8B',ram:7.6,fit:93,toks:20}
+      ],
+      agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:95,toks:28},
+        {name:'Qwen2.5-7B',params:'7B',ram:7.1,fit:95,toks:23},
+        {name:'Mistral-7B-v0.2',params:'7B',ram:6.7,fit:96,toks:26}
+      ]
+    }
+  },
+  {
+    id:'macbook_air_m5_32', label:'MacBook Air M5 32GB', price:'$1,499', tier:'Mid-Range',
+    mem:32, backend:'Apple Metal', desc:'Apple M5 chip, 32GB unified memory — first Air that runs 32B models. Runs Mixtral 8×7B Q4 on a laptop. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    amazon:'https://www.apple.com/macbook-air/', amazonLabel:'Pre-order on Apple Store →',
+    runpod:null,
+    color:'#a8a8a8', total:330,
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-32B Q4',params:'32B',ram:19.4,fit:92,toks:18},
+        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:98,toks:25},
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:100,toks:23}
+      ],
+      chat:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:28},
+        {name:'Mixtral-8x7B Q4',params:'46B MoE',ram:26,fit:72,toks:10},
+        {name:'Qwen2.5-32B Q4',params:'32B',ram:19.4,fit:92,toks:18}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-32B Q4',params:'32B',ram:19.4,fit:88,toks:12},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:95,toks:20},
+        {name:'DeepSeek-R1-Distill-Qwen-7B',params:'7B',ram:7.1,fit:100,toks:23}
+      ],
+      agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:28},
+        {name:'Qwen2.5-Coder-32B Q4',params:'32B',ram:19.4,fit:92,toks:18},
+        {name:'Qwen3-Coder-Next Q4',params:'14B',ram:13.5,fit:98,toks:25}
+      ]
+    }
+  },
+  {
     id:'rtx4060ti', label:'RTX 4060 Ti 16GB', price:'$449', tier:'Budget',
     mem:16, backend:'NVIDIA CUDA', desc:'ZOTAC RTX 4060 Ti 16GB. Fast inference with CUDA acceleration.',
     amazon:'https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20',
@@ -584,6 +642,64 @@ const HARDWARE = [
         {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:6},
         {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:10},
         {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:18}
+      ]
+    }
+  },
+  {
+    id:'macbook_pro_m5pro_64', label:'MacBook Pro M5 Pro 64GB', price:'$2,499', tier:'Serious',
+    mem:64, backend:'Apple Metal', desc:'Apple M5 Pro, 64GB unified memory, 307GB/s bandwidth. Runs Llama 3.3 70B Q4 in a laptop. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    amazon:'https://www.apple.com/macbook-pro/', amazonLabel:'Pre-order on Apple Store →',
+    runpod:null,
+    color:'#a8a8a8', total:375,
+    models:{
+      coding:[
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:92,toks:10},
+        {name:'Qwen3-Coder-Next Q4',params:'80B MoE',ram:46,fit:78,toks:6},
+        {name:'Qwen2.5-Coder-7B',params:'7B',ram:7.1,fit:100,toks:31}
+      ],
+      chat:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:31},
+        {name:'Llama-3.3-70B Q4',params:'70B',ram:40,fit:82,toks:8},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:88,toks:12}
+      ],
+      reasoning:[
+        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:92,toks:10},
+        {name:'DeepSeek-R1-70B Q4',params:'70B',ram:40,fit:82,toks:8},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:98,toks:22}
+      ],
+      agents:[
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:31},
+        {name:'Qwen3-Coder-Next Q4',params:'80B MoE',ram:46,fit:78,toks:6},
+        {name:'Llama-4-Scout Q4',params:'109B MoE',ram:30,fit:88,toks:12}
+      ]
+    }
+  },
+  {
+    id:'macbook_pro_m5max_128', label:'MacBook Pro M5 Max 128GB', price:'$3,999', tier:'Serious',
+    mem:128, backend:'Apple Metal', desc:'Apple M5 Max 40-core GPU, 128GB unified memory, 614GB/s bandwidth. Fastest Apple Silicon laptop ever made for local LLMs. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    amazon:'https://www.apple.com/macbook-pro/', amazonLabel:'Pre-order on Apple Store →',
+    runpod:null,
+    color:'#a8a8a8', total:415,
+    models:{
+      coding:[
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:7},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:11},
+        {name:'Qwen2.5-Coder-32B',params:'32B',ram:30.4,fit:98,toks:14}
+      ],
+      chat:[
+        {name:'Llama-4-Maverick Q2',params:'400B MoE',ram:122,fit:65,toks:3},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:20},
+        {name:'Qwen3.5-35B-A3B',params:'35B MoE',ram:8,fit:100,toks:32}
+      ],
+      reasoning:[
+        {name:'Qwen3.5-122B-A10B',params:'122B MoE',ram:80,fit:82,toks:6},
+        {name:'DeepSeek-R1-Distill-Qwen-32B',params:'32B',ram:30.4,fit:98,toks:14},
+        {name:'DeepSeek-R1-Distill-Qwen-14B',params:'14B',ram:13.8,fit:100,toks:27}
+      ],
+      agents:[
+        {name:'MiniMax-M2.5 Q3',params:'230B MoE',ram:101,fit:78,toks:7},
+        {name:'Qwen3-Coder-Next (full)',params:'80B MoE',ram:46,fit:92,toks:11},
+        {name:'Llama-4-Scout',params:'109B MoE',ram:30,fit:98,toks:20}
       ]
     }
   },
@@ -1004,7 +1120,7 @@ function renderMobile(){
         });
         h+='</div>';
       }
-      h+=amazonBtnHTML(hw.amazon);
+      h+=amazonBtnHTML(hw.amazon, hw.amazonLabel);
       h+=runpodBtnHTML(hw.runpod);
       h+='</div>';
     });
@@ -1149,7 +1265,7 @@ function showHWPanel(hw) {
   html += '<div class="stat-card"><div class="stat-label">Fits Models</div><div class="stat-val">'+hw.total+'</div></div>';
   html += '<div class="stat-card"><div class="stat-label">Tier</div><div class="stat-val" style="font-size:12px">'+hw.tier+'</div></div>';
   html += '</div>';
-  html += amazonBtnHTML(hw.amazon);
+  html += amazonBtnHTML(hw.amazon, hw.amazonLabel);
   html += runpodBtnHTML(hw.runpod);
 
   html += '<div class="sec-title">Top Models by Use Case</div>';
