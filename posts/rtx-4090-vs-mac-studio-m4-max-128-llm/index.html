@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs: Which One Should You Buy?</title>
+<meta name="description" content="If you&#x27;re serious about running local LLMs, you&#x27;ve almost certainly landed on the same two machines everyone in the community is debating: the RTX 4090 PC and t">
+<link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-mac-studio-m4-max-128-llm/">
+<meta property="og:title" content="RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs: Which One Should You Buy?">
+<meta property="og:description" content="If you&#x27;re serious about running local LLMs, you&#x27;ve almost certainly landed on the same two machines everyone in the community is debating: the RTX 4090 PC and t">
+<meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-mac-studio-m4-max-128-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="rtx-4090-vs-mac-studio-m4-max-128gb-for-local-llms-which-one-should-you-buy">RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs: Which One Should You Buy?</h1>
+<p>If you're serious about running local LLMs, you've almost certainly landed on the same two machines everyone in the community is debating: the <strong>RTX 4090 PC</strong> and the <strong>Apple Mac Studio M4 Max with 128GB unified memory</strong>. Both are genuinely excellent. Both will cost you real money. And they're built for fundamentally different kinds of users.</p><a href="https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FNS1ZX5B?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>Here's the problem: most comparisons online either worship the RTX 4090's raw CUDA throughput or get starry-eyed about Apple Silicon's unified memory architecture. Neither framing is complete. The honest answer is that <strong>the right choice depends entirely on which model sizes you're running and what you're willing to pay</strong>.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>In this post, we break down everything that matters — specs, tokens per second, model compatibility, price-to-value ratio, and a clear verdict — so you can stop second-guessing and start running inference.</p>
+<hr />
+<h2 id="key-specs-rtx-4090-vs-mac-studio-m4-max-128gb">Key Specs: RTX 4090 vs Mac Studio M4 Max 128GB</h2>
+<p>Let's start with the hardware reality before we get into benchmarks.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>RTX 4090 PC</strong></th>
+<th><strong>Mac Studio M4 Max 128GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VRAM / Unified RAM</strong></td>
+<td>24GB GDDR6X</td>
+<td>128GB Unified Memory</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>1,008 GB/s</td>
+<td>400 GB/s</td>
+</tr>
+<tr>
+<td><strong>FP16 Compute</strong></td>
+<td>~82 TFLOPS</td>
+<td>~35 TFLOPS</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>Varies (e.g., Core i9 / Ryzen 9)</td>
+<td>M4 Max (14-core)</td>
+</tr>
+<tr>
+<td><strong>TDP</strong></td>
+<td>450W (GPU alone)</td>
+<td>150W (entire system)</td>
+</tr>
+<tr>
+<td><strong>Price</strong></td>
+<td>~$2,500 (full build)</td>
+<td>~$4,500 (base 128GB config)</td>
+</tr>
+<tr>
+<td><strong>Ecosystem</strong></td>
+<td>Windows/Linux + CUDA</td>
+<td>macOS + MLX/Metal</td>
+</tr>
+<tr>
+<td><strong>Expandability</strong></td>
+<td>PCIe, multi-GPU capable</td>
+<td>No external GPU support</td>
+</tr>
+</tbody>
+</table>
+<p>The RTX 4090's memory bandwidth advantage — <strong>1,008 GB/s vs 400 GB/s</strong> — is the single biggest reason it dominates on smaller models. LLM inference is almost entirely memory-bandwidth-bound, not compute-bound. Faster memory access means faster token generation, full stop.</p>
+<p>But the Mac Studio's <strong>128GB of unified memory</strong> is a different kind of advantage. It's not faster per byte — it's just vastly more of it, accessible to both CPU and GPU simultaneously without any PCIe transfer overhead. That's what lets you load a 70B parameter model entirely on-chip.</p>
+<blockquote>
+<p><strong>Looking to build an RTX 4090 workstation?</strong> Check out the <a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20">NVIDIA GeForce RTX 4090 Founders Edition on Amazon</a> or grab a pre-built option to skip the assembly headache.</p>
+</blockquote>
+<hr />
+<h2 id="performance-benchmarks-tokens-per-second">Performance Benchmarks: Tokens Per Second</h2>
+<p>All figures below are based on <strong>llama.cpp</strong> (RTX 4090) and <strong>MLX</strong> (Mac Studio), using <strong>4-bit quantization (Q4_K_M)</strong> at 2048 context length. These are representative community benchmarks from r/LocalLLaMA and llama.cpp testing threads — real-world numbers, not marketing slides.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>Mac Studio M4 Max 128GB</strong></th>
+<th><strong>Winner</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>7B (Q4)</strong></td>
+<td>150–200 tok/s</td>
+<td>80–120 tok/s</td>
+<td>RTX 4090</td>
+</tr>
+<tr>
+<td><strong>13B (Q4)</strong></td>
+<td>100–150 tok/s</td>
+<td>50–80 tok/s</td>
+<td>RTX 4090</td>
+</tr>
+<tr>
+<td><strong>30B (Q4)</strong></td>
+<td>50–70 tok/s</td>
+<td>30–50 tok/s</td>
+<td>RTX 4090</td>
+</tr>
+<tr>
+<td><strong>70B (Q4)</strong></td>
+<td>10–20 tok/s*</td>
+<td>20–30 tok/s</td>
+<td>Mac Studio</td>
+</tr>
+<tr>
+<td><strong>70B (FP16)</strong></td>
+<td>Not feasible</td>
+<td>10–15 tok/s</td>
+<td>Mac Studio</td>
+</tr>
+</tbody>
+</table>
+<p><em>*RTX 4090 requires partial CPU offload for 70B models, which tanks throughput significantly.</em></p>
+<h3 id="what-these-numbers-actually-mean">What These Numbers Actually Mean</h3>
+<p>For <strong>7B and 13B models</strong>, the RTX 4090 is roughly <strong>1.5–2x faster</strong> than the Mac Studio. At 150–200 tokens per second on a 7B model, you're getting near-instant responses — fast enough that latency essentially disappears in a chat interface.</p>
+<p>The Mac Studio's 80–120 tok/s on 7B is still very usable. You won't be staring at a loading screen. But if you're running automated pipelines, batch processing, or agentic workflows where you're generating thousands of tokens per minute, that 2x gap compounds quickly.</p>
+<p>The <strong>70B crossover point</strong> is where the story flips. The RTX 4090 simply cannot fit a 70B Q4 model in its 24GB VRAM. It has to offload layers to system RAM and shuttle data across PCIe, which creates a brutal bottleneck. You end up at 10–20 tok/s — slower than the Mac Studio running the same model entirely in unified memory at 20–30 tok/s.</p>
+<p>For <strong>70B FP16</strong> (full precision, no quantization), the RTX 4090 is out of the picture entirely. The Mac Studio handles it. Slowly, but it handles it — and that matters for researchers who need full-precision outputs.</p>
+<hr />
+<h2 id="model-compatibility-what-actually-fits">Model Compatibility: What Actually Fits</h2>
+<p>This is arguably the most important section for local LLM users. Raw speed means nothing if your target model won't load.</p>
+<h3 id="rtx-4090-24gb-vram">RTX 4090 (24GB VRAM)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>Max Model Size</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP16</td>
+<td>7B only</td>
+<td>Tight fit; ~14GB</td>
+</tr>
+<tr>
+<td>Q8</td>
+<td>13B</td>
+<td>~13GB, comfortable</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>30B</td>
+<td>~17GB, fits cleanly</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>70B</td>
+<td>Requires CPU offload</td>
+</tr>
+</tbody>
+</table>
+<p>The 24GB VRAM ceiling is the RTX 4090's defining limitation for LLM work. It's generous by GPU standards — no other single consumer GPU comes close — but the model size explosion of the past two years has made 24GB feel increasingly tight. Llama 3.1 70B, Qwen2.5 72B, Mistral Large — all of these require offloading on a single 4090.</p>
+<p>The workaround is multi-GPU (two 4090s = 48GB VRAM), but that doubles your cost and power draw, and you're now at $5,000+ before the rest of the build.</p>
+<h3 id="mac-studio-m4-max-128gb-unified-memory">Mac Studio M4 Max (128GB Unified Memory)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>Max Model Size</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP16</td>
+<td>70B</td>
+<td>~140GB — tight but feasible with system overhead managed</td>
+</tr>
+<tr>
+<td>Q8</td>
+<td>70B</td>
+<td>~70GB, comfortable</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>70B+</td>
+<td>Easily fits; room for 100B+ models</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>120B+</td>
+<td>Mixtral MoE variants, large context models</td>
+</tr>
+</tbody>
+</table>
+<p>The 128GB unified memory configuration is genuinely transformative for model compatibility. You can load <strong>Llama 3.1 70B in Q8</strong> and still have memory headroom. You can run <strong>FP16 70B</strong> — something essentially no other sub-$10,000 consumer setup can do. You can experiment with Mixtral 8x7B MoE architectures that balloon in memory requirements.</p>
+<p>For anyone whose primary use case involves frontier-scale open models, the Mac Studio's memory capacity isn't a luxury — it's a hard requirement.</p>
+<hr />
+<h2 id="price-and-value-analysis">Price and Value Analysis</h2>
+<h3 id="rtx-4090-pc-build-2500">RTX 4090 PC Build (~$2,500)</h3>
+<p>A competitive RTX 4090 build breaks down roughly as:<br />
+- <a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20">RTX 4090 GPU</a>: ~$1,600–$1,800<br />
+- <a href="https://www.amazon.com/s?k=AMD+Ryzen+9+7950X&amp;tag=ms5573-20">AMD Ryzen 9 7950X or Intel Core i9</a>: ~$400–$500<br />
+- <a href="https://www.amazon.com/s?k=64GB+DDR5+RAM&amp;tag=ms5573-20">64GB DDR5 RAM</a>: ~$150–$200<br />
+- Motherboard, PSU (1000W+), case, NVMe SSD: ~$400–$600</p>
+<p><strong>Total: ~$2,500–$2,800</strong></p>
+<p>At 150–200 tok/s on 7B models, you're paying roughly <strong>$12–15 per tok/s</strong> for your primary use case. That's exceptional value if 7B–30B models cover your needs.</p>
+<p>The ongoing cost matters too. The RTX 4090 alone draws 450W under load. A full system under inference load hits 550–650W. Running 8 hours a day at $0.15/kWh adds roughly <strong>$25–30/month</strong> to your electricity bill.</p>
+<h3 id="mac-studio-m4-max-128gb-4500">Mac Studio M4 Max 128GB (~$4,500)</h3>
+<p>Apple's pricing for the 128GB M4 Max configuration starts at approximately $4,499. There's no meaningful way to build cheaper — it's a closed, integrated system.</p>
+<p>At 80–120 tok/s on 7B models, you're paying roughly <strong>$37–56 per tok/s</strong> for smaller model inference. That's a significant premium over the RTX 4090 for the same task.</p>
+<p>Where the value equation shifts is on <strong>large model capability</strong>. The Mac Studio is the only sub-$5,000 machine that can run 70B FP16 models. If that's your use case, the comparison isn't RTX 4090 vs Mac Studio — it's Mac Studio vs a dual-4090 build at $7,000+, or a used A100 server at similar cost with none of the convenience.</p>
+<p>The power efficiency story is also real. At 150W for the entire system, the Mac Studio costs roughly <strong>$6–8/month</strong> under the same usage scenario. Over two years, that's $400–500 in electricity savings versus the RTX 4090 build — not enough to close the price gap, but worth factoring in.</p>
+<p><strong>Cost per GB of addressable model memory:</strong><br />
+- RTX 4090: ~$104/GB (24GB VRAM)<br />
+- Mac Studio: ~$35/GB (128GB unified)</p>
+<p>For raw memory capacity per dollar, the Mac Studio wins decisively.</p>
+<hr />
+<h2 id="who-should-buy-which">Who Should Buy Which</h2>
+<h3 id="buy-the-rtx-4090-pc-if">Buy the RTX 4090 PC If:</h3>
+<ul>
+<li><strong>Your primary models are 7B–30B.</strong> This covers the vast majority of local LLM use cases — coding assistants, chat, RAG pipelines, document summarization. The 4090 is faster and cheaper for all of it.</li>
+<li><strong>You're a gamer or creative professional</strong> who wants to dual-purpose the GPU for rendering, video editing, or gaming alongside LLM work.</li>
+<li><strong>You need CUDA.</strong> Fine-tuning with tools like Unsloth, running ComfyUI for image generation, or using any PyTorch-based training pipeline — CUDA is still the default. Apple's MLX ecosystem is improving rapidly but isn't there yet for training workflows.</li>
+<li><strong>You want upgrade flexibility.</strong> PCIe slots, multi-GPU support, and a standard PC form factor mean you can swap components as the hardware landscape evolves.</li>
+<li><strong>Budget is a real constraint.</strong> $2,000 less upfront is significant, and the performance-per-dollar on smaller models is hard to argue with.</li>
+</ul>
+<blockquote>
+<p><a href="https://www.amazon.com/s?k=RTX+4090+PC+build&amp;tag=ms5573-20">Shop RTX 4090 builds and components on Amazon</a></p>
+</blockquote>
+<h3 id="buy-the-mac-studio-m4-max-128gb-if">Buy the Mac Studio M4 Max 128GB If:</h3>
+<ul>
+<li><strong>You regularly work with 70B+ models.</strong> If Llama 3.1 70B, Qwen2.5 72B, or similar frontier models are your daily drivers, the Mac Studio is the only reasonable consumer option.</li>
+<li><strong>You need FP16 inference.</strong> Research applications, precision-sensitive tasks, or evaluating model behavior without quantization artifacts — the Mac Studio handles this; the RTX 4090 cannot at 70B scale.</li>
+<li><strong>You're already in the Apple ecosystem.</strong> macOS integration, iPhone/iPad handoff, and native app support matter if this is your primary work machine.</li>
+<li><strong>Noise and power draw are real concerns.</strong> A silent, 150W machine that sits on your desk without a cooling fan screaming at 60dB is a legitimate quality-of-life advantage for home office environments.</li>
+<li><strong>You want a turnkey solution.</strong> No driver conflicts, no Linux configuration, no PSU sizing — it works out of the box with llama.cpp and MLX.</li>
+</ul>
+<hr />
+<h2 id="verdict-clear-winner-and-runner-up-use-case">Verdict: Clear Winner and Runner-Up Use Case</h2>
+<p><strong>For most local LLM users: RTX 4090 wins.</strong></p>
+<p>The reality is that 7B–30B models handle the overwhelming majority of practical local LLM tasks in 2024–2025. Coding assistants, RAG pipelines, chat interfaces, document processing — all of these run excellently on models that fit comfortably in 24GB VRAM. The RTX 4090 is faster at these tasks, costs $2,000 less, and plugs into a broader ecosystem of CUDA-based tools that the local AI community has built over the past several years.</p>
+<p><strong>For researchers and power users running 70B+ models: Mac Studio M4 Max is the only sensible choice under $10,000.</strong></p>
+<p>If your work requires frontier-scale open models at full or near-full precision, the Mac Studio's 128GB unified memory is a genuine technical moat. No other consumer product at this price point comes close. The slower per-token speed is a real tradeoff, but it's a tradeoff you make knowingly in exchange for capability that simply doesn't exist elsewhere at this price.</p>
+<p><strong>The bottom line:</strong> Buy the RTX 4090 if you're optimizing for speed and value on the models most people actually use. Buy the Mac Studio M4 Max 128GB if you need to run the biggest open-source models available and you're willing to pay a premium for that capability.</p>
+<hr />
+<h2 id="faq">FAQ</h2>
+<h3 id="1-can-the-rtx-4090-run-70b-models-at-all">1. Can the RTX 4090 run 70B models at all?</h3>
+<p>Yes, but with significant caveats. Using llama.cpp with partial CPU offload, you can run 70B Q4 models with layers split between VRAM and system RAM. Expect <strong>10–20 tok/s</strong> — usable for occasional queries, but painful for any workflow requiring sustained generation. The Mac Studio M4 Max runs the same model at 20–30 tok/s entirely in unified memory, making it the better choice for 70B inference.</p>
+<h3 id="2-is-the-mac-studio-m4-max-good-for-fine-tuning-llms">2. Is the Mac Studio M4 Max good for fine-tuning LLMs?</h3>
+<p>Currently, no — not for serious fine-tuning work. Apple's MLX framework supports LoRA fine-tuning and is improving rapidly, but the CUDA ecosystem (Unsloth, HuggingFace PEFT, DeepSpeed) is far more mature, better documented, and faster for training workflows. If fine-tuning is a priority, the RTX 4090 with a Linux setup is the stronger choice.</p>
+<h3 id="3-what-about-running-two-rtx-4090s-instead-of-the-mac-studio">3. What about running two RTX 4090s instead of the Mac Studio?</h3>
+<p>A dual-4090 setup gives you 48GB of combined VRAM (with NVLink or tensor parallelism via llama.cpp), which comfortably fits 70B Q4 models with room to spare. Performance would exceed the Mac Studio significantly. However, you're looking at $3,200+ just for two GPUs, a 1600W+ PSU, a high-end motherboard, and a case that can handle the thermal load. Total build cost hits $5,500–$6,500 — more expensive than the Mac Studio, louder, and more complex to configure.</p>
+<h3 id="4-how-does-the-mac-studio-m4-max-compare-to-the-m3-ultra-for-llms">4. How does the Mac Studio M4 Max compare to the M3 Ultra for LLMs?</h3>
+<p>The M4 Max 128GB and M3 Ultra 192GB serve different segments. The M3 Ultra (in the Mac Studio or Mac Pro) offers more memory and higher GPU core counts, but at $6,000–$8,000+. For pure LLM inference, the M4 Max 128GB hits a sweet spot — enough memory for 70B models, faster per-core performance than M3, and a more reasonable price. The M3 Ultra makes sense if you need 192GB for very large MoE models or multi-model serving.</p>
+<h3 id="5-will-the-rtx-5090-change-this-comparison">5. Will the RTX 5090 change this comparison?</h3>
+<p>The RTX 5090 is expected to feature 32GB of GDDR7 memory — an improvement over the 4090's 24GB, but still far short of 128GB unified memory. It will likely be faster per token on smaller models and push the comfortable model size ceiling to around 34B–40B at Q4. It won't fundamentally change the 70B+ use case advantage that Apple Silicon's unified memory architecture provides. If you're buying today, the RTX 4090 remains the better value; if you can wait 6–12 months, the 5090 will be worth evaluating for the mid-range model sweet spot.</p>
+<hr />
+<p><em>Benchmark data sourced from llama.cpp community benchmarks, MLX documentation, and user-reported results from r/LocalLLaMA. Prices reflect approximate market rates and may vary. This post contains affiliate links — purchases made through these links support the site at no additional cost to you.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>
