@@ -2522,7 +2522,7 @@ function renderCompareView() {
       var bestUCCount = 0;
       USE_CASES.forEach(function(uc){ var c = (hw.models[uc.id]||[]).length; if(c > bestUCCount){ bestUCCount = c; bestUC = uc.label.split(' ')[0]; }});
       h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
-      h += '<td class="hw-name"><span style="color:'+(isFeatured?'#76b900':'var(--text)')+';cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.15);text-underline-offset:3px" onclick="switchView(\'recommendations\')">'+hw.label+'</span></td>';
+      h += '<td class="hw-name"><span style="color:'+(isFeatured?'#76b900':'var(--text)')+';cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.15);text-underline-offset:3px" onclick="switchView(\'explorer\');showHWPanel(HARDWARE.find(function(x){return x.id===\''+hw.id+'\';}))">'+hw.label+'</span></td>';
       h += '<td><span class="price-badge">'+hw.price+'</span></td>';
       h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
       h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
