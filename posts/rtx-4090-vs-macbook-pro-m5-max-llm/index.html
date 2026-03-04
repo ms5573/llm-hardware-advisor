@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX 4090 vs MacBook Pro M5 Max 128GB for Local LLMs: Which Should You Buy in 2025?</title>
+<meta name="description" content="Running large language models locally has never been more accessible — but choosing the right hardware is still brutally confusing. Two machines dominate the co">
+<link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-macbook-pro-m5-max-llm/">
+<meta property="og:title" content="RTX 4090 vs MacBook Pro M5 Max 128GB for Local LLMs: Which Should You Buy in 2025?">
+<meta property="og:description" content="Running large language models locally has never been more accessible — but choosing the right hardware is still brutally confusing. Two machines dominate the co">
+<meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-macbook-pro-m5-max-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="rtx-4090-vs-macbook-pro-m5-max-128gb-for-local-llms-which-should-you-buy-in-2025">RTX 4090 vs MacBook Pro M5 Max 128GB for Local LLMs: Which Should You Buy in 2025?</h1>
+<p>Running large language models locally has never been more accessible — but choosing the right hardware is still brutally confusing. Two machines dominate the conversation right now: the <strong>RTX 4090 desktop</strong> and the <strong>MacBook Pro M5 Max with 128GB unified memory</strong>. One is a raw-power gaming GPU repurposed for AI. The other is Apple's most ambitious silicon yet, packed into a laptop that fits in your bag.</p><a href="https://www.apple.com/macbook-pro/" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The problem? They're built on completely different architectures, priced worlds apart, and optimized for different workflows. If you pick the wrong one, you'll either be bottlenecked on model size or paying a $2,500 premium for portability you don't need.</p>
+<p>This post breaks down exactly what you get from each machine for local LLM inference — tokens per second, model compatibility, quantization limits, real-world use cases, and dollar-for-dollar value. No fluff, no fanboy takes. Just data.</p>
+<hr />
+<h2 id="key-specs-side-by-side">Key Specs: Side-by-Side</h2>
+<p>Before diving into benchmarks, here's the hardware reality for each platform:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>RTX 4090 Desktop</strong></th>
+<th><strong>MacBook Pro M5 Max 128GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VRAM / RAM</strong></td>
+<td>24GB GDDR6X + 64GB DDR5 system RAM</td>
+<td>128GB Unified Memory</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>1,008 GB/s (VRAM) / ~50 GB/s (DDR5)</td>
+<td>~400 GB/s (Unified)</td>
+</tr>
+<tr>
+<td><strong>GPU Compute</strong></td>
+<td>82.6 TFLOPS (FP32)</td>
+<td>~35 TFLOPS (estimated)</td>
+</tr>
+<tr>
+<td><strong>TDP</strong></td>
+<td>450W GPU + ~100W system</td>
+<td>60–70W entire system</td>
+</tr>
+<tr>
+<td><strong>Price (2025)</strong></td>
+<td>~$2,500 full desktop build</td>
+<td>~$5,000</td>
+</tr>
+<tr>
+<td><strong>Portability</strong></td>
+<td>Desktop only</td>
+<td>Ultra-portable laptop</td>
+</tr>
+<tr>
+<td><strong>Primary Inference Stack</strong></td>
+<td>llama.cpp, ExLlamaV2, vLLM</td>
+<td>MLX, llama.cpp (Metal)</td>
+</tr>
+<tr>
+<td><strong>OS Ecosystem</strong></td>
+<td>Windows / Linux</td>
+<td>macOS only</td>
+</tr>
+</tbody>
+</table>
+<p>The RTX 4090's VRAM bandwidth advantage is enormous on paper — over 2.5x faster than M5 Max unified memory. But that 24GB ceiling is where things get complicated. The M5 Max's 128GB pool changes the entire conversation once models exceed what fits in VRAM.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<h2 id="performance-tokens-per-second-that-actually-matter">Performance: Tokens Per Second That Actually Matter</h2>
+<p>Raw throughput is the number most people care about. These benchmarks reflect <strong>Q4_K_M quantization on llama.cpp</strong> for the RTX 4090 and <strong>Q4_0 on MLX</strong> for the M5 Max, which represent realistic daily-driver configurations for each platform.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>M5 Max 128GB</strong></th>
+<th><strong>RTX 4090 Advantage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>7B</strong></td>
+<td>120–150 tok/s</td>
+<td>50–70 tok/s</td>
+<td>~2.5x faster</td>
+</tr>
+<tr>
+<td><strong>13B</strong></td>
+<td>80–100 tok/s</td>
+<td>30–50 tok/s</td>
+<td>~2x faster</td>
+</tr>
+<tr>
+<td><strong>30B</strong></td>
+<td>40–60 tok/s*</td>
+<td>20–30 tok/s</td>
+<td>~1.8x faster</td>
+</tr>
+<tr>
+<td><strong>70B</strong></td>
+<td>10–15 tok/s***</td>
+<td>15–20 tok/s (FP16)****</td>
+<td>M5 Max wins</td>
+</tr>
+<tr>
+<td><strong>70B (Q4)</strong></td>
+<td>10–15 tok/s***</td>
+<td>25–35 tok/s</td>
+<td>M5 Max wins</td>
+</tr>
+</tbody>
+</table>
+<p>*RTX 4090 handles 30B via partial GPU offloading — most layers in VRAM, overflow to system RAM via PCIe. Performance degrades noticeably compared to fully GPU-resident models.</p>
+<p>***RTX 4090 running 70B requires heavy CPU offloading. You're essentially running the model on your CPU with GPU assistance. The 10–15 tok/s figure is generous — many users report 5–8 tok/s in practice.</p>
+<p><strong><em>*M5 Max runs 70B at </em>*full FP16 precision</strong> natively within its 128GB pool. This is genuinely remarkable and has no equivalent on the 4090 without a multi-GPU setup.</p>
+<h3 id="the-latency-reality">The Latency Reality</h3>
+<p>For interactive chat use cases, time-to-first-token matters as much as sustained throughput. The RTX 4090 wins here on smaller models — prompt processing (prefill) is dramatically faster thanks to raw CUDA compute. On a 7B model with a 2,000-token context, the 4090 processes the prompt in under a second. The M5 Max takes 2–3 seconds for the same task.</p>
+<p>For 70B models, this flips. The 4090 is so bottlenecked by CPU offloading that prefill on long contexts can take 10–20 seconds. The M5 Max handles it smoothly in 4–6 seconds.</p>
+<p><strong>Bottom line:</strong> If your workflow centers on 7B–30B models and you value speed above all else, the RTX 4090 is not close to being beaten. The gap only closes — and reverses — at 70B.</p>
+<hr />
+<h2 id="model-compatibility-what-actually-fits">Model Compatibility: What Actually Fits</h2>
+<p>This is where the M5 Max's 128GB unified memory becomes its defining advantage. Memory capacity determines which models you can run at all, and at what quality level.</p>
+<h3 id="rtx-4090-24gb-vram">RTX 4090 (24GB VRAM)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>Max Model Size (GPU-only)</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16</strong></td>
+<td>7B only</td>
+<td>~14GB for 7B; 13B won't fit</td>
+</tr>
+<tr>
+<td><strong>Q8</strong></td>
+<td>13B</td>
+<td>~13GB; tight but workable</td>
+</tr>
+<tr>
+<td><strong>Q4_K_M</strong></td>
+<td>30B</td>
+<td>~17GB; leaves room for KV cache</td>
+</tr>
+<tr>
+<td><strong>Q3 / Q2</strong></td>
+<td>30B–40B</td>
+<td>Quality degrades significantly</td>
+</tr>
+</tbody>
+</table>
+<p>Beyond 30B at Q4, you're into hybrid CPU/GPU territory. The model layers that don't fit in VRAM get offloaded to system RAM and processed by the CPU. This works, but the PCIe bus becomes a bottleneck, and performance tanks. Running Llama 3.1 70B on a 4090 is technically possible — it's just not something you'd want to do for real work.</p>
+<h3 id="macbook-pro-m5-max-128gb">MacBook Pro M5 Max 128GB</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>Max Model Size</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16</strong></td>
+<td>70B</td>
+<td>~140GB — fits with room for OS overhead</td>
+</tr>
+<tr>
+<td><strong>Q8</strong></td>
+<td>70B+</td>
+<td>Comfortable; 70B Q8 ≈ 70GB</td>
+</tr>
+<tr>
+<td><strong>Q4_K_M</strong></td>
+<td>70B+</td>
+<td>70B Q4 ≈ 35–40GB; could run 120B+ models</td>
+</tr>
+<tr>
+<td><strong>Q4 (smaller)</strong></td>
+<td>7B–30B</td>
+<td>Runs well; slower than 4090</td>
+</tr>
+</tbody>
+</table>
+<p>The M5 Max can run <strong>Llama 3.1 70B at FP16</strong> — the full, uncompromised model — entirely within its unified memory. No offloading, no quality compromise. That's a capability that simply doesn't exist on consumer hardware outside of this platform (or a dual-GPU workstation costing $10,000+).</p>
+<p>For researchers and practitioners who care about model quality over raw speed, this matters enormously. Q4 quantization introduces measurable quality degradation on complex reasoning tasks. FP16 is the gold standard.</p>
+<hr />
+<h2 id="price-value-analysis">Price &amp; Value Analysis</h2>
+<p>Let's be direct about the money.</p>
+<p><strong>RTX 4090 Desktop Build (~$2,500):</strong><br />
+- <a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20">NVIDIA RTX 4090 GPU</a>: ~$1,600–$1,800<br />
+- Motherboard + CPU (Ryzen 7 7700X or similar): ~$400<br />
+- 64GB DDR5 RAM: ~$150<br />
+- PSU (850W+), case, storage: ~$300</p>
+<p>You're building a machine that's also a gaming PC, a video editing workstation, and a general-purpose computer. The RTX 4090 alone delivers roughly <strong>3x the inference speed</strong> of the M5 Max on 7B and 13B models — the models most people actually use daily.</p>
+<p><strong>MacBook Pro M5 Max 128GB (~$5,000):</strong><br />
+This is a premium laptop with a premium price. You're paying for the M5 Max chip, the 128GB unified memory configuration, the display, the build quality, and the Apple ecosystem. The LLM capability is almost a bonus feature on top of a world-class laptop.</p>
+<h3 id="cost-per-token-rough-estimate">Cost Per Token (Rough Estimate)</h3>
+<p>Assuming 3 years of use, 4 hours/day of LLM inference:</p>
+<ul>
+<li><strong>RTX 4090:</strong> ~$2,500 hardware + ~$0.15/hour electricity (550W × $0.12/kWh) = <strong>~$2,660 total</strong></li>
+<li><strong>M5 Max:</strong> ~$5,000 hardware + ~$0.008/hour electricity (65W × $0.12/kWh) = <strong>~$5,035 total</strong></li>
+</ul>
+<p>The M5 Max's efficiency advantage is real but doesn't close the price gap. The 4090 setup costs roughly <strong>half as much</strong> over a 3-year ownership period.</p>
+<p><strong>Where the M5 Max earns its price:</strong> If you need a laptop anyway, the comparison changes. You're not buying a $5,000 LLM machine — you're buying a $5,000 laptop that happens to run 70B models natively. Compared to a MacBook Pro M4 Pro + a separate GPU server, the M5 Max 128GB starts looking more reasonable.</p>
+<hr />
+<h2 id="who-should-buy-which">Who Should Buy Which</h2>
+<h3 id="buy-the-rtx-4090-desktop-if">Buy the RTX 4090 Desktop If:</h3>
+<ul>
+<li><strong>Speed is your priority.</strong> You're building chatbots, running rapid inference loops, or doing anything where tokens-per-second directly impacts your workflow.</li>
+<li><strong>Your models are 7B–30B.</strong> This covers the vast majority of practical local LLM use cases in 2025, including Llama 3.1 8B, Mistral 7B, Phi-3 Medium, and Gemma 2 27B.</li>
+<li><strong>Budget is under $3,000.</strong> The 4090 delivers unmatched performance-per-dollar at this price point.</li>
+<li><strong>You already have or want a desktop.</strong> The GPU slots into an existing build or justifies a new one.</li>
+<li><strong>You use Linux or Windows.</strong> The CUDA ecosystem for LLM tooling — ExLlamaV2, vLLM, AutoGPTQ — is more mature and better-supported than Metal backends.</li>
+</ul>
+<p><a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20">Check RTX 4090 prices on Amazon →</a></p>
+<h3 id="buy-the-macbook-pro-m5-max-128gb-if">Buy the MacBook Pro M5 Max 128GB If:</h3>
+<ul>
+<li><strong>You need portability.</strong> Running 70B models on a plane, in a coffee shop, or between offices is a genuine use case for researchers and enterprise users.</li>
+<li><strong>70B FP16 inference matters to you.</strong> If you're evaluating model quality, running benchmarks, or need the highest-fidelity output from open-source models, nothing else at this price point delivers this.</li>
+<li><strong>You're in the Apple ecosystem.</strong> macOS integration, iPhone/iPad development, Final Cut Pro, Logic Pro — if these are part of your workflow, the M5 Max is a productivity multiplier beyond LLMs.</li>
+<li><strong>Power consumption is a constraint.</strong> At 60–70W total system draw, the M5 Max is viable in environments where a 550W desktop isn't practical.</li>
+<li><strong>You value silence.</strong> The M5 Max runs near-silent under LLM load. The RTX 4090 sounds like a jet engine.</li>
+</ul>
+<p><a href="https://www.amazon.com/s?k=MacBook+Pro+M5+Max&amp;tag=ms5573-20">Check MacBook Pro M5 Max availability →</a></p>
+<hr />
+<h2 id="verdict">Verdict</h2>
+<p><strong>For most users, the RTX 4090 desktop wins — and it's not particularly close.</strong></p>
+<p>At roughly half the price, it delivers 2–3x faster inference on the models that 90% of local LLM users actually run. The CUDA ecosystem is more mature, the tooling is better, and the raw throughput makes real-time applications actually feel real-time. If you're a developer, AI enthusiast, or power user who works from a desk, the 4090 is the obvious choice.</p>
+<p><strong>The M5 Max earns its place in one specific scenario:</strong> you need a portable machine that can run 70B models at high quality without compromise. That's a narrow but legitimate use case — researchers, enterprise consultants, and serious AI practitioners who travel and refuse to sacrifice model quality. For them, the M5 Max isn't overpriced. It's the only option.</p>
+<p><strong>Clear winner:</strong> RTX 4090 Desktop<br />
+<strong>Niche champion:</strong> MacBook Pro M5 Max 128GB</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q: Can the RTX 4090 run 70B models at all?</strong></p>
+<p>Yes, but not well. With heavy CPU offloading via llama.cpp, you can run 70B models at Q4 quantization, but expect 5–12 tokens per second at best. The PCIe bus between your GPU and system RAM becomes a severe bottleneck. It's technically functional for occasional use, but not a practical daily-driver setup for 70B inference.</p>
+<p><strong>Q: Is the M5 Max's unified memory actually as fast as VRAM?</strong></p>
+<p>No — but it's faster than you'd expect. The M5 Max's ~400 GB/s unified memory bandwidth is significantly slower than the RTX 4090's 1,008 GB/s VRAM bandwidth, which explains the token-per-second gap on smaller models. However, because the M5 Max has no PCIe bottleneck (everything is on-chip), it handles large models that exceed VRAM far more gracefully than any discrete GPU setup.</p>
+<p><strong>Q: Which is better for fine-tuning models locally?</strong></p>
+<p>The RTX 4090 wins for fine-tuning, and it's not close. CUDA-based training frameworks (PyTorch, Unsloth, QLoRA) are dramatically more optimized than Metal equivalents. Fine-tuning a 7B model with QLoRA on the 4090 takes hours; the same task on M5 Max takes significantly longer and has less tooling support. If fine-tuning is part of your workflow, the 4090 is the only reasonable choice.</p>
+<p><strong>Q: Will adding more system RAM to a 4090 desktop help with 70B models?</strong></p>
+<p>Marginally. More DDR5 RAM (128GB) means more of the 70B model can be loaded into system memory, reducing disk swapping. But the fundamental bottleneck is the PCIe 4.0 x16 bus (~32 GB/s bidirectional), which is 12x slower than the 4090's VRAM bandwidth. More RAM helps stability and prevents crashes, but doesn't meaningfully improve tokens-per-second for heavily offloaded models.</p>
+<p><strong>Q: Is the M5 Max worth it over the M4 Max for LLMs?</strong></p>
+<p>If you're specifically buying for LLM inference, the M5 Max's performance-per-watt improvements and memory bandwidth gains make it the better choice over the M4 Max at equivalent memory configurations. The 128GB configuration is the key spec — the chip generation matters less than having enough unified memory to keep your target model fully resident. If you can find an M4 Max 128GB at a significant discount, it remains competitive for most use cases.</p>
+<hr />
+<p><em>Prices and performance figures reflect available data as of mid-2025. Benchmark numbers may vary based on specific model versions, quantization methods, context length, and system configuration. Always verify current pricing before purchasing.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

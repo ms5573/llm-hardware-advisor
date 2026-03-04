@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?</title>
+<meta name="description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model ">
+<link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-rtx-4080-llm/">
+<meta property="og:title" content="RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?">
+<meta property="og:description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model ">
+<meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-rtx-4080-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="rtx-4090-vs-rtx-4080-for-local-llms-which-gpu-actually-wins">RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?</h1>
+<p>If you're serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model crawl at 3 tokens per second while your CPU sweats through offloaded layers. The right pick means fluid, responsive inference that actually feels usable.</p>
+<p>This post cuts through the marketing noise and gives you a direct, data-driven comparison of the <strong>RTX 4090 vs RTX 4080 for local LLMs</strong> — covering real token throughput, VRAM limits, model compatibility, and whether the $400 price gap is actually worth it.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>Spoiler: for serious LLM work, one of these cards is clearly better. Let's break it down.</p>
+<hr />
+<h2 id="quick-specs-rtx-4090-vs-rtx-4080-side-by-side">Quick Specs: RTX 4090 vs RTX 4080 Side-by-Side</h2>
+<p>Before diving into performance, here's what you're actually paying for:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Spec</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RTX 4080</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VRAM</strong></td>
+<td>24GB GDDR6X</td>
+<td>16GB GDDR6X</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>1,008 GB/s</td>
+<td>736 GB/s</td>
+</tr>
+<tr>
+<td><strong>CUDA Cores</strong></td>
+<td>16,384</td>
+<td>9,728</td>
+</tr>
+<tr>
+<td><strong>TDP</strong></td>
+<td>450W</td>
+<td>320W</td>
+</tr>
+<tr>
+<td><strong>MSRP</strong></td>
+<td>$1,599+</td>
+<td>$1,199+</td>
+</tr>
+</tbody>
+</table>
+<p>The numbers that matter most for local LLM inference are <strong>VRAM</strong> and <strong>memory bandwidth</strong> — not CUDA cores. LLM inference is overwhelmingly memory-bound, not compute-bound. Every token generation requires loading billions of model weights from VRAM into the GPU's compute units. The faster that data moves, the faster your tokens flow.</p>
+<p>The RTX 4090's 1,008 GB/s bandwidth is <strong>37% faster</strong> than the 4080's 736 GB/s. That gap directly translates to token throughput, especially on larger models. The 8GB VRAM difference is even more consequential — it determines which models you can run entirely on-GPU versus which ones require painful CPU offloading.</p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20">Check current RTX 4090 prices on Amazon</a></strong><br />
+👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080&amp;tag=ms5573-20">Check current RTX 4080 prices on Amazon</a></strong></p>
+<hr />
+<h2 id="performance-comparison-tokens-per-second-that-actually-matter">Performance Comparison: Tokens Per Second That Actually Matter</h2>
+<p>These benchmarks assume <strong>4-bit quantization (GPTQ or Q4_K_M)</strong> running through optimized inference frameworks like <strong>llama.cpp</strong> or <strong>ExLlamaV2</strong> — the standard setup for most local LLM users. Results will vary slightly based on your specific quantization method, system RAM, and CPU, but these ranges reflect real-world community benchmarks.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RTX 4080</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>7B</strong></td>
+<td>150–180 tok/s</td>
+<td>130–160 tok/s</td>
+<td>Negligible gap; both handle this effortlessly</td>
+</tr>
+<tr>
+<td><strong>13B</strong></td>
+<td>90–110 tok/s</td>
+<td>70–85 tok/s</td>
+<td>4090 leads by ~25% due to bandwidth advantage</td>
+</tr>
+<tr>
+<td><strong>30B</strong></td>
+<td>45–60 tok/s</td>
+<td>30–40 tok/s</td>
+<td>4090's VRAM keeps it fully on-GPU; 4080 starts offloading</td>
+</tr>
+<tr>
+<td><strong>70B</strong></td>
+<td>18–25 tok/s*</td>
+<td>3–8 tok/s**</td>
+<td><em>4090 uses partial GPU offload; </em>*4080 requires heavy CPU swap</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What these numbers mean in practice:</strong></p>
+<p>At <strong>7B</strong>, both cards are fast enough that you'll never feel bottlenecked. The 4080 running Mistral 7B or Llama 3.1 8B at 130+ tok/s is genuinely excellent — faster than you can read.</p>
+<p>At <strong>13B</strong>, the gap starts showing. The 4090's bandwidth advantage pushes it ~25% ahead. Still, the 4080 at 70–85 tok/s on a 13B model is perfectly usable for most workflows.</p>
+<p>At <strong>30B</strong>, things get interesting. The 4090 keeps the entire model in VRAM and delivers smooth 45–60 tok/s. The 4080 begins offloading layers to system RAM, and you'll feel it — throughput drops and latency spikes unpredictably depending on your RAM speed.</p>
+<p>At <strong>70B</strong>, the 4080 essentially taps out for practical use. Running a Q4 70B model with heavy CPU offloading on a 4080 can drop to 3–8 tok/s — barely faster than reading speed and frustrating for any interactive use. The 4090 handles 70B with partial offloading and still delivers 18–25 tok/s, which is genuinely usable.</p>
+<p><strong>The latency angle:</strong> Beyond raw throughput, the 4090's bandwidth advantage also reduces <strong>time-to-first-token</strong> — the delay before inference starts. For interactive chat applications, this matters as much as sustained tok/s.</p>
+<hr />
+<h2 id="model-compatibility-what-actually-fits-in-vram">Model Compatibility: What Actually Fits in VRAM</h2>
+<p>VRAM is your hard ceiling. Once a model exceeds your available VRAM, you're either quantizing more aggressively or offloading to CPU — both of which hurt quality or speed (usually both).</p>
+<h3 id="rtx-4090-24gb-vram">RTX 4090 — 24GB VRAM</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Precision</strong></th>
+<th><strong>Max Model Size</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16 (full precision)</strong></td>
+<td>Up to ~13B</td>
+<td>Leaves room for context and KV cache</td>
+</tr>
+<tr>
+<td><strong>8-bit (INT8)</strong></td>
+<td>Up to ~30B</td>
+<td>Solid quality, good speed</td>
+</tr>
+<tr>
+<td><strong>4-bit (GPTQ/Q4_K_M)</strong></td>
+<td>Up to 70B*</td>
+<td>*Requires partial offloading for 70B</td>
+</tr>
+</tbody>
+</table>
+<p>The 4090's 24GB is the sweet spot for the current generation of open-source models. You can run <strong>Llama 3.1 70B at Q4</strong> with most layers on-GPU, <strong>Mixtral 8x7B</strong> (which requires ~26GB at Q4 — tight but manageable with careful layer allocation), and virtually any 30B model at 8-bit with room to spare for long context windows.</p>
+<h3 id="rtx-4080-16gb-vram">RTX 4080 — 16GB VRAM</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Precision</strong></th>
+<th><strong>Max Model Size</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16 (full precision)</strong></td>
+<td>Up to ~7B</td>
+<td>13B models won't fit cleanly</td>
+</tr>
+<tr>
+<td><strong>8-bit (INT8)</strong></td>
+<td>Up to ~13B</td>
+<td>Workable for most users</td>
+</tr>
+<tr>
+<td><strong>4-bit (GPTQ/Q4_K_M)</strong></td>
+<td>Up to ~30B</td>
+<td>30B fits; 70B requires severe CPU offloading</td>
+</tr>
+</tbody>
+</table>
+<p>The 4080's 16GB is genuinely limiting. At FP16, you're capped at 7B models — a significant constraint if you care about model quality. At 4-bit, you can run 30B models comfortably, but 70B becomes a CPU offloading nightmare. The 16GB ceiling also becomes a problem as context windows grow — longer conversations eat into your available VRAM headroom.</p>
+<p><strong>The quantization quality tradeoff:</strong> Running a 13B model at 4-bit on a 4080 is not the same as running it at 8-bit on a 4090. Aggressive quantization degrades output quality, particularly on reasoning tasks and instruction following. The 4090's extra VRAM lets you run models at higher precision, which matters for production or research use.</p>
+<hr />
+<h2 id="price-value-analysis-is-the-4090-worth-the-premium">Price &amp; Value Analysis: Is the 4090 Worth the Premium?</h2>
+<p>The RTX 4090 costs roughly <strong>$400 more at MSRP</strong> — that's a 33% price premium. Here's how that math shakes out depending on your use case.</p>
+<h3 id="for-7b13b-model-users">For 7B–13B Model Users</h3>
+<p>If you exclusively run 7B or 13B models, the 4080 is the smarter buy. The performance gap at these sizes doesn't justify $400 extra. The 4080 at 130–160 tok/s on a 7B model is already faster than you'll ever need for interactive use.</p>
+<p><strong>Verdict for this use case: 4080 wins on value.</strong></p>
+<h3 id="for-30b-model-users">For 30B Model Users</h3>
+<p>Here the calculus shifts. The 4090 runs 30B models fully on-GPU at 45–60 tok/s. The 4080 offloads to CPU and delivers 30–40 tok/s in the best case — and that's assuming fast DDR5 RAM. The 4090's performance advantage is real and consistent.</p>
+<p>Over time, the 4090's ability to run 30B at higher precision (8-bit vs. forced 4-bit on the 4080) also means better output quality for the same model.</p>
+<p><strong>Verdict for this use case: 4090 is worth the premium.</strong></p>
+<h3 id="for-70b-model-users">For 70B Model Users</h3>
+<p>There's no contest. The 4080 cannot run 70B models at usable speeds. Period. If 70B inference is your goal, the 4090 isn't just better — it's the only viable option between these two cards.</p>
+<p><strong>Verdict for this use case: 4090 is the only choice.</strong></p>
+<h3 id="power-costs">Power Costs</h3>
+<p>The 4090's 450W TDP vs. the 4080's 320W means roughly <strong>130W more power draw</strong> under load. Running 8 hours a day at $0.15/kWh, that's about <strong>$57/year</strong> in additional electricity. Meaningful, but not a deciding factor for most users.</p>
+<p>You'll also need a <strong>850W+ PSU</strong> for the 4090 — factor that in if you're upgrading. The 4080 is more forgiving with a 750W PSU.</p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=1000w+gold+psu&amp;tag=ms5573-20">EVGA 1000W Gold PSU on Amazon</a></strong> — recommended for 4090 builds<br />
+👉 <strong><a href="https://www.amazon.com/s?k=ddr5+64gb+ram&amp;tag=ms5573-20">High-speed DDR5 RAM for LLM offloading on Amazon</a></strong> — critical if you're offloading layers to CPU</p>
+<hr />
+<h2 id="who-should-buy-which-gpu">Who Should Buy Which GPU?</h2>
+<h3 id="buy-the-rtx-4090-if">Buy the RTX 4090 If:</h3>
+<ul>
+<li>You want to run <strong>30B–70B models</strong> at usable speeds without CPU offloading</li>
+<li>You're doing <strong>research or development</strong> where model quality matters more than cost</li>
+<li>You want to <strong>future-proof</strong> your setup as open-source models continue scaling up</li>
+<li>You're running <strong>long context windows</strong> (8K–128K tokens) that eat into VRAM headroom</li>
+<li>You're building a <strong>local AI workstation</strong> that doubles as a gaming or creative rig</li>
+</ul>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20">Shop RTX 4090 on Amazon</a></strong></p>
+<h3 id="buy-the-rtx-4080-if">Buy the RTX 4080 If:</h3>
+<ul>
+<li>You <strong>exclusively run 7B–13B models</strong> and have no plans to go larger</li>
+<li><strong>Budget is a hard constraint</strong> and you need to save $400</li>
+<li>You're building a <strong>compact or power-efficient system</strong> where 450W TDP is impractical</li>
+<li>You're <strong>experimenting with local LLMs</strong> for the first time and want a lower-stakes entry point</li>
+<li>Your workload is <strong>batch processing</strong> at smaller model sizes where the speed gap narrows</li>
+</ul>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080+graphics+card&amp;tag=ms5573-20">Shop RTX 4080 on Amazon</a></strong></p>
+<hr />
+<h2 id="verdict-rtx-4090-vs-rtx-4080-for-local-llms">Verdict: RTX 4090 vs RTX 4080 for Local LLMs</h2>
+<p><strong>The RTX 4090 is the better GPU for local LLM inference — and it's not particularly close.</strong></p>
+<p>The 24GB VRAM and 1,008 GB/s memory bandwidth aren't just spec sheet bragging rights. They directly determine which models you can run, at what quality level, and at what speed. The 4090 runs 30B models fully on-GPU, handles 70B with partial offloading at usable speeds, and gives you headroom for longer context windows and higher-precision quantization.</p>
+<p>The 4080 is a capable card, but its 16GB VRAM ceiling is a genuine limitation that becomes more painful as the open-source model ecosystem continues pushing toward larger, more capable models. What fits comfortably today may require painful compromises tomorrow.</p>
+<p><strong>The 4080's use case:</strong> It's the right choice if you're strictly a 7B–13B user who values budget efficiency. At those model sizes, it's fast, capable, and $400 cheaper. There's no shame in that — 13B models like Llama 3.1 13B and Mistral 13B are genuinely impressive, and the 4080 runs them beautifully.</p>
+<p><strong>But if you're serious about local LLMs</strong> — if you want to run Llama 3.1 70B, experiment with 30B reasoning models, or avoid being bottlenecked by VRAM in 12 months — the RTX 4090 is the investment that pays off.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q: Can the RTX 4080 run 70B models at all?</strong></p>
+<p>Technically yes, but practically no. With aggressive 4-bit quantization and heavy CPU offloading, a 4080 can run 70B models at 3–8 tok/s. That's barely faster than reading speed and makes interactive use frustrating. For 70B inference, the RTX 4090 is the minimum viable GPU in this comparison.</p>
+<p><strong>Q: Does the RTX 4090 support running two GPUs for larger models?</strong></p>
+<p>Yes — with NVLink or PCIe multi-GPU setups, you can combine two RTX 4090s for 48GB of effective VRAM, enabling full FP16 inference on 70B models and partial support for larger models. However, multi-GPU inference has overhead and requires framework support (llama.cpp and ExLlamaV2 both support it). It's a significant additional investment but opens up a new tier of capability.</p>
+<p><strong>Q: Which inference framework should I use with these GPUs?</strong></p>
+<p>For most users, <strong>llama.cpp</strong> (with CUDA acceleration) or <strong>ExLlamaV2</strong> are the top choices. llama.cpp is more versatile and widely supported; ExLlamaV2 often delivers higher tok/s on GPTQ-quantized models. Both work excellently with the 4090 and 4080. Ollama (which wraps llama.cpp) is the easiest entry point for beginners.</p>
+<p><strong>Q: Is the RTX 4090's power requirement a dealbreaker?</strong></p>
+<p>For most desktop builds, no. You'll need an 850W+ PSU — ideally 1000W — which adds $100–$150 to your build cost if you're upgrading. The card also runs hot and needs good case airflow. But these are manageable constraints, not dealbreakers. The 4080's 320W TDP is more forgiving for compact or HTPC-style builds.</p>
+<p><strong>Q: Should I wait for RTX 5000 series GPUs instead?</strong></p>
+<p>If you can wait 6–12 months, the RTX 5090 and 5080 will likely offer meaningful improvements in bandwidth and potentially VRAM. However, current pricing on RTX 4090s has softened as the 50-series approaches, making now a reasonable time to buy if you need a card today. If local LLM inference is your primary use case and you're not in a hurry, waiting for next-gen is a defensible strategy.</p>
+<hr />
+<p><em>Prices and availability change frequently. Always verify current pricing before purchasing. Benchmark figures represent community-reported ranges and may vary based on your specific system configuration, quantization method, and inference framework version.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

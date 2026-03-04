@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best LLM for Coding Locally in 2026: Real Benchmarks, Hardware Pairings, and No-BS Recommendations</title>
+<meta name="description" content="TL;DR">
+<link rel="canonical" href="https://llmpicker.blog/posts/best-llm-for-coding-locally/">
+<meta property="og:title" content="Best LLM for Coding Locally in 2026: Real Benchmarks, Hardware Pairings, and No-BS Recommendations">
+<meta property="og:description" content="TL;DR">
+<meta property="og:url" content="https://llmpicker.blog/posts/best-llm-for-coding-locally/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="best-llm-for-coding-locally-in-2026-real-benchmarks-hardware-pairings-and-no-bs-recommendations">Best LLM for Coding Locally in 2026: Real Benchmarks, Hardware Pairings, and No-BS Recommendations</h1>
+<p><strong>TL;DR</strong><br />
+- <strong>DeepSeek Coder V2 (16B)</strong> is the best all-around pick for most developers — 83% HumanEval, 120 tokens/sec, fits on a 12GB GPU<br />
+- <strong>Qwen3-Coder-480B</strong> dominates enterprise agentic workflows with 92% SWE-Bench and 1M+ token context, but needs serious hardware<br />
+- <strong>StarCoder2-7B</strong> is the budget champion — runs on 4GB VRAM and supports 600+ programming languages<br />
+- Local deployment in 2026 is genuinely competitive with cloud models for most coding tasks, especially with MoE architectures cutting VRAM requirements dramatically</p>
+<hr />
+<p>Running a coding LLM locally used to mean painful compromises: slow inference, mediocre completions, and a GPU bill that made cloud APIs look cheap. That's no longer true. The 2026 model landscape — driven by Mixture-of-Experts architectures and aggressive quantization — means you can run genuinely capable coding assistants on hardware you already own.</p>
+<p>This guide cuts through the noise. You'll get real benchmark numbers, honest hardware requirements, and specific recommendations based on your budget and use case.</p>
+<hr />
+<h2 id="why-run-a-coding-llm-locally-in-2026">Why Run a Coding LLM Locally in 2026?</h2>
+<p>The case for local deployment has gotten stronger, not weaker, as cloud models have improved. Here's why developers are still choosing local:</p>
+<p><strong>Privacy is non-negotiable for proprietary code.</strong> Sending your company's internal codebase to a third-party API is a compliance nightmare in most enterprise environments. Local inference means your code never leaves your machine.</p>
+<p><strong>Latency is genuinely better.</strong> CodeLlama 34B running on an RTX 4090 delivers around 40ms per token. That's fast enough to feel responsive in an IDE autocomplete loop. Cloud models introduce network round-trips that add up during long coding sessions.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p><strong>Custom fine-tuning is actually usable now.</strong> StarCoder2's GitHub integration and LoRA fine-tuning support mean you can adapt a model to your specific codebase, internal APIs, or coding style. You can't do that with a locked API.</p>
+<p><strong>Cost at scale.</strong> If you're running inference 8+ hours a day, the amortized cost of a one-time GPU purchase beats monthly API bills within 6-12 months for most developers.</p>
+<hr />
+<h2 id="how-to-actually-evaluate-a-coding-llm">How to Actually Evaluate a Coding LLM</h2>
+<p>Before diving into model recommendations, you need to understand what the benchmarks actually measure — because not all of them are equally useful for day-to-day coding work.</p>
+<h3 id="the-benchmarks-that-matter">The Benchmarks That Matter</h3>
+<p><strong>SWE-Bench</strong> is the gold standard for real-world coding tasks. It tests models on actual GitHub issues from popular open-source projects — writing patches, fixing bugs, navigating multi-file codebases. A high SWE-Bench score means the model can handle the messy, contextual work that real development involves.</p>
+<p><strong>HumanEval</strong> measures Python function completion from docstrings. It's useful but limited — it's essentially a single-file, single-function test. Good for baseline comparisons, not a complete picture.</p>
+<p><strong>LiveCodeBench</strong> covers multi-language performance across competitive programming problems. If you work in Go, Rust, or TypeScript rather than Python, this is more relevant than HumanEval.</p>
+<h3 id="ide-integration-matters-as-much-as-raw-performance">IDE Integration Matters as Much as Raw Performance</h3>
+<p>A model that scores 90% on benchmarks but has clunky tooling integration will feel worse in practice than an 80% model with smooth VS Code support. The main integration paths in 2026:</p>
+<ul>
+<li><strong>Ollama CLI</strong>: The fastest local inference layer — benchmarks show 2.4x faster throughput than LM Studio for the same models</li>
+<li><strong>Continue.dev</strong>: Native DeepSeek Coder support, works seamlessly in VS Code</li>
+<li><strong>Tabby</strong>: Optimized specifically for StarCoder2, good for teams wanting a self-hosted completion server</li>
+<li><strong>Aider</strong>: JetBrains integration, excellent for multi-file refactoring workflows</li>
+</ul>
+<hr />
+<h2 id="the-top-5-local-coding-llms-in-2026">The Top 5 Local Coding LLMs in 2026</h2>
+<h3 id="1-deepseek-coder-v2-16b-best-all-around-pick">1. DeepSeek Coder V2 (16B) — Best All-Around Pick</h3>
+<p><strong>Benchmark scores</strong>: 83% HumanEval | <strong>Storage</strong>: ~9GB | <strong>Speed</strong>: 120 tokens/sec on RTX 4070 Ti</p>
+<p>DeepSeek Coder V2 hits the sweet spot that most developers actually need. It's fast enough for real-time autocomplete, accurate enough for complex multi-step coding tasks, and fits comfortably on mid-range hardware. The 16B parameter count is deceptive — this model punches well above its weight class thanks to its MoE architecture.</p>
+<p>The Continue.dev integration is particularly polished. You get inline completions, chat-based refactoring, and codebase-aware context without any manual configuration.</p>
+<p><strong>Best for</strong>: Full-stack developers, daily driver coding assistant, teams on 12-16GB VRAM GPUs</p>
+<hr />
+<h3 id="2-qwen3-coder-480b-enterprise-agentic-workflows">2. Qwen3-Coder-480B — Enterprise Agentic Workflows</h3>
+<p><strong>Benchmark scores</strong>: 92% SWE-Bench | <strong>Context</strong>: 1M+ tokens | <strong>Active parameters</strong>: 35B (MoE)</p>
+<p>The headline number here is 92% SWE-Bench — that's competitive with the best cloud models available. The 480B total parameter count sounds terrifying, but the MoE architecture means only 35B parameters are active during inference. With proper quantization, you can run this on a dual RTX 4090 setup (48GB pooled VRAM).</p>
+<p>The 1M+ token context window is genuinely transformative for large codebases. You can load an entire monorepo into context and ask the model to trace a bug across dozens of files. That's not a party trick — it changes how you approach complex debugging sessions.</p>
+<p>The Apache 2.0 license makes it commercially viable without legal headaches.</p>
+<p><strong>Best for</strong>: Enterprise teams, agentic coding pipelines, large codebase navigation, anyone with ≥24GB VRAM</p>
+<hr />
+<h3 id="3-starcoder2-7b-best-budget-option">3. StarCoder2-7B — Best Budget Option</h3>
+<p><strong>Benchmark scores</strong>: 48.3% multi-language benchmarks | <strong>VRAM</strong>: 4-5GB | <strong>Languages</strong>: 600+</p>
+<p>Don't let the benchmark score fool you into dismissing this one. StarCoder2-7B runs on a 4GB GPU — including older cards like the RTX 3060 — and supports over 600 programming languages. For developers working in niche languages or on older hardware, nothing else comes close.</p><a href="https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The GitHub integration for fine-tuning is a standout feature. You can adapt StarCoder2 to your specific codebase with relatively modest compute requirements, which is something the larger models make much harder.</p>
+<p>Tabby server deployment makes it easy to run StarCoder2 as a team-shared completion endpoint, which is a cost-effective setup for small engineering teams.</p>
+<p><strong>Best for</strong>: Budget builds, multi-language projects, teams wanting a self-hosted completion server, fine-tuning on custom codebases</p>
+<hr />
+<h3 id="4-codellama-34b-python-specialist">4. CodeLlama-34B — Python Specialist</h3>
+<p>CodeLlama-34B remains the Reddit consensus pick for pure Python work, and the community consensus is earned. It's been around long enough to have excellent tooling support, extensive community fine-tunes, and well-documented deployment patterns.</p>
+<p>It's not the most efficient model at 13-24GB VRAM depending on quantization, and it doesn't match DeepSeek Coder V2 on raw benchmarks. But for Python-heavy workflows — data science, Django backends, ML pipelines — the model's training data distribution gives it an edge in domain-specific completions that benchmarks don't fully capture.</p>
+<p><strong>Best for</strong>: Python-first developers, data scientists, well-documented deployment requirements</p>
+<hr />
+<h3 id="5-glm-47-thinking-mit-licensed-commercial-alternative">5. GLM-4.7 Thinking — MIT-Licensed Commercial Alternative</h3>
+<p><strong>Benchmark scores</strong>: 89% LiveCodeBench | <strong>License</strong>: MIT</p>
+<p>GLM-4.7 Thinking's 89% LiveCodeBench score is impressive, and the MIT license makes it the most permissive option on this list for commercial deployment. If you're building a product on top of a local coding LLM and want zero licensing ambiguity, GLM-4.7 is worth serious consideration.</p>
+<p>The "Thinking" variant includes chain-of-thought reasoning that's particularly useful for algorithmic problems and debugging complex logic. It requires ≥24GB VRAM for comfortable inference, which limits its accessibility, but on high-end hardware it's a genuine Qwen3 alternative.</p>
+<p><strong>Best for</strong>: Commercial product development, algorithm-heavy work, teams prioritizing open licensing</p>
+<hr />
+<h2 id="hardware-guide-what-you-actually-need">Hardware Guide: What You Actually Need</h2>
+<h3 id="budget-build-10001500-starcoder2-7b-territory">Budget Build (€1,000–1,500): StarCoder2-7B Territory</h3>
+<ul>
+<li><strong>GPU</strong>: RTX 3060 12GB or RTX 4060 8GB</li>
+<li><strong>RAM</strong>: 32GB DDR4</li>
+<li><strong>Storage</strong>: 1TB NVMe SSD</li>
+<li><strong>Best models</strong>: StarCoder2-7B, Qwen2.5-7B</li>
+</ul>
+<p>The RTX 3060 12GB is the value play here — more VRAM than the 4060 at a lower price point. You won't be running cutting-edge models, but StarCoder2-7B at this tier is genuinely useful for day-to-day coding assistance.</p>
+<hr />
+<h3 id="prosumer-build-25003000-deepseek-coder-v2-sweet-spot">Prosumer Build (€2,500–3,000): DeepSeek Coder V2 Sweet Spot</h3>
+<ul>
+<li><strong>GPU</strong>: RTX 4070 Ti Super (16GB)</li>
+<li><strong>CPU</strong>: Ryzen 9 7900X (PCIe 5.0 lanes matter for bandwidth)</li>
+<li><strong>RAM</strong>: 64GB DDR5</li>
+<li><strong>Storage</strong>: 2TB NVMe</li>
+<li><strong>Best models</strong>: DeepSeek Coder V2, CodeLlama-34B (4-bit), Qwen3-14B</li>
+</ul>
+<p>This is the build most professional developers should target. The RTX 4070 Ti Super hits the 16GB VRAM threshold that unlocks DeepSeek Coder V2 at full precision and CodeLlama-34B in 4-bit quantization. The Ryzen 9 7900X's PCIe 5.0 support reduces the CPU-GPU memory transfer bottleneck that kills inference speed on older platforms.</p>
+<hr />
+<h3 id="enterprise-build-6000-qwen3-coder-480b-capable">Enterprise Build (€6,000+): Qwen3-Coder-480B Capable</h3>
+<ul>
+<li><strong>GPU</strong>: Dual RTX 4090 (48GB pooled VRAM)</li>
+<li><strong>Storage</strong>: RAID 0 SSD array (8TB+) for model weight storage</li>
+<li><strong>Cooling</strong>: Custom loop — dual 4090s under sustained inference load generate serious heat</li>
+<li><strong>Best models</strong>: Qwen3-Coder-480B, GLM-4.7 Thinking, GPT-OSS-120B (4-bit)</li>
+</ul>
+<p>Dual RTX 4090 setups require careful motherboard selection for proper PCIe lane allocation and a case with serious airflow. The 48GB pooled VRAM unlocks the full range of 2026's best local models. For teams running 24/7 inference, the custom cooling loop isn't optional — it's the difference between stable operation and thermal throttling.</p>
+<hr />
+<h2 id="setting-up-your-local-coding-stack">Setting Up Your Local Coding Stack</h2>
+<h3 id="ollama-is-the-right-starting-point">Ollama Is the Right Starting Point</h3>
+<p>Ollama CLI is the fastest path from zero to running inference. It handles model downloads, quantization selection, and API serving with minimal configuration. Benchmarks show it running 2.4x faster than LM Studio for equivalent models — that gap matters when you're doing real-time autocomplete.</p>
+<pre><code class="language-bash">ollama pull deepseek-coder-v2:16b
+ollama serve
+</code></pre>
+<p>That's genuinely the entire setup for DeepSeek Coder V2. Continue.dev in VS Code picks up the Ollama endpoint automatically.</p>
+<h3 id="quantization-the-practical-guide">Quantization: The Practical Guide</h3>
+<p>4-bit quantization (via AutoGPTQ or llama.cpp's GGUF format) is the standard approach for fitting larger models onto consumer GPUs. The performance cost is real but manageable:</p>
+<ul>
+<li><strong>Q4_K_M</strong>: Best quality-to-size ratio for most models, ~15-20% performance reduction vs FP16</li>
+<li><strong>Q5_K_M</strong>: Better quality, ~10% larger than Q4, worth it if you have headroom</li>
+<li><strong>Q8_0</strong>: Near-lossless, only viable if you have abundant VRAM</li>
+</ul>
+<p>For DeepSeek Coder V2 on a 12GB GPU, Q4_K_M is the right call. You get the model running with acceptable quality loss.</p>
+<hr />
+<h2 id="whats-coming-in-2027">What's Coming in 2027</h2>
+<p>A few trends worth tracking if you're making hardware purchasing decisions now:</p>
+<p><strong>MoE architectures will dominate.</strong> Kimi-K2's 1T parameter MoE model demonstrates where this is heading — massive total parameter counts with manageable active parameter loads. The Qwen3-480B pattern (35B active from 480B total) will become standard.</p>
+<p><strong>Context windows are getting absurd.</strong> Qwen3-235B already supports 1M+ tokens. 4M+ token context for full codebase loading is a realistic near-term target. This will require fast NVMe storage as a memory tier, not just VRAM.</p>
+<p><strong>FP4 quantization is maturing.</strong> Current 4-bit quantization involves real quality tradeoffs. FP4 formats with better numerical properties are showing near-lossless compression in research settings. When this hits production tooling, it will meaningfully expand what's runnable on consumer hardware.</p>
+<hr />
+<h2 id="bottom-line-what-should-you-actually-buy">Bottom Line: What Should You Actually Buy?</h2>
+<p><strong>If you have a 12-16GB GPU right now</strong>: Install Ollama, pull DeepSeek Coder V2 16B, set up Continue.dev in VS Code. You'll have a genuinely capable coding assistant running locally within an hour. This is the recommendation for the majority of developers reading this.</p>
+<p><strong>If you're building a new workstation</strong>: Target the RTX 4070 Ti Super (16GB) at the €2,500-3,000 price point. It's the minimum spec for running the best mid-range models without quantization compromises, and it has a realistic upgrade path.</p>
+<p><strong>If you're on a tight budget</strong>: RTX 3060 12GB + StarCoder2-7B is a legitimate setup. The benchmark scores look modest, but the model is fast, supports your language stack, and runs on hardware that costs under €400.</p>
+<p><strong>If you're evaluating enterprise deployment</strong>: Qwen3-Coder-480B on dual RTX 4090s is the current ceiling for local inference quality. The 92% SWE-Bench score means you're not making meaningful compromises versus cloud models for most coding tasks — and your code stays on-premises.</p>
+<p>The local LLM for coding story in 2026 is genuinely good. Pick the model that fits your VRAM, set up Ollama, and stop paying per token.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

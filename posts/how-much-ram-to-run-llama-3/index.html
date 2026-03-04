@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much RAM Do You Need to Run Llama 3?</title>
+<meta name="description" content="TL;DR">
+<link rel="canonical" href="https://llmpicker.blog/posts/how-much-ram-to-run-llama-3/">
+<meta property="og:title" content="How Much RAM Do You Need to Run Llama 3?">
+<meta property="og:description" content="TL;DR">
+<meta property="og:url" content="https://llmpicker.blog/posts/how-much-ram-to-run-llama-3/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="how-much-ram-do-you-need-to-run-llama-3">How Much RAM Do You Need to Run Llama 3?</h1>
+<p><strong>TL;DR</strong><br />
+- Llama 3 8B needs ~16GB RAM for CPU inference or a 12GB GPU with Q4 quantization<br />
+- Llama 3 70B requires 64GB+ RAM or dual RTX 3090s (48GB VRAM) for quantized GPU inference<br />
+- Llama 3 405B is enterprise territory — budget 256GB RAM or 8x H100s<br />
+- Q4 quantization cuts memory requirements by ~70% with only a modest quality tradeoff — use it</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<p>Running Llama 3 locally is genuinely exciting. Meta's open-weight models punch well above their weight class, and with the right hardware, you can run a capable AI assistant entirely offline. But "right hardware" is doing a lot of work in that sentence.</p>
+<p>The RAM and VRAM requirements for Llama 3 vary wildly depending on which model variant you're targeting and how you plan to run it. Get this wrong and you'll either be waiting 45 seconds per response or watching your system crash entirely.</p>
+<p>This guide gives you the exact numbers you need, no hand-waving.</p>
+<hr />
+<h2 id="the-memory-math-behind-llms">The Memory Math Behind LLMs</h2>
+<p>Before jumping into specific configurations, you need to understand <em>why</em> these models eat so much memory. It's not magic — it's arithmetic.</p>
+<p>Every parameter in a language model needs to be stored in memory during inference. The amount of space each parameter takes depends on numerical precision:</p>
+<ul>
+<li><strong>FP32 (full precision):</strong> 4 bytes per parameter</li>
+<li><strong>FP16/BF16 (half precision):</strong> 2 bytes per parameter</li>
+<li><strong>Q4 quantization:</strong> ~0.5 bytes per parameter</li>
+</ul>
+<p>So for Llama 3 8B at BF16 precision: 8 billion × 2 bytes = <strong>16GB just for weights</strong>. Add ~20% overhead for activations and the KV cache, and you're looking at 18-19GB minimum.</p>
+<p>That's the formula: <code>Parameters × Bytes per weight × 1.2 ≈ Minimum memory needed</code></p>
+<p><strong>VRAM vs. RAM: Why It Matters</strong></p>
+<p>GPU VRAM and system RAM are not interchangeable. VRAM is fast — an RTX 4090 has ~1TB/s of memory bandwidth. System DDR5 RAM tops out around 50-100GB/s. Running a model on CPU with system RAM instead of GPU VRAM means you're trading speed for accessibility. You'll get functional inference, but "functional" might mean 2-5 tokens per second instead of 40+.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>For serious use, GPU VRAM is the goal. System RAM is the fallback.</p>
+<hr />
+<h2 id="llama-3-8b-the-sweet-spot-for-most-people">Llama 3 8B: The Sweet Spot for Most People</h2>
+<p>The 8B model is where most local AI enthusiasts should start. It's capable, reasonably fast, and actually fits on consumer hardware.</p>
+<h3 id="gpu-requirements-8b">GPU Requirements (8B)</h3>
+<table>
+<thead>
+<tr>
+<th>Precision</th>
+<th>VRAM Needed</th>
+<th>Minimum GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BF16</td>
+<td>15-16GB</td>
+<td>RTX 4080 (16GB)</td>
+</tr>
+<tr>
+<td>Q4_K_M</td>
+<td>5-6GB</td>
+<td>RTX 3060 (12GB)</td>
+</tr>
+<tr>
+<td>Q6_K</td>
+<td>~7GB</td>
+<td>RTX 3060 (12GB)</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>Q4_K_M quantized version</strong> is the practical choice for most people. At 5-6GB VRAM, it runs comfortably on an RTX 3060 12GB or RTX 4070 12GB. On an RTX 4070 SUPER with 16GB, you're looking at <strong>40+ tokens per second</strong> — fast enough that it genuinely feels like a real-time conversation.</p><a href="https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>If you have an RTX 4080 or 4090 and want maximum quality, run BF16. The difference in output quality is noticeable, especially for complex reasoning tasks.</p>
+<h3 id="cpuram-requirements-8b">CPU/RAM Requirements (8B)</h3>
+<p>If you're going CPU-only with llama.cpp:</p>
+<ul>
+<li><strong>Minimum:</strong> 16GB RAM (tight, expect slowdowns)</li>
+<li><strong>Recommended:</strong> 32GB RAM</li>
+<li><strong>Performance:</strong> Expect 5-15 tokens/sec on a modern CPU like Ryzen 9 7950X</li>
+</ul>
+<p>It works. It's not fast. For casual use or overnight batch processing, it's a legitimate option. For interactive chat, it gets frustrating quickly.</p>
+<hr />
+<h2 id="llama-3-70b-where-things-get-serious">Llama 3 70B: Where Things Get Serious</h2>
+<p>The 70B model is a different beast. At BF16, you need <strong>140GB+ of VRAM</strong> — that's multiple A100s or H100s. For most people, that means quantization is not optional, it's mandatory.</p>
+<h3 id="gpu-requirements-70b">GPU Requirements (70B)</h3>
+<table>
+<thead>
+<tr>
+<th>Precision</th>
+<th>VRAM Needed</th>
+<th>Hardware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BF16</td>
+<td>140GB+</td>
+<td>2x A100 80GB minimum</td>
+</tr>
+<tr>
+<td>Q4_K_M</td>
+<td>35-40GB</td>
+<td>2x RTX 3090 (48GB total)</td>
+</tr>
+<tr>
+<td>Q6_K</td>
+<td>~55GB</td>
+<td>3x RTX 3090 or 2x RTX 6000 Ada</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>dual RTX 3090 setup</strong> is the community-tested sweet spot for 70B Q4. Two used RTX 3090s will run you around $1,600 total, giving you 48GB of combined VRAM. You'll get roughly <strong>8 tokens per second</strong> on Q4_K_M — slower than the 8B, but the output quality jump is substantial for complex tasks.</p>
+<p>Multi-GPU inference requires some setup (llama.cpp handles tensor parallelism reasonably well), but it's not rocket science.</p>
+<h3 id="ram-requirements-70b">RAM Requirements (70B)</h3>
+<p>For CPU offloading or pure CPU inference:</p>
+<ul>
+<li><strong>Minimum:</strong> 64GB RAM</li>
+<li><strong>Recommended:</strong> 128GB RAM for comfortable operation</li>
+<li><strong>Performance:</strong> 1-3 tokens/sec on CPU-only — technically functional, practically painful</li>
+</ul>
+<p>If you're doing CPU-only 70B inference, you need DDR5 RAM. DDR4's lower bandwidth makes an already slow process noticeably worse. This isn't a recommendation to run 70B on CPU — it's a warning that if you must, at least use fast RAM.</p>
+<hr />
+<h2 id="llama-3-405b-enterprise-hardware-only">Llama 3 405B: Enterprise Hardware Only</h2>
+<p>Let's be direct: <strong>Llama 3 405B is not a consumer model.</strong> The numbers don't lie.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BF16 GPU</td>
+<td>~800GB VRAM (8x H100 80GB)</td>
+</tr>
+<tr>
+<td>Q4 GPU</td>
+<td>~200GB VRAM (3-4x A100 80GB)</td>
+</tr>
+<tr>
+<td>CPU RAM</td>
+<td>256GB+ DDR5</td>
+</tr>
+</tbody>
+</table>
+<p>Unless you're running a research lab or a well-funded startup, this model isn't for your home setup. If you're curious about 405B-class performance without the hardware, use the API. For everyone else, 70B Q4 gets you 80% of the capability at a fraction of the cost.</p>
+<hr />
+<h2 id="quantization-your-best-friend-for-local-inference">Quantization: Your Best Friend for Local Inference</h2>
+<p>Quantization is the technique that makes local LLM inference practical. It reduces the precision of model weights, shrinking memory requirements dramatically.</p>
+<h3 id="the-main-quantization-formats">The Main Quantization Formats</h3>
+<p><strong>Q4_K_M</strong> — This is the one you want for most use cases. It reduces the 70B model from 140GB to ~35GB, a 75% reduction. The quality loss is real but modest — roughly 10-15% degradation on benchmarks, and often imperceptible in everyday use.</p>
+<p><strong>Q6_K</strong> — Higher quality, higher memory. Good choice if you have the VRAM headroom and want to minimize quality loss. The 8B Q6_K fits in 7GB, making it viable on a 12GB GPU with room to spare.</p>
+<p><strong>Q2_K</strong> — Extreme compression. Memory requirements drop dramatically, but quality takes a serious hit. Only worth considering if you're severely memory-constrained and understand the tradeoffs.</p>
+<p><strong>Q8_0</strong> — Near-lossless quantization. Requires almost as much memory as BF16 but is faster than FP16 on some hardware. Niche use case.</p>
+<h3 id="tools-for-running-quantized-models">Tools for Running Quantized Models</h3>
+<ul>
+<li><strong>llama.cpp</strong> — The workhorse. Runs on CPU and GPU, supports all major quantization formats, actively maintained. Start here.</li>
+<li><strong>Ollama</strong> — Wraps llama.cpp in a cleaner interface. Great for getting started quickly, less flexibility for advanced configs.</li>
+<li><strong>GPTQ</strong> — GPU-optimized quantization, integrates well with Hugging Face transformers.</li>
+<li><strong>AWQ</strong> — Activation-aware quantization, generally produces better quality than GPTQ at the same bit width.</li>
+</ul>
+<p>For most people: download a Q4_K_M GGUF from Hugging Face, run it with Ollama or llama.cpp, done.</p>
+<hr />
+<h2 id="hardware-configurations-by-budget">Hardware Configurations by Budget</h2>
+<h3 id="budget-build-under-1000">Budget Build: Under $1,000</h3>
+<p><strong>Target:</strong> Llama 3 8B Q4_K_M at 40+ tokens/sec</p>
+<ul>
+<li><strong>GPU:</strong> RTX 4060 Ti 16GB (~$450)</li>
+<li><strong>RAM:</strong> 32GB DDR5 (~$100)</li>
+<li><strong>Why it works:</strong> 16GB VRAM handles 8B Q4 with room for context, DDR5 keeps CPU offloading viable</li>
+</ul>
+<p>This is the minimum setup where local inference actually feels good. The 16GB variant of the 4060 Ti is specifically worth the premium over the 8GB version — that extra VRAM headroom matters.</p>
+<h3 id="mid-range-build-2000">Mid-Range Build: ~$2,000</h3>
+<p><strong>Target:</strong> Llama 3 8B BF16 or 70B Q4_K_M</p>
+<ul>
+<li><strong>GPU:</strong> RTX 3090 24GB (~$800 used) or RTX 4070 SUPER 16GB (~$600 new)</li>
+<li><strong>RAM:</strong> 64GB DDR5 (~$180)</li>
+<li><strong>Why it works:</strong> 24GB VRAM handles 8B at full precision comfortably; 64GB RAM enables CPU offloading for 70B</li>
+</ul>
+<p>The RTX 3090 remains one of the best value propositions in the used GPU market specifically because of its 24GB VRAM. For local LLM work, VRAM capacity matters more than raw compute.</p>
+<h3 id="high-end-build-10000">High-End Build: $10,000+</h3>
+<p><strong>Target:</strong> Llama 3 70B Q4 or Q6 with fast inference</p>
+<ul>
+<li><strong>GPUs:</strong> 2x RTX 6000 Ada (48GB VRAM each, 96GB total) or 2x A6000 Ada</li>
+<li><strong>RAM:</strong> 256GB DDR5 ECC</li>
+<li><strong>CPU:</strong> Threadripper PRO 7000 series</li>
+<li><strong>Why it works:</strong> 96GB combined VRAM runs 70B at Q6 quality with headroom; Threadripper PRO supports massive RAM configs</li>
+</ul>
+<p>At this level, you're looking at professional workstation territory. The dual RTX 6000 Ada setup delivers ~8 tokens/sec on 70B Q4 with significantly better sustained performance than consumer GPUs under load.</p>
+<hr />
+<h2 id="optimization-techniques-worth-knowing">Optimization Techniques Worth Knowing</h2>
+<h3 id="layer-offloading">Layer Offloading</h3>
+<p>When your model doesn't quite fit in VRAM, you can offload some transformer layers to system RAM. llama.cpp's <code>--n-gpu-layers</code> flag controls this. Offloading 30 of 32 layers to GPU while keeping 2 in RAM is much faster than full CPU inference.</p>
+<p>Experiment with this flag to find the maximum layers your VRAM can handle — you'll often find a sweet spot that's 80% as fast as full GPU inference at a fraction of the VRAM requirement.</p>
+<h3 id="flashattention-3">FlashAttention-3</h3>
+<p>If your GPU supports it (RTX 40-series, A100, H100), enabling FlashAttention-3 can boost throughput by ~30% and reduce VRAM usage during inference. In llama.cpp, this is enabled with <code>--flash-attn</code>. It's a free performance upgrade — always enable it if your hardware supports it.</p>
+<h3 id="context-length-and-memory">Context Length and Memory</h3>
+<p>Longer context windows eat more memory. A 128K context window requires significantly more VRAM than 4K. If you're running tight on memory, reducing your context length (<code>--ctx-size</code> in llama.cpp) is an easy way to free up headroom. For most chat use cases, 8K-16K context is plenty.</p>
+<h3 id="docker-memory-limits">Docker Memory Limits</h3>
+<p>If you're running multiple models or hosting Ollama as a service, set explicit memory limits in Docker to prevent any single model from consuming all available resources. This is especially important on shared machines or when running inference alongside other workloads.</p>
+<hr />
+<h2 id="quick-reference-llama-3-memory-requirements">Quick Reference: Llama 3 Memory Requirements</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>BF16 VRAM</th>
+<th>Q4 VRAM</th>
+<th>CPU RAM (Q4)</th>
+<th>Min GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8B</td>
+<td>15-16GB</td>
+<td>5-6GB</td>
+<td>16GB</td>
+<td>RTX 3060 12GB</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>140GB+</td>
+<td>35-40GB</td>
+<td>64GB</td>
+<td>2x RTX 3090</td>
+</tr>
+<tr>
+<td>405B</td>
+<td>~800GB</td>
+<td>~200GB</td>
+<td>256GB+</td>
+<td>8x H100</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="bottom-line">Bottom Line</h2>
+<p><strong>For 95% of people, the answer is Llama 3 8B Q4_K_M.</strong></p>
+<p>It runs on a $450 GPU, delivers 40+ tokens/sec, and handles the vast majority of tasks you'd throw at a local LLM — coding assistance, writing, summarization, Q&amp;A. The quality difference between 8B Q4 and 70B is real, but it's not the difference between useful and useless.</p>
+<p>If you specifically need 70B capability — complex multi-step reasoning, nuanced analysis, tasks where 8B consistently falls short — budget for two used RTX 3090s and 64GB of DDR5. That's the cheapest path to 70B Q4 inference that actually works.</p>
+<p><strong>Avoid these mistakes:</strong><br />
+- Buying a GPU with less than 12GB VRAM for any Llama 3 work<br />
+- Running 70B on CPU-only unless you have extreme patience and DDR5<br />
+- Chasing BF16 precision when Q4_K_M gets you 85-90% of the quality at a fraction of the memory cost</p>
+<p>The local LLM ecosystem has matured to the point where this stuff actually works well. Pick the right model size for your hardware, use Q4_K_M quantization, and run it through Ollama or llama.cpp. You'll have a capable local AI assistant running in an afternoon.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

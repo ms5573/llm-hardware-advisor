@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB for Local LLMs: Which One Should You Buy?</title>
+<meta name="description" content="If you&#x27;re serious about running local LLMs on Apple Silicon, the memory configuration you choose today will define what models you can run for the next three to">
+<link rel="canonical" href="https://llmpicker.blog/posts/macbook-air-m5-32-vs-macbook-pro-m5-pro-64-llm/">
+<meta property="og:title" content="MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB for Local LLMs: Which One Should You Buy?">
+<meta property="og:description" content="If you&#x27;re serious about running local LLMs on Apple Silicon, the memory configuration you choose today will define what models you can run for the next three to">
+<meta property="og:url" content="https://llmpicker.blog/posts/macbook-air-m5-32-vs-macbook-pro-m5-pro-64-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="macbook-air-m5-32gb-vs-macbook-pro-m5-pro-64gb-for-local-llms-which-one-should-you-buy">MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB for Local LLMs: Which One Should You Buy?</h1>
+<p>If you're serious about running local LLMs on Apple Silicon, the memory configuration you choose today will define what models you can run for the next three to five years. The wrong choice means hitting a wall at 13B parameters. The right choice means running Llama 3 70B at usable speeds without breaking a sweat.</p>
+<p>This post cuts through the marketing noise and gives you a direct, data-driven answer to one of the most common questions in the local AI community right now: <strong>MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB for local LLMs</strong> — which machine actually deserves your money?</p><a href="https://www.apple.com/macbook-pro/" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>We'll cover raw specs, real-world token generation speeds, model compatibility at every quantization level, price-to-value math, and a clear verdict. No fluff. Let's get into it.</p>
+<hr />
+<h2 id="key-specs-side-by-side">Key Specs Side-by-Side</h2>
+<p>Before we talk performance, here's what you're actually comparing under the hood:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>MacBook Air M5 32GB</strong></th>
+<th><strong>MacBook Pro M5 Pro 64GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chip</strong></td>
+<td>Apple M5</td>
+<td>Apple M5 Pro</td>
+</tr>
+<tr>
+<td><strong>Unified Memory</strong></td>
+<td>32GB</td>
+<td>64GB</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>~100 GB/s</td>
+<td>~200 GB/s</td>
+</tr>
+<tr>
+<td><strong>CPU Cores</strong></td>
+<td>10-core</td>
+<td>14-core</td>
+</tr>
+<tr>
+<td><strong>GPU Cores</strong></td>
+<td>10-core</td>
+<td>20-core</td>
+</tr>
+<tr>
+<td><strong>Cooling</strong></td>
+<td>Passive (fanless)</td>
+<td>Active (fan-cooled)</td>
+</tr>
+<tr>
+<td><strong>TDP</strong></td>
+<td>~15W</td>
+<td>~30W+</td>
+</tr>
+<tr>
+<td><strong>Starting Price (USD)</strong></td>
+<td>~$2,100</td>
+<td>~$3,800+</td>
+</tr>
+<tr>
+<td><strong>Max Supported Model Size</strong></td>
+<td>~26GB (13B FP16)</td>
+<td>~60GB (30B FP16)</td>
+</tr>
+</tbody>
+</table>
+<p>The two numbers that matter most for local LLM inference are <strong>unified memory</strong> and <strong>memory bandwidth</strong>. The M5 Pro doubles both compared to the base M5. That's not a minor spec bump — it's a fundamentally different inference experience, especially once you push past 13B parameters.</p>
+<p>The fanless design of the MacBook Air is elegant for everyday use, but it becomes a liability during sustained LLM inference sessions. The MacBook Pro's active cooling system means it can maintain peak performance for hours, not minutes.</p>
+<hr />
+<h2 id="performance-comparison-token-generation-speeds">Performance Comparison: Token Generation Speeds</h2>
+<p>Token generation speed (tokens per second, or tok/s) is the metric that determines whether a local LLM feels responsive or frustrating. Below are realistic estimates based on llama.cpp benchmarks using Q4_K_M quantization unless otherwise noted.</p>
+<h3 id="7b-models-eg-mistral-7b-llama-3-8b">7B Models (e.g., Mistral 7B, Llama 3 8B)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Air M5 32GB</strong></th>
+<th><strong>Pro M5 Pro 64GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tok/s</strong></td>
+<td>~45–50</td>
+<td>~55–60</td>
+</tr>
+<tr>
+<td><strong>Sustained?</strong></td>
+<td>No (throttles after 5–10 min)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Notes</strong></td>
+<td>Fine for short sessions</td>
+<td>Consistent across long sessions</td>
+</tr>
+</tbody>
+</table>
+<p>At 7B, both machines feel fast. The Air starts strong but thermal throttling kicks in during extended conversations or batch processing. The Pro maintains its peak speed indefinitely thanks to active cooling. For casual chatbot use, the Air is fine. For anything production-adjacent, the throttling becomes noticeable and annoying.</p>
+<h3 id="13b-models-eg-llama-3-13b-mistral-nemo">13B Models (e.g., Llama 3 13B, Mistral Nemo)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Air M5 32GB</strong></th>
+<th><strong>Pro M5 Pro 64GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tok/s (Q4)</strong></td>
+<td>~25–30</td>
+<td>~35–40</td>
+</tr>
+<tr>
+<td><strong>Tok/s (Q8)</strong></td>
+<td>Marginal (memory pressure)</td>
+<td>~28–32</td>
+</tr>
+<tr>
+<td><strong>FP16 Feasible?</strong></td>
+<td>Yes, barely (26GB, no multitasking)</td>
+<td>Yes, comfortably</td>
+</tr>
+<tr>
+<td><strong>Notes</strong></td>
+<td>Usable but constrained</td>
+<td>Smooth at all quantizations</td>
+</tr>
+</tbody>
+</table>
+<p>This is where the gap starts to open. The Air can run 13B models at Q4, but you're leaving memory headroom razor-thin. Running FP16 on a 13B model consumes roughly 26GB, which means macOS has almost no room for system processes. Expect slowdowns, spinning beach balls, and the occasional crash if you have anything else open.</p>
+<p>The Pro handles 13B at Q8 and FP16 without breaking a sweat, and the 2x memory bandwidth translates directly into faster token generation.</p>
+<h3 id="30b-models-eg-yi-34b-mixtral-8x7b">30B Models (e.g., Yi-34B, Mixtral 8x7B)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Air M5 32GB</strong></th>
+<th><strong>Pro M5 Pro 64GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tok/s (Q4)</strong></td>
+<td>~8–12 (with swapping)</td>
+<td>~20–25</td>
+</tr>
+<tr>
+<td><strong>Q8 Feasible?</strong></td>
+<td>No</td>
+<td>Yes (~30GB)</td>
+</tr>
+<tr>
+<td><strong>FP16 Feasible?</strong></td>
+<td>No</td>
+<td>Possible (~60GB, tight)</td>
+</tr>
+<tr>
+<td><strong>Notes</strong></td>
+<td>Frequent disk swapping, impractical</td>
+<td>Smooth at Q4/Q8</td>
+</tr>
+</tbody>
+</table>
+<p>At 30B, the Air essentially taps out. A Q4 quantized 30B model sits around 17–20GB, which technically fits in 32GB, but macOS needs memory too. You'll see constant memory pressure warnings and disk swapping that tanks performance to single-digit tok/s. It's technically possible, but practically miserable.</p>
+<p>The Pro runs 30B models at Q4 and Q8 with genuine headroom. This is the sweet spot for the 64GB configuration — you get high-quality outputs from large models at speeds that feel usable (20–25 tok/s is comfortable for interactive use).</p>
+<h3 id="70b-models-eg-llama-3-70b-qwen-72b">70B Models (e.g., Llama 3 70B, Qwen 72B)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Air M5 32GB</strong></th>
+<th><strong>Pro M5 Pro 64GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tok/s (Q4)</strong></td>
+<td>❌ Not feasible</td>
+<td>~8–12</td>
+</tr>
+<tr>
+<td><strong>Q8 Feasible?</strong></td>
+<td>❌ No</td>
+<td>No (exceeds 64GB)</td>
+</tr>
+<tr>
+<td><strong>Notes</strong></td>
+<td>Requires ≥35GB minimum</td>
+<td>Fits comfortably at Q4 (~35GB)</td>
+</tr>
+</tbody>
+</table>
+<p>70B models at Q4 quantization require approximately 35–40GB of memory. The Air simply cannot run them — full stop. The Pro handles Llama 3 70B Q4 with room to spare, and while 8–12 tok/s isn't blazing fast, it's entirely usable for research, long-form writing, and complex reasoning tasks where output quality matters more than raw speed.</p>
+<hr />
+<h2 id="model-compatibility-what-fits-at-what-quantization">Model Compatibility: What Fits at What Quantization</h2>
+<h3 id="macbook-air-m5-32gb">MacBook Air M5 32GB</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>Q2/Q3</strong></th>
+<th><strong>Q4</strong></th>
+<th><strong>Q8</strong></th>
+<th><strong>FP16</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+<td>✅ (14GB)</td>
+</tr>
+<tr>
+<td>13B</td>
+<td>✅</td>
+<td>✅</td>
+<td>⚠️ Tight</td>
+<td>⚠️ (26GB, no multitasking)</td>
+</tr>
+<tr>
+<td>30B</td>
+<td>⚠️ Marginal</td>
+<td>⚠️ Swapping</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>The Air is a capable machine for 7B and 13B models. Beyond that, you're fighting the hardware. The 32GB ceiling is a real constraint that no software optimization can fully overcome.</p>
+<h3 id="macbook-pro-m5-pro-64gb">MacBook Pro M5 Pro 64GB</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>Q4</strong></th>
+<th><strong>Q8</strong></th>
+<th><strong>FP16</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+</tr>
+<tr>
+<td>13B</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+<td>✅ Easy</td>
+</tr>
+<tr>
+<td>30B</td>
+<td>✅ Easy</td>
+<td>✅ (~30GB)</td>
+<td>⚠️ (~60GB, tight)</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>✅ (~35–40GB)</td>
+<td>❌ Exceeds memory</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>The Pro's 64GB configuration is genuinely versatile. You can run the full spectrum from tiny 1B models up to 70B Q4 without compromise. The only thing it can't do is run 70B at Q8 or FP16 — but that would require 128GB+ of unified memory, which currently means looking at Mac Studio or Mac Pro territory.</p><a href="https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p><strong>Recommended tools for running these models:</strong> <a href="https://ollama.com">Ollama</a> and llama.cpp are the go-to options. For a better GUI experience, check out <a href="https://lmstudio.ai">LM Studio</a>.</p>
+<hr />
+<h2 id="price-value-analysis">Price &amp; Value Analysis</h2>
+<p>Let's be honest about what you're actually paying for.</p>
+<p><strong>MacBook Air M5 32GB (~$2,100)</strong></p>
+<p>The base MacBook Air M5 starts around $1,299. Upgrading to 32GB adds approximately $400 to the price. For general use, that's a reasonable premium. For LLM work specifically, you're paying for a machine that handles 7B models excellently and 13B models adequately — but hits a hard wall at anything larger.</p>
+<p>If you're purely budget-constrained and know you'll only ever run 7B–13B models, the Air is a defensible choice. But "only ever" is a dangerous phrase in a field where model sizes and capabilities are evolving as fast as they are.</p>
+<p><strong>MacBook Pro M5 Pro 64GB (~$3,800+)</strong></p>
+<p>The base M5 Pro MacBook Pro starts around $2,000. The 64GB configuration adds roughly $1,200–$1,400 over the base model. That's a significant premium, but you're getting:</p>
+<ul>
+<li>2x the unified memory (32GB → 64GB)</li>
+<li>2x the memory bandwidth (~100 GB/s → ~200 GB/s)</li>
+<li>Active cooling that eliminates thermal throttling</li>
+<li>Access to 30B and 70B model classes</li>
+<li>Genuine future-proofing as model sizes continue to grow</li>
+</ul>
+<p>The value math here is straightforward: the Pro costs ~$1,700 more than the Air, but it runs models that the Air literally cannot execute. If 70B models are in your workflow — or will be in 12 months — the Air's lower price is a false economy.</p>
+<p><strong>The Honest Verdict on Value:</strong> The Pro M5 Pro 64GB wins on value for anyone doing serious LLM work. The Air wins only if your budget is genuinely fixed and you're certain 13B is your ceiling.</p>
+<hr />
+<h2 id="who-should-buy-which">Who Should Buy Which</h2>
+<h3 id="buy-the-macbook-air-m5-32gb-if">Buy the MacBook Air M5 32GB If:</h3>
+<ul>
+<li>Your budget is firm at ~$2,100 and cannot stretch further</li>
+<li>You primarily run 7B models (Mistral 7B, Llama 3 8B, Phi-3) for coding assistance or light chatbot use</li>
+<li>You use your machine for short inference sessions rather than extended multi-hour runs</li>
+<li>Portability and battery life are your top priorities</li>
+<li>You're new to local LLMs and want to experiment without a major financial commitment</li>
+</ul>
+<p>The Air is a genuinely excellent machine for casual local LLM use. Don't let anyone tell you it's bad — it's just limited. For a student, a hobbyist, or someone dipping their toes into the local AI space, it's a reasonable entry point.</p>
+<h3 id="buy-the-macbook-pro-m5-pro-64gb-if">Buy the MacBook Pro M5 Pro 64GB If:</h3>
+<ul>
+<li>You're a developer, researcher, or power user who needs 30B–70B model access</li>
+<li>You run long inference sessions (coding projects, document analysis, multi-turn research conversations)</li>
+<li>You multitask while running models (having other apps open alongside your LLM interface)</li>
+<li>You want to future-proof your investment as model sizes continue to scale</li>
+<li>You're building applications or pipelines that depend on consistent, sustained inference performance</li>
+<li>Output quality matters more than saving $1,700 upfront</li>
+</ul>
+<p>For anyone treating local LLM inference as a serious part of their workflow, the Pro is the correct answer. The 64GB configuration isn't just "more memory" — it's access to an entirely different tier of model capability.</p>
+<hr />
+<h2 id="verdict">Verdict</h2>
+<p><strong>Winner: MacBook Pro M5 Pro 64GB</strong></p>
+<p>There's no ambiguity here. The MacBook Pro M5 Pro 64GB is the superior machine for local LLM deployment by every meaningful metric: memory capacity, memory bandwidth, sustained performance, and model compatibility. The 2x memory bandwidth alone makes a measurable difference in token generation speed, and the active cooling system means that performance is consistent whether you're running a 5-minute query or a 5-hour batch job.</p>
+<p>The ability to run 70B models at Q4 quantization is a genuine differentiator. Llama 3 70B, Qwen 72B, and similar models represent the current frontier of what's achievable locally, and the Air simply cannot participate in that tier.</p>
+<p><strong>Runner-Up Use Case: MacBook Air M5 32GB</strong></p>
+<p>The Air isn't a bad machine — it's the wrong tool for serious LLM work. If your use case is genuinely limited to 7B–13B models, you value portability above all else, and you're budget-constrained, the Air delivers solid performance for its price. Just go in with clear eyes about what you're giving up.</p>
+<p><strong>Bottom line:</strong> If you're spending $2,100 on a machine specifically for local LLMs, you should seriously consider stretching to the Pro. The $1,700 difference buys you access to model classes that will define the next several years of local AI capability. Buy the Pro once, or buy the Air and wish you had.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q1: Can the MacBook Air M5 32GB run Llama 3 70B?</strong></p>
+<p>No. Llama 3 70B at Q4 quantization requires approximately 35–40GB of unified memory. The Air's 32GB is insufficient even before accounting for macOS system memory overhead. You need at least 48GB of unified memory to run 70B models practically, and 64GB to do so comfortably.</p>
+<p><strong>Q2: Does thermal throttling on the MacBook Air significantly impact LLM performance?</strong></p>
+<p>Yes, meaningfully so. The Air's passive cooling design means it begins throttling CPU and GPU performance after approximately 5–10 minutes of sustained inference load. For short queries, you won't notice. For extended sessions — long documents, multi-turn conversations, batch processing — you can see token generation speeds drop by 20–30% compared to initial performance. The Pro's active cooling eliminates this entirely.</p>
+<p><strong>Q3: Is 64GB of unified memory future-proof for local LLMs?</strong></p>
+<p>For the next 2–3 years, yes. 64GB comfortably handles the current generation of frontier local models (up to 70B Q4). As 100B+ parameter models become more accessible, you may eventually want more — but 64GB keeps you relevant through the near-term evolution of the space. The Air's 32GB is already showing its limits with current model sizes.</p>
+<p><strong>Q4: What software should I use to run local LLMs on Apple Silicon?</strong></p>
+<p><a href="https://ollama.com">Ollama</a> is the easiest entry point — it handles model downloads, quantization selection, and provides a simple API. <a href="https://lmstudio.ai">LM Studio</a> offers a polished GUI for non-technical users. For maximum performance and control, llama.cpp compiled natively for Apple Silicon gives you the best raw throughput. All three tools are optimized for Apple's Metal GPU acceleration and work well on both machines.</p>
+<p><strong>Q5: Should I consider the MacBook Pro M5 Pro 48GB instead of 64GB?</strong></p>
+<p>The 48GB configuration is a reasonable middle ground if it's available and priced appropriately. It handles 30B models comfortably and can technically run some 70B models at aggressive quantization (Q2/Q3), though with quality trade-offs. However, the price difference between 48GB and 64GB configurations is often small enough that the 64GB is worth the extra spend. Always check current Apple pricing — the gap between memory tiers shifts with promotions and education discounts.</p>
+<hr />
+<p><em>Prices and performance figures reflect estimates based on available M5-generation benchmarks and Apple Silicon memory architecture specifications. Actual tok/s will vary based on model architecture, quantization method, system load, and llama.cpp version. Always verify current pricing directly with Apple.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

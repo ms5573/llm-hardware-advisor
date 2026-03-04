@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX 4090 vs RX 7900 XTX for Local LLMs: Which GPU Actually Wins in 2024?</title>
+<meta name="description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The RTX 4090 vs RX 7900 XTX for local LLMs de">
+<link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-rx-7900-xtx-llm/">
+<meta property="og:title" content="RTX 4090 vs RX 7900 XTX for Local LLMs: Which GPU Actually Wins in 2024?">
+<meta property="og:description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The RTX 4090 vs RX 7900 XTX for local LLMs de">
+<meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-rx-7900-xtx-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="rtx-4090-vs-rx-7900-xtx-for-local-llms-which-gpu-actually-wins-in-2024">RTX 4090 vs RX 7900 XTX for Local LLMs: Which GPU Actually Wins in 2024?</h1>
+<p>If you're serious about running large language models locally, your GPU choice will make or break your experience. The <strong>RTX 4090 vs RX 7900 XTX for local LLMs</strong> debate comes down to one brutal tradeoff: raw performance and software maturity versus upfront cost savings. Both cards pack 24GB of VRAM, but that's where the similarities end.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>In this post, we cut through the marketing noise with real benchmark data, honest software ecosystem assessments, and a clear verdict on which card deserves your money. Whether you're running Llama 3, Mistral, or pushing 70B models to their limits, this guide tells you exactly what to expect from each GPU before you spend a single dollar.</p>
+<hr />
+<h2 id="side-by-side-specs-rtx-4090-vs-rx-7900-xtx">Side-by-Side Specs: RTX 4090 vs RX 7900 XTX</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Spec</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RX 7900 XTX</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VRAM</strong></td>
+<td>24GB GDDR6X</td>
+<td>24GB GDDR6</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>1,008 GB/s</td>
+<td>960 GB/s</td>
+</tr>
+<tr>
+<td><strong>TDP (Power Draw)</strong></td>
+<td>450W</td>
+<td>355W</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Ada Lovelace</td>
+<td>RDNA 3</td>
+</tr>
+<tr>
+<td><strong>AI Software Stack</strong></td>
+<td>CUDA + TensorRT-LLM</td>
+<td>ROCm (Linux-focused)</td>
+</tr>
+<tr>
+<td><strong>Street Price</strong></td>
+<td>$1,600–$2,000</td>
+<td>$900–$1,100</td>
+</tr>
+<tr>
+<td><strong>Windows LLM Support</strong></td>
+<td>Excellent</td>
+<td>Limited</td>
+</tr>
+<tr>
+<td><strong>Linux LLM Support</strong></td>
+<td>Excellent</td>
+<td>Good (with tuning)</td>
+</tr>
+</tbody>
+</table>
+<p>On paper, the specs look closer than you'd expect. The 4090's memory bandwidth edge is modest — roughly 5% faster than the 7900 XTX. But raw specs don't tell the full story. Software optimization is where the RTX 4090 pulls decisively ahead, and we'll show you exactly how much that matters in real inference workloads.</p>
+<blockquote>
+<p>🛒 <strong><a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20">Buy the RTX 4090 on Amazon</a></strong><br />
+🛒 <strong><a href="https://www.amazon.com/s?k=RX+7900+XTX&amp;tag=ms5573-20">Buy the RX 7900 XTX on Amazon</a></strong></p>
+</blockquote>
+<hr />
+<h2 id="performance-comparison-tokens-per-second-that-actually-matter">Performance Comparison: Tokens Per Second That Actually Matter</h2>
+<p>This is the section most comparison posts get wrong. They quote theoretical TFLOPS numbers that mean nothing for LLM inference. What matters is <strong>tokens per second</strong> on real models using real inference engines like llama.cpp and ExLlama2.</p>
+<h3 id="llama-2-llama-3-benchmarks-q4_k_m-quantization">Llama 2 / Llama 3 Benchmarks (Q4_K_M Quantization)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RX 7900 XTX</strong></th>
+<th><strong>4090 Advantage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>7B Q4_K_M</strong></td>
+<td>140–160 tok/s</td>
+<td>80–100 tok/s</td>
+<td>~60% faster</td>
+</tr>
+<tr>
+<td><strong>13B Q4_K_M</strong></td>
+<td>90–110 tok/s</td>
+<td>50–70 tok/s</td>
+<td>~57% faster</td>
+</tr>
+<tr>
+<td><strong>30B Q4_K_M</strong></td>
+<td>40–50 tok/s</td>
+<td>25–35 tok/s</td>
+<td>~47% faster</td>
+</tr>
+<tr>
+<td><strong>70B Q4_K_M</strong></td>
+<td>~15–20 tok/s*</td>
+<td>~10–14 tok/s*</td>
+<td>~35% faster</td>
+</tr>
+</tbody>
+</table>
+<p>*Both cards require CPU offloading for 70B at Q4 — performance drops sharply for both.</p>
+<h3 id="what-these-numbers-mean-in-practice">What These Numbers Mean in Practice</h3>
+<p>At <strong>7B models</strong>, the 4090 delivers a near-conversational experience at 140+ tokens per second. The 7900 XTX at 80–100 tok/s is still usable, but you'll notice the difference in rapid back-and-forth conversations or batch processing tasks.</p>
+<p>At <strong>13B models</strong> — arguably the sweet spot for quality-versus-speed — the 4090 stays comfortably above 90 tok/s. The 7900 XTX drops to 50–70 tok/s, which starts to feel sluggish for interactive use.</p>
+<p>The <strong>30B range</strong> is where the gap becomes painful for AMD users. The 4090 fits a 30B Q4_K_M model entirely in VRAM and runs it at 40–50 tok/s. The 7900 XTX often requires partial CPU offloading due to ROCm's less efficient memory management, dragging performance down to 25–35 tok/s.</p>
+<p><strong>Why is the gap so large given similar specs?</strong> Three reasons:</p>
+<ol>
+<li><strong>CUDA optimization</strong>: llama.cpp, ExLlama2, and vLLM have years of CUDA-specific tuning. ROCm support is functional but consistently lags behind.</li>
+<li><strong>Kernel-level efficiency</strong>: NVIDIA's tensor cores are more aggressively optimized for the matrix operations that dominate LLM inference.</li>
+<li><strong>Windows ROCm limitations</strong>: If you're on Windows, AMD's ROCm stack is significantly more limited. Many optimized inference paths simply aren't available outside Linux.</li>
+</ol>
+<hr />
+<h2 id="model-compatibility-what-actually-fits-in-24gb">Model Compatibility: What Actually Fits in 24GB</h2>
+<p>Both cards share the same 24GB VRAM ceiling, so maximum model capacity looks identical on paper. In practice, ROCm's overhead and mixed-precision handling create real differences.</p>
+<h3 id="maximum-model-size-by-quantization">Maximum Model Size by Quantization</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RX 7900 XTX</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16 (full precision)</strong></td>
+<td>13B</td>
+<td>13B</td>
+<td>Both max out at ~24GB</td>
+</tr>
+<tr>
+<td><strong>Q8 (8-bit)</strong></td>
+<td>30B (~21GB)</td>
+<td>30B (~21GB)*</td>
+<td>AMD has mixed-precision issues</td>
+</tr>
+<tr>
+<td><strong>Q5_K_M</strong></td>
+<td>40B+</td>
+<td>40B+</td>
+<td>Tight fit, context matters</td>
+</tr>
+<tr>
+<td><strong>Q4_K_M</strong></td>
+<td>70B (partial)</td>
+<td>70B (partial)</td>
+<td>CPU offload required for both</td>
+</tr>
+<tr>
+<td><strong>Q3_K_M</strong></td>
+<td>70B (full VRAM)</td>
+<td>70B (full VRAM)</td>
+<td>Quality degrades noticeably</td>
+</tr>
+</tbody>
+</table>
+<p>*The 7900 XTX technically fits 30B at Q8, but ROCm's weaker mixed-precision support means you'll often see slower speeds and occasional instability compared to the 4090 running the same workload.</p>
+<h3 id="the-70b-reality-check">The 70B Reality Check</h3>
+<p>Neither card runs 70B models fully in VRAM at Q4 quantization — you'll need approximately 35–40GB for that. Both cards will offload layers to system RAM, and performance tanks to 10–20 tok/s depending on your CPU and RAM speed. The 4090 handles this offloading roughly 20% more efficiently due to better PCIe bandwidth utilization and CUDA-optimized layer management.</p>
+<p>If 70B is your primary target, you're better off looking at dual-GPU setups or waiting for 48GB cards. For most users, <strong>30B at Q4 or Q5 is the practical sweet spot</strong> that both cards can handle — with the 4090 doing it faster and more reliably.</p>
+<h3 id="context-length-considerations">Context Length Considerations</h3>
+<p>Longer context windows eat VRAM fast. Running a 13B model at FP16 with a 32K context window will push you right to the 24GB limit on both cards. The 4090's more efficient CUDA memory management gives it slightly more headroom in edge cases, but this is a minor advantage for most users.</p>
+<hr />
+<h2 id="price-value-analysis-the-math-that-changes-everything">Price &amp; Value Analysis: The Math That Changes Everything</h2>
+<p>Let's be direct about the numbers.</p>
+<ul>
+<li><strong>RTX 4090</strong>: $1,600–$2,000 (average ~$1,800)</li>
+<li><strong>RX 7900 XTX</strong>: $900–$1,100 (average ~$1,000)</li>
+</ul>
+<p>The 7900 XTX costs roughly <strong>44–55% less</strong> than the 4090. That's a real, significant difference — $700–$900 that could buy you more RAM, a better CPU, or fast NVMe storage for model files.</p>
+<h3 id="cost-per-token-analysis">Cost-Per-Token Analysis</h3>
+<p>For heavy users running inference 4–8 hours daily, the math shifts toward the 4090:</p>
+<ul>
+<li>The 4090 generates roughly <strong>2x more tokens per hour</strong> across most model sizes</li>
+<li>If you value your time at even $20/hour, the 4090 pays back its premium in roughly 6–12 months of heavy use</li>
+<li>For developers building applications or running batch jobs, the throughput difference compounds quickly</li>
+</ul>
+<p>For <strong>casual users</strong> running inference an hour or two per day on 7B–13B models, the 7900 XTX's slower speeds are tolerable and the $700–$900 savings are hard to ignore.</p>
+<h3 id="the-hidden-costs-of-amd">The Hidden Costs of AMD</h3>
+<p>The 7900 XTX's sticker price understates its true cost for many users:</p>
+<ul>
+<li><strong>Time investment</strong>: Expect 5–15 hours getting ROCm properly configured, especially on Linux</li>
+<li><strong>Troubleshooting overhead</strong>: ROCm updates can break inference setups; CUDA rarely does</li>
+<li><strong>Windows limitations</strong>: If you're on Windows, many optimized inference tools simply won't work well with AMD</li>
+<li><strong>Opportunity cost</strong>: Every hour debugging ROCm is an hour not spent on actual projects</li>
+</ul>
+<p>These aren't dealbreakers for technically confident Linux users, but they're real costs that don't show up in the price tag.</p>
+<hr />
+<h2 id="who-should-buy-which-gpu">Who Should Buy Which GPU?</h2>
+<h3 id="buy-the-rtx-4090-if-you">Buy the RTX 4090 If You:</h3>
+<ul>
+<li>Run LLMs daily for work, development, or research</li>
+<li>Want to run 30B models at full speed without headaches</li>
+<li>Use Windows as your primary OS</li>
+<li>Value setup simplicity and want things to work out of the box</li>
+<li>Are building applications with vLLM, TensorRT-LLM, or other CUDA-optimized frameworks</li>
+<li>Run multiple models in parallel or switch between them frequently</li>
+<li>Can justify the premium through productivity gains</li>
+</ul>
+<blockquote>
+<p>🛒 <strong><a href="https://www.amazon.com/s?k=RTX+4090+24GB&amp;tag=ms5573-20">Check RTX 4090 Prices on Amazon</a></strong></p>
+</blockquote>
+<h3 id="buy-the-rx-7900-xtx-if-you">Buy the RX 7900 XTX If You:</h3>
+<ul>
+<li>Are primarily running 7B–13B models for personal use</li>
+<li>Are comfortable with Linux and don't mind ROCm configuration</li>
+<li>Have a strict budget and the $700–$900 savings are genuinely meaningful</li>
+<li>Are a Linux enthusiast who enjoys tinkering with hardware and software stacks</li>
+<li>Run inference occasionally rather than continuously</li>
+<li>Already have an AMD-centric system and want to minimize compatibility complexity</li>
+</ul>
+<blockquote>
+<p>🛒 <strong><a href="https://www.amazon.com/s?k=RX+7900+XTX+24GB&amp;tag=ms5573-20">Check RX 7900 XTX Prices on Amazon</a></strong></p>
+</blockquote>
+<hr />
+<h2 id="verdict-clear-winner-and-when-to-consider-the-runner-up">Verdict: Clear Winner and When to Consider the Runner-Up</h2>
+<p><strong>Winner: NVIDIA RTX 4090</strong></p>
+<p>The RTX 4090 wins the <strong>RTX 4090 vs RX 7900 XTX for local LLMs</strong> matchup decisively. It delivers approximately 2x faster inference across all tested model sizes, runs flawlessly on both Windows and Linux, and benefits from the most mature AI software ecosystem available. CUDA's dominance in the LLM space isn't a marketing talking point — it's a practical reality that shows up in every benchmark and every hour of actual use.</p>
+<p>For anyone serious about local LLM inference — developers, researchers, power users — the 4090 is the correct choice. The performance gap is too large and the software ecosystem too lopsided to recommend AMD for demanding workloads.</p>
+<p><strong>Runner-Up Use Case: RX 7900 XTX</strong></p>
+<p>The 7900 XTX earns a legitimate recommendation for one specific user: the budget-conscious Linux enthusiast who primarily runs 7B–13B models for personal use and has the technical confidence to navigate ROCm setup. At $900–$1,100, it provides genuine value for lighter inference workloads, and AMD's ROCm stack is improving with each release.</p>
+<p>It's not the right choice for Windows users, developers building production applications, or anyone who wants to run 30B+ models at competitive speeds. But for the right user, it's a reasonable GPU that gets the job done at a significantly lower price point.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="1-can-the-rx-7900-xtx-run-local-llms-on-windows">1. Can the RX 7900 XTX run local LLMs on Windows?</h3>
+<p>Yes, but with significant limitations. ROCm support on Windows is substantially less mature than on Linux. Many optimized inference tools — including some ExLlama2 features and vLLM — either don't work or perform poorly on Windows with AMD GPUs. If you're on Windows, the RTX 4090 is the far safer choice. Linux users get a much better AMD experience, though still slower than CUDA.</p>
+<h3 id="2-does-the-rtx-4090s-higher-power-draw-450w-vs-355w-matter-for-home-use">2. Does the RTX 4090's higher power draw (450W vs 355W) matter for home use?</h3>
+<p>It matters at the margins. Running the 4090 at full load costs roughly $0.03–0.05 more per hour in electricity than the 7900 XTX (depending on local rates). Over a year of heavy daily use, that's $100–$180 in additional electricity costs — real money, but unlikely to change the overall value calculation for most users. The 4090's faster inference also means it completes tasks sooner, partially offsetting the higher wattage.</p>
+<h3 id="3-can-i-run-a-70b-model-on-either-of-these-cards">3. Can I run a 70B model on either of these cards?</h3>
+<p>Both cards can run 70B models at Q4 quantization, but neither can fit the full model in VRAM. You'll need to offload layers to system RAM, which dramatically reduces performance to roughly 10–20 tok/s depending on your CPU and RAM speed. For a better 70B experience, consider a dual-GPU setup or look at 48GB cards like the RTX 6000 Ada. If 70B is your primary use case, neither of these cards is the ideal solution.</p>
+<h3 id="4-is-the-rtx-4090-worth-the-premium-over-the-rx-7900-xtx">4. Is the RTX 4090 worth the premium over the RX 7900 XTX?</h3>
+<p>For heavy users, yes. The 4090 delivers roughly 2x faster inference, works seamlessly on Windows and Linux, and requires zero ROCm troubleshooting. If you're running LLMs daily for work or development, the productivity gains justify the $700–$900 premium within months. For casual users running inference an hour or two per day on smaller models, the 7900 XTX's savings are harder to dismiss.</p>
+<h3 id="5-whats-the-best-quantization-format-to-use-on-each-card">5. What's the best quantization format to use on each card?</h3>
+<p>For both cards, <strong>Q4_K_M</strong> offers the best balance of quality, speed, and VRAM efficiency for most use cases. On the RTX 4090, <strong>Q5_K_M</strong> is worth considering for 13B–30B models if you want slightly better output quality without a major speed penalty. On the RX 7900 XTX, stick with Q4_K_M — the card's ROCm overhead makes higher quantizations less practical, and the performance hit is more pronounced than on CUDA.</p>
+<hr />
+<p><em>Prices and availability are subject to change. Benchmark figures represent typical performance ranges from community testing with llama.cpp and ExLlama2. Individual results may vary based on system configuration, driver versions, and specific model variants.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

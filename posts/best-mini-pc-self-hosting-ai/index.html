@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Mini PC for Self-Hosting AI in 2026: Real Benchmarks, No Fluff</title>
+<meta name="description" content="TL;DR">
+<link rel="canonical" href="https://llmpicker.blog/posts/best-mini-pc-self-hosting-ai/">
+<meta property="og:title" content="Best Mini PC for Self-Hosting AI in 2026: Real Benchmarks, No Fluff">
+<meta property="og:description" content="TL;DR">
+<meta property="og:url" content="https://llmpicker.blog/posts/best-mini-pc-self-hosting-ai/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="best-mini-pc-for-self-hosting-ai-in-2026-real-benchmarks-no-fluff">Best Mini PC for Self-Hosting AI in 2026: Real Benchmarks, No Fluff</h1>
+<p><strong>TL;DR</strong><br />
+- The <strong>Minisforum MS-S1 Max</strong> is the best overall pick for serious local LLM work — 126 TOPS and capable of running 128B+ models.<br />
+- For most people, the <strong>GEEKOM A8 Max</strong> at $719.99 hits the sweet spot of price, NPU performance, and connectivity.<br />
+- Budget under $600? The <strong>Beelink SER8</strong> with Ryzen 7 8845HS and 32GB DDR5 delivers 18–25 tokens/sec on Llama 3 8B — genuinely usable.<br />
+- Intel N100 mini PCs are fine for home automation but painful for anything above a 7B model. Don't buy one expecting real AI performance.</p><a href="https://www.amazon.com/dp/B0D9YJLZP6?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<p>Running AI models locally used to mean a loud, power-hungry desktop with a $1,000 GPU. That's no longer the case. Mini PCs in 2026 have crossed a threshold where they're legitimately useful for self-hosted AI — not just as toys, but as daily drivers for local LLMs, AI-assisted development, and homelab inference servers.</p>
+<p>This guide cuts through the marketing noise and gives you real numbers, real tradeoffs, and a clear recommendation for every budget.</p>
+<hr />
+<h2 id="why-mini-pcs-have-become-serious-ai-hardware">Why Mini PCs Have Become Serious AI Hardware</h2>
+<p>A few years ago, running a 13B model locally meant accepting 2–3 tokens per second and a lot of patience. The hardware has changed dramatically.</p>
+<p>AMD's Ryzen AI chips now pack NPUs with up to 126 TOPS (trillion operations per second) into a package the size of a paperback book. DDR5 unified memory means a mini PC with 32GB RAM can use all of it as shared VRAM — something that was a GPU-only privilege before. And OCuLink ports now let you attach a full desktop GPU to a device that draws under 50W at idle.</p>
+<p>The practical upside:<br />
+- <strong>Power efficiency</strong>: A Ryzen 8845HS mini PC idles at 15–20W. A desktop with an RTX 3090 idles at 80W+.<br />
+- <strong>Noise</strong>: Most mini PCs are near-silent under moderate load.<br />
+- <strong>Cost</strong>: You can get a capable AI inference machine for $600–$800 instead of $2,000+.<br />
+- <strong>Space</strong>: Fits on a shelf, behind a monitor, or in a rack with an adapter.</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The use cases are real: running Ollama for a private ChatGPT alternative, hosting a local coding assistant with Continue.dev, fine-tuning small models, or just keeping your data off someone else's servers.</p>
+<hr />
+<h2 id="what-hardware-actually-matters-for-local-llms">What Hardware Actually Matters for Local LLMs</h2>
+<p>Before jumping to product picks, here's what you actually need to understand.</p>
+<h3 id="cpu-vs-gpu-inference">CPU vs. GPU Inference</h3>
+<p><strong>CPU inference</strong> is where most mini PCs live. Tools like Ollama and llama.cpp are optimized for it, and modern Ryzen chips are surprisingly fast. The Ryzen 9 8945HS hits 18–25 tokens/sec on Llama 3 8B with 32GB DDR5 as shared VRAM. That's a comfortable, usable speed for most tasks.</p>
+<p>The limitation is model size. CPU inference on a 70B model drops to 3–5 tokens/sec — technically functional, but frustrating for interactive use.</p>
+<p><strong>GPU inference</strong> is where things get fast. An RTX 4070 with 12GB VRAM can push ~45 tokens/sec on 70B models. The catch: you need either a mini PC with an eGPU port (OCuLink or Thunderbolt 4) or a dedicated GPU in the machine itself.</p>
+<h3 id="npus-real-acceleration-or-marketing">NPUs: Real Acceleration or Marketing?</h3>
+<p>NPUs (Neural Processing Units) are increasingly relevant, but with caveats.</p>
+<ul>
+<li><strong>AMD Ryzen AI (39 TOPS on the 8945HS)</strong>: Useful for specific workloads, particularly Windows AI features and some inference acceleration. ROCm support is improving but still not as mature as CUDA.</li>
+<li><strong>Minisforum MS-S1 Max (126 TOPS)</strong>: This is a different league — AMD CPU and GPU working in synergy, capable of handling 128B+ parameter models.</li>
+<li><strong>Intel AI Boost (~10 TOPS)</strong>: Mostly useful for Windows Studio Effects and light inference. Don't buy a mini PC primarily for Intel's NPU if AI is your goal.</li>
+</ul>
+<h3 id="ram-requirements-be-honest-with-yourself">RAM Requirements (Be Honest With Yourself)</h3>
+<table>
+<thead>
+<tr>
+<th>Model Size</th>
+<th>Minimum RAM</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B models</td>
+<td>8GB</td>
+<td>16GB</td>
+</tr>
+<tr>
+<td>13B–30B models</td>
+<td>16GB</td>
+<td>32GB</td>
+</tr>
+<tr>
+<td>70B models</td>
+<td>48GB</td>
+<td>64GB+</td>
+</tr>
+<tr>
+<td>128B+ models</td>
+<td>96GB+</td>
+<td>128GB</td>
+</tr>
+</tbody>
+</table>
+<p>32GB DDR5 is the practical minimum for a capable AI mini PC in 2026. If you're buying something with 16GB and no upgrade path, you'll hit a wall fast.</p>
+<hr />
+<h2 id="the-best-mini-pcs-for-self-hosting-ai-in-2026">The Best Mini PCs for Self-Hosting AI in 2026</h2>
+<h3 id="best-overall-minisforum-ms-s1-max">🏆 Best Overall: Minisforum MS-S1 Max</h3>
+<p>If you want the most capable mini PC for local AI without building a full desktop, this is it.</p>
+<p>The MS-S1 Max delivers <strong>126 TOPS</strong> through AMD CPU and GPU synergy — not just the NPU in isolation. That's enough to run 128B+ parameter models, which puts it in a category most mini PCs can't touch. It handles the kind of workloads that would have required a server rack two years ago.</p>
+<p><strong>Why it wins:</strong><br />
+- 126 TOPS handles massive models without an eGPU<br />
+- Supports 128B+ LLMs natively<br />
+- Future-proofed for the next 2–3 years of model releases<br />
+- Compact form factor with serious thermal management</p>
+<p><strong>Who it's for:</strong> Developers, researchers, or power users who want to run the largest open-source models (Llama 3 70B, Mixtral 8x22B, etc.) without compromise.</p>
+<p>The price reflects the capability — expect to pay a premium. But if you're serious about local AI, it's the right tool.</p>
+<hr />
+<h3 id="best-value-geekom-a8-max">💰 Best Value: GEEKOM A8 Max</h3>
+<p>At <strong>$719.99</strong>, the GEEKOM A8 Max is the mini PC I'd recommend to most people asking about local AI.</p><a href="https://www.amazon.com/dp/B0D22FYFL4?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>It runs the <strong>Ryzen 9 8945HS</strong> with <strong>39 TOPS</strong> of NPU acceleration, dual 2.5G LAN (useful for homelab setups where you're serving inference to multiple devices), and handles 8B–30B models comfortably. The dual LAN alone makes it stand out — you can run it as a dedicated inference server on your network without a separate switch.</p>
+<p><strong>Specs that matter:</strong><br />
+- Ryzen 9 8945HS (Radeon 780M iGPU)<br />
+- 39 TOPS NPU<br />
+- Dual 2.5G LAN<br />
+- Supports up to 64GB DDR5<br />
+- $719.99</p>
+<p><strong>Performance reality check:</strong> At 32GB DDR5, you're looking at 18–25 tokens/sec on Llama 3 8B. That's fast enough for real interactive use. Step up to a 30B model and you'll see it slow down, but it's still functional.</p>
+<p>The GEEKOM A8 Max is the answer to "what should I buy?" for 80% of people reading this.</p><a href="https://www.amazon.com/dp/B0D22FYFL4?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<h3 id="budget-pick-beelink-ser8">💵 Budget Pick: Beelink SER8</h3>
+<p>Under $600, the <strong>Beelink SER8</strong> with the <strong>Ryzen 7 8845HS</strong> is the move.</p><a href="https://www.amazon.com/dp/B0CJB9FBMM?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The 8845HS is essentially the same architecture as the 8945HS with slightly lower clocks. In practice, the performance difference for LLM inference is minimal. You get the same Radeon 780M iGPU, DDR5 shared memory support, and solid Linux compatibility.</p>
+<p><strong>Why the SER8 works:</strong><br />
+- Ryzen 7 8845HS delivers 18–25 tokens/sec on Llama 3 8B<br />
+- 32GB DDR5 standard configuration<br />
+- Strong community support (Reddit's homelab community loves this chip)<br />
+- Excellent Linux driver support — no fighting with the OS to get Ollama running<br />
+- Under $600</p>
+<p>The tradeoff: no dual LAN, lower NPU TOPS than the A8 Max, and less headroom for larger models. But for someone running a personal AI assistant or coding helper on a budget, it's genuinely excellent.</p>
+<p>The Reddit homelab community has largely converged on the SER8 as the go-to budget recommendation, and they're right.</p>
+<hr />
+<h3 id="gpu-powerhouse-minisforum-um890-pro-rtx-4070-egpu">⚡ GPU Powerhouse: Minisforum UM890 Pro + RTX 4070 eGPU</h3>
+<p>If you need to run 70B models at interactive speeds, CPU inference won't cut it. You need a GPU.</p>
+<p>The <strong>Minisforum UM890 Pro</strong> has an <strong>OCuLink port</strong>, which is the key feature here. OCuLink provides near-PCIe bandwidth to an external GPU — significantly better than Thunderbolt 4 for GPU workloads. Pair it with an RTX 4070 (12GB VRAM) in an eGPU enclosure and you're looking at <strong>~45 tokens/sec on 70B models</strong>.</p><a href="https://www.amazon.com/dp/B0D9YJLZP6?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>That's a transformative difference. 70B models at 45 tokens/sec feel like talking to a fast cloud API, except it's running on your desk.</p>
+<p><strong>The setup:</strong><br />
+- Minisforum UM890 Pro (OCuLink port)<br />
+- RTX 4070 eGPU enclosure<br />
+- Total cost: ~$1,000–$1,200 depending on GPU pricing</p>
+<p><strong>OCuLink vs. Thunderbolt 4:</strong> OCuLink wins for GPU inference. Thunderbolt 4 introduces latency and bandwidth limitations that noticeably hurt tokens/sec. If eGPU is your plan, make sure your mini PC has OCuLink, not just Thunderbolt.</p>
+<p>This setup is the best performance-per-dollar for 70B inference in the mini PC category.</p>
+<hr />
+<h3 id="enterprisepower-user-gmktec-evo-t1">🏢 Enterprise/Power User: GMKtec EVO-T1</h3>
+<p>The <strong>GMKtec EVO-T1</strong> is for people who need to run very large models or handle multiple simultaneous inference requests.</p>
+<p><strong>96GB RAM</strong> is the headline spec. That means you can load a 70B model fully into memory with room to spare, or run multiple smaller models simultaneously. Add a 2TB SSD and OCuLink/USB4 connectivity, and you have a machine that can serve as a small team's private AI server.</p>
+<p>At <strong>$1,200+</strong>, it's not cheap. But compared to cloud API costs for a team running heavy inference workloads, it pays for itself quickly.</p>
+<p><strong>Best for:</strong> Small teams, AI developers who need to test large models, or anyone running inference as a service on their local network.</p>
+<hr />
+<h2 id="setting-up-local-llms-practical-tips">Setting Up Local LLMs: Practical Tips</h2>
+<p>Getting the hardware is step one. Here's how to actually make it perform.</p>
+<h3 id="quantization-is-your-friend">Quantization Is Your Friend</h3>
+<p>Running a full-precision 13B model requires ~26GB of VRAM. Running a Q4-quantized version requires ~8GB. The quality difference is smaller than you'd expect — for most conversational tasks, Q4 or Q5 quantization is indistinguishable from full precision.</p>
+<ul>
+<li><strong>Q4_K_M</strong>: Best balance of speed and quality for CPU inference</li>
+<li><strong>Q5_K_M</strong>: Slightly better quality, slightly slower — worth it if you have the RAM</li>
+<li><strong>Q8</strong>: Near full quality, but doubles the memory requirement</li>
+</ul>
+<h3 id="tuning-shared-vram-on-amd-igpus">Tuning Shared VRAM on AMD iGPUs</h3>
+<p>The Radeon 780M iGPU in Ryzen 8000 series chips can use system RAM as VRAM. By default, it may only allocate 512MB–2GB. You can increase this in BIOS to 8GB or more, which significantly improves inference speed for GPU-accelerated layers.</p>
+<p>On Linux with ROCm, you can also set <code>HSA_OVERRIDE_GFX_VERSION=11.0.0</code> to improve compatibility with some inference frameworks.</p>
+<h3 id="tools-worth-using">Tools Worth Using</h3>
+<ul>
+<li><strong>Ollama</strong>: The easiest way to get started. One command to pull and run a model. Excellent API compatibility.</li>
+<li><strong>LM Studio</strong>: Great GUI for Windows users who want a ChatGPT-like interface locally.</li>
+<li><strong>Text Generation WebUI</strong>: More control, more complexity. Good for experimentation.</li>
+<li><strong>Docker + Ollama</strong>: The cleanest setup for a dedicated inference server — containerized, easy to update, accessible from other devices on your network.</li>
+</ul>
+<hr />
+<h2 id="what-to-avoid">What to Avoid</h2>
+<p><strong>Intel N100 mini PCs</strong>: Fine for Home Assistant, Pi-hole, or light server tasks. At ~5 tokens/sec on a 7B Q4 model, they're too slow for interactive LLM use. Don't buy one expecting AI performance.</p>
+<p><strong>Intel NUCs</strong>: The Linux driver situation has historically been messy, and the community consensus is to avoid them for AI workloads. The Reddit homelab community has largely moved on.</p>
+<p><strong>Mac Mini (M4)</strong>: This will be controversial, but hear me out. The M4 Mac Mini has impressive unified memory bandwidth, but it has limited NPU support for open-source inference tools, non-upgradeable RAM, and poor Vulkan/ROCm compatibility. If you're in the Apple ecosystem and using Apple Silicon-optimized tools, it's fine. For open-source LLM work with Ollama, llama.cpp, and ROCm — AMD mini PCs are more flexible and often cheaper for equivalent performance.</p><a href="https://www.amazon.com/Apple-2024-Desktop-Computer-10%E2%80%91core/dp/B0DLBTPDCS?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<h2 id="future-proofing-your-setup">Future-Proofing Your Setup</h2>
+<p>A few things worth keeping in mind as you buy:</p>
+<p><strong>OCuLink is increasingly important.</strong> As models get larger, the ability to add a discrete GPU without replacing the whole machine is valuable. Prioritize mini PCs with OCuLink if you think you'll want GPU acceleration later.</p>
+<p><strong>AMD Ryzen AI 300 series</strong> is coming with even higher TOPS ratings and improved ROCm support. If you're buying in early 2026, the current 8000 series is mature and well-supported. If you can wait until mid-2026, the next generation may offer meaningfully better performance.</p>
+<p><strong>RAM upgradability matters.</strong> Some mini PCs solder RAM. Always check before buying — you want to be able to go from 32GB to 64GB as models grow.</p>
+<hr />
+<h2 id="bottom-line">Bottom Line</h2>
+<p>Stop overthinking this. Here's the decision tree:</p>
+<ul>
+<li><strong>Under $600, just want to try local AI</strong>: Get the <strong>Beelink SER8</strong>. Ryzen 7 8845HS, 32GB DDR5, great Linux support. It works.</li>
+<li><strong>$700–$800, want the best value</strong>: Get the <strong>GEEKOM A8 Max</strong>. Better NPU, dual LAN, more headroom. This is the right answer for most people.</li>
+<li><strong>Need to run 70B models fast</strong>: Get the <strong>Minisforum UM890 Pro + RTX 4070 eGPU</strong>. OCuLink + 12GB VRAM = 45 tokens/sec on 70B. Nothing else in this price range comes close.</li>
+<li><strong>Want the best mini PC for AI, full stop</strong>: Get the <strong>Minisforum MS-S1 Max</strong>. 126 TOPS, 128B+ model support, no compromises.</li>
+<li><strong>Running inference for a small team</strong>: Get the <strong>GMKtec EVO-T1</strong>. 96GB RAM handles anything you throw at it.</li>
+</ul>
+<p>The era of needing a full tower with a $1,500 GPU to run local AI is over. A $720 mini PC on your desk can now run models that would have required cloud infrastructure two years ago. That's a genuinely big deal — and the hardware is only getting better.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

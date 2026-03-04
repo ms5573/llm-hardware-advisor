@@ -27,6 +27,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .content{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 20px 80px}
 .page-title{font-size:36px;font-weight:800;margin-bottom:8px}
 .page-sub{color:var(--text-dim);font-size:15px;margin-bottom:40px}
+.section-title{font-size:22px;font-weight:700;margin:48px 0 20px;padding-top:24px;border-top:1px solid var(--border);letter-spacing:-0.3px}
 .posts-grid{display:flex;flex-direction:column;gap:16px}
 .post-card{display:block;padding:22px 24px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden}
 .post-card:hover{border-color:var(--border-h);background:rgba(22,22,42,0.95);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
@@ -115,6 +116,19 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
       <div class="post-title">Best Mini PC for Self-Hosting AI in 2026</div>
       <div class="post-desc">Minisforum, Beelink, Mac Mini — CPU inference vs GPU inference, and which mini PC handles local AI without a discrete GPU.</div>
       <div class="post-meta"><span>Coming March 13</span></div>
+      <span class="post-arrow">→</span>
+    </a>
+
+  </div>
+
+  <h2 class="section-title">Comparisons</h2>
+  <div class="posts-grid" id="comparisons-grid">
+
+    <a class="post-card" href="/posts/rtx-4090-vs-mac-studio-m4-max-128-llm/">
+      <div class="post-tag">GPU vs Apple Silicon</div>
+      <div class="post-title">RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs</div>
+      <div class="post-desc">24GB VRAM vs 128GB unified memory — which actually wins for running 70B models locally?</div>
+      <div class="post-meta"><span>March 2026</span><span>·</span><span>~2,400 words</span></div>
       <span class="post-arrow">→</span>
     </a>
 

@@ -75,6 +75,17 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
 .cta-sub{font-size:12px;color:var(--text-dim)}
 
+.hw-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:40px 0 28px;padding:20px 24px;border:1px solid rgba(124,106,255,0.25);border-radius:14px;background:linear-gradient(135deg,rgba(124,106,255,0.08),rgba(34,211,238,0.04));flex-wrap:wrap}
+.hw-cta-left{flex:1;min-width:200px}
+.hw-cta-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.hw-cta-sub{font-size:13px;color:var(--text-dim);line-height:1.5}
+.hw-cta-btn{flex-shrink:0;display:inline-flex;align-items:center;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap}
+.hw-cta-btn:hover{opacity:0.85;transform:translateY(-1px);color:#fff!important;text-decoration:none!important}
+
+.back-link{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.back-link a{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.back-link a:hover{color:var(--text);}
+
 .email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
 .email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
 .email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
@@ -349,8 +360,10 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p>The RTX 5090 is expected to feature 32GB of GDDR7 memory — an improvement over the 4090's 24GB, but still far short of 128GB unified memory. It will likely be faster per token on smaller models and push the comfortable model size ceiling to around 34B–40B at Q4. It won't fundamentally change the 70B+ use case advantage that Apple Silicon's unified memory architecture provides. If you're buying today, the RTX 4090 remains the better value; if you can wait 6–12 months, the 5090 will be worth evaluating for the mid-range model sweet spot.</p>
 <hr />
 <p><em>Benchmark data sourced from llama.cpp community benchmarks, MLX documentation, and user-reported results from r/LocalLLaMA. Prices reflect approximate market rates and may vary. This post contains affiliate links — purchases made through these links support the site at no additional cost to you.</em></p>
+    <div class="hw-cta"><div class="hw-cta-left"><div class="hw-cta-title">See full specs &amp; model compatibility</div><div class="hw-cta-sub">Interactive hardware picker — filter by budget, VRAM, and which models you want to run.</div></div><a class="hw-cta-btn" href="https://llmpicker.blog" target="_blank" rel="noopener">Open LLM Picker →</a></div>
     <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
     <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+    <div class="back-link"><a href="https://llmpicker.blog/posts/">← All guides</a></div>
   </article>
 </div>
 </body>

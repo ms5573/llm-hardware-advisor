@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?</title>
+<meta name="description" content="Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?">
+<link rel="canonical" href="https://llmpicker.blog/posts/macbook-air-m4-16-vs-m5-16-llm/">
+<meta property="og:title" content="MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?">
+<meta property="og:description" content="Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?">
+<meta property="og:url" content="https://llmpicker.blog/posts/macbook-air-m4-16-vs-m5-16-llm/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="macbook-air-m4-16gb-vs-m5-16gb-for-local-llms-which-one-should-you-buy">MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?</h1>
+<p><em>Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?</em></p>
+<hr />
+<p>If you're serious about running local LLMs on a MacBook Air, you've already narrowed your choices down to two machines: the <strong>M4 at $1,299</strong> and the newly released <strong>M5 at $1,599</strong>. Both pack 16GB of unified memory. Both are fanless, silent, and genuinely capable of running models that would have required a dedicated GPU rig just two years ago.</p>
+<p>But here's the thing — when you're running inference on a 13B or 30B model, that $300 price difference starts to feel like a very real question. Is the M5's faster memory bandwidth worth it? Does the architectural upgrade actually translate to meaningful token-per-second gains? Or is the M4 still the smarter buy for most users?</p>
+<p>This post answers all of that. We'll break down the raw specs, compare real-world token generation speeds across model sizes, map out exactly which models fit at which quantization levels, and give you a direct, no-fluff verdict on which machine deserves your money.</p>
+<p>Let's get into it.</p>
+<hr />
+<h2 id="side-by-side-specs-m4-vs-m5-16gb">Side-by-Side Specs: M4 vs M5 (16GB)</h2>
+<p>Before we talk performance, here's the hardware reality you're working with:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>MacBook Air M4 (16GB)</strong></th>
+<th><strong>MacBook Air M5 (16GB)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unified RAM / VRAM</strong></td>
+<td>16GB</td>
+<td>16GB</td>
+</tr>
+<tr>
+<td><strong>Memory Bandwidth</strong></td>
+<td>~150 GB/s</td>
+<td>~200 GB/s</td>
+</tr>
+<tr>
+<td><strong>Base Price</strong></td>
+<td>$1,299</td>
+<td>$1,599</td>
+</tr>
+<tr>
+<td><strong>TDP</strong></td>
+<td>~18W</td>
+<td>~20W</td>
+</tr>
+<tr>
+<td><strong>CPU Cores</strong></td>
+<td>10-core</td>
+<td>12-core (est.)</td>
+</tr>
+<tr>
+<td><strong>GPU Cores</strong></td>
+<td>10-core</td>
+<td>14-core (est.)</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>3nm (M4 gen)</td>
+<td>3nm next-gen</td>
+</tr>
+</tbody>
+</table>
+<p>The single most important number for local LLM inference is <strong>memory bandwidth</strong>. When you're running a quantized model, the GPU isn't compute-bound — it's memory-bound. The bottleneck is how fast weights can be streamed from RAM into the compute units. That's why the M5's jump from ~150 GB/s to ~200 GB/s is the headline spec for LLM users, not the CPU or GPU core count.</p>
+<p>That 33% bandwidth increase is what drives almost every performance difference you'll see below.</p>
+<hr />
+<h2 id="performance-comparison-token-generation-speed">Performance Comparison: Token Generation Speed</h2>
+<p>Here's where the rubber meets the road. These are estimated token-per-second figures using <strong>llama.cpp</strong> with standard Q4_K_M quantization, which is the most common setup for local inference on Apple Silicon.</p>
+<h3 id="7b-models-q4_k_m-eg-llama-31-7b-mistral-7b">7B Models (Q4_K_M) — e.g., Llama 3.1 7B, Mistral 7B</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>M4 16GB</strong></th>
+<th><strong>M5 16GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokens/sec</strong></td>
+<td>~55 tok/s</td>
+<td>~70 tok/s</td>
+</tr>
+<tr>
+<td><strong>Performance Delta</strong></td>
+<td>Baseline</td>
+<td><strong>+27% faster</strong></td>
+</tr>
+<tr>
+<td><strong>Practical Feel</strong></td>
+<td>Smooth, responsive</td>
+<td>Very fast, near-instant</td>
+</tr>
+</tbody>
+</table>
+<p>At 7B, both machines are genuinely comfortable. The M4's 55 tok/s is fast enough that you won't feel like you're waiting. The M5 pushes that to 70 tok/s, which is noticeably snappier in interactive use — but the M4 is far from slow here.</p>
+<h3 id="13b-models-q4_k_m-eg-llama-31-13b-mistral-nemo">13B Models (Q4_K_M) — e.g., Llama 3.1 13B, Mistral Nemo</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>M4 16GB</strong></th>
+<th><strong>M5 16GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokens/sec</strong></td>
+<td>~28 tok/s</td>
+<td>~35 tok/s</td>
+</tr>
+<tr>
+<td><strong>Performance Delta</strong></td>
+<td>Baseline</td>
+<td><strong>+25% faster</strong></td>
+</tr>
+<tr>
+<td><strong>Practical Feel</strong></td>
+<td>Usable, slight lag</td>
+<td>Smooth, comfortable</td>
+</tr>
+</tbody>
+</table>
+<p>This is where the gap starts to matter more. At 28 tok/s on the M4, you'll notice the pace during longer outputs. The M5's 35 tok/s keeps things feeling fluid. If 13B is your daily driver model — and for many users it should be, given the quality-to-size ratio — this difference is felt in every session.</p>
+<h3 id="30b-models-q4_k_m-eg-llama-3-30b-mixtral-variants">30B Models (Q4_K_M) — e.g., Llama 3 30B, Mixtral variants</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>M4 16GB</strong></th>
+<th><strong>M5 16GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokens/sec</strong></td>
+<td>~6 tok/s</td>
+<td>~8 tok/s</td>
+</tr>
+<tr>
+<td><strong>Performance Delta</strong></td>
+<td>Baseline</td>
+<td><strong>+33% faster</strong></td>
+</tr>
+<tr>
+<td><strong>Practical Feel</strong></td>
+<td>Borderline, heavy swap risk</td>
+<td>Slow but usable</td>
+</tr>
+<tr>
+<td><strong>Memory Pressure</strong></td>
+<td>High (~15GB, near limit)</td>
+<td>High (~15GB, near limit)</td>
+</tr>
+</tbody>
+</table>
+<p>30B Q4 is the edge of what 16GB can handle. Both machines are technically capable, but you're living dangerously close to the memory ceiling. The M4 at 6 tok/s is frustratingly slow for interactive use — think reading a sentence, then waiting. The M5 at 8 tok/s is still slow, but meaningfully less painful. Neither machine is ideal for 30B regular use, but if you need it occasionally, the M5 handles it better.</p>
+<h3 id="70b-models-q4_k_m-eg-llama-31-70b">70B Models (Q4_K_M) — e.g., Llama 3.1 70B</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>M4 16GB</strong></th>
+<th><strong>M5 16GB</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokens/sec</strong></td>
+<td>&lt;3 tok/s</td>
+<td>&lt;3 tok/s</td>
+</tr>
+<tr>
+<td><strong>Practical Feel</strong></td>
+<td>Not practical</td>
+<td>Not practical</td>
+</tr>
+</tbody>
+</table>
+<p>Don't bother. A 70B Q4 model needs 35GB+ of memory. With 16GB unified RAM, both machines will hammer swap constantly, and you'll be watching tokens trickle out at a pace that makes the experience unusable. If 70B is your target, you need the <strong>MacBook Pro M4 Max with 48GB or 64GB</strong> — not either of these machines.</p>
+<hr />
+<h2 id="model-compatibility-what-actually-fits-at-16gb">Model Compatibility: What Actually Fits at 16GB?</h2>
+<p>Memory capacity is fixed at 16GB on both machines, so compatibility is identical. What differs is <em>how well</em> each machine handles models near the memory ceiling. Here's the full breakdown:</p>
+<h3 id="runs-natively-no-swap">✅ Runs Natively (No Swap)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>Quantization</strong></th>
+<th><strong>VRAM Usage</strong></th>
+<th><strong>Status</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B</td>
+<td>Q4, Q8, FP16</td>
+<td>4–14GB</td>
+<td>Fully supported</td>
+</tr>
+<tr>
+<td>13B</td>
+<td>Q4, Q8</td>
+<td>7–13GB</td>
+<td>Fully supported</td>
+</tr>
+</tbody>
+</table>
+<p>These are your sweet spot models. Everything from a 7B Q4 (fast, lightweight) to a 13B Q8 (high quality, still fits) runs without touching swap. This is where both the M4 and M5 shine, and where the M4 offers genuinely excellent value.</p>
+<h3 id="fits-with-caution-near-memory-limit">⚠️ Fits With Caution (Near Memory Limit)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>Quantization</strong></th>
+<th><strong>VRAM Usage</strong></th>
+<th><strong>Status</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13B</td>
+<td>FP16</td>
+<td>~26GB</td>
+<td>Requires swap — slow</td>
+</tr>
+<tr>
+<td>30B</td>
+<td>Q4</td>
+<td>~15GB</td>
+<td>Barely fits, memory pressure</td>
+</tr>
+</tbody>
+</table>
+<p>The 30B Q4 situation deserves special attention. At approximately 15GB of model weight, it technically fits within 16GB — but you have almost no headroom for the KV cache, system processes, or context. You'll want to keep context windows short (512–1024 tokens) and close everything else running on your machine. It works, but it's not comfortable.</p>
+<h3 id="not-recommended">❌ Not Recommended</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Model Size</strong></th>
+<th><strong>Quantization</strong></th>
+<th><strong>VRAM Usage</strong></th>
+<th><strong>Status</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30B</td>
+<td>Q8, FP16</td>
+<td>30–60GB</td>
+<td>Unusable</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>Q4+</td>
+<td>35GB+</td>
+<td>Unusable</td>
+</tr>
+</tbody>
+</table>
+<p>If you're regularly running 30B+ models, accept the reality: 16GB isn't the right configuration. Step up to a MacBook Pro with 36GB or 48GB unified memory.</p>
+<hr />
+<h2 id="price-value-analysis">Price &amp; Value Analysis</h2>
+<p>Let's be direct about the math here.</p>
+<ul>
+<li><strong>MacBook Air M4 16GB:</strong> $1,299</li>
+<li><strong>MacBook Air M5 16GB:</strong> $1,599</li>
+<li><strong>Price difference:</strong> $300 (23% premium)</li>
+<li><strong>Average performance gain:</strong> ~25–27%</li>
+</ul>
+<p>On paper, the M5's performance uplift roughly matches its price premium. You're paying 23% more and getting approximately 25% faster inference. That's a near 1:1 value ratio, which means the decision comes down to <strong>how much those extra tokens per second actually matter to your workflow</strong>.</p>
+<p>For a user running 7B models casually — writing assistance, quick Q&amp;A, local chatbot experiments — the M4 at $1,299 is the smarter buy. The 55 tok/s you get is already fast enough that the extra 15 tok/s from the M5 won't change your experience in any meaningful way.</p>
+<p>For a user running 13B models as their daily driver, the calculus shifts. Going from 28 tok/s to 35 tok/s is a 25% improvement you'll feel in every session. Over months of daily use, that adds up. The $300 premium starts to look reasonable.</p>
+<p>For 30B use cases, the M5 is the clear choice — but honestly, both machines struggle here. If 30B is a core part of your workflow, you should be looking at a MacBook Pro instead.</p>
+<p><strong>Bottom line:</strong> The M5 offers fair value for its premium, but it's only <em>clearly</em> worth it if you're regularly using 13B+ models.</p>
+<hr />
+<h2 id="who-should-buy-which">Who Should Buy Which?</h2>
+<h3 id="buy-the-macbook-air-m4-16gb-if">Buy the MacBook Air M4 16GB if:</h3>
+<ul>
+<li>Your primary models are <strong>7B to 13B Q4/Q8</strong></li>
+<li>You're <strong>budget-conscious</strong> and the $300 difference matters</li>
+<li>You're new to local LLMs and want to experiment without overspending</li>
+<li>You use LLMs as a <strong>secondary workflow tool</strong>, not a primary one</li>
+<li>You prioritize <strong>portability and battery life</strong> over peak inference speed</li>
+</ul>
+<p>The M4 is not a compromise machine. At 55 tok/s on 7B models, it's genuinely fast. For most casual-to-moderate LLM users, it's the right call.</p>
+<p>👉 <a href="https://www.amazon.com/dp/B0CX23V2ZK?tag=ms5573-20">Check current pricing on the MacBook Air M4</a></p>
+<h3 id="buy-the-macbook-air-m5-16gb-if">Buy the MacBook Air M5 16GB if:</h3>
+<ul>
+<li>You regularly run <strong>13B models</strong> as your daily driver</li>
+<li>You occasionally push into <strong>30B Q4</strong> territory</li>
+<li>You want <strong>future-proofing</strong> as model sizes and complexity grow</li>
+<li>The <strong>25% performance gain</strong> justifies the $300 premium in your budget</li>
+<li>You're a developer or researcher who values faster iteration cycles</li>
+</ul>
+<p>The M5 is the better machine for serious LLM enthusiasts. The bandwidth advantage is real, and it compounds across every model size you run.</p>
+<p>👉 <a href="https://www.amazon.com/dp/B0CX23V2ZK?tag=ms5573-20">Check current pricing on the MacBook Air M5</a></p><a href="https://www.apple.com/macbook-air/" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<h3 id="consider-upgrading-to-macbook-pro-if">Consider Upgrading to MacBook Pro if:</h3>
+<ul>
+<li>You need <strong>70B models</strong> to run practically</li>
+<li>You want to run <strong>multiple models simultaneously</strong></li>
+<li>Your workflow demands <strong>long context windows</strong> (32K+) on large models</li>
+</ul>
+<p>For serious 70B inference, look at the <strong>MacBook Pro M4 Max with 48GB</strong> — it's a different class of machine for a different class of workload.</p>
+<hr />
+<h2 id="verdict-clear-winner-runner-up-use-case">Verdict: Clear Winner + Runner-Up Use Case</h2>
+<p><strong>Winner: MacBook Air M5 16GB</strong></p><a href="https://www.apple.com/macbook-air/" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The M5 earns the top spot because its ~200 GB/s memory bandwidth delivers a consistent 25–33% performance improvement across every model size that matters on 16GB. For the most common serious use case — running 13B models daily — the M5's 35 tok/s vs the M4's 28 tok/s is a difference you'll feel every single day. The $300 premium is justified for anyone who treats local LLMs as a real part of their workflow.</p>
+<p><strong>Runner-Up: MacBook Air M4 16GB</strong></p>
+<p>The M4 is the right choice for the majority of users who are running 7B models, experimenting with local AI, or simply don't need to squeeze every token per second out of their hardware. At $1,299, it's one of the best value propositions in consumer AI hardware today. Don't let anyone convince you it's a slow machine — 55 tok/s on a 7B model is genuinely impressive for a $1,299 fanless laptop.</p>
+<p><strong>The one-sentence rule:</strong> If you run 13B models regularly, buy the M5. If you mostly run 7B models, save $300 and buy the M4.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="1-can-the-macbook-air-m4-or-m5-run-llama-31-70b">1. Can the MacBook Air M4 or M5 run Llama 3.1 70B?</h3>
+<p>Technically, yes — but practically, no. A 70B Q4 model requires approximately 35–40GB of memory. With only 16GB of unified RAM, both machines will rely heavily on swap memory, resulting in token speeds below 3 tok/s. That's not a usable experience for most workflows. If 70B inference is your goal, you need a MacBook Pro M4 Max with 48GB or 64GB of unified memory.</p>
+<h3 id="2-does-the-m5s-extra-gpu-cores-help-with-llm-inference">2. Does the M5's extra GPU cores help with LLM inference?</h3>
+<p>Somewhat, but memory bandwidth matters more. LLM inference on Apple Silicon is primarily memory-bandwidth-bound, not compute-bound. The M5's additional GPU cores provide some benefit, but the bigger driver of its performance advantage is the jump from ~150 GB/s to ~200 GB/s in memory bandwidth. That's what's moving model weights faster and generating more tokens per second.</p>
+<h3 id="3-whats-the-best-quantization-level-for-13b-models-on-16gb">3. What's the best quantization level for 13B models on 16GB?</h3>
+<p><strong>Q4_K_M</strong> is the sweet spot. It keeps memory usage around 7–8GB, leaving plenty of headroom for the KV cache and system processes, while maintaining output quality that's very close to FP16. Q8 is also viable at ~13GB if you want higher fidelity and are willing to trade some context window space. Avoid FP16 for 13B on 16GB — it requires swap and becomes painfully slow.</p>
+<h3 id="4-is-the-macbook-air-m5-worth-it-over-the-m4-for-coding-assistance-with-local-llms">4. Is the MacBook Air M5 worth it over the M4 for coding assistance with local LLMs?</h3>
+<p>Yes, if you're using a 13B model as your coding assistant. Tools like Continue.dev or Aider running a local 13B model will feel noticeably more responsive on the M5. The 25% faster token generation means less waiting between completions, which matters when you're iterating quickly on code. If you're using a 7B model for coding (like DeepSeek Coder 6.7B), the M4 is perfectly adequate.</p>
+<h3 id="5-should-i-wait-for-the-m5-or-buy-the-m4-now">5. Should I wait for the M5 or buy the M4 now?</h3>
+<p>If the M5 is available and within your budget, buy it — especially for 13B+ use cases. If you're budget-constrained or primarily running 7B models, the M4 is available now at a lower price and delivers excellent performance. There's no reason to wait if the M4 meets your needs. The next meaningful upgrade for LLM users would likely require moving to a MacBook Pro with significantly more unified memory, not waiting for an M6.</p>
+<hr />
+<p><em>Prices and availability are subject to change. Token speed estimates are based on llama.cpp benchmarks with Q4_K_M quantization. Actual performance may vary based on model architecture, context length, and system configuration.</em></p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>

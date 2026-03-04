@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Run Llama on Mac Apple Silicon: The Complete Setup Guide</title>
+<meta name="description" content="TL;DR">
+<link rel="canonical" href="https://llmpicker.blog/posts/run-llama-on-mac/">
+<meta property="og:title" content="How to Run Llama on Mac Apple Silicon: The Complete Setup Guide">
+<meta property="og:description" content="TL;DR">
+<meta property="og:url" content="https://llmpicker.blog/posts/run-llama-on-mac/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.1;margin:12px 0 20px}
+.post h2{font-size:22px;margin:24px 0 12px}
+.post h3{font-size:18px;margin:18px 0 8px}
+.post p{color:var(--text-dim);line-height:1.7;margin:10px 0}
+.post ul{margin:10px 0 12px 18px;color:var(--text-dim);line-height:1.7}
+.post li{margin:6px 0}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:6px}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;margin:16px 0}
+.post pre code{background:none;padding:0}
+.post blockquote{border-left:3px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(124,106,255,0.05);border-radius:0 8px 8px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.post table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.post thead{background:rgba(124,106,255,0.12)}
+.post th{padding:10px 14px;text-align:left;color:var(--text);font-weight:700;border-bottom:1px solid rgba(124,106,255,0.3)}
+.post td{padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.post tr:last-child td{border-bottom:none}
+.post tr:hover td{background:rgba(255,255,255,0.02)}
+
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="how-to-run-llama-on-mac-apple-silicon-the-complete-setup-guide">How to Run Llama on Mac Apple Silicon: The Complete Setup Guide</h1>
+<p><strong>TL;DR</strong><br />
+- Apple Silicon's unified memory architecture makes Macs genuinely great for running local LLMs — no discrete GPU required<br />
+- You need at least 16GB RAM for 8B models; 64GB+ for 70B models<br />
+- Ollama is the fastest way to get started; llama.cpp gives you the most control and best raw performance<br />
+- An M2 MacBook Air 16GB ($1,299) is the sweet spot for most people running local AI</p>
+<hr />
+<p>Running a large language model locally on your Mac used to feel like a science project. Compile this, patch that, pray to the Metal gods. In 2025, it's genuinely straightforward — and Apple Silicon hardware has become one of the best platforms for local LLM inference you can buy at any price point.</p>
+<p>This guide walks you through exactly how to run Llama on Mac Apple Silicon, from picking the right hardware to getting your first model responding in under 10 minutes. Whether you're on an M2 MacBook Air or an M3 Max MacBook Pro, there's a setup here that works for you.</p>
+<hr />
+<h2 id="why-apple-silicon-is-surprisingly-good-at-this">Why Apple Silicon Is Surprisingly Good at This</h2>
+<p>Before we get into setup, it's worth understanding <em>why</em> this works so well. Most people assume you need a beefy NVIDIA GPU to run LLMs locally. That's true if you're training models — but for inference (actually using a model to generate text), the bottleneck is memory bandwidth, not raw compute.</p>
+<p>Here's the key insight: Apple Silicon uses <strong>unified memory architecture</strong>. The CPU and GPU share the same memory pool. On a discrete GPU setup, you're limited to whatever VRAM is soldered onto the card — typically 8-24GB on consumer hardware. On an M2 Ultra Mac Studio with 64GB of unified memory, the GPU can access all 64GB. That's why you can run a 70B parameter model on a Mac that costs less than a single high-end GPU.</p><a href="https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The numbers back this up. Metal acceleration on Apple Silicon delivers <strong>3-5x faster inference than Intel Macs</strong>, and the M-series chips handle sustained workloads without thermal throttling — especially on Mac Studio and Mac mini, which have better passive cooling than the thin MacBook Air chassis.</p><a href="https://www.amazon.com/Apple-Desktop-Computer-12%E2%80%91core-16%E2%80%91core/dp/B0DLBVHSLD?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>Real-world benchmarks:<br />
+- <strong>M1 Max (64GB)</strong>: ~33 tokens/sec on Llama 3.1 8B via Core ML<br />
+- <strong>M2 Pro (16GB)</strong>: ~27 tokens/sec on Llama 3 8B Q4 via Jan.ai<br />
+- <strong>M3 Max (128GB)</strong>: 30-40 tokens/sec on 70B models at 4-bit quantization</p>
+<p>Those are usable speeds. 27 tokens/sec feels like a fast typist. 33+ tokens/sec feels instant.</p>
+<hr />
+<h2 id="hardware-requirements-what-you-actually-need">Hardware Requirements: What You Actually Need</h2>
+<p>Let me be direct: <strong>8GB of RAM is not enough</strong>. If you have a base M1 or M2 Mac with 8GB, you're limited to tiny 3B models that aren't particularly useful. Don't waste your time trying to squeeze a 7B model into 8GB — the constant memory swapping will make it painfully slow.</p>
+<p>Here's the honest breakdown:</p>
+<h3 id="entry-level-16gb-ram">Entry-Level: 16GB RAM</h3>
+<p><strong>Best for</strong>: Llama 3 8B, Mistral 7B, Phi-3 Mini<br />
+<strong>Devices</strong>: M2/M3 MacBook Air 16GB, M2/M3 Mac mini 16GB<br />
+<strong>Experience</strong>: Solid. 8B models at 4-bit quantization run comfortably with room to spare. This is the minimum I'd recommend for anyone serious about local AI.</p>
+<h3 id="mid-range-32-48gb-ram">Mid-Range: 32-48GB RAM</h3>
+<p><strong>Best for</strong>: Llama 3 13B, Qwen2 12B, Code Llama 34B<br />
+<strong>Devices</strong>: M2/M3 Max MacBook Pro, Mac Studio M2 Max<br />
+<strong>Experience</strong>: Excellent. You can run 13B models at full quality and experiment with larger quantized models.</p>
+<h3 id="high-end-64gb-ram">High-End: 64GB+ RAM</h3>
+<p><strong>Best for</strong>: Llama 3 70B, Mixtral 8x22B, full-precision 13B models<br />
+<strong>Devices</strong>: M2/M3 Ultra Mac Studio, Mac Pro<br />
+<strong>Experience</strong>: This is where local LLMs become genuinely competitive with cloud APIs. A 70B model at 4-bit quantization needs ~40GB, which fits comfortably in 64GB.</p>
+<p><strong>Quick note on quantization</strong>: 4-bit quantized models reduce RAM requirements by roughly 60%. A 70B model that would normally need 128GB+ of memory runs in ~40-64GB at Q4 precision. You lose a small amount of quality, but the tradeoff is almost always worth it.</p>
+<hr />
+<h2 id="method-1-ollama-recommended-for-most-people">Method 1: Ollama (Recommended for Most People)</h2>
+<p>Ollama is the easiest way to run Llama on Mac Apple Silicon. It handles model downloads, Metal acceleration, and serving — all with a clean CLI interface. Start here unless you have a specific reason not to.</p>
+<h3 id="installation">Installation</h3>
+<pre><code class="language-bash">brew install ollama
+</code></pre>
+<p>Or download the DMG directly from ollama.com if you prefer a GUI installer. The DMG version adds a menu bar icon, which is handy.</p>
+<h3 id="running-your-first-model">Running Your First Model</h3>
+<pre><code class="language-bash"># Download and run Llama 3.2 8B
+ollama pull llama3.2:8b
+ollama run llama3.2:8b
+</code></pre>
+<p>That's it. Ollama automatically detects Apple Silicon and enables Metal acceleration. The first run downloads the model (around 4.7GB for the 8B Q4 version), then drops you into an interactive chat.</p>
+<h3 id="useful-ollama-commands">Useful Ollama Commands</h3>
+<pre><code class="language-bash"># List available models
+ollama list
+
+# Run a specific quantization
+ollama run llama3.2:8b-instruct-q4_K_M
+
+# Run as an API server (useful for integrations)
+ollama serve
+
+# Check what's running
+ollama ps
+</code></pre>
+<h3 id="integrations-worth-knowing">Integrations Worth Knowing</h3>
+<p>Once Ollama is running as a server (<code>ollama serve</code>), it exposes a local API at <code>http://localhost:11434</code>. This means you can:</p>
+<ul>
+<li>Connect it to <strong>VS Code</strong> via the Continue extension for AI-assisted coding</li>
+<li>Use it with <strong>Open WebUI</strong> for a ChatGPT-style browser interface</li>
+<li>Integrate with <strong>Home Assistant</strong> for local AI automation</li>
+<li>Point any OpenAI-compatible client at it (it mimics the OpenAI API format)</li>
+</ul>
+<p>Ollama is the right default choice. It's actively maintained, the model library is extensive, and the Metal support is solid out of the box.</p>
+<hr />
+<h2 id="method-2-llamacpp-best-raw-performance">Method 2: llama.cpp (Best Raw Performance)</h2>
+<p>If you want maximum performance and control, llama.cpp is the tool. It's more involved to set up, but it gives you direct access to Metal acceleration flags, quantization options, and fine-grained memory controls.</p>
+<h3 id="building-with-metal-support">Building with Metal Support</h3>
+<pre><code class="language-bash"># Clone the repo
+git clone https://github.com/ggml-org/llama.cpp
+cd llama.cpp
+
+# Build with Metal acceleration enabled
+LLAMA_METAL=1 make -j$(sysctl -n hw.logicalcpu)
+</code></pre>
+<p>The <code>LLAMA_METAL=1</code> flag is critical. Without it, you're running on CPU only and leaving most of your hardware's capability on the table.</p>
+<h3 id="getting-gguf-models">Getting GGUF Models</h3>
+<p>llama.cpp uses the GGUF format. The best source is Hugging Face — search for "GGUF" plus your model name. Bartowski and TheBloke are reliable uploaders with well-tested quantizations.</p>
+<p>For Llama 3 8B, you want something like <code>Meta-Llama-3-8B-Instruct-Q4_K_M.gguf</code>. The <code>Q4_K_M</code> suffix means 4-bit quantization with medium quality — the best balance of size and performance for most use cases.</p>
+<h3 id="running-a-model">Running a Model</h3>
+<pre><code class="language-bash">./llama-cli \
+  -m models/Meta-Llama-3-8B-Instruct-Q4_K_M.gguf \
+  -n 512 \
+  --temp 0.7 \
+  -ngl 99
+</code></pre>
+<p>The <code>-ngl 99</code> flag offloads all 99 layers to the GPU (Metal). This is what makes it fast. If you run into memory issues, reduce this number to offload fewer layers.</p>
+<h3 id="when-to-choose-llamacpp-over-ollama">When to Choose llama.cpp Over Ollama</h3>
+<ul>
+<li>You want to benchmark specific quantizations</li>
+<li>You're running models not yet in Ollama's library</li>
+<li>You need fine-grained control over context length and sampling parameters</li>
+<li>You're building something custom and want direct GGUF access</li>
+</ul>
+<hr />
+<h2 id="method-3-lm-studio-best-for-non-technical-users">Method 3: LM Studio (Best for Non-Technical Users)</h2>
+<p>If command lines aren't your thing, LM Studio is a polished desktop app that wraps llama.cpp in a GUI. You get a model browser, drag-and-drop loading, and a chat interface that looks like a proper application.</p>
+<p>Download it from lmstudio.ai, install it like any Mac app, search for models in the built-in browser, and click download. Metal acceleration is enabled automatically on Apple Silicon.</p>
+<p>LM Studio is genuinely good software. The main tradeoff is that it's slightly less flexible than direct llama.cpp access and adds a layer of abstraction you can't always see through. But for someone who just wants to run local models without touching a terminal, it's the right choice.</p>
+<hr />
+<h2 id="performance-optimization-getting-more-speed">Performance Optimization: Getting More Speed</h2>
+<p>Once you have a model running, here are the tweaks that actually matter.</p>
+<h3 id="enable-metal-explicitly-ollama">Enable Metal Explicitly (Ollama)</h3>
+<p>Metal should be on by default, but you can force it:</p>
+<pre><code class="language-bash">export OLLAMA_METAL_ENABLED=1
+ollama serve
+</code></pre>
+<h3 id="choose-the-right-quantization">Choose the Right Quantization</h3>
+<p>Not all quantizations are equal. Here's a practical guide:</p>
+<table>
+<thead>
+<tr>
+<th>Quantization</th>
+<th>RAM Usage</th>
+<th>Quality</th>
+<th>Use When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q2_K</td>
+<td>Lowest</td>
+<td>Noticeably worse</td>
+<td>Tight on RAM</td>
+</tr>
+<tr>
+<td>Q4_K_M</td>
+<td>~4.7GB (8B)</td>
+<td>Very good</td>
+<td>Default choice</td>
+</tr>
+<tr>
+<td>Q5_K_M</td>
+<td>~5.7GB (8B)</td>
+<td>Excellent</td>
+<td>Have RAM to spare</td>
+</tr>
+<tr>
+<td>Q8_0</td>
+<td>~8.5GB (8B)</td>
+<td>Near-perfect</td>
+<td>Max quality</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Q4_K_M is the sweet spot</strong> for most people. The quality difference between Q4 and Q8 is small; the RAM difference is significant.</p>
+<h3 id="free-up-memory">Free Up Memory</h3>
+<p>This sounds obvious, but it matters. Before running large models:</p>
+<ul>
+<li>Quit Chrome (it's a memory hog)</li>
+<li>Stop Docker Desktop if it's running</li>
+<li>Close Xcode, Figma, and other heavy apps</li>
+</ul>
+<p>On a 16GB machine, freeing 4-6GB of RAM can be the difference between a model running smoothly and constant swapping.</p>
+<h3 id="context-length">Context Length</h3>
+<p>Longer context = more RAM. If you're running tight on memory, reduce the context window:</p>
+<pre><code class="language-bash"># In llama.cpp
+./llama-cli -m model.gguf -c 2048  # Instead of default 4096
+</code></pre>
+<p>In Ollama, you can set this in a Modelfile.</p>
+<hr />
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<h3 id="model-wont-load-out-of-memory">Model Won't Load / Out of Memory</h3>
+<p>First, check how much RAM the model actually needs versus what you have free. Run <code>ollama ps</code> to see active models and their memory usage. If you're running multiple models, stop the ones you're not using.</p>
+<h3 id="metal-errors-on-macos-sonoma">Metal Errors on macOS Sonoma</h3>
+<p>Some users hit Metal-related crashes on Sonoma. The quick fix:</p>
+<pre><code class="language-bash">export OLLAMA_METAL_ENABLED=0
+</code></pre>
+<p>This falls back to CPU-only mode. Slower, but stable. Check for Ollama updates first — most Sonoma-specific issues have been patched in recent releases.</p>
+<h3 id="slow-download-failed-model-downloads">Slow Download / Failed Model Downloads</h3>
+<p>Llama models are large. A 70B Q4 model is ~40GB. If downloads are failing:</p>
+<ul>
+<li>Check your firewall isn't blocking Ollama's download server</li>
+<li>Make sure you have enough disk space (models are stored in <code>~/.ollama/models</code>)</li>
+<li>Try downloading via the Ollama CLI rather than a GUI wrapper</li>
+</ul>
+<h3 id="verify-metal-is-actually-being-used">Verify Metal Is Actually Being Used</h3>
+<pre><code class="language-bash">system_profiler SPDisplaysDataType
+</code></pre>
+<p>This shows your GPU details. You can also watch GPU utilization in Activity Monitor (Window → GPU History) while running inference. If the GPU graph isn't moving, Metal isn't engaged.</p>
+<hr />
+<h2 id="model-storage-dont-overlook-this">Model Storage: Don't Overlook This</h2>
+<p>A collection of GGUF models adds up fast. A few 70B models can easily consume 150GB+. Your Mac's internal SSD is fast enough for model loading, but if you're building a serious local AI setup, an external NVMe SSD is worth considering.</p>
+<p>The Samsung T7 Shield 4TB is a solid choice — fast enough for model loading (1,050 MB/s read), durable, and reasonably priced. Store your model library there and point llama.cpp or LM Studio at the external drive.</p>
+<p>For sustained inference workloads on a MacBook, a cooling pad can help maintain consistent performance. The MacBook Air in particular has no fan, and while it handles inference well, it can throttle slightly under very long continuous sessions. A passive cooling pad helps dissipate heat.</p>
+<hr />
+<h2 id="bottom-line-what-should-you-actually-do">Bottom Line: What Should You Actually Do?</h2>
+<p>Here's my direct recommendation based on your situation:</p>
+<p><strong>If you're just getting started</strong>: Install Ollama, run <code>ollama pull llama3.2:8b</code>, and start chatting. You'll be up and running in 10 minutes. Upgrade to llama.cpp later if you need more control.</p>
+<p><strong>If you want maximum performance</strong>: Build llama.cpp with Metal support and download Q4_K_M GGUF models from Hugging Face. The extra setup time pays off in speed and flexibility.</p>
+<p><strong>If you hate terminals</strong>: LM Studio. No shame in it — it's good software.</p>
+<p><strong>Hardware recommendations</strong>:<br />
+- <strong>Best value</strong>: M2 MacBook Air 16GB (~$1,299) — handles 8B models well, portable, great battery life<br />
+- <strong>Prosumer pick</strong>: Mac Studio M2 Ultra 64GB (~$3,999) — runs 70B models comfortably, no thermal throttling, sits on your desk quietly doing serious work<br />
+- <strong>Hard pass</strong>: Any Mac with 8GB RAM for LLM work — save yourself the frustration</p>
+<p>The local AI experience on Apple Silicon has crossed a threshold. It's not a compromise anymore. A 70B model running at 30-40 tokens/sec on a Mac Studio is genuinely useful for real work — coding assistance, document analysis, private conversations you don't want going to a cloud API. The hardware is there. The software is mature. There's no reason to wait.</p>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+  </article>
+</div>
+</body>
+</html>
