@@ -1262,7 +1262,7 @@ function renderMobile(){
       var topModel=models[0];
       var fitColor=topModel?(topModel.fit>=90?'var(--fit-perfect)':topModel.fit>=75?'var(--fit-good)':topModel.fit>=60?'var(--fit-marginal)':'var(--fit-tight)'):'var(--text-muted)';
 
-      h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'">';
+      h+='<div class="m-hw-card'+(isFeatured?' featured':'')+'" style="cursor:pointer" onclick="openHardwareDetailFromCard(event,\''+hw.id+'\')">';
       h+='<div class="m-hw-header"><div class="m-hw-name" style="color:'+(isFeatured?'#76b900':'var(--text)')+'">'+hw.label+'</div><span class="price-badge">'+hw.price+'</span></div>';
       h+='<div class="m-hw-stats">';
       h+='<div class="m-hw-stat"><strong>'+hw.mem+'</strong>GB</div>';
@@ -1379,7 +1379,7 @@ function renderRecommendationsView() {
       var isFeatured = hw.featured || !!badge;
       var fitColor = topModel ? (topModel.fit>=90?'var(--fit-perfect)':topModel.fit>=75?'var(--fit-good)':topModel.fit>=60?'var(--fit-marginal)':'var(--fit-tight)') : 'var(--text-muted)';
 
-      h += '<div class="rec-card'+(isFeatured?' featured':'')+'">';
+      h += '<div class="rec-card'+(isFeatured?' featured':'')+'" style="cursor:pointer" onclick="openHardwareDetailFromCard(event,\''+hw.id+'\')">';
       if(badge) h += '<div class="rec-badge '+badge.cls+'">'+badge.text+'</div>';
       h += '<div class="rec-card-name">'+hw.label+'</div>';
       h += '<div class="rec-card-price">'+hw.price+'</div>';
@@ -1631,6 +1631,12 @@ function showHWPanel(hw) {
 
   d3.select('#pBody').html(html);
   panel.classed('open',true);
+}
+
+function openHardwareDetailFromCard(event, hwId) {
+  if(event && event.target && event.target.closest('a,button,input,select,textarea,label')) return;
+  var hw = HARDWARE.find(function(x){ return x.id === hwId; });
+  if(hw) showHWPanel(hw);
 }
 
 function showUCPanel(uc) {
@@ -2484,7 +2490,7 @@ function renderModelDetail(model) {
 
   hwMatches.forEach(function(item, i) {
     var isBest = i === 0;
-    h += '<div class="model-hw-match'+(isBest?' best':'')+'">';
+    h += '<div class="model-hw-match'+(isBest?' best':'')+'" style="cursor:pointer" onclick="openHardwareDetailFromCard(event,\''+item.hw.id+'\')">';
     h += '<div style="flex:1;min-width:0">';
     if(isBest) h += '<div style="font-size:9px;font-weight:600;color:var(--fit-perfect);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">Best Value</div>';
     h += '<div style="font-size:14px;font-weight:600">'+item.hw.label+'</div>';
@@ -2554,7 +2560,7 @@ function renderCompareView() {
     // Mobile: card layout
     filtered.forEach(function(hw){
       var isFeatured = hw.featured;
-      h += '<div style="padding:14px;border-radius:12px;border:1px solid '+(isFeatured?'rgba(118,185,0,0.3)':'var(--border)')+';background:'+(isFeatured?'rgba(118,185,0,0.04)':'var(--bg-card)')+';margin-bottom:10px">';
+      h += '<div style="padding:14px;border-radius:12px;border:1px solid '+(isFeatured?'rgba(118,185,0,0.3)':'var(--border)')+';background:'+(isFeatured?'rgba(118,185,0,0.04)':'var(--bg-card)')+';margin-bottom:10px;cursor:pointer" onclick="openHardwareDetailFromCard(event,\''+hw.id+'\')">';
       h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;flex-wrap:wrap">';
       h += '<div style="font-size:14px;font-weight:600;color:'+(isFeatured?'#76b900':'var(--text)')+';min-width:0">'+hw.label+'</div>';
       h += '<span class="price-badge">'+hw.price+'</span></div>';
@@ -2588,8 +2594,8 @@ function renderCompareView() {
       var bestUC = 'General';
       var bestUCCount = 0;
       USE_CASES.forEach(function(uc){ var c = (hw.models[uc.id]||[]).length; if(c > bestUCCount){ bestUCCount = c; bestUC = uc.label.split(' ')[0]; }});
-      h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03)"':'')+'>';
-      h += '<td class="hw-name"><span style="color:'+(isFeatured?'#76b900':'var(--text)')+';cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.15);text-underline-offset:3px" onclick="_origShowHWPanel(HARDWARE.find(function(x){return x.id===\''+hw.id+'\';}))">'+hw.label+'</span></td>';
+      h += '<tr'+(isFeatured?' style="background:rgba(118,185,0,0.03);cursor:pointer"':' style="cursor:pointer"')+' onclick="openHardwareDetailFromCard(event,\''+hw.id+'\')">';
+      h += '<td class="hw-name"><span style="color:'+(isFeatured?'#76b900':'var(--text)')+';text-decoration:underline;text-decoration-color:rgba(255,255,255,0.15);text-underline-offset:3px">'+hw.label+'</span></td>';
       h += '<td><span class="price-badge">'+hw.price+'</span></td>';
       h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+hw.mem+'<span style="color:var(--text-dim);font-weight:400">GB</span></td>';
       h += '<td style="font-size:11px;color:var(--text-dim)">'+hw.backend+'</td>';
