@@ -1697,6 +1697,7 @@ function openOwnedHardwareDetail(ownedLabel) {
   selectedOwned = owned;
   renderMySetupView();
   showOwnedHWPanel(owned);
+  updateHash('mysetup', owned.label, true);
 }
 
 function showUCPanel(uc) {
@@ -2314,7 +2315,7 @@ function switchView(view) {
       }
       if(view === 'model-search') { renderModelSearchView(); updateHash('modelsearch'); }
       else if(view === 'compare') { renderCompareView(); updateHash('compare'); }
-      else if(view === 'mysetup') { renderMySetupView(); updateHash('mysetup'); }
+      else if(view === 'mysetup') { renderMySetupView(); updateHash('mysetup', selectedOwned && selectedOwned.label); }
     }
   }
 }
@@ -2804,13 +2805,20 @@ function renderOwnedResults(owned) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // DEEP LINKING (URL HASH)
 // ═══════════════════════════════════════════════════════════════════════════════
-function updateHash(type,id){
-  if(type==='overview') history.replaceState(null,'','#');
-  else if(type==='uc') history.replaceState(null,'','#'+id);
-  else if(type==='hw') history.replaceState(null,'','#hw/'+id);
-  else if(type==='modelsearch') history.replaceState(null,'','#models');
-  else if(type==='compare') history.replaceState(null,'','#compare');
-  else if(type==='mysetup') history.replaceState(null,'','#mysetup');
+function updateHash(type,id,push){
+  var target = '#';
+  if(type==='overview') target = '#';
+  else if(type==='uc') target = '#'+id;
+  else if(type==='hw') target = '#hw/'+id;
+  else if(type==='modelsearch') target = '#models';
+  else if(type==='compare') target = '#compare';
+  else if(type==='mysetup') target = id ? '#mysetup/'+encodeURIComponent(id) : '#mysetup';
+
+  if(push){
+    if(location.hash !== target) location.hash = target;
+    return;
+  }
+  history.replaceState(null,'',target);
 }
 
 function handleHash(){
@@ -2818,7 +2826,16 @@ function handleHash(){
   if(!hash){ switchView('recommendations'); return; }
   if(hash==='models'){ switchView('model-search'); return; }
   if(hash==='compare'){ switchView('compare'); return; }
-  if(hash==='mysetup'){ switchView('mysetup'); return; }
+  if(hash==='mysetup'){ selectedOwned = null; switchView('mysetup'); panel.classed('open',false); return; }
+  if(hash.indexOf('mysetup/')===0){
+    var ownedLabel = decodeURIComponent(hash.slice(8));
+    var owned = OWNED_HARDWARE.find(function(o){ return o.label===ownedLabel; }) || null;
+    selectedOwned = owned;
+    switchView('mysetup');
+    if(owned) showOwnedHWPanel(owned);
+    else panel.classed('open',false);
+    return;
+  }
   if(hash==='map'){ switchView('explorer'); renderOverview(); return; }
   if(hash.indexOf('hw/')===0){
     var hwId=hash.slice(3);
