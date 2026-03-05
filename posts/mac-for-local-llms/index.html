@@ -6,9 +6,16 @@
 <title>Mac for Local LLMs: The Complete Apple Silicon Guide (2026)</title>
 <meta name="description" content="Complete guide to running local LLMs on Mac. Covers every Apple Silicon chip from M1 to M5 Max, which models fit, real performance numbers, and setup tools.">
 <link rel="canonical" href="https://llmpicker.blog/posts/mac-for-local-llms/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Mac for Local LLMs: The Complete Apple Silicon Guide (2026)">
 <meta property="og:description" content="Complete guide to running local LLMs on Mac. Covers every Apple Silicon chip from M1 to M5 Max, which models fit, real performance numbers, and setup tools.">
 <meta property="og:url" content="https://llmpicker.blog/posts/mac-for-local-llms/">
+<meta property="og:image" content="https://llmpicker.blog/assets/og-default.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mac for Local LLMs: The Complete Apple Silicon Guide (2026)">
+<meta name="twitter:description" content="Complete guide to running local LLMs on Mac. Covers every Apple Silicon chip from M1 to M5 Max, which models fit, real performance numbers, and setup tools.">
+<meta name="twitter:image" content="https://llmpicker.blog/assets/og-default.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -190,40 +197,40 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h2 id="apple-silicon-comparison-guides">Apple Silicon Comparison Guides</h2>
 <p>We've tested specific Mac configurations head-to-head for LLM workloads. These guides include real benchmarks, model compatibility details, and buying recommendations.</p>
 
-<div class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.04);border-radius:12px;background:rgba(255,255,255,0.02);margin:10px 0;color:#a0a0ba">
-  <div style="font-size:14px;font-weight:700;color:#a0a0ba;margin-bottom:4px">How to Run Llama on Mac: Apple Silicon Guide</div>
-  <div style="font-size:12px;color:#777792;line-height:1.5">Scheduled: March 13, 2026 at 10:00 AM ET.</div>
-</div>
+<a href="/posts/run-llama-on-mac/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
+  <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">How to Run Llama on Mac: Apple Silicon Guide</div>
+  <div style="font-size:12px;color:#8888a8;line-height:1.5">Step-by-step setup with Ollama, llama.cpp, and model recommendations by Mac tier.</div>
+</a>
 
 <a href="/posts/macbook-air-m5-local-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
   <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">MacBook Air M5 for Local LLMs</div>
   <div style="font-size:12px;color:#8888a8;line-height:1.5">Can the M5 MacBook Air handle serious local AI work? Full breakdown of which models fit and real-world performance.</div>
 </a>
 
-<div class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.04);border-radius:12px;background:rgba(255,255,255,0.02);margin:10px 0;color:#a0a0ba">
-  <div style="font-size:14px;font-weight:700;color:#a0a0ba;margin-bottom:4px">MacBook Air M4 16GB vs M5 16GB for LLMs</div>
-  <div style="font-size:12px;color:#777792;line-height:1.5">Scheduled: March 5, 2026 at 2:00 PM ET.</div>
-</div>
+<a href="/posts/macbook-air-m4-16-vs-m5-16-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
+  <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">MacBook Air M4 16GB vs M5 16GB for LLMs</div>
+  <div style="font-size:12px;color:#8888a8;line-height:1.5">Same memory tier, different chip generation. See whether the M5 upgrade is worth it.</div>
+</a>
 
-<div class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.04);border-radius:12px;background:rgba(255,255,255,0.02);margin:10px 0;color:#a0a0ba">
-  <div style="font-size:14px;font-weight:700;color:#a0a0ba;margin-bottom:4px">MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB</div>
-  <div style="font-size:12px;color:#777792;line-height:1.5">Scheduled: March 5, 2026 at 1:00 PM ET.</div>
-</div>
+<a href="/posts/macbook-air-m5-32-vs-macbook-pro-m5-pro-64-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
+  <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB</div>
+  <div style="font-size:12px;color:#8888a8;line-height:1.5">Portability versus model capacity for developers choosing a Mac laptop for local AI.</div>
+</a>
 
-<div class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.04);border-radius:12px;background:rgba(255,255,255,0.02);margin:10px 0;color:#a0a0ba">
-  <div style="font-size:14px;font-weight:700;color:#a0a0ba;margin-bottom:4px">Mac Studio M4 Max: 64GB vs 128GB for LLMs</div>
-  <div style="font-size:12px;color:#777792;line-height:1.5">Scheduled: March 5, 2026 at 3:00 PM ET.</div>
-</div>
+<a href="/posts/mac-studio-m4-max-64-vs-128-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
+  <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">Mac Studio M4 Max: 64GB vs 128GB for LLMs</div>
+  <div style="font-size:12px;color:#8888a8;line-height:1.5">Model compatibility, real performance, and whether the extra unified memory is worth it.</div>
+</a>
 
 <a href="/posts/rtx-4090-vs-mac-studio-m4-max-128-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
   <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">RTX 4090 vs Mac Studio M4 Max 128GB</div>
   <div style="font-size:12px;color:#8888a8;line-height:1.5">NVIDIA's fastest consumer GPU versus Apple's high-memory workstation. Which is better for local LLM inference?</div>
 </a>
 
-<div class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.04);border-radius:12px;background:rgba(255,255,255,0.02);margin:10px 0;color:#a0a0ba">
-  <div style="font-size:14px;font-weight:700;color:#a0a0ba;margin-bottom:4px">RTX 4090 vs MacBook Pro M5 Max</div>
-  <div style="font-size:12px;color:#777792;line-height:1.5">Scheduled: March 5, 2026 at 5:00 PM ET.</div>
-</div>
+<a href="/posts/rtx-4090-vs-macbook-pro-m5-max-llm/" class="guide-card" style="display:block;padding:16px 18px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);text-decoration:none;transition:all .2s;margin:10px 0">
+  <div style="font-size:14px;font-weight:700;color:#e8e8f0;margin-bottom:4px">RTX 4090 vs MacBook Pro M5 Max</div>
+  <div style="font-size:12px;color:#8888a8;line-height:1.5">Desktop CUDA speed versus portable high-memory Apple Silicon for local LLM workflows.</div>
+</a>
 
 <hr />
 <h2 id="bottom-line">Bottom Line</h2>
