@@ -44,6 +44,7 @@ svg{display:block}
 .header{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,18,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);pointer-events:none}
 .header>*{pointer-events:auto}
 .logo{display:flex;align-items:center;gap:10px}
+.logo{cursor:pointer}
 .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--coding));border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
 .logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
 .logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
@@ -408,6 +409,38 @@ svg{display:block}
   .rec-card-price{font-size:20px}
   #runpod-footer{display:none!important}
 }
+
+/* Final mobile overrides (kept last so they win over desktop declarations) */
+@media(max-width:768px){
+  .header{position:sticky;top:0;left:0;right:0;padding:10px 12px;gap:8px}
+  .logo{width:100%;justify-content:space-between}
+  .controls{width:100%;display:flex;flex-wrap:wrap;gap:6px}
+  .controls > a{flex:1 1 calc(50% - 6px);text-align:center}
+  .search-box{order:3;flex:1 1 100%}
+  .search-box input{width:100%}
+  #btnReset{order:4}
+
+  .nav-tabs{
+    position:relative;
+    top:auto;
+    left:auto;
+    right:auto;
+    padding:6px 10px;
+    z-index:1;
+    gap:4px;
+  }
+  .nav-tab{padding:6px 10px;font-size:11px}
+
+  .page-view{
+    padding:14px 12px 88px;
+    min-height:auto;
+    max-width:none;
+    overflow:visible;
+  }
+  .mobile-view{padding:12px 12px 88px}
+  .compare-wrap{margin:0 -12px;border-radius:0;border-left:none;border-right:none}
+  .model-hw-match{flex-direction:column;align-items:stretch}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"LLM Picker","description":"Interactive explorer mapping LLM models to the hardware that runs them best. Find your perfect local AI setup.","url":"https://llmpicker.blog","applicationCategory":"UtilityApplication","operatingSystem":"Web"}
@@ -416,7 +449,7 @@ svg{display:block}
 <div class="bg-grad"></div>
 
 <div class="header">
-  <div class="logo">
+  <div class="logo" onclick="goHome()">
     <div class="logo-icon">LP</div>
     <div class="logo-text">LLM Picker <span>· Hardware Explorer</span></div>
   </div>
@@ -2270,6 +2303,8 @@ function switchView(view) {
 
   var headerSearch = document.querySelector('.search-box');
 
+  var onMobile = isMobile();
+
   if(view === 'explorer') {
     // D3 interactive map mode
     if(canvas) canvas.style.display = '';
@@ -2280,8 +2315,8 @@ function switchView(view) {
     if(footer) footer.style.display = '';
     if(quizFab) quizFab.style.display = '';
     if(headerSearch) headerSearch.style.display = '';
-    if(!isMobile()) { document.body.style.overflow = 'hidden'; document.body.style.height = '100vh'; }
-    if(isMobile()) renderMobile();
+    if(!onMobile) { document.body.style.overflow = 'hidden'; document.body.style.height = '100vh'; }
+    if(onMobile) renderMobile();
     // Hide rec view
     var recView = document.getElementById('view-recommendations');
     if(recView) recView.classList.remove('active');
@@ -2302,8 +2337,16 @@ function switchView(view) {
     if(view === 'recommendations') {
       if(headerSearch) headerSearch.style.display = '';
       var recView = document.getElementById('view-recommendations');
-      if(recView) recView.classList.add('active');
-      renderRecommendationsView();
+      if(onMobile) {
+        // Mobile uses card feed renderer, not the desktop recommendations page shell.
+        if(mobile) mobile.classList.remove('hidden');
+        if(recView) recView.classList.remove('active');
+        renderMobile();
+      } else {
+        if(mobile) mobile.classList.add('hidden');
+        if(recView) recView.classList.add('active');
+        renderRecommendationsView();
+      }
       window.scrollTo(0,0);
       updateHash('overview');
     } else {
@@ -2318,6 +2361,12 @@ function switchView(view) {
       else if(view === 'mysetup') { renderMySetupView(); updateHash('mysetup', selectedOwned && selectedOwned.label); }
     }
   }
+}
+
+function goHome() {
+  // Explicit home behavior avoids blank states after cross-page navigation.
+  switchView('recommendations');
+  if(isMobile()) renderMobile();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
