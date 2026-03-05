@@ -1639,6 +1639,66 @@ function openHardwareDetailFromCard(event, hwId) {
   if(hw) showHWPanel(hw);
 }
 
+function showOwnedHWPanel(owned) {
+  var mem = owned.vram || owned.ram || 0;
+  var compatible = MODEL_DB.filter(function(m){ return (m.ram || m.vram || 0) <= mem * 1.15; });
+  compatible.sort(function(a,b){ return (b.ram||b.vram||0) - (a.ram||a.vram||0); });
+
+  var top = compatible.slice(0, 8).map(function(m){
+    return {
+      name: m.name,
+      params: m.params,
+      ram: m.ram || m.vram || 0,
+      fit: calcModelFit(m.ram || m.vram || 0, mem),
+      toks: '-'
+    };
+  });
+
+  var modelsByUC = { coding:[], chat:[], reasoning:[], agents:[] };
+  top.forEach(function(m){
+    var src = MODEL_DB.find(function(x){ return x.name===m.name; });
+    var uc = src && src.useCase ? src.useCase : 'chat';
+    if(!modelsByUC[uc]) uc = 'chat';
+    modelsByUC[uc].push(m);
+  });
+
+  d3.select('#pCat').text('MY SETUP').style('color','var(--accent)');
+  d3.select('#pTitle').text(owned.label);
+
+  var html = '<p style="color:var(--text-dim);font-size:12px;line-height:1.5;margin-bottom:12px">Your selected hardware profile. Compatibility is estimated from memory capacity and quantized model requirements.</p>';
+  html += '<div style="margin-bottom:14px"><span class="price-badge">'+mem+'GB</span></div>';
+  html += '<div class="stat-grid">';
+  html += '<div class="stat-card"><div class="stat-label">Memory</div><div class="stat-val">'+mem+'<span class="stat-unit"> GB</span></div></div>';
+  html += '<div class="stat-card"><div class="stat-label">Backend</div><div class="stat-val" style="font-size:11px;color:var(--accent)">'+owned.backend+'</div></div>';
+  html += '<div class="stat-card"><div class="stat-label">Type</div><div class="stat-val" style="font-size:12px">'+owned.type.toUpperCase()+'</div></div>';
+  html += '<div class="stat-card"><div class="stat-label">Fits Models</div><div class="stat-val">'+compatible.length+'</div></div>';
+  html += '</div>';
+
+  html += '<div class="sec-title">Top Compatible Models</div>';
+  USE_CASES.forEach(function(uc){
+    var models = modelsByUC[uc.id] || [];
+    if(!models.length) return;
+    html += '<div style="margin-bottom:12px">';
+    html += '<div style="font-size:11px;font-weight:600;color:'+uc.color+';margin-bottom:5px">'+uc.icon+' '+uc.label+'</div>';
+    html += '<div class="model-list">';
+    models.forEach(function(m){
+      html += '<div class="model-item"><div><div class="model-item-name">'+m.name+'</div><div style="font-size:9px;color:var(--text-muted)">'+m.params+' · '+m.ram+'GB · Fit '+m.fit+'%</div></div><div class="model-item-meta">'+m.toks+' t/s</div></div>';
+    });
+    html += '</div></div>';
+  });
+
+  d3.select('#pBody').html(html);
+  panel.classed('open',true);
+}
+
+function openOwnedHardwareDetail(ownedLabel) {
+  var owned = OWNED_HARDWARE.find(function(x){ return x.label === ownedLabel; });
+  if(!owned) return;
+  selectedOwned = owned;
+  renderMySetupView();
+  showOwnedHWPanel(owned);
+}
+
 function showUCPanel(uc) {
   d3.select('#pCat').text('USE CASE').style('color',uc.color);
   d3.select('#pTitle').text(uc.label);
@@ -2631,7 +2691,7 @@ function renderMySetupView() {
   h += '<div class="setup-section-title">NVIDIA GPUs</div>';
   h += '<div class="setup-grid">';
   OWNED_HARDWARE.filter(function(o){return o.backend==='NVIDIA CUDA';}).forEach(function(o){
-    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="openOwnedHardwareDetail(\''+o.label+'\')">';
     h += '<div class="setup-card-name">'+o.label+'</div>';
     h += '<div class="setup-card-spec">'+o.vram+'GB VRAM</div></div>';
   });
@@ -2641,7 +2701,7 @@ function renderMySetupView() {
   h += '<div class="setup-section-title">Intel GPUs</div>';
   h += '<div class="setup-grid">';
   OWNED_HARDWARE.filter(function(o){return o.backend==='Intel oneAPI';}).forEach(function(o){
-    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="openOwnedHardwareDetail(\''+o.label+'\')">';
     h += '<div class="setup-card-name">'+o.label+'</div>';
     h += '<div class="setup-card-spec">'+o.vram+'GB VRAM</div></div>';
   });
@@ -2651,7 +2711,7 @@ function renderMySetupView() {
   h += '<div class="setup-section-title">Apple Silicon</div>';
   h += '<div class="setup-grid">';
   OWNED_HARDWARE.filter(function(o){return o.type==='mac';}).forEach(function(o){
-    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="selectedOwned=OWNED_HARDWARE.find(function(x){return x.label===\''+o.label+'\'});renderMySetupView()">';
+    h += '<div class="setup-card'+(selectedOwned&&selectedOwned.label===o.label?' selected':'')+'" onclick="openOwnedHardwareDetail(\''+o.label+'\')">';
     h += '<div class="setup-card-name">'+o.label+'</div>';
     h += '<div class="setup-card-spec">'+o.ram+'GB unified</div></div>';
   });
