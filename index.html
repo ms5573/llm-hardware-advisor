@@ -572,7 +572,7 @@ const HARDWARE = [
   },
   {
     id:'macbook_air_m5_16', label:'MacBook Air M5 16GB', price:'$1,099', tier:'Budget',
-    mem:16, backend:'Apple Metal', desc:'Apple M5 chip, 16GB unified memory, 153GB/s bandwidth. 28% faster than M4. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    mem:16, backend:'Apple Metal', desc:'Apple M5 chip, 16GB unified memory, 153GB/s bandwidth. 28% faster than M4.',
     amazon:'https://www.apple.com/macbook-air/', amazonLabel:'Pre-order on Apple Store →',
     runpod:null,
     color:'#a8a8a8', total:300,
@@ -601,7 +601,7 @@ const HARDWARE = [
   },
   {
     id:'macbook_air_m5_32', label:'MacBook Air M5 32GB', price:'$1,499', tier:'Mid-Range',
-    mem:32, backend:'Apple Metal', desc:'Apple M5 chip, 32GB unified memory — first Air that runs 32B models. Runs Mixtral 8×7B Q4 on a laptop. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    mem:32, backend:'Apple Metal', desc:'Apple M5 chip, 32GB unified memory — first Air that runs 32B models. Runs Mixtral 8×7B Q4 on a laptop.',
     amazon:'https://www.apple.com/macbook-air/', amazonLabel:'Pre-order on Apple Store →',
     runpod:null,
     color:'#a8a8a8', total:330,
@@ -775,7 +775,7 @@ const HARDWARE = [
   },
   {
     id:'macbook_pro_m5pro_64', label:'MacBook Pro M5 Pro 64GB', price:'$2,499', tier:'Serious',
-    mem:64, backend:'Apple Metal', desc:'Apple M5 Pro, 64GB unified memory, 307GB/s bandwidth. Runs Llama 3.3 70B Q4 in a laptop. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    mem:64, backend:'Apple Metal', desc:'Apple M5 Pro, 64GB unified memory, 307GB/s bandwidth. Runs Llama 3.3 70B Q4 in a laptop.',
     amazon:'https://www.apple.com/macbook-pro/', amazonLabel:'Pre-order on Apple Store →',
     runpod:null,
     color:'#a8a8a8', total:375,
@@ -804,7 +804,7 @@ const HARDWARE = [
   },
   {
     id:'macbook_pro_m5max_128', label:'MacBook Pro M5 Max 128GB', price:'$3,999', tier:'Serious',
-    mem:128, backend:'Apple Metal', desc:'Apple M5 Max 40-core GPU, 128GB unified memory, 614GB/s bandwidth. Fastest Apple Silicon laptop ever made for local LLMs. Ships March 11. (Token speeds estimated — real benchmarks pending)',
+    mem:128, backend:'Apple Metal', desc:'Apple M5 Max 40-core GPU, 128GB unified memory, 614GB/s bandwidth. Fastest Apple Silicon laptop ever made for local LLMs.',
     amazon:'https://www.apple.com/macbook-pro/', amazonLabel:'Pre-order on Apple Store →',
     runpod:null,
     color:'#a8a8a8', total:415,
@@ -1370,7 +1370,7 @@ function renderRecommendationsView() {
       var hwPrice = parseFloat(hw.price.replace(/[$,]/g,''));
       if(hwPrice >= 1500) {
         var tbySugg = getRunpodSuggestion(hw.mem);
-        h += '<div class="runpod-try-link">Test these models first? <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try on RunPod</a> from '+tbySugg.price+'</div>';
+        h += '<div class="runpod-try-link">Test these models first? <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Try on RunPod</a> from '+tbySugg.price+'</div>';
       }
 
       if(models.length > 1) {
@@ -1401,7 +1401,7 @@ function renderRecommendationsView() {
           var suggestion = getRunpodSuggestion(exampleRam);
           h += '<div class="runpod-gap-nudge">';
           h += '<div class="nudge-label">Can\'t run '+exampleModel.params+' models locally?</div>';
-          h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try a '+suggestion.gpu+' on RunPod</a> \u2014 '+suggestion.price+', no hardware needed';
+          h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Try a '+suggestion.gpu+' on RunPod</a> \u2014 '+suggestion.price+', no hardware needed';
           h += '</div>';
         }
       }
@@ -1466,7 +1466,7 @@ d3.select('#panelClose').on('click',()=>panel.classed('open',false));
 // ═══════════════════════════════════════════════════════════════════════════════
 function amazonBtnHTML(url, label) {
   label = label || 'Check Price on Amazon';
-  return '<a href="'+url+'" target="_blank" rel="noopener" class="amazon-btn">' +
+  return '<a href="'+url+'" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">' +
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 21.15c4.16 2.07 8.6 3.14 13.34 2.28 2.4-.44 4.6-1.37 6.6-2.76.4-.28.76-.6.56-1.1-.2-.48-.72-.36-1.1-.16-3.2 1.7-6.6 2.5-10.24 2.22-3.16-.24-6.08-1.2-8.74-2.9-.3-.2-.56-.44-.9-.28-.4.2-.36.56.48.7zM21.5 19.5c-.38-.48-2.48-.6-3.44-.48-.28.04-.32.2-.08.36.48.32.96.56 1.48.68 1 .24 2.28.12 2.52-.08.24-.2 0-.96-.48-1.48z"/><path d="M14.25 3.75c0-1.06.04-1.94-.5-2.88-.44-.76-1.14-1.22-1.92-1.22-2.12 0-3.36 1.62-3.36 4.02 0 1.52.72 3.22 3.04 3.22.88 0 1.66-.34 2.2-1.06.66-.88.54-2.06.54-3.08zm2.08 7.14c-.14.16-.38.16-.56.08-.78-.66-.92-1.28-1.36-1.92-1.3 1.32-2.22 1.72-3.9 1.72-2 0-3.54-1.22-3.54-3.68 0-1.92 1.04-3.22 2.52-3.86 1.28-.56 3.06-.66 4.42-.82V2.1c0-.5.04-1.08-.26-1.5-.26-.38-.74-.54-1.18-.54-.8 0-1.52.42-1.7 1.28-.04.2-.18.38-.38.4L8.2 1.46c-.18-.04-.38-.18-.32-.44C8.48-1.4 10.72.08 12.86.08c1.1 0 2.54.3 3.4 1.12 1.1 1.04.98 2.42.98 3.92v3.56c0 1.06.44 1.54.86 2.12.14.2.18.46 0 .6-.44.38-1.24.72-1.68 1.04l-.09-.05z"/></svg>' +
     label + '</a>' +
     '<div class="amazon-sub">Affiliate link \u00B7 No extra cost to you</div>';
@@ -1474,7 +1474,7 @@ function amazonBtnHTML(url, label) {
 
 function runpodBtnHTML(runpod) {
   if (!runpod) return "";
-  return '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" class="runpod-btn">' +
+  return '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer" class="runpod-btn">' +
     'Try ' + runpod.gpu + ' on RunPod \u00b7 ' + runpod.price + '</a>' +
     '<div class="runpod-try-label">No hardware needed \u00b7 Pay per hour</div>';
 }
@@ -1563,7 +1563,7 @@ function showHWPanel(hw) {
   html += '<div class="sec-title">Recommended Accessory</div>';
   ACCESSORIES.forEach(function(a){
     html += '<div class="model-item" style="margin-bottom:4px"><div><div class="model-item-name">'+a.label+'</div><div style="font-size:9px;color:var(--text-muted)">'+a.desc+'</div></div><div class="model-item-meta">'+a.price+'</div></div>';
-    html += '<a href="'+a.amazon+'" target="_blank" rel="noopener" style="display:block;text-align:center;color:var(--amazon);font-size:11px;text-decoration:none;padding:4px">View SSD on Amazon \u2192</a>';
+    html += '<a href="'+a.amazon+'" target="_blank" rel="sponsored nofollow noopener noreferrer" style="display:block;text-align:center;color:var(--amazon);font-size:11px;text-decoration:none;padding:4px">View SSD on Amazon \u2192</a>';
   });
 
   var related = getRelatedHW(hw, 3);
@@ -1614,7 +1614,7 @@ function showUCPanel(uc) {
       html += '<div class="model-item"><div><div class="model-item-name">'+m.name+'</div><div style="font-size:9px;color:var(--text-muted)">'+m.params+' \u00B7 Fit '+m.fit+'%</div></div><div class="model-item-meta">'+m.toks+' t/s</div></div>';
     });
     html += '</div>';
-    html += '<a href="'+hw.amazon+'" target="_blank" rel="noopener" style="display:block;text-align:center;color:var(--amazon);font-size:11px;font-weight:500;text-decoration:none;padding:8px 0 2px">View on Amazon \u2192</a>';
+    html += '<a href="'+hw.amazon+'" target="_blank" rel="sponsored nofollow noopener noreferrer" style="display:block;text-align:center;color:var(--amazon);font-size:11px;font-weight:500;text-decoration:none;padding:8px 0 2px">View on Amazon \u2192</a>';
     html += '</div>';
   });
 
@@ -2108,7 +2108,7 @@ function renderQuizResult(){
       var qSugg = getRunpodSuggestion(bigRam);
       h+='<div class="runpod-gap-nudge" style="margin-top:12px">';
       h+='<div class="nudge-label">Want to run bigger models like '+biggest.name+'?</div>';
-      h+='<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try cloud GPUs on RunPod</a> \u2014 from '+qSugg.price;
+      h+='<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Try cloud GPUs on RunPod</a> \u2014 from '+qSugg.price;
       h+='</div>';
     }
   }
@@ -2426,7 +2426,7 @@ function renderModelDetail(model) {
     h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
     h += fitBadgeHTML(item.fit);
     h += '<span class="price-badge">'+item.hw.price+'</span>';
-    h += '<a href="'+item.hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">Buy</a>';
+    h += '<a href="'+item.hw.amazon+'" target="_blank" rel="sponsored nofollow noopener noreferrer" class="buy-btn">Buy</a>';
     h += '</div></div>';
   });
 
@@ -2496,7 +2496,7 @@ function renderCompareView() {
       h += '<span><strong style="color:var(--accent);font-family:\'JetBrains Mono\',monospace">'+hw.total+'</strong> models</span>';
       h += '<span>'+hw.backend+'</span>';
       h += '<span class="tag" style="font-size:10px">'+hw.tier+'</span></div>';
-      h += '<a href="'+hw.amazon+'" target="_blank" rel="noopener" class="amazon-btn" style="margin-top:10px">Check Price on Amazon</a>';
+      h += '<a href="'+hw.amazon+'" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn" style="margin-top:10px">Check Price on Amazon</a>';
       h += '</div>';
     });
   } else {
@@ -2529,7 +2529,7 @@ function renderCompareView() {
       h += '<td style="font-size:11px;color:var(--text-dim)">'+bestUC+'</td>';
       h += '<td style="font-family:\'JetBrains Mono\',monospace;font-weight:600;color:var(--accent)">'+hw.total+'</td>';
       h += '<td><span class="tag">'+hw.tier+'</span></td>';
-      h += '<td>'+(hw.amazon?'<a href="'+hw.amazon+'" target="_blank" rel="noopener" class="buy-btn">'+(hw.amazonLabel?'Check Price ↗':'Check Price')+'</a>':'<span style="color:var(--text-muted);font-size:11px">—</span>')+'</td>';
+      h += '<td>'+(hw.amazon?'<a href="'+hw.amazon+'" target="_blank" rel="sponsored nofollow noopener noreferrer" class="buy-btn">'+(hw.amazonLabel?'Check Price ↗':'Check Price')+'</a>':'<span style="color:var(--text-muted);font-size:11px">—</span>')+'</td>';
       h += '</tr>';
     });
     h += '</tbody></table></div>';
@@ -2644,7 +2644,7 @@ function renderOwnedResults(owned) {
       h += '<div class="cant-row">';
       h += '<div style="min-width:0"><div style="font-size:12px;font-weight:500">'+m.name+'</div>';
       h += '<div style="font-size:10px;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace">'+m.params+' \u00b7 '+mram+'GB needed</div></div>';
-      h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Try on RunPod \u2014 '+sugg.gpu+' '+sugg.price+'</a>';
+      h += '<a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Try on RunPod \u2014 '+sugg.gpu+' '+sugg.price+'</a>';
       h += '</div>';
     });
     h += '</div>';
@@ -2715,7 +2715,7 @@ if(location.hash && location.hash!=='#'){ handleHash(); } else { switchView('rec
 </script>
 <div id="runpod-footer" style="position:relative;bottom:0;left:0;right:0;z-index:50;background:rgba(8,8,13,0.95);border-top:1px solid rgba(100,200,100,0.15);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:12px">
   <span style="font-size:12px;color:#555570">New to local AI?</span>
-  <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:#7ddf7d;text-decoration:none">Try cloud GPUs on RunPod — no hardware needed</a>
+  <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer" style="font-size:12px;font-weight:600;color:#7ddf7d;text-decoration:none">Try cloud GPUs on RunPod — no hardware needed</a>
 </div>
 </body>
 </html>
