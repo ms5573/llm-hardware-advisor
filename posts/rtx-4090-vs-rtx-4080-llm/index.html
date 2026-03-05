@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?</title>
-<meta name="description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model ">
+<meta name="description" content="RTX 4090 vs RTX 4080 for LLM inference compared on VRAM, tokens per second, and price. See real benchmarks to decide if the 4090 premium is worth it.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-rtx-4080-llm/">
 <meta property="og:title" content="RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?">
-<meta property="og:description" content="If you&#x27;re serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model ">
+<meta property="og:description" content="RTX 4090 vs RTX 4080 for LLM inference compared on VRAM, tokens per second, and price. See real benchmarks to decide if the 4090 premium is worth it.">
 <meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-rtx-4080-llm/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,8 +65,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
 
-.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
-.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#ff9900,#ffad33);color:#111;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;margin:14px 0 6px;box-shadow:0 4px 20px rgba(255,153,0,0.2)}
+.amazon-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,153,0,0.35)}
 .amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
 
 .runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
@@ -91,7 +92,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   .post h1{font-size:28px}
 }
 </style>
-</head>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?","description":"RTX 4090 vs RTX 4080 compared for local LLM inference. See VRAM limits, token speeds, and which GPU is the better value for running models locally.","author":{"@type":"Organization","name":"LLM Picker"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-04","dateModified":"2026-03-04"}
+</script></head>
 <body>
 <div class="bg-grad"></div>
 <header class="header">
@@ -104,7 +107,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <article class="post">
     <h1 id="rtx-4090-vs-rtx-4080-for-local-llms-which-gpu-actually-wins">RTX 4090 vs RTX 4080 for Local LLMs: Which GPU Actually Wins?</h1>
 <p>If you're serious about running large language models locally, your GPU choice will make or break your experience. The wrong pick means watching your 70B model crawl at 3 tokens per second while your CPU sweats through offloaded layers. The right pick means fluid, responsive inference that actually feels usable.</p>
-<p>This post cuts through the marketing noise and gives you a direct, data-driven comparison of the <strong>RTX 4090 vs RTX 4080 for local LLMs</strong> — covering real token throughput, VRAM limits, model compatibility, and whether the $400 price gap is actually worth it.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div><a href="https://www.amazon.com/dp/B0BG7H9WBG?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy RTX 4080 on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>This post cuts through the marketing noise and gives you a direct, data-driven comparison of the <strong>RTX 4090 vs RTX 4080 for local LLMs</strong> — covering real token throughput, VRAM limits, model compatibility, and whether the $400 price gap is actually worth it.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div><a href="https://www.amazon.com/dp/B0BG7H9WBG?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy RTX 4080 on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>Spoiler: for serious LLM work, one of these cards is clearly better. Let's break it down.</p>
 <hr />
 <h2 id="quick-specs-rtx-4090-vs-rtx-4080-side-by-side">Quick Specs: RTX 4090 vs RTX 4080 Side-by-Side</h2>
@@ -147,8 +150,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </table>
 <p>The numbers that matter most for local LLM inference are <strong>VRAM</strong> and <strong>memory bandwidth</strong> — not CUDA cores. LLM inference is overwhelmingly memory-bound, not compute-bound. Every token generation requires loading billions of model weights from VRAM into the GPU's compute units. The faster that data moves, the faster your tokens flow.</p>
 <p>The RTX 4090's 1,008 GB/s bandwidth is <strong>37% faster</strong> than the 4080's 736 GB/s. That gap directly translates to token throughput, especially on larger models. The 8GB VRAM difference is even more consequential — it determines which models you can run entirely on-GPU versus which ones require painful CPU offloading.</p>
-<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20">Check current RTX 4090 prices on Amazon</a></strong><br />
-👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080&amp;tag=ms5573-20">Check current RTX 4080 prices on Amazon</a></strong></p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">Check current RTX 4090 prices on Amazon</a></strong><br />
+👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">Check current RTX 4080 prices on Amazon</a></strong></p>
 <hr />
 <h2 id="performance-comparison-tokens-per-second-that-actually-matter">Performance Comparison: Tokens Per Second That Actually Matter</h2>
 <p>These benchmarks assume <strong>4-bit quantization (GPTQ or Q4_K_M)</strong> running through optimized inference frameworks like <strong>llama.cpp</strong> or <strong>ExLlamaV2</strong> — the standard setup for most local LLM users. Results will vary slightly based on your specific quantization method, system RAM, and CPU, but these ranges reflect real-world community benchmarks.</p>
@@ -270,8 +273,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h3 id="power-costs">Power Costs</h3>
 <p>The 4090's 450W TDP vs. the 4080's 320W means roughly <strong>130W more power draw</strong> under load. Running 8 hours a day at $0.15/kWh, that's about <strong>$57/year</strong> in additional electricity. Meaningful, but not a deciding factor for most users.</p>
 <p>You'll also need a <strong>850W+ PSU</strong> for the 4090 — factor that in if you're upgrading. The 4080 is more forgiving with a 750W PSU.</p>
-<p>👉 <strong><a href="https://www.amazon.com/s?k=1000w+gold+psu&amp;tag=ms5573-20">EVGA 1000W Gold PSU on Amazon</a></strong> — recommended for 4090 builds<br />
-👉 <strong><a href="https://www.amazon.com/s?k=ddr5+64gb+ram&amp;tag=ms5573-20">High-speed DDR5 RAM for LLM offloading on Amazon</a></strong> — critical if you're offloading layers to CPU</p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=1000w+gold+psu&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">EVGA 1000W Gold PSU on Amazon</a></strong> — recommended for 4090 builds<br />
+👉 <strong><a href="https://www.amazon.com/s?k=ddr5+64gb+ram&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">High-speed DDR5 RAM for LLM offloading on Amazon</a></strong> — critical if you're offloading layers to CPU</p>
 <hr />
 <h2 id="who-should-buy-which-gpu">Who Should Buy Which GPU?</h2>
 <h3 id="buy-the-rtx-4090-if">Buy the RTX 4090 If:</h3>
@@ -282,7 +285,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li>You're running <strong>long context windows</strong> (8K–128K tokens) that eat into VRAM headroom</li>
 <li>You're building a <strong>local AI workstation</strong> that doubles as a gaming or creative rig</li>
 </ul>
-<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20">Shop RTX 4090 on Amazon</a></strong></p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">Shop RTX 4090 on Amazon</a></strong></p>
 <h3 id="buy-the-rtx-4080-if">Buy the RTX 4080 If:</h3>
 <ul>
 <li>You <strong>exclusively run 7B–13B models</strong> and have no plans to go larger</li>
@@ -291,7 +294,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li>You're <strong>experimenting with local LLMs</strong> for the first time and want a lower-stakes entry point</li>
 <li>Your workload is <strong>batch processing</strong> at smaller model sizes where the speed gap narrows</li>
 </ul>
-<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080+graphics+card&amp;tag=ms5573-20">Shop RTX 4080 on Amazon</a></strong></p>
+<p>👉 <strong><a href="https://www.amazon.com/s?k=RTX+4080+graphics+card&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">Shop RTX 4080 on Amazon</a></strong></p>
 <hr />
 <h2 id="verdict-rtx-4090-vs-rtx-4080-for-local-llms">Verdict: RTX 4090 vs RTX 4080 for Local LLMs</h2>
 <p><strong>The RTX 4090 is the better GPU for local LLM inference — and it's not particularly close.</strong></p>
@@ -313,7 +316,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p>If you can wait 6–12 months, the RTX 5090 and 5080 will likely offer meaningful improvements in bandwidth and potentially VRAM. However, current pricing on RTX 4090s has softened as the 50-series approaches, making now a reasonable time to buy if you need a card today. If local LLM inference is your primary use case and you're not in a hurry, waiting for next-gen is a defensible strategy.</p>
 <hr />
 <p><em>Prices and availability change frequently. Always verify current pricing before purchasing. Benchmark figures represent community-reported ranges and may vary based on your specific system configuration, quantization method, and inference framework version.</em></p>
-    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+<div style="margin:24px 0 20px;padding:14px 18px;background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.15);border-radius:10px"><span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7c6aff">Part of our GPU Guide</span><br><a href="/posts/best-gpu-for-running-llms-locally/" style="color:#e8e8f0;font-size:14px;font-weight:600;text-decoration:none">Best GPU for Running LLMs Locally →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Not ready to buy hardware? Try on RunPod →</a></div>
     <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
   </article>
 </div>

@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Much RAM Do You Need to Run Llama 3?</title>
-<meta name="description" content="TL;DR">
+<meta name="description" content="Exact RAM and VRAM requirements for every Llama 3 model size from 8B to 405B. Includes quantization options so you can pick the right hardware.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://llmpicker.blog/posts/how-much-ram-to-run-llama-3/">
 <meta property="og:title" content="How Much RAM Do You Need to Run Llama 3?">
-<meta property="og:description" content="TL;DR">
+<meta property="og:description" content="Exact RAM and VRAM requirements for every Llama 3 model size from 8B to 405B. Includes quantization options so you can pick the right hardware.">
 <meta property="og:url" content="https://llmpicker.blog/posts/how-much-ram-to-run-llama-3/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +89,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   .post h1{font-size:28px}
 }
 </style>
-</head>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How Much RAM Do You Need to Run Llama 3?","description":"Exact RAM and VRAM requirements for every Llama 3 model size from 8B to 405B. Includes quantization options so you can pick the right hardware.","author":{"@type":"Organization","name":"LLM Picker"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-04","dateModified":"2026-03-04"}
+</script></head>
 <body>
 <div class="bg-grad"></div>
 <header class="header">
@@ -104,7 +107,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 - Llama 3 8B needs ~16GB RAM for CPU inference or a 12GB GPU with Q4 quantization<br />
 - Llama 3 70B requires 64GB+ RAM or dual RTX 3090s (48GB VRAM) for quantized GPU inference<br />
 - Llama 3 405B is enterprise territory — budget 256GB RAM or 8x H100s<br />
-- Q4 quantization cuts memory requirements by ~70% with only a modest quality tradeoff — use it</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+- Q4 quantization cuts memory requirements by ~70% with only a modest quality tradeoff — use it</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <hr />
 <p>Running Llama 3 locally is genuinely exciting. Meta's open-weight models punch well above their weight class, and with the right hardware, you can run a capable AI assistant entirely offline. But "right hardware" is doing a lot of work in that sentence.</p>
 <p>The RAM and VRAM requirements for Llama 3 vary wildly depending on which model variant you're targeting and how you plan to run it. Get this wrong and you'll either be waiting 45 seconds per response or watching your system crash entirely.</p>
@@ -121,7 +124,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p>So for Llama 3 8B at BF16 precision: 8 billion × 2 bytes = <strong>16GB just for weights</strong>. Add ~20% overhead for activations and the KV cache, and you're looking at 18-19GB minimum.</p>
 <p>That's the formula: <code>Parameters × Bytes per weight × 1.2 ≈ Minimum memory needed</code></p>
 <p><strong>VRAM vs. RAM: Why It Matters</strong></p>
-<p>GPU VRAM and system RAM are not interchangeable. VRAM is fast — an RTX 4090 has ~1TB/s of memory bandwidth. System DDR5 RAM tops out around 50-100GB/s. Running a model on CPU with system RAM instead of GPU VRAM means you're trading speed for accessibility. You'll get functional inference, but "functional" might mean 2-5 tokens per second instead of 40+.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>GPU VRAM and system RAM are not interchangeable. VRAM is fast — an RTX 4090 has ~1TB/s of memory bandwidth. System DDR5 RAM tops out around 50-100GB/s. Running a model on CPU with system RAM instead of GPU VRAM means you're trading speed for accessibility. You'll get functional inference, but "functional" might mean 2-5 tokens per second instead of 40+.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>For serious use, GPU VRAM is the goal. System RAM is the fallback.</p>
 <hr />
 <h2 id="llama-3-8b-the-sweet-spot-for-most-people">Llama 3 8B: The Sweet Spot for Most People</h2>
@@ -153,7 +156,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 </tbody>
 </table>
-<p>The <strong>Q4_K_M quantized version</strong> is the practical choice for most people. At 5-6GB VRAM, it runs comfortably on an RTX 3060 12GB or RTX 4070 12GB. On an RTX 4070 SUPER with 16GB, you're looking at <strong>40+ tokens per second</strong> — fast enough that it genuinely feels like a real-time conversation.</p><a href="https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The <strong>Q4_K_M quantized version</strong> is the practical choice for most people. At 5-6GB VRAM, it runs comfortably on an RTX 3060 12GB or RTX 4070 12GB. On an RTX 4070 SUPER with 16GB, you're looking at <strong>40+ tokens per second</strong> — fast enough that it genuinely feels like a real-time conversation.</p><a href="https://www.amazon.com/dp/B08WPRMVWB?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>If you have an RTX 4080 or 4090 and want maximum quality, run BF16. The difference in output quality is noticeable, especially for complex reasoning tasks.</p>
 <h3 id="cpuram-requirements-8b">CPU/RAM Requirements (8B)</h3>
 <p>If you're going CPU-only with llama.cpp:</p>
@@ -329,7 +332,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 - Running 70B on CPU-only unless you have extreme patience and DDR5<br />
 - Chasing BF16 precision when Q4_K_M gets you 85-90% of the quality at a fraction of the memory cost</p>
 <p>The local LLM ecosystem has matured to the point where this stuff actually works well. Pick the right model size for your hardware, use Q4_K_M quantization, and run it through Ollama or llama.cpp. You'll have a capable local AI assistant running in an afternoon.</p>
-    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Not ready to buy hardware? Try on RunPod →</a></div>
     <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
   </article>
 </div>

@@ -27,6 +27,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .content{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 20px 80px}
 .page-title{font-size:36px;font-weight:800;margin-bottom:8px}
 .page-sub{color:var(--text-dim);font-size:15px;margin-bottom:40px}
+.page-note{font-size:12px;color:var(--text-muted);margin-bottom:20px}
 .section-title{font-size:22px;font-weight:700;margin:48px 0 20px;padding-top:24px;border-top:1px solid var(--border);letter-spacing:-0.3px}
 .posts-grid{display:flex;flex-direction:column;gap:16px}
 .post-card{display:block;padding:22px 24px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden}
@@ -39,8 +40,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .post-meta{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--text-muted)}
 .post-arrow{position:absolute;right:24px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:18px;transition:all .2s}
 .post-card:hover .post-arrow{color:var(--accent);transform:translateY(-50%) translateX(3px)}
-.coming-soon{opacity:0.45;pointer-events:none}
+.coming-soon{opacity:0.55;pointer-events:none}
 .coming-soon .post-tag{color:var(--text-muted)}
+.coming-label{font-size:11px;color:#c7b7ff}
 @media(max-width:768px){
   .header{padding:12px 16px}
   .content{padding:32px 16px 60px}
@@ -61,74 +63,99 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <div class="content">
   <h1 class="page-title">Guides</h1>
   <p class="page-sub">In-depth breakdowns on local LLM hardware, benchmarks, and running AI models at home.</p>
+  <p class="page-note">Publishing cadence: upcoming posts are listed below with ET dates and become clickable once live.</p>
+
+  <h2 class="section-title" style="margin-top:0;border-top:none;padding-top:0">GPU Guides</h2>
   <div class="posts-grid">
+
+    <a class="post-card" href="/posts/best-gpu-for-running-llms-locally/" style="border-color:rgba(124,106,255,0.3);background:rgba(124,106,255,0.06)">
+      <div class="post-tag">Pillar Guide · GPU</div>
+      <div class="post-title">Best GPU for Running LLMs Locally in 2026</div>
+      <div class="post-desc">RTX 5090 vs RTX 4090 vs RX 7900 XTX — real benchmark numbers, VRAM requirements, and a clear winner for every budget.</div>
+      <div class="post-meta"><span>Live</span><span>·</span><span>~2,000 words</span></div>
+      <span class="post-arrow">→</span>
+    </a>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">GPU · Comparison</div>
+      <div class="post-title">RTX 4090 vs RTX 4080 for Local LLMs</div>
+      <div class="post-desc">Is the 4090's extra VRAM worth the premium? Real inference benchmarks and the honest answer.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 9:00 AM ET</span></div>
+    </div>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">GPU · Comparison</div>
+      <div class="post-title">RTX 4090 vs RX 7900 XTX for LLM Inference</div>
+      <div class="post-desc">Same 24GB VRAM, different ecosystems. CUDA vs ROCm head-to-head with real benchmarks.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 11:00 AM ET</span></div>
+    </div>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">Coding · Models</div>
+      <div class="post-title">Best Local LLM for Coding in 2026</div>
+      <div class="post-desc">DeepSeek Coder, Qwen2.5, CodeLlama — benchmarks, hardware requirements, and IDE integration for each.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 7, 2026 · 10:00 AM ET</span></div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Apple Silicon Guides</h2>
+  <div class="posts-grid">
+
+    <a class="post-card" href="/posts/mac-for-local-llms/" style="border-color:rgba(124,106,255,0.3);background:rgba(124,106,255,0.06)">
+      <div class="post-tag">Pillar Guide · Apple Silicon</div>
+      <div class="post-title">Mac for Local LLMs: The Complete Apple Silicon Guide</div>
+      <div class="post-desc">Every Apple Silicon chip from M1 to M5 Max — which models fit, real performance numbers, and the best tools to get started.</div>
+      <div class="post-meta"><span>Live</span><span>·</span><span>~1,000 words</span></div>
+      <span class="post-arrow">→</span>
+    </a>
 
     <a class="post-card" href="/posts/macbook-air-m5-local-llm/">
       <div class="post-tag">Apple Silicon · M5</div>
       <div class="post-title">MacBook Air M5 for Local LLMs: What Models Can It Run?</div>
-      <div class="post-desc">First Air with 32GB unified memory. Runs Qwen2.5-32B, Mixtral 8×7B on a fanless laptop. Full model compatibility breakdown by memory tier.</div>
-      <div class="post-meta"><span>March 2026</span><span>·</span><span>~2,400 words</span></div>
+      <div class="post-desc">First Air with 32GB unified memory. Runs Qwen2.5-32B, Mixtral 8x7B on a fanless laptop.</div>
+      <div class="post-meta"><span>Live</span><span>·</span><span>~2,400 words</span></div>
       <span class="post-arrow">→</span>
     </a>
 
-    <a class="post-card" href="/posts/best-gpu-for-running-llms-locally/">
-      <div class="post-tag">GPU · Hardware</div>
-      <div class="post-title">Best GPU for Running LLMs Locally in 2026</div>
-      <div class="post-desc">RTX 5090 vs RTX 4090 vs RX 7900 XTX — real benchmark numbers, VRAM requirements, and a clear winner for every budget.</div>
-      <div class="post-meta"><span>March 2026</span><span>·</span><span>~2,000 words</span></div>
-      <span class="post-arrow">→</span>
-    </a>
+    <div class="post-card coming-soon">
+      <div class="post-tag">Apple Silicon · Comparison</div>
+      <div class="post-title">MacBook Air M5 32GB vs MacBook Pro M5 Pro 64GB for LLMs</div>
+      <div class="post-desc">32GB portability vs 64GB model capacity. Which laptop for local AI?</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 1:00 PM ET</span></div>
+    </div>
 
-    <a class="post-card coming-soon" href="#">
-      <div class="post-tag">GPU · Comparison</div>
-      <div class="post-title">RTX 4090 vs RX 7900 XTX for LLM Inference</div>
-      <div class="post-desc">Same 24GB VRAM, 50% performance gap. A deep dive into why CUDA still dominates and when AMD is worth it.</div>
-      <div class="post-meta"><span>Coming March 5</span></div>
-      <span class="post-arrow">→</span>
-    </a>
+    <div class="post-card coming-soon">
+      <div class="post-tag">Apple Silicon · Comparison</div>
+      <div class="post-title">MacBook Air M4 16GB vs M5 16GB for Local LLMs</div>
+      <div class="post-desc">Same memory, different chips. Is the M5 upgrade worth it for LLM inference?</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 2:00 PM ET</span></div>
+    </div>
 
-    <a class="post-card coming-soon" href="#">
-      <div class="post-tag">Memory · Llama 3</div>
-      <div class="post-title">How Much RAM Do You Need to Run Llama 3?</div>
-      <div class="post-desc">8B to 405B — exact VRAM and RAM requirements for every Llama 3 model size, with and without quantization.</div>
-      <div class="post-meta"><span>Coming March 7</span></div>
-      <span class="post-arrow">→</span>
-    </a>
+    <div class="post-card coming-soon">
+      <div class="post-tag">Apple Silicon · Comparison</div>
+      <div class="post-title">Mac Studio M4 Max: 64GB vs 128GB for Local LLMs</div>
+      <div class="post-desc">Is doubling the memory worth $400? Model compatibility and performance breakdown.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 3:00 PM ET</span></div>
+    </div>
 
-    <a class="post-card coming-soon" href="#">
+    <div class="post-card coming-soon">
       <div class="post-tag">Apple Silicon · Setup</div>
       <div class="post-title">How to Run Llama on Mac: Apple Silicon Guide</div>
-      <div class="post-desc">M1 through M4 — which Mac handles which model sizes, unified memory advantages, and the best tools to get started.</div>
-      <div class="post-meta"><span>Coming March 9</span></div>
-      <span class="post-arrow">→</span>
-    </a>
-
-    <a class="post-card coming-soon" href="#">
-      <div class="post-tag">Coding · Models</div>
-      <div class="post-title">Best Local LLM for Coding in 2026</div>
-      <div class="post-desc">DeepSeek Coder, Qwen2.5, CodeLlama — benchmarks, hardware requirements, and IDE integration for each.</div>
-      <div class="post-meta"><span>Coming March 11</span></div>
-      <span class="post-arrow">→</span>
-    </a>
-
-    <a class="post-card coming-soon" href="#">
-      <div class="post-tag">Mini PC · Self-Hosting</div>
-      <div class="post-title">Best Mini PC for Self-Hosting AI in 2026</div>
-      <div class="post-desc">Minisforum, Beelink, Mac Mini — CPU inference vs GPU inference, and which mini PC handles local AI without a discrete GPU.</div>
-      <div class="post-meta"><span>Coming March 13</span></div>
-      <span class="post-arrow">→</span>
-    </a>
+      <div class="post-desc">Step-by-step setup with Ollama, llama.cpp, and LM Studio. Which Mac handles which model sizes.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 13, 2026 · 10:00 AM ET</span></div>
+    </div>
 
   </div>
 
-  <h2 class="section-title">Comparisons</h2>
-  <div class="posts-grid" id="comparisons-grid">
+  <h2 class="section-title">GPU vs Mac Comparisons</h2>
+  <div class="posts-grid">
 
     <a class="post-card" href="/posts/rtx-4090-vs-mac-studio-m4-max-128-llm/">
       <div class="post-tag">GPU vs Apple Silicon</div>
       <div class="post-title">RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs</div>
       <div class="post-desc">24GB VRAM vs 128GB unified memory — which actually wins for running 70B models locally?</div>
-      <div class="post-meta"><span>March 2026</span><span>·</span><span>~2,400 words</span></div>
+      <div class="post-meta"><span>Live</span><span>·</span><span>~2,400 words</span></div>
       <span class="post-arrow">→</span>
     </a>
 
@@ -139,6 +166,39 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
       <div class="post-meta"><span>March 2026</span><span>·</span><span>~2,400 words</span></div>
       <span class="post-arrow">→</span>
     </a>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">GPU vs Apple Silicon</div>
+      <div class="post-title">RTX 4090 vs MacBook Pro M5 Max 128GB for Local LLMs</div>
+      <div class="post-desc">Desktop GPU power vs laptop portability. Which is the better investment?</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 5, 2026 · 5:00 PM ET</span></div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">More Guides</h2>
+  <div class="posts-grid">
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">Homelab · Security</div>
+      <div class="post-title">Homelab Security Best Practices (Reddit Intel)</div>
+      <div class="post-desc">Practical hardening checklist for self-hosted AI stacks using patterns repeatedly surfaced in community incidents.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 6, 2026 · 10:00 AM ET</span></div>
+    </div>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">Mini PC · Self-Hosting</div>
+      <div class="post-title">Best Mini PC for Self-Hosting AI in 2026</div>
+      <div class="post-desc">Minisforum, Beelink, Mac Mini — CPU inference vs GPU inference, and which mini PC handles local AI.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 9, 2026 · 10:00 AM ET</span></div>
+    </div>
+
+    <div class="post-card coming-soon">
+      <div class="post-tag">Memory · Llama 3</div>
+      <div class="post-title">How Much RAM Do You Need to Run Llama 3?</div>
+      <div class="post-desc">8B to 405B — exact VRAM and RAM requirements for every Llama 3 model size, with and without quantization.</div>
+      <div class="post-meta"><span class="coming-label">Scheduled: March 11, 2026 · 10:00 AM ET</span></div>
+    </div>
 
   </div>
 </div>

@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to Run Llama on Mac Apple Silicon: The Complete Setup Guide</title>
-<meta name="description" content="TL;DR">
+<meta name="description" content="Learn how to run Llama on Mac with Apple Silicon using Ollama and llama.cpp. Step-by-step setup, performance benchmarks, and model recommendations included.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://llmpicker.blog/posts/run-llama-on-mac/">
 <meta property="og:title" content="How to Run Llama on Mac Apple Silicon: The Complete Setup Guide">
-<meta property="og:description" content="TL;DR">
+<meta property="og:description" content="Learn how to run Llama on Mac with Apple Silicon using Ollama and llama.cpp. Step-by-step setup, performance benchmarks, and model recommendations included.">
 <meta property="og:url" content="https://llmpicker.blog/posts/run-llama-on-mac/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +89,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   .post h1{font-size:28px}
 }
 </style>
-</head>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Run Llama on Mac Apple Silicon: The Complete Setup Guide","description":"Learn how to run Llama on Mac with Apple Silicon using Ollama and llama.cpp. Step-by-step setup, performance benchmarks, and model recommendations included.","author":{"@type":"Organization","name":"LLM Picker"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-04","dateModified":"2026-03-04"}
+</script></head>
 <body>
 <div class="bg-grad"></div>
 <header class="header">
@@ -111,8 +114,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <hr />
 <h2 id="why-apple-silicon-is-surprisingly-good-at-this">Why Apple Silicon Is Surprisingly Good at This</h2>
 <p>Before we get into setup, it's worth understanding <em>why</em> this works so well. Most people assume you need a beefy NVIDIA GPU to run LLMs locally. That's true if you're training models — but for inference (actually using a model to generate text), the bottleneck is memory bandwidth, not raw compute.</p>
-<p>Here's the key insight: Apple Silicon uses <strong>unified memory architecture</strong>. The CPU and GPU share the same memory pool. On a discrete GPU setup, you're limited to whatever VRAM is soldered onto the card — typically 8-24GB on consumer hardware. On an M2 Ultra Mac Studio with 64GB of unified memory, the GPU can access all 64GB. That's why you can run a 70B parameter model on a Mac that costs less than a single high-end GPU.</p><a href="https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
-<p>The numbers back this up. Metal acceleration on Apple Silicon delivers <strong>3-5x faster inference than Intel Macs</strong>, and the M-series chips handle sustained workloads without thermal throttling — especially on Mac Studio and Mac mini, which have better passive cooling than the thin MacBook Air chassis.</p><a href="https://www.amazon.com/Apple-Desktop-Computer-12%E2%80%91core-16%E2%80%91core/dp/B0DLBVHSLD?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>Here's the key insight: Apple Silicon uses <strong>unified memory architecture</strong>. The CPU and GPU share the same memory pool. On a discrete GPU setup, you're limited to whatever VRAM is soldered onto the card — typically 8-24GB on consumer hardware. On an M2 Ultra Mac Studio with 64GB of unified memory, the GPU can access all 64GB. That's why you can run a 70B parameter model on a Mac that costs less than a single high-end GPU.</p><a href="https://www.amazon.com/Apple-Studio-28-Core-60-Core-Unified/dp/B0FM5CSC4P?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>The numbers back this up. Metal acceleration on Apple Silicon delivers <strong>3-5x faster inference than Intel Macs</strong>, and the M-series chips handle sustained workloads without thermal throttling — especially on Mac Studio and Mac mini, which have better passive cooling than the thin MacBook Air chassis.</p><a href="https://www.amazon.com/Apple-Desktop-Computer-12%E2%80%91core-16%E2%80%91core/dp/B0DLBVHSLD?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>Real-world benchmarks:<br />
 - <strong>M1 Max (64GB)</strong>: ~33 tokens/sec on Llama 3.1 8B via Core ML<br />
 - <strong>M2 Pro (16GB)</strong>: ~27 tokens/sec on Llama 3 8B Q4 via Jan.ai<br />
@@ -302,7 +305,8 @@ ollama serve
 - <strong>Prosumer pick</strong>: Mac Studio M2 Ultra 64GB (~$3,999) — runs 70B models comfortably, no thermal throttling, sits on your desk quietly doing serious work<br />
 - <strong>Hard pass</strong>: Any Mac with 8GB RAM for LLM work — save yourself the frustration</p>
 <p>The local AI experience on Apple Silicon has crossed a threshold. It's not a compromise anymore. A 70B model running at 30-40 tokens/sec on a Mac Studio is genuinely useful for real work — coding assistance, document analysis, private conversations you don't want going to a cloud API. The hardware is there. The software is mature. There's no reason to wait.</p>
-    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+<div style="margin:24px 0 20px;padding:14px 18px;background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.15);border-radius:10px"><span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7c6aff">Part of our Apple Silicon Guide</span><br><a href="/posts/mac-for-local-llms/" style="color:#e8e8f0;font-size:14px;font-weight:600;text-decoration:none">Mac for Local LLMs: Complete Apple Silicon Guide →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Not ready to buy hardware? Try on RunPod →</a></div>
     <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
   </article>
 </div>
