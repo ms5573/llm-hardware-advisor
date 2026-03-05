@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Hardware to Run Claude-Distilled GGUF Models Locally (2026)</title>
+<meta name="description" content="Meta Description: 2026 guide to running Claude-distilled GGUF models locally. Match RTX 4090, M5 Ultra, and budget GPUs to 7B-70B quants (Q4KM, Q80). Real token">
+<link rel="canonical" href="https://llmpicker.blog/posts/best-hardware-run-claude-distilled-models-locally/">
+<meta property="og:title" content="Best Hardware to Run Claude-Distilled GGUF Models Locally (2026)">
+<meta property="og:description" content="Meta Description: 2026 guide to running Claude-distilled GGUF models locally. Match RTX 4090, M5 Ultra, and budget GPUs to 7B-70B quants (Q4KM, Q80). Real token">
+<meta property="og:url" content="https://llmpicker.blog/posts/best-hardware-run-claude-distilled-models-locally/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.hw-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:40px 0 28px;padding:20px 24px;border:1px solid rgba(124,106,255,0.25);border-radius:14px;background:linear-gradient(135deg,rgba(124,106,255,0.08),rgba(34,211,238,0.04));flex-wrap:wrap}
+.hw-cta-left{flex:1;min-width:200px}
+.hw-cta-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.hw-cta-sub{font-size:13px;color:var(--text-dim);line-height:1.5}
+.hw-cta-btn{flex-shrink:0;display:inline-flex;align-items:center;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap}
+.hw-cta-btn:hover{opacity:0.85;transform:translateY(-1px);color:#fff!important;text-decoration:none!important}
+
+.back-link{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.back-link a{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.back-link a:hover{color:var(--text);}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="best-hardware-to-run-claude-distilled-gguf-models-locally-2026">Best Hardware to Run Claude-Distilled GGUF Models Locally (2026)</h1>
+<p><strong>Meta Description:</strong> 2026 guide to running Claude-distilled GGUF models locally. Match RTX 4090, M5 Ultra, and budget GPUs to 7B-70B quants (Q4_K_M, Q8_0). Real token speeds, VRAM charts, and benchmarks.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<hr />
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li><strong>RTX 4090 is the best overall GPU</strong> for local GGUF inference — 80 t/s on 7B models, handles 32B Q6_K at 25 t/s, and fits 70B Q4_K_M with room to spare.</li>
+<li><strong>Apple M5 Ultra Mac Studio</strong> is the only single-device solution that runs 70B Q8_0 without offloading, thanks to 192GB unified memory.</li>
+<li><strong>Budget pick: AMD RX 6600 ($200)</strong> delivers 33 t/s on 7B Q4_K_M — genuinely usable performance for a fraction of the cost.</li>
+<li><strong>8GB VRAM GPUs are a dead end</strong> for anything beyond 7B Q8_0. If you're buying new hardware in 2026, don't go below 16GB VRAM.</li>
+</ul>
+<hr />
+<p>Running Claude-distilled GGUF models locally through llama.cpp is one of the most practical things you can do with a capable home machine right now. You get privacy, zero API costs, and the ability to run powerful distilled models offline. But the hardware question trips people up constantly — and bad hardware choices lead to either unusable token speeds or wasted money.</p>
+<p>This guide cuts through the noise. Real benchmarks, real prices, real recommendations.</p>
+<hr />
+<h2 id="what-are-claude-distilled-gguf-models-exactly">What Are Claude-Distilled GGUF Models, Exactly?</h2>
+<p>Claude-distilled models are smaller, open-weight models trained to replicate the behavior of larger frontier models like Claude. They're typically released in GGUF format, which is the standard container format for llama.cpp inference. GGUF replaced GGML and brought significant improvements: memory mapping, flexible quantization, and clean CPU/GPU hybrid loading.</p>
+<p>The key advantage of GGUF is flexibility. You can run a model entirely on GPU VRAM, entirely on CPU RAM, or split layers across both. That last option — layer offloading — is what makes GGUF so practical for hardware that doesn't quite have enough VRAM to fit a model completely.</p>
+<h3 id="quantization-the-tradeoff-that-defines-your-hardware-requirements">Quantization: The Tradeoff That Defines Your Hardware Requirements</h3>
+<p>Quantization compresses model weights to reduce memory footprint at the cost of some precision. The two formats you'll use most:</p>
+<ul>
+<li><strong>Q4_K_M</strong>: 4-bit quantization with K-quant improvements. Best balance of speed, memory, and quality. This is the default recommendation for most use cases.</li>
+<li><strong>Q8_0</strong>: 8-bit quantization. Closer to full precision, noticeably better output quality on complex reasoning tasks, but roughly double the VRAM requirement.</li>
+</ul>
+<p>A practical rule of thumb for estimating VRAM needs: <strong>Model size in billions × quant multiplier</strong>. For Q8_0, that multiplier is roughly 1.5. So a 7B Q8_0 model needs about 10.5GB of VRAM. A 70B Q8_0 needs around 105GB — which is why you need an M5 Ultra or a multi-GPU setup to run it without CPU offloading.</p>
+<p>The trend toward distilled MoE (Mixture of Experts) architectures makes this more interesting. Models like GLM-4.7-Flash pack 42B parameters into a structure that only activates a fraction of them per token, dropping the effective VRAM requirement to 16GB for Q4_K_M. Expect more Claude-distilled models to follow this pattern through 2026.</p>
+<hr />
+<h2 id="hardware-tiers-by-model-size">Hardware Tiers by Model Size</h2>
+<h3 id="7b-models-entry-point-for-useful-local-inference">7B Models: Entry Point for Useful Local Inference</h3>
+<p>7B Q4_K_M is the sweet spot for budget hardware. You need 5GB of VRAM, which means almost any modern GPU can handle it fully on-device.</p>
+<table>
+<thead>
+<tr>
+<th>Hardware</th>
+<th>Token Speed (7B Q4_K_M)</th>
+<th>VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMD RX 6600</td>
+<td>33 t/s</td>
+<td>8GB</td>
+</tr>
+<tr>
+<td>RTX 4060 Ti 16GB</td>
+<td>~40 t/s</td>
+<td>16GB</td>
+</tr>
+<tr>
+<td>RTX 4090</td>
+<td>80 t/s</td>
+<td>24GB</td>
+</tr>
+<tr>
+<td>Apple M4 MacBook Pro</td>
+<td>28 t/s</td>
+<td>Unified</td>
+</tr>
+<tr>
+<td>Ryzen 5700G (CPU only)</td>
+<td>11 t/s</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>At 33 t/s, the RX 6600 produces text faster than most people read. That's genuinely comfortable for interactive use. The Ryzen 5700G at 11 t/s is usable but starts to feel sluggish during longer outputs.</p>
+<p>For 7B Q8_0, you need 8GB VRAM minimum. The RX 6600 fits it exactly — no headroom. The RTX 4060 Ti 16GB is a much better choice here because it handles Q8_0 comfortably and leaves room for the KV cache to grow during long conversations.</p><a href="https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-D40620F-10M/dp/B0CMJQZQC6?tag=ms5573-20" target="_blank" rel="noopener" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<h3 id="13b32b-models-where-hardware-starts-to-matter">13B–32B Models: Where Hardware Starts to Matter</h3>
+<p>This range is where most people hit a wall. Q4_K_M for a 13B model needs around 10GB VRAM; a 32B model needs 16-20GB. Q8_0 pushes those numbers to 16GB and 28GB respectively.</p>
+<p><strong>GPU options that work here:</strong></p>
+<ul>
+<li><strong>RTX 4080 Super (16GB)</strong>: Handles 13B Q8_0 cleanly, 32B Q4_K_M with some layer offloading to RAM.</li>
+<li><strong>AMD RX 7900 XTX (24GB)</strong>: Excellent VRAM for the price. Runs 32B Q8_0 fully on-device. ROCm support in llama.cpp has matured significantly — this is now a legitimate alternative to NVIDIA for pure inference.</li>
+<li><strong>RTX 4090 (24GB)</strong>: Runs 32B Q6_K at 25 t/s. Handles everything in this tier without breaking a sweat.</li>
+</ul>
+<p><strong>Apple Silicon:</strong></p>
+<p>The M5 Max Mac Studio with 64GB unified memory is a compelling option here. It hits 45 t/s on 13B Q4_K_M — faster than most discrete GPUs at this tier — and can comfortably run 32B models that would require GPU offloading on a 24GB card. The unified memory architecture means there's no PCIe bandwidth bottleneck between RAM and VRAM.</p>
+<h3 id="70b-models-the-big-leagues">70B Models: The Big Leagues</h3>
+<p>Running a 70B model locally is genuinely impressive, but the hardware requirements are steep.</p>
+<ul>
+<li><strong>70B Q4_K_M</strong>: Needs ~40GB VRAM. A single RTX 4090 (24GB) can't fit it without offloading. Dual RTX 3090s (48GB total) get you there at around 15 t/s.</li>
+<li><strong>70B Q8_0</strong>: Needs ~105GB. This is M5 Ultra territory or a serious multi-GPU workstation.</li>
+</ul>
+<p>The M5 Ultra Mac Studio with 192GB unified memory runs 70B Q8_0 at approximately 12 t/s. That's not fast, but it's coherent and fully on-device. No other single consumer device can do this in 2026.</p>
+<p>CPU-only inference on 70B Q8_0 with a Ryzen 5700G and 64GB DDR4 RAM? About 0.8 t/s. That's not inference — that's watching paint dry.</p>
+<hr />
+<h2 id="apple-silicon-the-unified-memory-advantage">Apple Silicon: The Unified Memory Advantage</h2>
+<p>Apple Silicon deserves its own section because it plays by different rules. There's no discrete VRAM — the CPU, GPU, and Neural Engine all share the same memory pool. This means a 64GB M5 Max can load a 40GB model and still have 24GB left for the OS and KV cache.</p>
+<p>The Metal backend in llama.cpp is well-optimized at this point. Benchmarks from r/LocalLLaMA show the M5 Max consistently outperforming discrete GPUs with equivalent VRAM at the same model size, largely because of memory bandwidth advantages.</p>
+<p><strong>M4 vs. M5 comparison on 13B Q4_K_M:</strong></p>
+<ul>
+<li>M4 MacBook Pro: ~28 t/s</li>
+<li>M5 Max Mac Studio: ~45 t/s</li>
+</ul>
+<p>That's a 60% improvement, driven by higher memory bandwidth and more GPU cores. If you're buying a Mac for local LLM work, the M5 Max is the minimum worth considering for 13B+ models.</p>
+<p><strong>The M5 Ultra case:</strong> At $7,000 for the Mac Studio configuration, it's expensive. But it's the only device that runs 70B Q8_0 without any offloading or multi-GPU complexity. For researchers or developers who need that capability in a clean, single-device package, the math actually works out.</p>
+<hr />
+<h2 id="nvidia-gpus-consumer-vs-pro">NVIDIA GPUs: Consumer vs. Pro</h2>
+<h3 id="rtx-4090-still-the-king">RTX 4090: Still the King</h3>
+<p>The RTX 4090 remains the best consumer GPU for local LLM inference. 80 t/s on 7B Q4_K_M is fast enough that the model feels instant. 25 t/s on 32B Q6_K is comfortable for interactive use. At 24GB VRAM, it fits most models you'll encounter in the Claude-distilled space.</p>
+<p>The one limitation: 70B models. You can run 70B Q4_K_M with aggressive layer offloading to system RAM, but performance drops significantly. If 70B is your primary target, you need either dual 4090s or an M5 Ultra.</p>
+<h3 id="rtx-4080-super-the-sensible-step-down">RTX 4080 Super: The Sensible Step Down</h3>
+<p>At 16GB VRAM, the RTX 4080 Super handles 13B Q8_0 and 32B Q4_K_M cleanly. It's meaningfully cheaper than the 4090 and covers the majority of use cases. The token speed gap versus the 4090 is real but not dramatic for most model sizes.</p>
+<h3 id="the-3090-case">The 3090 Case</h3>
+<p>Used RTX 3090s (24GB VRAM) are available for significantly less than a new 4090. Performance is lower — roughly 60-70% of 4090 speeds — but the VRAM is identical. If you're budget-conscious and want 24GB VRAM, a used 3090 is worth considering. Dual 3090s for 70B inference is a legitimate setup at around $1,200-1,400 total for the pair.</p>
+<h3 id="multi-gpu-for-70b">Multi-GPU for 70B</h3>
+<p>Dual RTX 4090s give you 48GB of combined VRAM and around 15 t/s on 70B Q4_K_M. llama.cpp handles tensor parallelism across multiple GPUs reasonably well. The complexity cost is real — you need a motherboard with adequate PCIe lanes, proper cooling for two 450W GPUs, and a power supply that won't flinch at 1,200W peak draw. But if you want 70B performance on NVIDIA hardware, this is the path.</p>
+<hr />
+<h2 id="budget-and-power-efficient-options">Budget and Power-Efficient Options</h2>
+<p>Not everyone needs to run 70B models. If 7B-13B covers your use case, you can build a genuinely capable local inference machine for under $500.</p>
+<h3 id="gtx-1070-8gb-100-used">GTX 1070 (8GB, ~$100 used)</h3>
+<p>Surprisingly capable for 7B Q4_K_M — around 25-30 t/s. The catch: 8GB VRAM means you're limited to 7B Q8_0 at the upper end. No headroom for 13B. But for someone who just wants to run a capable 7B model locally without spending much, this works.</p>
+<h3 id="amd-rx-6600-8gb-200">AMD RX 6600 (8GB, ~$200)</h3>
+<p>The best budget pick. 33 t/s on 7B Q4_K_M, solid driver support, and the ROCm backend in llama.cpp handles it well. Same 8GB VRAM ceiling as the 1070, but faster and more power-efficient. Pair it with a Ryzen 5700G and 64GB RAM for a system that can fall back to CPU inference for larger models when needed.</p>
+<h3 id="intel-arc-a770-16gb-vram-250">Intel Arc A770 (16GB VRAM, ~$250)</h3>
+<p>The Arc A770 is an underrated option. 16GB VRAM at this price point is genuinely unusual. llama.cpp's SYCL backend supports it, and you'll see around 15 t/s on 13B Q4_K_M. Intel NUC builds with the A770 make for a compact, power-efficient local inference box. The driver ecosystem is less mature than NVIDIA or AMD, but it's workable.</p>
+<hr />
+<h2 id="ram-and-vram-the-numbers-you-need">RAM and VRAM: The Numbers You Need</h2>
+<h3 id="vram-requirements-quick-reference">VRAM Requirements Quick Reference</h3>
+<table>
+<thead>
+<tr>
+<th>Model Size</th>
+<th>Q4_K_M VRAM</th>
+<th>Q8_0 VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B</td>
+<td>5GB</td>
+<td>8GB</td>
+</tr>
+<tr>
+<td>13B</td>
+<td>10GB</td>
+<td>16GB</td>
+</tr>
+<tr>
+<td>32B</td>
+<td>16-20GB</td>
+<td>28GB</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>38-40GB</td>
+<td>~105GB</td>
+</tr>
+<tr>
+<td>42B MoE (GLM-4.7-Flash style)</td>
+<td>16GB</td>
+<td>28GB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="system-ram-matters-for-cpu-offloading">System RAM Matters for CPU Offloading</h3>
+<p>When your model doesn't fit entirely in VRAM, llama.cpp offloads layers to system RAM. The speed of that RAM matters more than most people expect.</p>
+<p>64GB DDR5-6000 delivers approximately 1.2x faster CPU inference than DDR4-3600 in the same configuration. That's not a massive difference, but when you're already at 2-3 t/s on a large model, a 20% improvement is meaningful.</p>
+<p><strong>Minimum RAM recommendations:</strong><br />
+- 7B-13B models: 16GB (32GB preferred)<br />
+- 32B models with offloading: 32-64GB<br />
+- 70B CPU inference: 64GB minimum, 128GB preferred</p>
+<hr />
+<h2 id="bottom-line-what-should-you-actually-buy">Bottom Line: What Should You Actually Buy?</h2>
+<p><strong>Best overall — RTX 4090 ($1,800):</strong> If you're serious about local LLM inference and want one GPU that handles everything through 32B models with authority and 70B with offloading, this is it. 80 t/s on 7B, 25 t/s on 32B Q6_K. Future-proof for the GGUF models coming in 2026.</p>
+<p><strong>Best for Mac users — M5 Ultra Mac Studio (~$7,000):</strong> Expensive, but it's the only single device that runs 70B Q8_0 without compromise. 192GB unified memory, clean macOS experience, no driver headaches. If you're already in the Apple ecosystem and need maximum capability, this is the answer.</p>
+<p><strong>Best budget build — AMD RX 6600 ($200) + Ryzen 5700G + 64GB RAM:</strong> 33 t/s on 7B Q4_K_M is genuinely comfortable for daily use. The 64GB RAM gives you a CPU fallback for larger models. Total system cost under $600 if you're building from scratch.</p>
+<p><strong>Best RAM upgrade — Corsair Vengeance DDR5-6400 64GB:</strong> If you're doing any CPU-assisted inference, DDR5 at 6000+ MHz makes a measurable difference. Don't pair a capable GPU with slow RAM.</p>
+<p><strong>Avoid:</strong> Any GPU with 8GB VRAM if you're buying new in 2026. The model landscape is moving toward 13B-32B as the practical sweet spot, and 8GB VRAM locks you out of that range. Also avoid DDR4-only platforms if CPU inference is part of your workflow.</p>
+<p>The hardware floor for useful local inference has never been lower. A $200 GPU and a mid-range CPU will get you a capable 7B setup today. But if you want to run the best Claude-distilled models at the quality levels that actually compete with API access, budget for at least 16GB VRAM and don't skimp on system RAM.</p>
+    <div class="hw-cta"><div class="hw-cta-left"><div class="hw-cta-title">See full specs &amp; model compatibility</div><div class="hw-cta-sub">Interactive hardware picker — filter by budget, VRAM, and which models you want to run.</div></div><a class="hw-cta-btn" href="https://llmpicker.blog" target="_blank" rel="noopener">Open LLM Picker →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+    <div class="back-link"><a href="https://llmpicker.blog/posts/">← All guides</a></div>
+  </article>
+</div>
+</body>
+</html>

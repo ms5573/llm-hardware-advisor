@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Securing Your Homelab: Essential Best Practices for Your Local LLM Setup and Self-Hosted Services</title>
+<meta name="description" content="Your homelab is only as powerful as it is secure — and most aren&#x27;t secure enough.">
+<link rel="canonical" href="https://llmpicker.blog/posts/reddit-homelab-security-best-practices/">
+<meta property="og:title" content="Securing Your Homelab: Essential Best Practices for Your Local LLM Setup and Self-Hosted Services">
+<meta property="og:description" content="Your homelab is only as powerful as it is secure — and most aren&#x27;t secure enough.">
+<meta property="og:url" content="https://llmpicker.blog/posts/reddit-homelab-security-best-practices/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post pre{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;margin:24px 0}
+.post pre code{background:none;padding:0;border:none}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+
+.hw-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:40px 0 28px;padding:20px 24px;border:1px solid rgba(124,106,255,0.25);border-radius:14px;background:linear-gradient(135deg,rgba(124,106,255,0.08),rgba(34,211,238,0.04));flex-wrap:wrap}
+.hw-cta-left{flex:1;min-width:200px}
+.hw-cta-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.hw-cta-sub{font-size:13px;color:var(--text-dim);line-height:1.5}
+.hw-cta-btn{flex-shrink:0;display:inline-flex;align-items:center;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap}
+.hw-cta-btn:hover{opacity:0.85;transform:translateY(-1px);color:#fff!important;text-decoration:none!important}
+
+.back-link{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.back-link a{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.back-link a:hover{color:var(--text);}
+
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <h1 id="securing-your-homelab-essential-best-practices-for-your-local-llm-setup-and-self-hosted-services">Securing Your Homelab: Essential Best Practices for Your Local LLM Setup and Self-Hosted Services</h1>
+<p>Your homelab is only as powerful as it is secure — and most aren't secure enough.</p>
+<p>Whether you're running a local LLM setup on a beefy GPU server, hosting Nextcloud for your family, or managing a fleet of Raspberry Pis, your homelab is a real attack surface. It sits on your home network, often runs 24/7, and frequently holds sensitive personal data. The good news: securing it doesn't require an enterprise budget or a cybersecurity degree. It requires a layered approach, consistent habits, and the right tools.</p>
+<p>This guide walks you through every layer of homelab security — from physical access to disaster recovery — with specific tools, real configurations, and honest tradeoffs.</p>
+<hr />
+<h2 id="why-homelab-security-is-more-critical-than-ever">Why Homelab Security Is More Critical Than Ever</h2>
+<p>Cyberattacks targeting self-hosted services and IoT devices have surged. Shodan, the search engine for internet-connected devices, indexes millions of exposed admin panels, SSH ports, and unsecured NAS devices every day. If your homelab is misconfigured, it can become an entry point for ransomware, a node in a botnet, or a source of leaked personal data.</p>
+<p>A local LLM setup adds another dimension: you may be processing sensitive documents, private conversations, or proprietary code locally <em>specifically</em> to avoid cloud exposure. A breach of that machine defeats the entire purpose.</p>
+<p>The solution is defense in depth — multiple overlapping security layers so that no single failure compromises everything.</p>
+<hr />
+<h2 id="1-physical-security-lock-down-the-hardware-first">1. Physical Security: Lock Down the Hardware First</h2>
+<p>Security starts before any software is involved.</p>
+<p><strong>Restrict physical access.</strong> Your homelab server should live in a locked room, closet, or cabinet. An unlocked machine can be booted from a USB drive, bypassing every software control you've implemented. A basic <a href="https://www.amazon.com/dp/B08KGXR5WK?tag=ms5573-20">keyed server rack cabinet</a> costs under $200 and dramatically reduces walk-up risk.</p>
+<p><strong>Environmental controls matter too.</strong> Power fluctuations can corrupt drives and damage GPUs. Use a UPS (Uninterruptible Power Supply) — the <a href="https://www.amazon.com/dp/B00429N19W?tag=ms5573-20">APC Back-UPS 1500VA</a> handles most small homelab setups and gives you 5–10 minutes of runtime to gracefully shut down during outages. For cooling, ensure your server room maintains temperatures below 80°F (27°C). GPU-heavy local LLM setups generate significant heat — a dedicated exhaust fan or small AC unit is worth the investment.</p>
+<hr />
+<h2 id="2-network-security-your-most-important-defense-layer">2. Network Security: Your Most Important Defense Layer</h2>
+<p>Network security is where most homelab breaches originate and where your effort pays off the most.</p>
+<h3 id="firewall-configuration">Firewall Configuration</h3>
+<p>Every homelab needs a dedicated firewall, not just the basic NAT built into a consumer router. <strong>pfSense</strong> and <strong>OPNsense</strong> are the gold standards — both are free, open-source, and run on modest hardware. A dedicated mini PC like the <a href="https://www.amazon.com/dp/B07FHRCS4D?tag=ms5573-20">Protectli Vault FW4B</a> (4 Intel NICs, 8GB RAM, fanless) makes an excellent pfSense appliance for under $400.</p>
+<p>Key firewall rules to implement immediately:<br />
+- Block all inbound traffic by default; allow only what you explicitly need<br />
+- Restrict outbound traffic from servers to only required destinations<br />
+- Enable geo-blocking for countries you don't expect traffic from<br />
+- Log all denied connections for review</p>
+<h3 id="network-segmentation-with-vlans">Network Segmentation with VLANs</h3>
+<p>Never put your IoT devices, personal laptops, and homelab servers on the same flat network. A compromised smart bulb shouldn't be able to reach your LLM server.</p>
+<p>Set up at minimum three VLANs:<br />
+- <strong>VLAN 10 – Servers</strong>: Your homelab machines, NAS, LLM inference server<br />
+- <strong>VLAN 20 – Personal Devices</strong>: Laptops, phones, tablets<br />
+- <strong>VLAN 30 – IoT</strong>: Smart home devices, cameras, printers</p>
+<p>Managed switches like the <a href="https://www.amazon.com/dp/B00K4DS5KU?tag=ms5573-20">TP-Link TL-SG108E</a> support 802.1Q VLANs for around $30 — one of the highest-ROI security purchases you can make.</p>
+<h3 id="secure-wi-fi">Secure Wi-Fi</h3>
+<ul>
+<li>Use <strong>WPA3</strong> encryption if your router supports it; WPA2-AES at minimum</li>
+<li>Disable <strong>WPS</strong> — it has known vulnerabilities that can be exploited in hours</li>
+<li>Create a separate guest network for visitors and untrusted devices</li>
+<li>Change your router's default admin credentials immediately (more on this in Section 8)</li>
+</ul>
+<h3 id="vpn-for-remote-access">VPN for Remote Access</h3>
+<p>This is non-negotiable: <strong>never expose SSH, admin panels, or your local LLM interface directly to the internet.</strong> Instead, use a VPN tunnel.</p>
+<p><strong>WireGuard</strong> is the modern choice — it's faster, simpler, and more secure than OpenVPN. Most pfSense/OPNsense installations support it natively. Configure WireGuard on your firewall, install the client on your devices, and access everything through the tunnel. Latency is typically under 5ms on a local connection.</p>
+<hr />
+<h2 id="3-access-control-who-gets-in-and-what-they-can-do">3. Access Control: Who Gets In and What They Can Do</h2>
+<h3 id="strong-authentication">Strong Authentication</h3>
+<p>Weak passwords are the single most common entry point for breaches. Enforce these standards:</p>
+<ul>
+<li><strong>Minimum 16 characters</strong> for all service accounts</li>
+<li>Use a passphrase format: <code>correct-horse-battery-staple-42!</code> is both memorable and strong</li>
+<li>Deploy a self-hosted password manager like <strong>Vaultwarden</strong> (a lightweight Bitwarden-compatible server) so you never reuse credentials</li>
+</ul>
+<h3 id="multi-factor-authentication-mfa">Multi-Factor Authentication (MFA)</h3>
+<p>Enable MFA on every service that supports it:<br />
+- <strong>Proxmox</strong>: Supports TOTP natively under Datacenter → Permissions → Two Factor<br />
+- <strong>Nextcloud</strong>: Enable via the Two-Factor TOTP Provider app<br />
+- <strong>Portainer</strong>: Supports TOTP in the Business edition; use a reverse proxy with MFA for Community edition</p>
+<p>Use an authenticator app like <strong>Aegis</strong> (Android) or <strong>Raivo</strong> (iOS) — avoid SMS-based MFA when possible.</p>
+<h3 id="ssh-key-authentication">SSH Key Authentication</h3>
+<p>Replace password-based SSH with key pairs immediately. Generate an Ed25519 key (preferred over RSA for modern systems):</p>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;homelab-access&quot;
+</code></pre>
+<p>Copy the public key to your server, then disable password authentication in <code>/etc/ssh/sshd_config</code>:</p>
+<pre><code>PasswordAuthentication no
+PermitRootLogin no
+</code></pre>
+<p>Restart SSH and verify key access before closing your session.</p>
+<h3 id="principle-of-least-privilege">Principle of Least Privilege</h3>
+<p>Run Docker containers as non-root users. Assign service accounts only the permissions they need. For your local LLM setup specifically — if you're running <strong>Ollama</strong> or <strong>llama.cpp</strong> — run the inference server under a dedicated user account with no sudo privileges. A compromised LLM API endpoint should not have access to your entire filesystem.</p>
+<hr />
+<h2 id="4-patch-and-update-management">4. Patch and Update Management</h2>
+<p>Unpatched software is the second most common attack vector after weak credentials.</p>
+<p><strong>Automate OS updates</strong> on Debian/Ubuntu systems:</p>
+<pre><code class="language-bash">apt install unattended-upgrades
+dpkg-reconfigure unattended-upgrades
+</code></pre>
+<p>Configure it to auto-apply security patches but hold major version upgrades for manual review.</p>
+<p><strong>Don't forget firmware.</strong> Router firmware, NAS firmware, and GPU driver updates all contain security patches. Set a monthly calendar reminder to check for firmware updates on all network-connected hardware.</p>
+<p><strong>Monitor CVEs</strong> relevant to your stack. Subscribe to security advisories for software you run — Proxmox, TrueNAS, and most major projects have mailing lists or RSS feeds for security announcements.</p>
+<hr />
+<h2 id="5-data-protection-encrypt-everything">5. Data Protection: Encrypt Everything</h2>
+<h3 id="encryption-at-rest">Encryption at Rest</h3>
+<p>For Linux servers, use <strong>LUKS</strong> (Linux Unified Key Setup) to encrypt entire drives. For NAS devices running TrueNAS, enable dataset encryption at the pool level. For Windows machines, <strong>BitLocker</strong> with a TPM chip provides solid at-rest protection.</p>
+<p>Your local LLM setup likely stores model weights (which can be large but aren't sensitive) alongside inference logs and input data (which absolutely are). Encrypt the partition or directory storing conversation history and processed documents.</p>
+<h3 id="encryption-in-transit">Encryption in Transit</h3>
+<p>All internal services should use HTTPS, even on your local network. Use <strong>Caddy</strong> or <strong>Nginx Proxy Manager</strong> as a reverse proxy with automatic SSL certificate generation via Let's Encrypt or self-signed certificates from your own internal CA. Never transmit credentials or data over plain HTTP, even internally.</p>
+<hr />
+<h2 id="6-monitoring-and-intrusion-detection">6. Monitoring and Intrusion Detection</h2>
+<p>You can't defend against what you can't see.</p>
+<h3 id="intrusion-detection">Intrusion Detection</h3>
+<ul>
+<li><strong>Fail2ban</strong>: Automatically bans IPs after repeated failed login attempts. Install on every internet-facing service. Configure it to ban after 5 failed attempts for 24 hours.</li>
+<li><strong>Suricata</strong>: A full network IDS/IPS that integrates with pfSense/OPNsense. It inspects traffic in real time and alerts on known attack signatures.</li>
+</ul>
+<h3 id="centralized-logging">Centralized Logging</h3>
+<p>Aggregate logs from all your services into a single dashboard. The <strong>Grafana + Loki + Promtail</strong> stack is lightweight and excellent for homelabs. Alternatively, the <strong>ELK Stack</strong> (Elasticsearch, Logstash, Kibana) offers more power but requires more RAM — budget at least 8GB for the ELK stack alone.</p>
+<p>Set up alerts for:<br />
+- Failed SSH login attempts (more than 3 in 5 minutes)<br />
+- New devices appearing on your network<br />
+- Unexpected outbound connections from server VLANs</p>
+<h3 id="regular-audits">Regular Audits</h3>
+<p>Run <strong>Nmap</strong> scans against your own network monthly to see what's exposed:</p>
+<pre><code class="language-bash">nmap -sV -p 1-65535 192.168.10.0/24
+</code></pre>
+<p>Review the results and close anything you didn't intentionally open.</p>
+<hr />
+<h2 id="7-backup-and-disaster-recovery">7. Backup and Disaster Recovery</h2>
+<p>A ransomware attack or hardware failure without a tested backup plan is catastrophic. The <strong>3-2-1 rule</strong> is the industry standard:</p>
+<ul>
+<li><strong>3</strong> copies of your data</li>
+<li><strong>2</strong> different storage media (e.g., local NAS + external HDD)</li>
+<li><strong>1</strong> offsite copy (cloud or physical offsite)</li>
+</ul>
+<p><strong>Tools to implement this:</strong><br />
+- <strong>Rclone</strong>: Sync local data to encrypted cloud storage (Backblaze B2, Wasabi)<br />
+- <strong>Borgmatic</strong>: Automated, deduplicated, encrypted backups with retention policies<br />
+- <strong>rsync</strong>: Simple file-level sync for local copies</p>
+<p><strong>Test your backups quarterly.</strong> A backup you've never restored from is a backup you don't actually have. Schedule a quarterly drill: restore a random file, or spin up a VM from a backup image, and verify it works.</p>
+<p>Document your disaster recovery plan in a simple text file stored offsite. Include: what services you run, where backups live, how to restore each service, and contact info for any cloud providers.</p>
+<hr />
+<h2 id="8-common-mistakes-that-get-homelabs-compromised">8. Common Mistakes That Get Homelabs Compromised</h2>
+<p><strong>Default credentials.</strong> The Raspberry Pi default <code>pi/raspberry</code> login, the router admin panel at <code>admin/admin</code>, the Proxmox root account with a weak password — attackers have lists of these. Change every default credential before a device touches your network.</p>
+<p><strong>Exposing admin panels to the internet.</strong> Portainer, Proxmox, TrueNAS, and your local LLM web UI should never be directly accessible from the public internet. Always require VPN access first.</p>
+<p><strong>Skipping updates because "it's working fine."</strong> The most dangerous vulnerabilities are the ones you don't know about yet. Staying patched is your best defense against zero-days that become known exploits.</p>
+<p><strong>Flat networks.</strong> If every device can reach every other device, one compromised IoT sensor can pivot to your LLM server. Segment your network.</p>
+<hr />
+<h2 id="hardware-recommendations-for-a-secure-local-llm-setup">Hardware Recommendations for a Secure Local LLM Setup</h2>
+<p>If you're building or upgrading your homelab for local AI workloads, here are security-conscious hardware picks:</p>
+<ul>
+<li><strong><a href="https://www.amazon.com/dp/B0BG95H8RX?tag=ms5573-20">NVIDIA RTX 4090</a></strong> — 24GB VRAM, runs 70B models at 4-bit quantization at ~20 tokens/s. Powerful enough to handle serious LLM workloads locally.</li>
+<li><strong><a href="https://www.amazon.com/dp/B07FHRCS4D?tag=ms5573-20">Protectli Vault FW4B</a></strong> — Dedicated pfSense/OPNsense appliance for your firewall layer.</li>
+<li><strong><a href="https://www.amazon.com/dp/B00429N19W?tag=ms5573-20">APC Back-UPS 1500VA</a></strong> — Essential power protection for always-on servers.</li>
+<li><strong><a href="https://www.amazon.com/dp/B00K4DS5KU?tag=ms5573-20">TP-Link TL-SG108E</a></strong> — Managed switch for VLAN segmentation on a budget.</li>
+</ul>
+<blockquote>
+<p><strong>Not sure which hardware fits your workload?</strong> Use the interactive picker at <a href="https://llmpicker.blog">llmpicker.blog</a> — filter by budget, model size, and use case.</p>
+</blockquote>
+<p>If you're not ready to invest in dedicated hardware yet, you can experiment with secure, isolated LLM inference in the cloud: <a href="https://runpod.io?ref=2lqmzyra">Try on RunPod</a> — spin up a GPU instance, test your workflow, then bring it home when you're ready.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Is a homelab a security risk?</strong><br />
+Yes, if unsecured. A misconfigured homelab can expose personal data, serve as a botnet node, or provide attackers a foothold into your home network. With proper segmentation, authentication, and monitoring, the risks are very manageable.</p>
+<p><strong>Do I need a dedicated firewall, or is my router enough?</strong><br />
+Consumer routers provide basic NAT but lack the granular control needed for a serious homelab. A dedicated pfSense or OPNsense appliance gives you VLAN support, IDS integration, VPN hosting, and detailed logging — all of which matter for a multi-service homelab.</p>
+<p><strong>How do I secure my local LLM setup specifically?</strong><br />
+Run your inference server (Ollama, llama.cpp, etc.) under a non-root user account, keep it on a server VLAN isolated from personal devices, put the web UI behind a reverse proxy with authentication, and never expose the API port to the internet without VPN protection.</p>
+<p><strong>What's the most important first step for a new homelab?</strong><br />
+Change all default credentials and enable a firewall before connecting anything to your network. These two steps eliminate the vast majority of opportunistic attacks.</p>
+<p><strong>How often should I audit my homelab security?</strong><br />
+Run Nmap scans monthly, review logs weekly, test backups quarterly, and do a full security review (all settings, all accounts, all exposed services) every six months.</p>
+<p><strong>Should I use a VPN service or host my own?</strong><br />
+For homelab remote access, host your own WireGuard VPN on your firewall. Commercial VPN services route your traffic through third-party servers — the opposite of what you want for accessing private local services.</p>
+<hr />
+<h2 id="conclusion-build-security-in-dont-bolt-it-on">Conclusion: Build Security In, Don't Bolt It On</h2>
+<p>Securing your homelab isn't a one-time task — it's an ongoing practice. The layered approach covered here (physical security → network segmentation → strong authentication → encryption → monitoring → backups) ensures that no single failure compromises everything you've built.</p>
+<p><strong>Your immediate next steps:</strong></p>
+<ol>
+<li>Audit your current network — run Nmap and see what's actually exposed</li>
+<li>Change all default credentials across every device</li>
+<li>Deploy a dedicated firewall with VLAN segmentation</li>
+<li>Enable MFA on Proxmox, Nextcloud, and any other critical services</li>
+<li>Implement the 3-2-1 backup rule and test a restore this week</li>
+</ol>
+<p>The homelab community is one of the best resources for staying current on threats and solutions. Follow forums like r/homelab and r/selfhosted, subscribe to security advisories for your core software, and revisit this checklist every six months.</p>
+<p>Your local LLM setup, your personal data, and your network are worth protecting. Start today.</p>
+    <div class="hw-cta"><div class="hw-cta-left"><div class="hw-cta-title">See full specs &amp; model compatibility</div><div class="hw-cta-sub">Interactive hardware picker — filter by budget, VRAM, and which models you want to run.</div></div><a class="hw-cta-btn" href="https://llmpicker.blog" target="_blank" rel="noopener">Open LLM Picker →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener">Not ready to buy hardware? Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+    <div class="back-link"><a href="https://llmpicker.blog/posts/">← All guides</a></div>
+  </article>
+</div>
+</body>
+</html>

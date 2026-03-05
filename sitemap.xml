@@ -49,12 +49,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://llmpicker.blog/posts/macbook-air-m4-16-vs-m5-16-llm/</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://llmpicker.blog/posts/macbook-air-m5-32-vs-macbook-pro-m5-pro-64-llm/</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -80,12 +74,6 @@
   </url>
   <url>
     <loc>https://llmpicker.blog/posts/rtx-4090-vs-rtx-4080-llm/</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://llmpicker.blog/posts/rtx-4090-vs-rx-7900-xtx-llm-inference/</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
