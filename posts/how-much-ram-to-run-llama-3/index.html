@@ -105,7 +105,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <h1 id="how-much-ram-do-you-need-to-run-llama-3">How Much RAM Do You Need to Run Llama 3?</h1>
 <p><strong>TL;DR</strong><br />
 - Llama 3 8B needs ~16GB RAM for CPU inference or a 12GB GPU with Q4 quantization<br />
-- Llama 3 70B requires 64GB+ RAM or dual RTX 3090s (48GB VRAM) for quantized GPU inference<br />
+- Llama 3 70B requires approximately 42–48GB RAM at Q4_K_M (64GB recommended for headroom) or dual RTX 3090s (48GB VRAM) for quantized GPU inference<br />
 - Llama 3 405B is enterprise territory — budget 256GB RAM or 8x H100s<br />
 - Q4 quantization cuts memory requirements by ~70% with only a modest quality tradeoff — use it</p><a href="https://www.amazon.com/dp/B09GWB753L?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <hr />
@@ -201,7 +201,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h3 id="ram-requirements-70b">RAM Requirements (70B)</h3>
 <p>For CPU offloading or pure CPU inference:</p>
 <ul>
-<li><strong>Minimum:</strong> 64GB RAM</li>
+<li><strong>Minimum:</strong> 48GB RAM</li>
 <li><strong>Recommended:</strong> 128GB RAM for comfortable operation</li>
 <li><strong>Performance:</strong> 1-3 tokens/sec on CPU-only — technically functional, practically painful</li>
 </ul>

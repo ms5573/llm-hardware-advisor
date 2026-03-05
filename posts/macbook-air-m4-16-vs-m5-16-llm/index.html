@@ -93,7 +93,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 }
 </style>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?", "description": "Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?", "author": {"@type": "Organization", "name": "LLM Picker"}, "publisher": {"@type": "Organization", "name": "LLM Picker", "url": "https://llmpicker.blog"}, "datePublished": "2026-03-04", "dateModified": "2026-03-04"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can the MacBook Air M4 or M5 run Llama 3.1 70B?", "acceptedAnswer": {"@type": "Answer", "text": "Technically yes, but practically no. A 70B Q4 model requires approximately 35-40GB of memory. With only 16GB of unified RAM, both machines will rely heavily on swap memory, resulting in token speeds below 3 tok/s."}}, {"@type": "Question", "name": "Does the M5's extra GPU cores help with LLM inference?", "acceptedAnswer": {"@type": "Answer", "text": "Somewhat, but memory bandwidth matters more. LLM inference on Apple Silicon is primarily memory-bandwidth-bound. The M5's bigger driver is the jump from ~150 GB/s to ~200 GB/s in memory bandwidth."}}, {"@type": "Question", "name": "What's the best quantization level for 13B models on 16GB?", "acceptedAnswer": {"@type": "Answer", "text": "Q4_K_M is the sweet spot. It keeps memory usage around 7-8GB, leaving plenty of headroom for the KV cache and system processes, while maintaining output quality close to FP16."}}, {"@type": "Question", "name": "Is the MacBook Air M5 worth it over the M4 for coding assistance with local LLMs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you're using a 13B model as your coding assistant. The 25% faster token generation means less waiting between completions. If you're using a 7B model for coding, the M4 is perfectly adequate."}}, {"@type": "Question", "name": "Should I wait for the M5 or buy the M4 now?", "acceptedAnswer": {"@type": "Answer", "text": "If the M5 is available and within your budget, buy it — especially for 13B+ use cases. If you're budget-constrained or primarily running 7B models, the M4 is available now at a lower price and delivers excellent performance."}}]}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?", "description": "Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?", "author": {"@type": "Organization", "name": "LLM Picker"}, "publisher": {"@type": "Organization", "name": "LLM Picker", "url": "https://llmpicker.blog"}, "datePublished": "2026-03-04", "dateModified": "2026-03-04"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can the MacBook Air M4 or M5 run Llama 3.1 70B?", "acceptedAnswer": {"@type": "Answer", "text": "Technically yes, but practically no. A 70B Q4 model requires approximately 35-40GB of memory. With only 16GB of unified RAM, both machines will rely heavily on swap memory, resulting in token speeds below 3 tok/s."}}, {"@type": "Question", "name": "Does the M5's extra GPU cores help with LLM inference?", "acceptedAnswer": {"@type": "Answer", "text": "Somewhat, but memory bandwidth matters more. LLM inference on Apple Silicon is primarily memory-bandwidth-bound. The M5's bigger driver is the jump from ~120 GB/s to ~153 GB/s in memory bandwidth."}}, {"@type": "Question", "name": "What's the best quantization level for 13B models on 16GB?", "acceptedAnswer": {"@type": "Answer", "text": "Q4_K_M is the sweet spot. It keeps memory usage around 7-8GB, leaving plenty of headroom for the KV cache and system processes, while maintaining output quality close to FP16."}}, {"@type": "Question", "name": "Is the MacBook Air M5 worth it over the M4 for coding assistance with local LLMs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you're using a 13B model as your coding assistant. The 25% faster token generation means less waiting between completions. If you're using a 7B model for coding, the M4 is perfectly adequate."}}, {"@type": "Question", "name": "Should I wait for the M5 or buy the M4 now?", "acceptedAnswer": {"@type": "Answer", "text": "If the M5 is available and within your budget, buy it — especially for 13B+ use cases. If you're budget-constrained or primarily running 7B models, the M4 is available now at a lower price and delivers excellent performance."}}]}]}
 </script>
 </head>
 <body>
@@ -109,7 +109,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <h1 id="macbook-air-m4-16gb-vs-m5-16gb-for-local-llms-which-one-should-you-buy">MacBook Air M4 16GB vs M5 16GB for Local LLMs: Which One Should You Buy?</h1>
 <p><em>Running local LLMs on Apple Silicon has never been more accessible — but which MacBook Air actually delivers the experience you need?</em></p>
 <hr />
-<p>If you're serious about running local LLMs on a MacBook Air, you've already narrowed your choices down to two machines: the <strong>M4 at $1,299</strong> and the newly released <strong>M5 at $1,599</strong>. Both pack 16GB of unified memory. Both are fanless, silent, and genuinely capable of running models that would have required a dedicated GPU rig just two years ago.</p>
+<p>If you're serious about running local LLMs on a MacBook Air, you've already narrowed your choices down to two machines: the <strong>M4 at $1,099</strong> and the newly released <strong>M5 at $1,099 (13-inch)</strong>. Both pack 16GB of unified memory. Both are fanless, silent, and genuinely capable of running models that would have required a dedicated GPU rig just two years ago.</p>
 <p>But here's the thing — when you're running inference on a 13B or 30B model, that $300 price difference starts to feel like a very real question. Is the M5's faster memory bandwidth worth it? Does the architectural upgrade actually translate to meaningful token-per-second gains? Or is the M4 still the smarter buy for most users?</p>
 <p>This post answers all of that. We'll break down the raw specs, compare real-world token generation speeds across model sizes, map out exactly which models fit at which quantization levels, and give you a direct, no-fluff verdict on which machine deserves your money.</p>
 <p>Let's get into it.</p>
@@ -132,13 +132,13 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 <tr>
 <td><strong>Memory Bandwidth</strong></td>
-<td>~150 GB/s</td>
-<td>~200 GB/s</td>
+<td>~120 GB/s</td>
+<td>~153 GB/s</td>
 </tr>
 <tr>
 <td><strong>Base Price</strong></td>
-<td>$1,299</td>
-<td>$1,599</td>
+<td>$1,099</td>
+<td>$1,099</td>
 </tr>
 <tr>
 <td><strong>TDP</strong></td>
@@ -162,8 +162,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 </tbody>
 </table>
-<p>The single most important number for local LLM inference is <strong>memory bandwidth</strong>. When you're running a quantized model, the GPU isn't compute-bound — it's memory-bound. The bottleneck is how fast weights can be streamed from RAM into the compute units. That's why the M5's jump from ~150 GB/s to ~200 GB/s is the headline spec for LLM users, not the CPU or GPU core count.</p>
-<p>That 33% bandwidth increase is what drives almost every performance difference you'll see below.</p>
+<p>The single most important number for local LLM inference is <strong>memory bandwidth</strong>. When you're running a quantized model, the GPU isn't compute-bound — it's memory-bound. The bottleneck is how fast weights can be streamed from RAM into the compute units. That's why the M5's jump from ~120 GB/s to ~153 GB/s is the headline spec for LLM users, not the CPU or GPU core count.</p>
+<p>That 28% bandwidth increase is what drives almost every performance difference you'll see below.</p>
 <hr />
 <h2 id="performance-comparison-token-generation-speed">Performance Comparison: Token Generation Speed</h2>
 <p>Here's where the rubber meets the road. These are estimated token-per-second figures using <strong>llama.cpp</strong> with standard Q4_K_M quantization, which is the most common setup for local inference on Apple Silicon.</p>
@@ -364,9 +364,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h2 id="price-value-analysis">Price &amp; Value Analysis</h2>
 <p>Let's be direct about the math here.</p>
 <ul>
-<li><strong>MacBook Air M4 16GB:</strong> $1,299</li>
-<li><strong>MacBook Air M5 16GB:</strong> $1,599</li>
-<li><strong>Price difference:</strong> $300 (23% premium)</li>
+<li><strong>MacBook Air M4 16GB:</strong> $1,099</li>
+<li><strong>MacBook Air M5 16GB:</strong> $1,099</li>
+<li><strong>Price difference:</strong> $0 (same price for 13-inch)</li>
 <li><strong>Average performance gain:</strong> ~25–27%</li>
 </ul>
 <p>On paper, the M5's performance uplift roughly matches its price premium. You're paying 23% more and getting approximately 25% faster inference. That's a near 1:1 value ratio, which means the decision comes down to <strong>how much those extra tokens per second actually matter to your workflow</strong>.</p>
@@ -406,7 +406,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <hr />
 <h2 id="verdict-clear-winner-runner-up-use-case">Verdict: Clear Winner + Runner-Up Use Case</h2>
 <p><strong>Winner: MacBook Air M5 16GB</strong></p><a href="https://www.apple.com/macbook-air/" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Apple Store  →</a><div class="amazon-sub">Apple Store link</div>
-<p>The M5 earns the top spot because its ~200 GB/s memory bandwidth delivers a consistent 25–33% performance improvement across every model size that matters on 16GB. For the most common serious use case — running 13B models daily — the M5's 35 tok/s vs the M4's 28 tok/s is a difference you'll feel every single day. The $300 premium is justified for anyone who treats local LLMs as a real part of their workflow.</p>
+<p>The M5 earns the top spot because its ~153 GB/s memory bandwidth delivers a consistent 25–33% performance improvement across every model size that matters on 16GB. For the most common serious use case — running 13B models daily — the M5's 35 tok/s vs the M4's 28 tok/s is a difference you'll feel every single day. The $300 premium is justified for anyone who treats local LLMs as a real part of their workflow.</p>
 <p><strong>Runner-Up: MacBook Air M4 16GB</strong></p>
 <p>The M4 is the right choice for the majority of users who are running 7B models, experimenting with local AI, or simply don't need to squeeze every token per second out of their hardware. At $1,299, it's one of the best value propositions in consumer AI hardware today. Don't let anyone convince you it's a slow machine — 55 tok/s on a 7B model is genuinely impressive for a $1,299 fanless laptop.</p>
 <p><strong>The one-sentence rule:</strong> If you run 13B models regularly, buy the M5. If you mostly run 7B models, save $300 and buy the M4.</p>
@@ -415,7 +415,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h3 id="1-can-the-macbook-air-m4-or-m5-run-llama-31-70b">1. Can the MacBook Air M4 or M5 run Llama 3.1 70B?</h3>
 <p>Technically, yes — but practically, no. A 70B Q4 model requires approximately 35–40GB of memory. With only 16GB of unified RAM, both machines will rely heavily on swap memory, resulting in token speeds below 3 tok/s. That's not a usable experience for most workflows. If 70B inference is your goal, you need a MacBook Pro M4 Max with 48GB or 64GB of unified memory.</p>
 <h3 id="2-does-the-m5s-extra-gpu-cores-help-with-llm-inference">2. Does the M5's extra GPU cores help with LLM inference?</h3>
-<p>Somewhat, but memory bandwidth matters more. LLM inference on Apple Silicon is primarily memory-bandwidth-bound, not compute-bound. The M5's additional GPU cores provide some benefit, but the bigger driver of its performance advantage is the jump from ~150 GB/s to ~200 GB/s in memory bandwidth. That's what's moving model weights faster and generating more tokens per second.</p>
+<p>Somewhat, but memory bandwidth matters more. LLM inference on Apple Silicon is primarily memory-bandwidth-bound, not compute-bound. The M5's additional GPU cores provide some benefit, but the bigger driver of its performance advantage is the jump from ~120 GB/s to ~153 GB/s in memory bandwidth. That's what's moving model weights faster and generating more tokens per second.</p>
 <h3 id="3-whats-the-best-quantization-level-for-13b-models-on-16gb">3. What's the best quantization level for 13B models on 16GB?</h3>
 <p><strong>Q4_K_M</strong> is the sweet spot. It keeps memory usage around 7–8GB, leaving plenty of headroom for the KV cache and system processes, while maintaining output quality that's very close to FP16. Q8 is also viable at ~13GB if you want higher fidelity and are willing to trade some context window space. Avoid FP16 for 13B on 16GB — it requires swap and becomes painfully slow.</p>
 <h3 id="4-is-the-macbook-air-m5-worth-it-over-the-m4-for-coding-assistance-with-local-llms">4. Is the MacBook Air M5 worth it over the M4 for coding assistance with local LLMs?</h3>

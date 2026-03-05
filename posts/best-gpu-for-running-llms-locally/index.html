@@ -104,7 +104,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <h1 id="best-gpu-for-running-llms-locally-in-2026-the-no-bs-guide">Best GPU for Running LLMs Locally in 2026: The No-BS Guide</h1>
 <p><strong>TL;DR</strong><br />
 - The RTX 5090 (32GB GDDR7) is the best GPU for running LLMs locally in 2026 — full stop. It hits 5,841 tokens/sec and handles 70B models without breaking a sweat.<br />
-- The RTX 4090 remains the smartest value play: 24GB VRAM, capable of running 70B models at INT4, and available for $1,600–$2,000.<br />
+- The RTX 4090 remains the smartest value play: 24GB VRAM, capable of running 70B models at INT4, and available for $1,800–$2,800 (discontinued, limited stock).<br />
 - AMD's ROCm ecosystem is still 50% slower than CUDA for LLM workloads — the 7900 XTX is a budget option, not a performance one.<br />
 - VRAM is the hard constraint. 24GB is the practical minimum for 70B models at 4-bit quantization. Don't let anyone talk you into less.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <hr />
@@ -164,7 +164,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <tr>
 <td>RTX 4090</td>
 <td>2,890</td>
-<td>$1,600–$2,000</td>
+<td>$1,800–$2,800</td>
 <td>~$0.55</td>
 </tr>
 <tr>
@@ -175,6 +175,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 </tbody>
 </table>
+<p><em>Note: The tok/s figures above are batch throughput benchmarks (batch size 8+), not single-user inference speeds. Typical single-user inference on a 7B model runs at 120–200 tok/s on an RTX 4090. Batch throughput numbers are useful for comparing relative GPU performance but do not reflect the experience of a single user running a local chatbot.</em></p>
 <p>A few things jump out here.</p>
 <p>The RTX 5090 is actually the most cost-efficient option per token despite being the most expensive GPU. At 2.4x the RTX 4090's speed for 1.6x the cost, the math works out in its favor if you're running inference at scale or doing long-context work regularly.</p>
 <p>The 7900 XTX looks cheap until you factor in performance. You're paying the most per token of any option here, and you're accepting the ROCm ecosystem limitations on top of it.</p>
@@ -226,7 +227,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p><strong>Best Overall: RTX 5090</strong><br />
 32GB GDDR7, 5,841 tokens/sec, handles everything from 7B to 70B+ without compromise. The price is high, but the performance-per-dollar math actually works out, and you're buying 3+ years of headroom. If you can afford it, this is the answer.</p>
 <p><strong>Best Value: RTX 4090</strong><br />
-24GB VRAM, ~2,890 tokens/sec, excellent ecosystem support, available for $1,600–$2,000. It delivers 82% of the RTX 5090's performance at roughly 55% of the cost. For most users, this is the practical sweet spot.</p>
+24GB VRAM, ~2,890 tokens/sec, excellent ecosystem support, available for $1,800–$2,800. It delivers 82% of the RTX 5090's performance at roughly 55% of the cost. For most users, this is the practical sweet spot.</p>
 <p><strong>AMD Alternative: Strix Halo APU + 128GB RAM</strong><br />
 Not for everyone — but if you're a researcher who needs to run 80B+ MoE models at full precision and you're willing to trade speed for capacity, this is the only consumer option that makes it possible.</p>
 <p><strong>Budget Pick: Used RTX 3090</strong><br />

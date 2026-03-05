@@ -117,7 +117,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <div class="content">
   <article class="post">
     <h1 id="rtx-4090-vs-mac-studio-m4-max-128gb-for-local-llms-which-one-should-you-buy">RTX 4090 vs Mac Studio M4 Max 128GB for Local LLMs: Which One Should You Buy?</h1>
-<p>If you're serious about running local LLMs, you've almost certainly landed on the same two machines everyone in the community is debating: the <strong>RTX 4090 PC</strong> and the <strong>Apple Mac Studio M4 Max with 128GB unified memory</strong>. Both are genuinely excellent. Both will cost you real money. And they're built for fundamentally different kinds of users.</p><a href="https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FNS1ZX5B?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
+<p>If you're serious about running local LLMs, you've almost certainly landed on the same two machines everyone in the community is debating: the <strong>RTX 4090 PC</strong> and the <strong>Apple Mac Studio M4 Max with 128GB unified memory</strong>. Both are genuinely excellent. Both will cost you real money. And they're built for fundamentally different kinds of users.</p><a href="https://www.amazon.com/Apple-Studio-16-Core-40-Core-Unified/dp/B0FMFZ5SXS?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>Here's the problem: most comparisons online either worship the RTX 4090's raw CUDA throughput or get starry-eyed about Apple Silicon's unified memory architecture. Neither framing is complete. The honest answer is that <strong>the right choice depends entirely on which model sizes you're running and what you're willing to pay</strong>.</p><a href="https://www.amazon.com/ASUS-GeForce-Graphics-DisplayPort-TUF-RTX4090-O24G-GAMING/dp/B0BGV6LQYR?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy on Amazon  →</a><div class="amazon-sub">Affiliate link · No extra cost to you</div>
 <p>In this post, we break down everything that matters — specs, tokens per second, model compatibility, price-to-value ratio, and a clear verdict — so you can stop second-guessing and start running inference.</p>
 <hr />
@@ -140,7 +140,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <tr>
 <td><strong>Memory Bandwidth</strong></td>
 <td>1,008 GB/s</td>
-<td>400 GB/s</td>
+<td>546 GB/s</td>
 </tr>
 <tr>
 <td><strong>FP16 Compute</strong></td>
@@ -159,8 +159,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 <tr>
 <td><strong>Price</strong></td>
-<td>~$2,500 (full build)</td>
-<td>~$4,500 (base 128GB config)</td>
+<td>~$2,800–$3,500 (full build)</td>
+<td>~$3,699 (128GB/1TB config)</td>
 </tr>
 <tr>
 <td><strong>Ecosystem</strong></td>
@@ -174,7 +174,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 </tbody>
 </table>
-<p>The RTX 4090's memory bandwidth advantage — <strong>1,008 GB/s vs 400 GB/s</strong> — is the single biggest reason it dominates on smaller models. LLM inference is almost entirely memory-bandwidth-bound, not compute-bound. Faster memory access means faster token generation, full stop.</p>
+<p>The RTX 4090's memory bandwidth advantage — <strong>1,008 GB/s vs 546 GB/s</strong> — is the single biggest reason it dominates on smaller models. LLM inference is almost entirely memory-bandwidth-bound, not compute-bound. Faster memory access means faster token generation, full stop.</p>
 <p>But the Mac Studio's <strong>128GB of unified memory</strong> is a different kind of advantage. It's not faster per byte — it's just vastly more of it, accessible to both CPU and GPU simultaneously without any PCIe transfer overhead. That's what lets you load a 70B parameter model entirely on-chip.</p>
 <blockquote>
 <p><strong>Looking to build an RTX 4090 workstation?</strong> Check out the <a href="https://www.amazon.com/s?k=RTX+4090&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">NVIDIA GeForce RTX 4090 Founders Edition on Amazon</a> or grab a pre-built option to skip the assembly headache.</p>
@@ -305,21 +305,21 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h2 id="price-and-value-analysis">Price and Value Analysis</h2>
 <h3 id="rtx-4090-pc-build-2500">RTX 4090 PC Build (~$2,500)</h3>
 <p>A competitive RTX 4090 build breaks down roughly as:<br />
-- <a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">RTX 4090 GPU</a>: ~$1,600–$1,800<br />
+- <a href="https://www.amazon.com/s?k=RTX+4090+graphics+card&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">RTX 4090 GPU</a>: ~$1,800–$2,800 (discontinued, limited stock)<br />
 - <a href="https://www.amazon.com/s?k=AMD+Ryzen+9+7950X&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">AMD Ryzen 9 7950X or Intel Core i9</a>: ~$400–$500<br />
 - <a href="https://www.amazon.com/s?k=64GB+DDR5+RAM&amp;tag=ms5573-20" rel="sponsored nofollow noopener noreferrer">64GB DDR5 RAM</a>: ~$150–$200<br />
 - Motherboard, PSU (1000W+), case, NVMe SSD: ~$400–$600</p>
-<p><strong>Total: ~$2,500–$2,800</strong></p>
+<p><strong>Total: ~$2,800–$3,500</strong></p>
 <p>At 150–200 tok/s on 7B models, you're paying roughly <strong>$12–15 per tok/s</strong> for your primary use case. That's exceptional value if 7B–30B models cover your needs.</p>
 <p>The ongoing cost matters too. The RTX 4090 alone draws 450W under load. A full system under inference load hits 550–650W. Running 8 hours a day at $0.15/kWh adds roughly <strong>$25–30/month</strong> to your electricity bill.</p>
-<h3 id="mac-studio-m4-max-128gb-4500">Mac Studio M4 Max 128GB (~$4,500)</h3>
-<p>Apple's pricing for the 128GB M4 Max configuration starts at approximately $4,499. There's no meaningful way to build cheaper — it's a closed, integrated system.</p>
+<h3 id="mac-studio-m4-max-128gb-3699">Mac Studio M4 Max 128GB (~$3,699)</h3>
+<p>Apple's pricing for the 128GB M4 Max configuration (16-core CPU/40-core GPU, 1TB SSD) is $3,699. There's no meaningful way to build cheaper — it's a closed, integrated system.</p>
 <p>At 80–120 tok/s on 7B models, you're paying roughly <strong>$37–56 per tok/s</strong> for smaller model inference. That's a significant premium over the RTX 4090 for the same task.</p>
 <p>Where the value equation shifts is on <strong>large model capability</strong>. The Mac Studio is the only sub-$5,000 machine that can run 70B FP16 models. If that's your use case, the comparison isn't RTX 4090 vs Mac Studio — it's Mac Studio vs a dual-4090 build at $7,000+, or a used A100 server at similar cost with none of the convenience.</p>
 <p>The power efficiency story is also real. At 150W for the entire system, the Mac Studio costs roughly <strong>$6–8/month</strong> under the same usage scenario. Over two years, that's $400–500 in electricity savings versus the RTX 4090 build — not enough to close the price gap, but worth factoring in.</p>
 <p><strong>Cost per GB of addressable model memory:</strong><br />
-- RTX 4090: ~$104/GB (24GB VRAM)<br />
-- Mac Studio: ~$35/GB (128GB unified)</p>
+- RTX 4090: ~$115–$145/GB (24GB VRAM)<br />
+- Mac Studio: ~$29/GB (128GB unified)</p>
 <p>For raw memory capacity per dollar, the Mac Studio wins decisively.</p>
 <hr />
 <h2 id="who-should-buy-which">Who Should Buy Which</h2>
