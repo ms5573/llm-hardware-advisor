@@ -1200,6 +1200,15 @@ HARDWARE.forEach(hw => {
   });
 });
 
+function normalizeSearchText(str){
+  return String(str || '').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function tokenizeSearchQuery(q){
+  var n = normalizeSearchText(q);
+  return n ? n.split(/\s+/).filter(Boolean) : [];
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // MOBILE DETECTION
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1229,8 +1238,8 @@ function renderMobile(){
 
   // Apply search filter
   if(mobileSearch){
-    var mTokens=mobileSearch.split(/\s+/).filter(Boolean);
-    function mTok(s){var sl=s.toLowerCase();return mTokens.every(function(t){return sl.indexOf(t)>=0;});}
+    var mTokens=tokenizeSearchQuery(mobileSearch);
+    function mTok(s){var sl=normalizeSearchText(s);return mTokens.every(function(t){return sl.indexOf(t)>=0;});}
     sorted=sorted.filter(function(hw){
       if(mTok(hw.label)) return true;
       if(mTok(hw.backend)) return true;
@@ -1973,15 +1982,25 @@ function updateBC() {
 // ═══════════════════════════════════════════════════════════════════════════════
 // SEARCH
 // ═══════════════════════════════════════════════════════════════════════════════
-d3.select('#searchInput').on('input',function(){
-  var q = this.value.toLowerCase().trim();
-  if(!q){ renderOverview(false); return; }
-  var tokens = q.split(/\s+/).filter(Boolean);
-  function tokMatch(str){ var s=str.toLowerCase(); return tokens.every(function(t){return s.indexOf(t)>=0;}); }
-
+function getSearchMatches(qRaw){
+  var q = normalizeSearchText(qRaw);
+  if(!q) return {q:q, mHW:[], mUC:[], mModels:[]};
+  var tokens = tokenizeSearchQuery(qRaw);
+  function tokMatch(str){ var s=normalizeSearchText(str); return tokens.every(function(t){return s.indexOf(t)>=0;}); }
   var mHW = HARDWARE.filter(function(h){ return tokMatch(h.label)||tokMatch(h.backend)||tokMatch(h.tier)||(h.desc&&tokMatch(h.desc)); });
-  var mUC = USE_CASES.filter(function(u){ return tokMatch(u.label)||u.id.indexOf(q)>=0; });
+  var mUC = USE_CASES.filter(function(u){ return tokMatch(u.label)||normalizeSearchText(u.id).indexOf(q)>=0; });
   var mModels = ALL_MODELS.filter(function(m){ return tokMatch(m.name); });
+  return {q:q, mHW:mHW, mUC:mUC, mModels:mModels};
+}
+
+d3.select('#searchInput').on('input',function(){
+  var qRaw = this.value.trim();
+  var matches = getSearchMatches(qRaw);
+  var q = matches.q;
+  if(!q){ renderOverview(false); return; }
+  var mHW = matches.mHW;
+  var mUC = matches.mUC;
+  var mModels = matches.mModels;
 
   G.selectAll('*').remove(); panel.classed('open',false);
   var cx=W/2, cy=H/2;
@@ -1991,7 +2010,7 @@ d3.select('#searchInput').on('input',function(){
   mModels.slice(0,24).forEach(function(m){all.push({t:'m',d:m});});
 
   G.append('text').attr('x',cx).attr('y',cy-20).attr('text-anchor','middle').attr('fill','var(--text-dim)').attr('font-size','12px')
-    .text(all.length+' results for "'+q+'"');
+    .text(all.length+' results for "'+qRaw+'"');
 
   all.forEach(function(item,i){
     var a=(i/Math.max(all.length,1))*Math.PI*2-Math.PI/2;
@@ -2017,6 +2036,18 @@ d3.select('#searchInput').on('input',function(){
       g.on('click',function(){showModelPanel(item.d);});
     }
   });
+});
+
+d3.select('#searchInput').on('keydown',function(event){
+  if(event.key!=='Enter' || isMobile()) return;
+  var qRaw = this.value.trim();
+  var matches = getSearchMatches(qRaw);
+  if(!matches.q) return;
+  event.preventDefault();
+
+  if(matches.mHW.length){ showHWPanel(matches.mHW[0]); return; }
+  if(matches.mModels.length){ showModelPanel(matches.mModels[0]); return; }
+  if(matches.mUC.length){ renderUCView(matches.mUC[0]); return; }
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2390,9 +2421,14 @@ function updateModelSearchResults() {
 
   var filtered = MODEL_DB;
   if(modelSearchQuery) {
-    var q = modelSearchQuery.toLowerCase();
+    var qTokens = tokenizeSearchQuery(modelSearchQuery);
     filtered = MODEL_DB.filter(function(m) {
-      return m.name.toLowerCase().indexOf(q)>=0 || m.provider.toLowerCase().indexOf(q)>=0 || m.useCase.toLowerCase().indexOf(q)>=0;
+      var name = normalizeSearchText(m.name);
+      var provider = normalizeSearchText(m.provider);
+      var useCase = normalizeSearchText(m.useCase);
+      return qTokens.every(function(t){
+        return name.indexOf(t)>=0 || provider.indexOf(t)>=0 || useCase.indexOf(t)>=0;
+      });
     });
   }
 
