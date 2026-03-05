@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RTX 4090 vs RX 7900 XTX for LLM Inference: Which GPU Actually Wins?</title>
-<meta name="description" content="TL;DR">
+<meta name="description" content="RTX 4090 vs RX 7900 XTX for LLM inference compared with real benchmarks and framework support. See which GPU wins on speed, VRAM, and value.">
 <link rel="canonical" href="https://llmpicker.blog/posts/rtx-4090-vs-rx-7900-xtx-llm-inference/">
 <meta property="og:title" content="RTX 4090 vs RX 7900 XTX for LLM Inference: Which GPU Actually Wins?">
-<meta property="og:description" content="TL;DR">
+<meta property="og:description" content="RTX 4090 vs RX 7900 XTX for LLM inference compared with real benchmarks and framework support. See which GPU wins on speed, VRAM, and value.">
 <meta property="og:url" content="https://llmpicker.blog/posts/rtx-4090-vs-rx-7900-xtx-llm-inference/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +88,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   .post h1{font-size:28px}
 }
 </style>
-</head>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"RTX 4090 vs RX 7900 XTX for LLM Inference: Which GPU Actually Wins?","description":"RTX 4090 vs RX 7900 XTX for LLM inference compared with real benchmarks and framework support. See which GPU wins on speed, VRAM, and value.","author":{"@type":"Organization","name":"LLM Picker"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-04","dateModified":"2026-03-04"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can the RX 7900 XTX run local LLMs on Windows?","acceptedAnswer":{"@type":"Answer","text":"Yes, but with significant limitations. ROCm support on Windows is substantially less mature than on Linux. Many optimized inference tools either don't work or perform poorly on Windows with AMD GPUs. If you're on Windows, the RTX 4090 is the safer choice."}},{"@type":"Question","name":"Does the RTX 4090's higher power draw matter for home use?","acceptedAnswer":{"@type":"Answer","text":"It matters at the margins. Running the 4090 at full load usually costs about $0.03-$0.05 more per hour in electricity than the 7900 XTX depending on local rates. Over heavy daily use, that can add up to roughly $100-$180 per year."}},{"@type":"Question","name":"Can I run a 70B model on either card?","acceptedAnswer":{"@type":"Answer","text":"Both cards can run 70B models at Q4 quantization, but neither can fit a full 70B model entirely in 24GB VRAM. You'll need layer offloading to system RAM, which can drop performance to around 10-20 tokens per second."}},{"@type":"Question","name":"Is the RTX 4090 worth the premium over the RX 7900 XTX?","acceptedAnswer":{"@type":"Answer","text":"For heavy users, usually yes. The RTX 4090 tends to deliver faster inference and broader framework compatibility with less setup friction. For budget-conscious users running smaller models, the 7900 XTX can still be a strong value."}},{"@type":"Question","name":"What's the best quantization format on each card?","acceptedAnswer":{"@type":"Answer","text":"For most users, Q4_K_M is the best balance of quality, speed, and VRAM usage on both cards. On the RTX 4090, Q5_K_M can be practical for 13B-30B models. On the RX 7900 XTX, Q4_K_M is usually the safer default due to ROCm overhead."}}]}]}
+</script></head>
 <body>
 <div class="bg-grad"></div>
 <header class="header">
@@ -213,6 +215,53 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li><strong>70B models</strong>: Not happening on a single card — you need multi-GPU or CPU offload</li>
 </ul>
 <p>Both cards hit the same wall at 24GB. If you need more, you need more cards.</p>
+<h3 id="maximum-model-size-by-quantization">Maximum Model Size by Quantization</h3>
+<p>The table below breaks down exactly what fits in 24GB VRAM at each quantization level — and where the two cards diverge in practice.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Quantization</strong></th>
+<th><strong>RTX 4090</strong></th>
+<th><strong>RX 7900 XTX</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FP16 (full precision)</strong></td>
+<td>13B</td>
+<td>13B</td>
+<td>Both max out at ~24GB</td>
+</tr>
+<tr>
+<td><strong>Q8 (8-bit)</strong></td>
+<td>30B (~21GB)</td>
+<td>30B (~21GB)*</td>
+<td>AMD has mixed-precision issues</td>
+</tr>
+<tr>
+<td><strong>Q5_K_M</strong></td>
+<td>40B+</td>
+<td>40B+</td>
+<td>Tight fit, context length matters</td>
+</tr>
+<tr>
+<td><strong>Q4_K_M</strong></td>
+<td>70B (partial)</td>
+<td>70B (partial)</td>
+<td>CPU offload required for both</td>
+</tr>
+<tr>
+<td><strong>Q3_K_M</strong></td>
+<td>70B (full VRAM)</td>
+<td>70B (full VRAM)</td>
+<td>Quality degrades noticeably</td>
+</tr>
+</tbody>
+</table>
+<p>*The 7900 XTX technically fits 30B at Q8, but ROCm's weaker mixed-precision support means you'll often see slower speeds and occasional instability compared to the 4090 running the same workload.</p>
+<h3 id="context-length-considerations">Context Length Considerations</h3>
+<p>Longer context windows eat VRAM fast. Running a 13B model at FP16 with a 32K context window will push you right to the 24GB limit on both cards. The 4090's more efficient CUDA memory management gives it slightly more headroom in edge cases, but this is a minor advantage for most users. If you plan to run extended context windows, factor in the VRAM overhead when choosing your quantization level — dropping from Q5 to Q4 can free up several GB for context.</p>
 <h3 id="multi-gpu-scaling-amds-surprise-advantage">Multi-GPU Scaling: AMD's Surprise Advantage</h3>
 <p>Here's something genuinely interesting from the community: multi-GPU scaling with AMD hardware. One Reddit user documented an 8x RX 7900 XTX build achieving 131k context window performance — a configuration that would cost significantly more with NVIDIA hardware.</p>
 <p>For researchers or developers building high-memory inference rigs on a budget, AMD's multi-GPU story is compelling. Eight 7900 XTX cards at $999 each is $7,992. Eight RTX 4090s at $1,799 each is $14,392. That's a $6,400 difference for a workload where AMD's per-card performance disadvantage matters less than raw VRAM capacity.</p>
@@ -297,6 +346,18 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li>You're planning to run everything through CPU offload anyway — at that point, the GPU matters much less than your RAM speed</li>
 <li>You're on a tight budget and a used RTX 3090 (24GB, ~$500) would cover your actual model size needs</li>
 </ul>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="can-the-rx-7900-xtx-run-local-llms-on-windows">Can the RX 7900 XTX run local LLMs on Windows?</h3>
+<p>Yes, but with significant limitations. ROCm support on Windows is substantially less mature than on Linux. Many optimized inference tools — including some ExLlama2 features and vLLM — either don't work or perform poorly on Windows with AMD GPUs. If you're on Windows, the RTX 4090 is the far safer choice. Linux users get a much better AMD experience, though still slower than CUDA.</p>
+<h3 id="does-the-rtx-4090s-higher-power-draw-matter-for-home-use">Does the RTX 4090's higher power draw (450W vs 355W) matter for home use?</h3>
+<p>It matters at the margins. Running the 4090 at full load costs roughly $0.03–0.05 more per hour in electricity than the 7900 XTX (depending on local rates). Over a year of heavy daily use, that's $100–$180 in additional electricity costs — real money, but unlikely to change the overall value calculation for most users. The 4090's faster inference also means it completes tasks sooner, partially offsetting the higher wattage.</p>
+<h3 id="can-i-run-a-70b-model-on-either-card">Can I run a 70B model on either of these cards?</h3>
+<p>Both cards can run 70B models at Q4 quantization, but neither can fit the full model in VRAM. You'll need to offload layers to system RAM, which dramatically reduces performance to roughly 10–20 tok/s depending on your CPU and RAM speed. For a better 70B experience, consider a dual-GPU setup or look at 48GB cards like the RTX 6000 Ada. If 70B is your primary use case, neither of these cards is the ideal solution.</p>
+<h3 id="is-the-rtx-4090-worth-the-premium-over-the-rx-7900-xtx">Is the RTX 4090 worth the premium over the RX 7900 XTX?</h3>
+<p>For heavy users, yes. The 4090 delivers roughly 20–60% faster inference, works seamlessly on Windows and Linux, and requires zero ROCm troubleshooting. If you're running LLMs daily for work or development, the productivity gains justify the $700–$900 premium within months. For casual users running inference an hour or two per day on smaller models, the 7900 XTX's savings are harder to dismiss.</p>
+<h3 id="whats-the-best-quantization-format-for-each-card">What's the best quantization format to use on each card?</h3>
+<p>For both cards, <strong>Q4_K_M</strong> offers the best balance of quality, speed, and VRAM efficiency for most use cases. On the RTX 4090, <strong>Q5_K_M</strong> is worth considering for 13B–30B models if you want slightly better output quality without a major speed penalty. On the RX 7900 XTX, stick with Q4_K_M — the card's ROCm overhead makes higher quantizations less practical, and the performance hit is more pronounced than on CUDA.</p>
 <hr />
 <h2 id="bottom-line">Bottom Line</h2>
 <p>The RTX 4090 wins the RTX 4090 vs RX 7900 XTX comparison for LLM inference — but not by the margin you might expect given the price difference.</p>
