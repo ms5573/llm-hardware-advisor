@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run</title>
+<meta name="description" content="A plain-English guide to running LLMs locally. Covers VRAM, quantization, NVIDIA vs Apple vs AMD, and exactly what hardware you need for each model size.">
+<link rel="canonical" href="https://llmpicker.blog/posts/local-llm-hardware-guide/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run">
+<meta property="og:description" content="A plain-English guide to running LLMs locally. Covers VRAM, quantization, NVIDIA vs Apple vs AMD, and exactly what hardware you need for each model size.">
+<meta property="og:url" content="https://llmpicker.blog/posts/local-llm-hardware-guide/">
+<meta property="og:image" content="https://llmpicker.blog/assets/og-default.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run">
+<meta name="twitter:description" content="A plain-English guide to running LLMs locally. Covers VRAM, quantization, NVIDIA vs Apple vs AMD, and exactly what hardware you need for each model size.">
+<meta name="twitter:image" content="https://llmpicker.blog/assets/og-default.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  var(--bg)}
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post em{color:var(--text-dim)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post blockquote{border-left:3px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(124,106,255,0.06);border-radius:0 10px 10px 0;color:var(--text-dim)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+.pin-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,106,255,0.12);border:1px solid rgba(124,106,255,0.3);border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;color:#a78bff;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:16px}
+.callout{background:rgba(124,106,255,0.07);border:1px solid rgba(124,106,255,0.2);border-radius:10px;padding:16px 20px;margin:24px 0}
+.callout strong{color:#a78bff}
+.callout p{margin:0;font-size:14px}
+.formula{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:13px;color:#22d3ee}
+.hw-tier{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px 20px;margin:12px 0}
+.hw-tier-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--accent);margin-bottom:6px}
+.hw-tier-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.hw-tier-body{font-size:13px;color:var(--text-dim);line-height:1.7}
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:10px}
+.runpod-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(100,200,100,0.3);background:rgba(20,40,20,0.6);color:#7ddf7d;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:12px}
+.runpod-btn:hover{background:rgba(30,60,30,0.8);border-color:rgba(100,200,100,0.5);transform:translateY(-1px)}
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+.hw-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:40px 0 28px;padding:20px 24px;border:1px solid rgba(124,106,255,0.25);border-radius:14px;background:linear-gradient(135deg,rgba(124,106,255,0.08),rgba(34,211,238,0.04));flex-wrap:wrap}
+.hw-cta-left{flex:1;min-width:200px}
+.hw-cta-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.hw-cta-sub{font-size:13px;color:var(--text-dim);line-height:1.5}
+.hw-cta-btn{flex-shrink:0;display:inline-flex;align-items:center;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap}
+.hw-cta-btn:hover{opacity:0.85;transform:translateY(-1px);color:#fff!important;text-decoration:none!important}
+.back-link{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.back-link a{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.back-link a:hover{color:var(--text)}
+.email-capture{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:16px;margin-top:24px}
+.email-capture-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.email-capture-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.email-capture-form{display:flex;gap:8px}
+.email-capture-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:12px;color:var(--text);outline:none;transition:all .2s}
+.email-capture-input:focus{border-color:rgba(124,106,255,0.4);box-shadow:0 0 0 3px rgba(124,106,255,0.08)}
+.email-capture-input::placeholder{color:var(--text-muted)}
+.email-capture-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap}
+.email-capture-btn:hover{opacity:0.85}
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:26px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run","description":"A plain-English guide to running LLMs locally. Covers VRAM, quantization, NVIDIA vs Apple vs AMD, and exactly what hardware you need for each model size.","author":{"@type":"Person","name":"Marc Smith"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-06","dateModified":"2026-03-06"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much VRAM do I need to run a 7B model?","acceptedAnswer":{"@type":"Answer","text":"At Q4_K_M quantization, a 7B model needs around 4–5GB of VRAM including overhead. An 8GB GPU like the RTX 4060 handles it comfortably."}},{"@type":"Question","name":"Can I run a 70B model on a single consumer GPU?","acceptedAnswer":{"@type":"Answer","text":"Yes, on a 24GB card like the RTX 4090 at Q4_K_M quantization (~40GB fit with CPU offloading), but expect performance drops. Unified memory systems like Apple Silicon handle 70B cleanly."}},{"@type":"Question","name":"What is Q4_K_M and why is it recommended?","acceptedAnswer":{"@type":"Answer","text":"Q4_K_M is a 4-bit quantization format that compresses a model to roughly a quarter of its original size with only minor quality degradation. It's the best balance of VRAM efficiency and output quality for consumer hardware."}},{"@type":"Question","name":"Is Apple Silicon good for local LLMs?","acceptedAnswer":{"@type":"Answer","text":"Yes — Apple Silicon's unified memory architecture means CPU and GPU share the same memory pool, eliminating the PCIe bottleneck. A Mac with 64GB+ can run 70B models cleanly. NVIDIA is faster on smaller models, but Apple wins on large model capacity."}}]}]}
+</script>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+    <div class="pin-badge">📌 Pinned Guide</div>
+    <h1>Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run</h1>
+
+<h2 id="why-running-locally-is-in-fashion">Why Running Locally Is in Fashion</h2>
+<p>Over the last few months, running models locally has become a hot topic across AI communities. A few things drove this:</p>
+<ul>
+  <li>The emergence of AI agents has captured the public's imagination. For the first time, the concept of agents going out into the real world and doing work for you has become real — and running a local model for at least some of those tasks is simply more cost-efficient.</li>
+  <li>Models have become extremely efficient. Something like Qwen 2.5 can now run on a consumer-grade GPU and produce genuinely useful results.</li>
+  <li>Some distrust in closed model AI labs. A meaningful number of users feel uncomfortable sending all their private data to OpenAI or Anthropic.</li>
+</ul>
+<p>I recently made the jump into self-hosting by purchasing an NVIDIA DGX Spark. I had always played with the idea, but the agent use case finally pushed me over the edge. Here is a plain-English guide to help you make better decisions as you evaluate your own setup.</p>
+
+<hr />
+
+<h2 id="why-vram-is-everything">Why VRAM Is Everything</h2>
+<p>A lot of AI hobbyists and power users are trying to figure out what models will run on their hardware. The biggest constraint is VRAM — Video RAM — the high-speed memory integrated directly into your graphics card. Originally designed for rendering video, it turns out VRAM is also excellent at the parallel processing that LLMs require.</p>
+
+<p>During inference (using a trained model to generate output), VRAM is consumed by three components:</p>
+<ul>
+  <li><strong>Model weights</strong> — the bulk of memory usage</li>
+  <li><strong>KV cache</strong> — grows with context length; more on this below</li>
+  <li><strong>Activations</strong> — temporary space the model needs while processing</li>
+</ul>
+
+<p>When VRAM doesn't cover all the layers of a model, it spills over into system RAM. This can cause <strong>5–20× slower performance</strong> — a meaningful difference between a usable experience and watching a cursor blink.</p>
+
+<hr />
+
+<h2 id="what-the-hell-is-quantization">What the Hell Is Quantization?</h2>
+<p>Think of packing a suitcase. Each parameter in a model is an item you want to pack, and quantization determines how tightly you pack each one.</p>
+
+<ul>
+  <li><strong>FP16</strong> — Large box, plenty of space. Takes up the most VRAM.</li>
+  <li><strong>Q8</strong> — Medium box. Roughly half the space of FP16.</li>
+  <li><strong>Q4</strong> — Small box. Roughly a quarter the space of FP16.</li>
+</ul>
+
+<p>The smaller the box, the lower the VRAM requirement. The tradeoff: the tighter you pack, the more quality you sacrifice. Quantization is the compression technique that makes this possible — it's essentially packing the model more tightly by reducing the precision of each weight.</p>
+
+<p>The rule of thumb for VRAM requirements:</p>
+<div class="formula">(Parameters × Bits per Parameter) / 8 = VRAM in GB</div>
+<p>A more realistic estimate that accounts for overhead:</p>
+<div class="formula">((Parameters × Bits per Parameter) × 1.2) / 8 = VRAM in GB</div>
+
+<p>For consumer hardware, look for <strong>Q4_K_M</strong> and <strong>Q5_K_M</strong> quantizations. Q4_K_M compresses the original model to roughly a quarter of its original size with only minor quality degradation — an excellent compromise. You could consider it the gold standard for local inference.</p>
+
+<p>A Q8 model is nearly indistinguishable from the original. Moving from Q8 to Q4, the difference becomes observable on complex tasks. One useful rule: <strong>a larger model at heavier quantization will usually outperform a smaller model at lighter quantization.</strong> A 70B at Q4 beats a 13B at Q8 on reasoning tasks.</p>
+
+<hr />
+
+<h2 id="what-can-we-actually-run-locally">What Can We Actually Run Locally?</h2>
+<p>Here's where theory meets reality. The simple math at Q4_K_M is approximately <strong>0.5–0.6 GB per billion parameters</strong> including overhead. A 7B model needs roughly 4–5 GB; a 70B model needs around 40 GB.</p>
+
+<div class="hw-tier">
+  <div class="hw-tier-label">8GB VRAM</div>
+  <div class="hw-tier-title">RTX 4060, RTX 3070</div>
+  <div class="hw-tier-body">Handles 7–8B models at Q4_K_M at 40+ tokens/second. Good for chatbots and simple tasks. Tight, but functional for the most popular small models.</div>
+</div>
+
+<div class="hw-tier">
+  <div class="hw-tier-label">12–16GB VRAM</div>
+  <div class="hw-tier-title">RTX 4060 Ti (16GB), RTX 4070, RTX 5080</div>
+  <div class="hw-tier-body">Comfortably runs 13B models at Q4_K_M, with headroom for Q8 on smaller models. Good for coding assistants, long-form writing, and general-purpose chat. Stretches to some 14B models.</div>
+</div>
+
+<div class="hw-tier">
+  <div class="hw-tier-label">24GB VRAM</div>
+  <div class="hw-tier-title">RTX 3090, RTX 4090, RTX 5090 (32GB)</div>
+  <div class="hw-tier-body">The sweet spot for serious local inference. Comfortably fits 30–34B models at Q4_K_M. With the 4090 or 5090, you can push into 70B territory with some CPU offloading — real reasoning and coding skills close to commercially available APIs.</div>
+</div>
+
+<div class="hw-tier">
+  <div class="hw-tier-label">48–80GB VRAM</div>
+  <div class="hw-tier-title">Dual RTX 4090 (48GB combined), Workstation GPUs, NVIDIA DGX Spark</div>
+  <div class="hw-tier-body">Full 70B models without compromise. Frontier-class open-source models like Llama 3.1 70B at Q8 quality. This is where local inference stops feeling like a compromise.</div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>VRAM</th><th>Example Hardware</th><th>Max Model (Q4_K_M)</th><th>Best Use Case</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>8GB</td><td>RTX 4060</td><td>7–8B</td><td>Chatbot, simple tasks</td></tr>
+    <tr><td>12–16GB</td><td>RTX 4060 Ti, RTX 4070</td><td>13–14B</td><td>Coding assistant, writing</td></tr>
+    <tr><td>24GB</td><td>RTX 4090, RTX 3090</td><td>30–34B (70B with offload)</td><td>Serious inference, reasoning</td></tr>
+    <tr><td>48GB+</td><td>Dual 4090, DGX Spark</td><td>70B+ cleanly</td><td>Frontier models, research</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="why-apple-silicon-is-so-hot">Why Apple Silicon Is So Hot Right Now</h2>
+<p>The main advantage of Apple Silicon is its <strong>unified memory architecture</strong> — the CPU and GPU share the same memory pool. A Mac with 64GB of unified memory gives the GPU access to all 64GB, compared to a discrete GPU's hard VRAM ceiling.</p>
+
+<p>You can roughly compare a 64GB MacBook Pro's unified memory to a 64GB GPU when it comes to inference. That said, NVIDIA still wins on raw inference speed for smaller models — the memory bandwidth on Apple Silicon is lower than a top-tier discrete GPU. Apple's advantage is on <strong>large 70B models</strong>, where unified memory eliminates the painful PCIe offloading penalty. Quiet operation is another genuine benefit for home office setups.</p>
+
+<hr />
+
+<h2 id="amd-the-black-sheep">AMD: The Black Sheep</h2>
+<p>Let's give credit where it's due. AMD has made real progress running LLMs on newer cards, driven largely by the open-source community rather than AMD itself. AMD cards are meaningfully cheaper than NVIDIA equivalents — important for budget-conscious builders.</p>
+
+<p>The honest downside: AMD's ROCm software stack requires Linux, extensive command-line setup, and has real compatibility gaps with some inference frameworks. It is not plug-and-play. If you want the smoothest local LLM experience, NVIDIA or Apple Silicon is the safer bet. AMD is for builders who don't mind the friction.</p>
+
+<hr />
+
+<h2 id="practical-takeaways">Practical Takeaways</h2>
+
+<div class="callout">
+  <p><strong>The silent killer: context length.</strong> This is where "it should fit" estimations break down. The KV cache grows with every token in your context window. A model that fits fine with a short prompt can run out of VRAM mid-conversation if you're using a 128K context window. Always leave headroom.</p>
+</div>
+
+<ul>
+  <li>At Q4_K_M, estimate <strong>0.5–0.6 GB per billion parameters</strong> including overhead — 7B ≈ 4GB, 70B ≈ 40GB.</li>
+  <li>When VRAM runs out, the model spills to system RAM. This works, but expect a significant performance hit.</li>
+  <li>A larger model at heavier quantization beats a smaller model at lighter quantization for most reasoning tasks.</li>
+  <li>Q4_K_M is the gold standard for consumer hardware. Q5_K_M if you have headroom.</li>
+</ul>
+
+<h3 id="quick-buying-guide">Quick Buying Guide</h3>
+<ul>
+  <li><strong>8GB VRAM</strong> — Absolute entry point. 7B models only.</li>
+  <li><strong>12–16GB VRAM</strong> — Sufficient for most people. 13B models comfortably.</li>
+  <li><strong>24GB VRAM</strong> — Solid local inference for 30B+. Recommended if budget allows.</li>
+  <li><strong>48GB+ VRAM</strong> — Workstation territory. Full 70B models without compromise.</li>
+</ul>
+
+<hr />
+
+<p>What I can tell you from personal experience is that there is something magical about running your own model locally. It feels like you are more in control of your own destiny. Which probably explains why I'm already thinking about buying my second DGX Spark.</p>
+
+<hr />
+
+<h2 id="related-guides">Related Guides</h2>
+<div style="display:grid;gap:10px;margin:16px 0 24px">
+<a href="/posts/best-gpu-for-running-llms-locally/" style="display:block;padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-decoration:none;color:#e8e8f0;transition:all .2s"><strong>Best GPU for Running LLMs Locally in 2026</strong><br><span style="font-size:12px;color:#8888a8">Full GPU comparison with benchmark numbers — NVIDIA, AMD, and where each tier makes sense.</span></a>
+<a href="/posts/how-much-ram-to-run-llama-3/" style="display:block;padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-decoration:none;color:#e8e8f0;transition:all .2s"><strong>How Much RAM Do You Need to Run Llama 3?</strong><br><span style="font-size:12px;color:#8888a8">Exact memory requirements for every Llama 3 model size, with and without quantization.</span></a>
+<a href="/posts/mac-for-local-llms/" style="display:block;padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-decoration:none;color:#e8e8f0;transition:all .2s"><strong>Mac for Local LLMs: Complete Apple Silicon Guide</strong><br><span style="font-size:12px;color:#8888a8">Every Apple chip from M1 to M5 Max — which models fit, real performance, and best tools.</span></a>
+<a href="/posts/best-hardware-run-claude-distilled-models-locally/" style="display:block;padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-decoration:none;color:#e8e8f0;transition:all .2s"><strong>Best Hardware for Claude-Distilled Models</strong><br><span style="font-size:12px;color:#8888a8">Hardware shortlist for the newer GGUF distill wave — 7B through 70B.</span></a>
+</div>
+
+    <div class="hw-cta"><div class="hw-cta-left"><div class="hw-cta-title">Not sure what will run on your hardware?</div><div class="hw-cta-sub">Use the interactive picker — filter by VRAM, budget, and target model.</div></div><a class="hw-cta-btn" href="https://llmpicker.blog" target="_blank" rel="noopener">Open LLM Picker →</a></div>
+    <div class="cta-card"><div class="cta-title">Not ready to buy hardware?</div><div class="cta-sub">Try on RunPod for instant access to powerful GPUs.</div><a class="runpod-btn" href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="sponsored nofollow noopener noreferrer">Try on RunPod →</a></div>
+    <div class="email-capture"><div class="email-capture-title">Get new local AI guides</div><div class="email-capture-sub">One email when new posts drop. No spam.</div><form class="email-capture-form" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3a662c8f-883f-49ca-aaed-aea470ee3de0" /><input class="email-capture-input" type="email" name="email" placeholder="you@example.com" required /><button class="email-capture-btn" type="submit">Join</button></form></div>
+    <div class="back-link"><a href="https://llmpicker.blog/posts/">← All guides</a></div>
+  </article>
+</div>
+</body>
+</html>
