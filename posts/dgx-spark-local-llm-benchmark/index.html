@@ -124,7 +124,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <p>We ran 4 different model sizes — two 32B models (QwQ &amp; Qwen 2.5 Coder), one 70B (DeepSeek R1), and one 122B (Qwen 3.5) — and measured how fast tokens were generated (tok/s).</p>
 
     <h3>What We Found</h3>
-    <p>As expected, speed dropped going from the 32B models to the 70B model. What was interesting is that the 122B Qwen 3.5 model ran at 15 tok/s — faster than the 70B DeepSeek at 4 tok/s. To be fair, it's not a direct comparison: Qwen 3.5:122B has been heavily optimized and DeepSeek R1 is an older model at this point. But the main takeaway is that <strong>nothing crashed and nothing failed to load</strong>. All models ran — including the one you'd never expect to fit on a consumer GPU.</p>
+    <p>As expected, speed dropped going from the 32B models to the 70B model. What was interesting is that the 122B Qwen 3.5 model ran at 15 tok/s — faster than the 70B DeepSeek at 4 tok/s. But the main takeaway is that <strong>nothing crashed and nothing failed to load</strong>. All models ran — including the one you'd never expect to fit on a consumer GPU.</p>
+    <p><em><strong>Note on Qwen3.5-122B:</strong> This is a Mixture-of-Experts (MoE) model — 122B total parameters, but only ~10B are active per token. That's why throughput is higher than the dense 32B models despite the larger memory footprint. It still requires ~81GB of RAM to load, which is why it only runs on hardware like the Spark — but the compute cost per token is closer to a 10B model.</em></p>
 
     <table>
       <thead><tr><th>Model</th><th>Params</th><th>Mean tok/s</th><th>Min</th><th>Max</th></tr></thead>
