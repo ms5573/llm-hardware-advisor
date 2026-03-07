@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmarking the NVIDIA DGX Spark for Local LLMs — Part 1</title>
+<meta name="description" content="First-party benchmark data on the NVIDIA DGX Spark GB10. Real tok/s numbers across 5 novel test dimensions: unified memory scaling, long context, reasoning overhead, task-type throughput, and memory bandwidth efficiency.">
+<link rel="canonical" href="https://llmpicker.blog/posts/dgx-spark-local-llm-benchmark/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Benchmarking the NVIDIA DGX Spark for Local LLMs — Part 1">
+<meta property="og:description" content="First-party benchmark data on the NVIDIA DGX Spark GB10. Real tok/s numbers across 5 novel test dimensions.">
+<meta property="og:url" content="https://llmpicker.blog/posts/dgx-spark-local-llm-benchmark/">
+<meta property="og:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Benchmarking the NVIDIA DGX Spark for Local LLMs — Part 1">
+<meta name="twitter:description" content="First-party benchmark data on the NVIDIA DGX Spark GB10. Real tok/s numbers across 5 novel test dimensions.">
+<meta name="twitter:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{font-size:10px;color:var(--text-muted);margin-bottom:10px}
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+.hero-img{width:100%;border-radius:14px;margin:0 0 36px;border:1px solid var(--border);display:block}
+.bench-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.part2-teaser{background:rgba(124,106,255,0.07);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:20px 24px;margin:40px 0 0}
+.part2-teaser p{margin:0;font-size:14px;line-height:1.8;color:var(--text-dim)}
+.part2-teaser strong{color:var(--text)}
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:26px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Benchmarking the NVIDIA DGX Spark for Local LLMs — Part 1","description":"First-party benchmark data on the NVIDIA DGX Spark GB10 across 5 novel test dimensions.","author":{"@type":"Person","name":"Marc Smith"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-07","dateModified":"2026-03-07","image":"https://llmpicker.blog/assets/dgx-spark-desk.jpg"}
+</script>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+
+    <h1>Benchmarking the NVIDIA DGX Spark for Local LLMs — Part 1</h1>
+
+    <img src="/assets/dgx-spark-desk.jpg" alt="NVIDIA DGX Spark on desk — home lab setup" class="hero-img">
+
+    <p>Since everyone was rushing to buy Mac Studios to run models locally, I wanted to see what alternatives were out there. I landed on the NVIDIA DGX Spark with 128GB LPDDR5X and an ARM processor. What I found appealing was the ability to also use this machine for fine-tuning my own models — something that is possible on the Mac Studio and Mac Mini via Apple's MLX framework, but that locks you into one framework and usually takes longer.</p>
+
+    <p>I noticed during my research that every DGX Spark blog out there repeats NVIDIA's specs, but few are actually running tests in real life. So after setting up the box in my home lab — which was very straightforward — I ran my first experiment. I wanted to capture angles that don't exist anywhere on r/LocalLLaMA yet.</p>
+
+    <p>Here are the 5 areas I tested.</p>
+
+    <a href="https://www.amazon.com/dp/B0FWJ16CCH?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">Buy NVIDIA DGX Spark on Amazon →</a>
+    <div class="amazon-sub">Affiliate link · No extra cost to you</div>
+
+    <hr />
+
+    <h2>1. Unified Memory Scaling</h2>
+
+    <h3>The Concept</h3>
+    <p>As described in our <a href="https://llmpicker.blog/posts/local-llm-hardware-guide/">Local LLM Hardware Guide: VRAM, Quantization, and What You Can Actually Run</a>, VRAM is a make-or-break stat for running models locally. If the VRAM isn't sufficiently large, the model will either not fit or slow down significantly — this is known as hitting the "VRAM cliff."</p>
+
+    <h3>What's Special</h3>
+    <p>The DGX Spark has a single 128GB pool that both the GPU and CPU can tap into. That eliminates the VRAM cliff where GPU memory spills into RAM and drastically slows down the system. You'll still need to be mindful of the 128GB ceiling, but performance stays consistent right up until you hit it.</p>
+
+    <h3>What We Measured</h3>
+    <p>We ran 4 different model sizes — two 32B models (QwQ &amp; Qwen 2.5 Coder), one 70B (DeepSeek R1), and one 122B (Qwen 3.5) — and measured how fast tokens were generated (tok/s).</p>
+
+    <h3>What We Found</h3>
+    <p>As expected, speed dropped going from the 32B models to the 70B model. What was interesting is that the 122B Qwen 3.5 model ran at 15 tok/s — faster than the 70B DeepSeek at 4 tok/s. To be fair, it's not a direct comparison: Qwen 3.5:122B has been heavily optimized and DeepSeek R1 is an older model at this point. But the main takeaway is that <strong>nothing crashed and nothing failed to load</strong>. All models ran — including the one you'd never expect to fit on a consumer GPU.</p>
+
+    <table>
+      <thead><tr><th>Model</th><th>Params</th><th>Mean tok/s</th><th>Min</th><th>Max</th></tr></thead>
+      <tbody>
+        <tr><td>QwQ-32B</td><td>32B</td><td><strong>8.51</strong></td><td>5.73</td><td>9.90</td></tr>
+        <tr><td>Qwen2.5-Coder-32B</td><td>32B</td><td><strong>7.34</strong></td><td>3.61</td><td>9.40</td></tr>
+        <tr><td>DeepSeek-R1-70B</td><td>70B</td><td><strong>4.11</strong></td><td>3.21</td><td>4.59</td></tr>
+        <tr><td>Qwen3.5-122B</td><td>122B</td><td><strong>15.11</strong></td><td>5.61</td><td>19.88</td></tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>2. Long Context Degradation</h2>
+
+    <h3>The Concept</h3>
+    <p>Context is how much the model can hold in working memory — your inputs such as raw text or documents, plus the model's own responses. I'm sure you've been in a situation where you've been going back and forth with an LLM and it suddenly forgets something you already discussed. The context window is measured in tokens, where 1 token is roughly equivalent to ¾ of a word.</p>
+
+    <h3>Why It Matters</h3>
+    <p>For RAG (Retrieval Augmented Generation) use cases, the context window is extremely important — the model needs to hold large chunks of information in memory to answer questions about them. The larger the context, the more memory and compute the GPU requires.</p>
+
+    <h3>What We Measured</h3>
+    <p>DeepSeek-R1:70B was given an identical task with 3 different context sizes — 4K, 32K, and 64K tokens — and we measured how fast the response came back each time.</p>
+
+    <h3>What We Found</h3>
+    <p>As expected, speed dropped as context size increased:</p>
+    <ul>
+      <li>4K context: <strong>3.42 tok/s</strong></li>
+      <li>32K context: <strong>2.74 tok/s</strong> (−20%)</li>
+      <li>64K context: <strong>2.28 tok/s</strong> (−33%)</li>
+    </ul>
+    <p>The big takeaway: the DGX Spark handles book-length context at an acceptable speed. It doesn't fall off a cliff — it slows down gradually and gracefully.</p>
+
+    <hr />
+
+    <h2>3. Reasoning Overhead</h2>
+
+    <h3>The Concept</h3>
+    <p>Reasoning models (like QwQ-32B or DeepSeek-R1) are designed to think through a response before providing an answer. You've probably seen the internal monologue these models generate before giving you an output. This is especially important for hard problems in math, science, or coding — but it obviously takes longer.</p>
+
+    <h3>What We Measured</h3>
+    <p>We compared two models equivalent in size but different in thinking style:</p>
+    <ul>
+      <li><strong>QwQ-32B</strong> — the reasoning model</li>
+      <li><strong>Qwen2.5-Coder-32B</strong> — standard instruct model</li>
+    </ul>
+
+    <h3>What We Found</h3>
+    <p>The reasoning model was only 6.4% slower — a surprisingly small gap. For daily use on a DGX Spark, reasoning models are fast enough that you won't feel penalized for using them.</p>
+    <ul>
+      <li>QwQ-32B (reasoning): <strong>9.07 tok/s</strong></li>
+      <li>Qwen2.5-Coder-32B (instruct): <strong>9.69 tok/s</strong></li>
+    </ul>
+    <p><em>Note: these speeds reflect isolated reasoning benchmark conditions and differ slightly from the unified memory scaling test above, which used different prompts and averaging windows.</em></p>
+
+    <hr />
+
+    <h2>4. Task-Type Throughput</h2>
+
+    <h3>The Concept</h3>
+    <p>Some questions require more "thinking" from a model. Simple fact retrieval like "what is the capital of the USA?" requires less work than a complex coding task. We wanted to test how much the task type impacts the speed at which the GPU generates tokens.</p>
+
+    <h3>Why It's Interesting</h3>
+    <p>Some hardware slows down drastically as task complexity increases. We wanted to check if the DGX Spark holds up when you push it.</p>
+
+    <h3>What We Measured</h3>
+    <p>DeepSeek-R1:70B was given four different task types — factual, technical writing, coding, and math reasoning — and we measured tok/s for each.</p>
+
+    <h3>What We Found</h3>
+    <p>The DGX Spark stayed in a tight range regardless of task complexity — a great sign for a general-purpose machine. The factual task came in slightly lower at 3.72 tok/s, likely because the short answer gives us less data to average across. Technical writing, coding, and math were nearly indistinguishable.</p>
+
+    <table>
+      <thead><tr><th>Task</th><th>Mean tok/s</th></tr></thead>
+      <tbody>
+        <tr><td>Factual (short)</td><td><strong>3.72</strong></td></tr>
+        <tr><td>Technical writing</td><td><strong>4.54</strong></td></tr>
+        <tr><td>Coding</td><td><strong>4.54</strong></td></tr>
+        <tr><td>Math reasoning</td><td><strong>4.56</strong></td></tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>5. Memory Bandwidth Efficiency</h2>
+
+    <h3>The Concept</h3>
+    <p>The DGX Spark has a theoretical maximum memory bandwidth of 273 GB/s — meaning it can move 273 gigabytes of data per second between memory and the processor. In practice, software never fully maxes out the hardware. Overhead from loading instructions, managing memory, and waiting for operations to sync always eats into that ceiling.</p>
+
+    <h3>What We Measured</h3>
+    <p>To generate each token, the GPU has to read the model's weights from memory roughly once. So if a 42GB model runs at 4 tok/s, it's reading 42GB × 4 = 168 GB/s of data per second. Divide that by the theoretical max of 273 GB/s and you get 61.5% utilization.</p>
+
+    <h3>What We Found</h3>
+    <p>The DGX Spark is using 50–63% of its memory bandwidth for LLM inference — which is exceptional for this type of workload.</p>
+
+    <table>
+      <thead><tr><th>Model</th><th>Size</th><th>tok/s</th><th>Effective BW</th><th>GB10 Utilization</th></tr></thead>
+      <tbody>
+        <tr><td>QwQ-32B</td><td>19.2 GB</td><td><strong>8.51</strong></td><td>163.4 GB/s</td><td><strong>59.9%</strong></td></tr>
+        <tr><td>Qwen2.5-Coder-32B</td><td>19.2 GB</td><td><strong>7.34</strong></td><td>140.9 GB/s</td><td><strong>51.6%</strong></td></tr>
+        <tr><td>DeepSeek-R1-70B</td><td>42.0 GB</td><td><strong>4.11</strong></td><td>172.6 GB/s</td><td><strong>63.2%</strong></td></tr>
+      </tbody>
+    </table>
+    <p><em>Qwen3.5-122B excluded — post-quantization model size is too difficult to estimate reliably at this scale, which would make the derived bandwidth figure misleading.</em></p>
+    <p><em>All benchmarks measured first-party on a DGX Spark GB10 (128GB LPDDR5X) via Ollama's OpenAI-compatible API. Each condition run 3× and averaged.</em></p>
+
+    <hr />
+
+    <div class="part2-teaser">
+      <p>Part 2 is coming soon — I'll cover whether the DGX Spark is actually worth the price: head-to-head vs the RTX 4090 and Mac Studio, plus a 3-year cost breakdown to help you decide.</p>
+    </div>
+
+    <div style="display:grid;gap:10px;margin:40px 0 24px">
+      <hr />
+      <h2 style="border-top:none;margin-top:0">Related Guides</h2>
+      <a href="https://llmpicker.blog/posts/local-llm-hardware-guide/" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;text-decoration:none!important;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.055)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="color:#e8e8f0;font-size:14px;font-weight:600;margin-bottom:4px">📌 Local LLM Hardware Guide: VRAM, Quantization &amp; What You Can Actually Run</div>
+        <div style="color:#8888a8;font-size:12px">The beginner-friendly primer — start here if you're new to running models locally</div>
+      </a>
+      <a href="https://llmpicker.blog/posts/how-much-ram-to-run-llama-3/" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;text-decoration:none!important;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.055)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="color:#e8e8f0;font-size:14px;font-weight:600;margin-bottom:4px">How Much RAM Do You Need to Run Llama 3?</div>
+        <div style="color:#8888a8;font-size:12px">Memory requirements by model size — 8B through 70B</div>
+      </a>
+      <a href="https://llmpicker.blog/posts/best-gpu-for-running-llms-locally/" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;text-decoration:none!important;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.055)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="color:#e8e8f0;font-size:14px;font-weight:600;margin-bottom:4px">Best GPU for Running LLMs Locally in 2026</div>
+        <div style="color:#8888a8;font-size:12px">Full GPU comparison — RTX 4090, 3090, 4080, RX 7900 XTX and more</div>
+      </a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

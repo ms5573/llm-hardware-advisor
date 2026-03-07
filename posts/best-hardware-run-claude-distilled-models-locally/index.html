@@ -118,9 +118,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <hr />
 <h2 id="tldr">TL;DR</h2>
 <ul>
-<li><strong>RTX 4090 is the best overall GPU</strong> for local GGUF inference — 80 t/s on 7B models, handles 32B Q6_K at 25 t/s, and fits 70B Q4_K_M with room to spare.</li>
-<li><strong>Apple M5 Ultra Mac Studio</strong> is the only single-device solution that runs 70B Q8_0 without offloading, thanks to 192GB unified memory.</li>
-<li><strong>Budget pick: AMD RX 6600 ($200)</strong> delivers 33 t/s on 7B Q4_K_M — genuinely usable performance for a fraction of the cost.</li>
+<li><strong>RTX 4090 is the best overall GPU</strong> for local GGUF inference — ~150 t/s on 7B models, handles 32B Q6_K at 25 t/s, and fits 70B Q4_K_M with room to spare.</li>
+<li><strong>Apple M5 Ultra Mac Studio (expected)</strong> is the only single-device solution that runs 70B Q8_0 without offloading, thanks to 192GB unified memory.</li>
+<li><strong>Budget pick: AMD RX 6600 (~$150 used / ~$250 new)</strong> delivers 33 t/s on 7B Q4_K_M — genuinely usable performance for a fraction of the cost.</li>
 <li><strong>8GB VRAM GPUs are a dead end</strong> for anything beyond 7B Q8_0. If you're buying new hardware in 2026, don't go below 16GB VRAM.</li>
 </ul>
 <hr />
@@ -136,7 +136,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li><strong>Q4_K_M</strong>: 4-bit quantization with K-quant improvements. Best balance of speed, memory, and quality. This is the default recommendation for most use cases.</li>
 <li><strong>Q8_0</strong>: 8-bit quantization. Closer to full precision, noticeably better output quality on complex reasoning tasks, but roughly double the VRAM requirement.</li>
 </ul>
-<p>A practical rule of thumb for estimating VRAM needs: <strong>Model size in billions × quant multiplier</strong>. For Q8_0, that multiplier is roughly 1.5. So a 7B Q8_0 model needs about 10.5GB of VRAM. A 70B Q8_0 needs around 105GB — which is why you need an M5 Ultra or a multi-GPU setup to run it without CPU offloading.</p>
+<p>A practical rule of thumb for estimating VRAM needs: <strong>Model size in billions × quant multiplier</strong>. For Q8_0, that multiplier is roughly ~1.1–1.2. So a 7B Q8_0 model needs about ~8–9GB of VRAM. A 70B Q8_0 needs around 105GB — which is why you need an M5 Ultra (expected) or a multi-GPU setup to run it without CPU offloading.</p>
 <p>The trend toward distilled MoE (Mixture of Experts) architectures makes this more interesting. Models like GLM-4.7-Flash pack 42B parameters into a structure that only activates a fraction of them per token, dropping the effective VRAM requirement to 16GB for Q4_K_M. Expect more Claude-distilled models to follow this pattern through 2026.</p>
 <hr />
 <h2 id="hardware-tiers-by-model-size">Hardware Tiers by Model Size</h2>
@@ -163,7 +163,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 </tr>
 <tr>
 <td>RTX 4090</td>
-<td>80 t/s</td>
+<td>~150 t/s</td>
 <td>24GB</td>
 </tr>
 <tr>
@@ -194,9 +194,9 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p>Running a 70B model locally is genuinely impressive, but the hardware requirements are steep.</p>
 <ul>
 <li><strong>70B Q4_K_M</strong>: Needs ~40GB VRAM. A single RTX 4090 (24GB) can't fit it without offloading. Dual RTX 3090s (48GB total) get you there at around 15 t/s.</li>
-<li><strong>70B Q8_0</strong>: Needs ~105GB. This is M5 Ultra territory or a serious multi-GPU workstation.</li>
+<li><strong>70B Q8_0</strong>: Needs ~105GB. This is M5 Ultra (expected) territory or a serious multi-GPU workstation.</li>
 </ul>
-<p>The M5 Ultra Mac Studio with 192GB unified memory runs 70B Q8_0 at approximately 12 t/s. That's not fast, but it's coherent and fully on-device. No other single consumer device can do this in 2026.</p>
+<p>The M5 Ultra Mac Studio (expected) with 192GB unified memory runs 70B Q8_0 at approximately 12 t/s. That's not fast, but it's coherent and fully on-device. No other single consumer device can do this in 2026.</p>
 <p>CPU-only inference on 70B Q8_0 with a Ryzen 5700G and 64GB DDR4 RAM? About 0.8 t/s. That's not inference — that's watching paint dry.</p>
 <hr />
 <h2 id="apple-silicon-the-unified-memory-advantage">Apple Silicon: The Unified Memory Advantage</h2>
@@ -208,12 +208,12 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <li>M5 Max Mac Studio: ~45 t/s</li>
 </ul>
 <p>That's a 60% improvement, driven by higher memory bandwidth and more GPU cores. If you're buying a Mac for local LLM work, the M5 Max is the minimum worth considering for 13B+ models.</p>
-<p><strong>The M5 Ultra case:</strong> At $7,000 for the Mac Studio configuration, it's expensive. But it's the only device that runs 70B Q8_0 without any offloading or multi-GPU complexity. For researchers or developers who need that capability in a clean, single-device package, the math actually works out.</p>
+<p><strong>The M5 Ultra case (expected):</strong> At a rumored ~$7,000 for the Mac Studio configuration, it's expensive. But it's the only device that runs 70B Q8_0 without any offloading or multi-GPU complexity. For researchers or developers who need that capability in a clean, single-device package, the math actually works out.</p>
 <hr />
 <h2 id="nvidia-gpus-consumer-vs-pro">NVIDIA GPUs: Consumer vs. Pro</h2>
 <h3 id="rtx-4090-still-the-king">RTX 4090: Still the King</h3>
-<p>The RTX 4090 remains the best consumer GPU for local LLM inference. 80 t/s on 7B Q4_K_M is fast enough that the model feels instant. 25 t/s on 32B Q6_K is comfortable for interactive use. At 24GB VRAM, it fits most models you'll encounter in the Claude-distilled space.</p>
-<p>The one limitation: 70B models. You can run 70B Q4_K_M with aggressive layer offloading to system RAM, but performance drops significantly. If 70B is your primary target, you need either dual 4090s or an M5 Ultra.</p>
+<p>The RTX 4090 remains the best consumer GPU for local LLM inference. ~150 t/s on 7B Q4_K_M is fast enough that the model feels instant. 25 t/s on 32B Q6_K is comfortable for interactive use. At 24GB VRAM, it fits most models you'll encounter in the Claude-distilled space.</p>
+<p>The one limitation: 70B models. You can run 70B Q4_K_M with aggressive layer offloading to system RAM, but performance drops significantly. If 70B is your primary target, you need either dual 4090s or an M5 Ultra (expected).</p>
 <h3 id="rtx-4080-super-the-sensible-step-down">RTX 4080 Super: The Sensible Step Down</h3>
 <p>At 16GB VRAM, the RTX 4080 Super handles 13B Q8_0 and 32B Q4_K_M cleanly. It's meaningfully cheaper than the 4090 and covers the majority of use cases. The token speed gap versus the 4090 is real but not dramatic for most model sizes.</p>
 <h3 id="the-3090-case">The 3090 Case</h3>
@@ -225,7 +225,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <p>Not everyone needs to run 70B models. If 7B-13B covers your use case, you can build a genuinely capable local inference machine for under $500.</p>
 <h3 id="gtx-1070-8gb-100-used">GTX 1070 (8GB, ~$100 used)</h3>
 <p>Surprisingly capable for 7B Q4_K_M — around 25-30 t/s. The catch: 8GB VRAM means you're limited to 7B Q8_0 at the upper end. No headroom for 13B. But for someone who just wants to run a capable 7B model locally without spending much, this works.</p>
-<h3 id="amd-rx-6600-8gb-200">AMD RX 6600 (8GB, ~$200)</h3>
+<h3 id="amd-rx-6600-8gb-200">AMD RX 6600 (8GB, ~$150 used / ~$250 new)</h3>
 <p>The best budget pick. 33 t/s on 7B Q4_K_M, solid driver support, and the ROCm backend in llama.cpp handles it well. Same 8GB VRAM ceiling as the 1070, but faster and more power-efficient. Pair it with a Ryzen 5700G and 64GB RAM for a system that can fall back to CPU inference for larger models when needed.</p>
 <h3 id="intel-arc-a770-16gb-vram-250">Intel Arc A770 (16GB VRAM, ~$250)</h3>
 <p>The Arc A770 is an underrated option. 16GB VRAM at this price point is genuinely unusual. llama.cpp's SYCL backend supports it, and you'll see around 15 t/s on 13B Q4_K_M. Intel NUC builds with the A770 make for a compact, power-efficient local inference box. The driver ecosystem is less mature than NVIDIA or AMD, but it's workable.</p>
@@ -277,12 +277,12 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 - 70B CPU inference: 64GB minimum, 128GB preferred</p>
 <hr />
 <h2 id="bottom-line-what-should-you-actually-buy">Bottom Line: What Should You Actually Buy?</h2>
-<p><strong>Best overall — RTX 4090 ($1,800):</strong> If you're serious about local LLM inference and want one GPU that handles everything through 32B models with authority and 70B with offloading, this is it. 80 t/s on 7B, 25 t/s on 32B Q6_K. Future-proof for the GGUF models coming in 2026.</p>
-<p><strong>Best for Mac users — M5 Ultra Mac Studio (~$7,000):</strong> Expensive, but it's the only single device that runs 70B Q8_0 without compromise. 192GB unified memory, clean macOS experience, no driver headaches. If you're already in the Apple ecosystem and need maximum capability, this is the answer.</p>
-<p><strong>Best budget build — AMD RX 6600 ($200) + Ryzen 5700G + 64GB RAM:</strong> 33 t/s on 7B Q4_K_M is genuinely comfortable for daily use. The 64GB RAM gives you a CPU fallback for larger models. Total system cost under $600 if you're building from scratch.</p>
+<p><strong>Best overall — RTX 4090 (~$1,800):</strong> If you're serious about local LLM inference and want one GPU that handles everything through 32B models with authority and 70B with offloading, this is it. ~150 t/s on 7B, 25 t/s on 32B Q6_K. Future-proof for the GGUF models coming in 2026.</p>
+<p><strong>Best for Mac users — M5 Ultra Mac Studio (expected, rumored ~$7,000):</strong> Expensive, but it's the only single device that runs 70B Q8_0 without compromise. 192GB unified memory, clean macOS experience, no driver headaches. If you're already in the Apple ecosystem and need maximum capability, this is the answer.</p>
+<p><strong>Best budget build — AMD RX 6600 (~$150 used / ~$250 new) + Ryzen 5700G + 64GB RAM:</strong> 33 t/s on 7B Q4_K_M is genuinely comfortable for daily use. The 64GB RAM gives you a CPU fallback for larger models. Total system cost under $600 if you're building from scratch.</p>
 <p><strong>Best RAM upgrade — Corsair Vengeance DDR5-6400 64GB:</strong> If you're doing any CPU-assisted inference, DDR5 at 6000+ MHz makes a measurable difference. Don't pair a capable GPU with slow RAM.</p>
 <p><strong>Avoid:</strong> Any GPU with 8GB VRAM if you're buying new in 2026. The model landscape is moving toward 13B-32B as the practical sweet spot, and 8GB VRAM locks you out of that range. Also avoid DDR4-only platforms if CPU inference is part of your workflow.</p>
-<p>The hardware floor for useful local inference has never been lower. A $200 GPU and a mid-range CPU will get you a capable 7B setup today. But if you want to run the best Claude-distilled models at the quality levels that actually compete with API access, budget for at least 16GB VRAM and don't skimp on system RAM.</p>
+<p>The hardware floor for useful local inference has never been lower. A ~$150–250 GPU and a mid-range CPU will get you a capable 7B setup today. But if you want to run the best Claude-distilled models at the quality levels that actually compete with API access, budget for at least 16GB VRAM and don't skimp on system RAM.</p>
 <hr />
 <h2 id="related-guides">Related Guides</h2>
 <div style="display:grid;gap:10px;margin:16px 0 24px">
