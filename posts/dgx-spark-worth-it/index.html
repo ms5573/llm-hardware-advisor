@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is the DGX Spark Worth $5,000? — Part 2</title>
+<meta name="description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
+<link rel="canonical" href="https://llmpicker.blog/posts/dgx-spark-worth-it/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Is the DGX Spark Worth $5,000? — Part 2">
+<meta property="og:description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
+<meta property="og:url" content="https://llmpicker.blog/posts/dgx-spark-worth-it/">
+<meta property="og:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is the DGX Spark Worth $5,000? — Part 2">
+<meta name="twitter:description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
+<meta name="twitter:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);--bg-card-hover:rgba(22,22,42,0.95);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+  --green:#22c55e;--red:#f87171;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(244,114,182,0.03) 0%,transparent 50%),
+  var(--bg)}
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+.content{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:28px 20px 80px}
+.post h1{font-size:34px;line-height:1.15;margin:12px 0 28px;letter-spacing:-0.5px}
+.post h2{font-size:22px;font-weight:700;margin:48px 0 16px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px}
+.post h3{font-size:17px;font-weight:600;margin:28px 0 12px;color:var(--text)}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 20px;font-size:15px}
+.post ul,.post ol{margin:4px 0 24px 20px;color:var(--text-dim);line-height:1.85}
+.post li{margin:8px 0;font-size:15px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.post em{color:var(--text-dim)}
+.post code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+.post hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.post table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:14px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.post thead{background:linear-gradient(135deg,rgba(124,106,255,0.18),rgba(124,106,255,0.08))}
+.post th{padding:13px 18px;text-align:left;color:var(--text);font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;border-bottom:1px solid rgba(124,106,255,0.25)}
+.post td{padding:12px 18px;color:var(--text-dim);border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+.post tr:last-child td{border-bottom:none}
+.post tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.post tbody tr:hover td{background:rgba(124,106,255,0.05);color:var(--text);transition:all .15s}
+.amazon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#e68a00,#ff9900);color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none!important;margin:10px 0 4px;box-shadow:0 2px 12px rgba(255,153,0,0.25);letter-spacing:0.2px}
+.amazon-btn:hover{background:linear-gradient(135deg,#d47e00,#e68a00);box-shadow:0 4px 18px rgba(255,153,0,0.4);transform:translateY(-1px)}
+.amazon-sub{font-size:10px;color:var(--text-muted);margin-bottom:10px}
+.cta-card{margin:28px 0;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.cta-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--text-dim)}
+.hero-img{width:100%;border-radius:14px;margin:0 0 36px;border:1px solid var(--border);display:block}
+.verdict-card{border-radius:14px;padding:28px 32px;margin:36px 0}
+.verdict-buy{background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2)}
+.verdict-pass{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2)}
+.verdict-card h3{margin:0 0 16px;font-size:18px}
+.verdict-buy h3{color:var(--green)}
+.verdict-pass h3{color:var(--red)}
+.verdict-card ul{margin:0;padding-left:20px}
+.verdict-card li{margin:10px 0;font-size:15px;color:var(--text-dim)}
+.callout{background:rgba(124,106,255,0.07);border:1px solid rgba(124,106,255,0.2);border-radius:12px;padding:20px 24px;margin:32px 0}
+.callout p{margin:0;font-size:14px;line-height:1.8;color:var(--text-dim)}
+.callout strong{color:var(--text)}
+.data-note{font-size:12px;color:var(--text-muted);font-style:italic;margin-top:-16px;margin-bottom:20px}
+.part-nav{display:flex;gap:12px;margin:0 0 36px;flex-wrap:wrap}
+.part-nav a{font-size:13px;color:var(--text-dim);text-decoration:none;padding:6px 14px;border:1px solid var(--border);border-radius:20px;transition:all .15s}
+.part-nav a:hover,.part-nav a.active{border-color:var(--accent);color:var(--accent);background:rgba(124,106,255,0.06)}
+.hw-cta{background:rgba(124,106,255,0.06);border:1px solid rgba(124,106,255,0.18);border-radius:14px;padding:24px 28px;margin:48px 0 0}
+.hw-cta h3{font-size:16px;margin:0 0 8px;color:var(--text)}
+.hw-cta p{margin:0 0 16px;font-size:14px;color:var(--text-dim)}
+.hw-cta a{font-size:14px;color:var(--accent);font-weight:600}
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .content{padding:20px 16px 60px}
+  .post h1{font-size:26px}
+  .verdict-card{padding:20px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Is the DGX Spark Worth $5,000? — Part 2","description":"How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference?","author":{"@type":"Person","name":"Marc Smith"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-08","dateModified":"2026-03-08","image":"https://llmpicker.blog/assets/dgx-spark-desk.jpg"}
+</script>
+</head>
+<body>
+<div class="bg-grad"></div>
+<header class="header">
+  <a class="logo" href="https://llmpicker.blog">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">LLM Picker <span>blog</span></div>
+  </a>
+</header>
+<div class="content">
+  <article class="post">
+
+    <div class="part-nav">
+      <a href="/posts/dgx-spark-local-llm-benchmark/">Part 1: Benchmarks</a>
+      <a href="/posts/dgx-spark-worth-it/" class="active">Part 2: Is It Worth It?</a>
+    </div>
+
+    <h1>Is the DGX Spark Worth $5,000?</h1>
+
+    <img src="/assets/dgx-spark-desk.jpg" alt="NVIDIA DGX Spark on desk" class="hero-img">
+
+    <p>After running benchmarks on the DGX Spark across several models in <a href="/posts/dgx-spark-local-llm-benchmark/">Part 1</a>, the obvious next question is: how does it actually compare to the alternatives, and is it worth the price tag?</p>
+
+    <p>Here's the lineup I put together for this comparison.</p>
+
+    <hr />
+
+    <h2>1. The Contenders</h2>
+
+    <table>
+      <thead>
+        <tr><th>Machine</th><th>Price</th><th>VRAM / RAM</th><th>Memory BW</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>DGX Spark GB10</strong></td><td>~$5,000</td><td>128GB unified</td><td>273 GB/s</td></tr>
+        <tr><td>RTX 5090 build</td><td>~$3,800</td><td>32GB GDDR7</td><td>1,792 GB/s</td></tr>
+        <tr><td>RTX 4090 build</td><td>~$2,800</td><td>24GB GDDR6</td><td>1,008 GB/s</td></tr>
+        <tr><td>Mac Studio M4 Max</td><td>$3,699</td><td>128GB unified</td><td>546 GB/s</td></tr>
+      </tbody>
+    </table>
+
+    <p>The DGX is the most expensive machine on this list. The RTX 5090 has more than double the bandwidth for $1,200 less, which might make it the preferred choice for many hobbyists and AI practitioners. Even the Mac Studio, which a lot of people online treat as the obvious choice for running local models, has the same RAM and double the bandwidth for $1,300 less. Apple hardware being a value play is a relatively new phenomenon, but it really is competitive for local models right now.</p>
+
+    <p>Where the DGX Spark obviously beats everyone is form factor. It's small enough to fit in a bag, though most people probably don't need their AI lab to be portable.</p>
+
+    <hr />
+
+    <h2>2. Speed Comparison</h2>
+
+    <table>
+      <thead>
+        <tr><th>Model</th><th>Spark GB10</th><th>RTX 5090 ✅</th><th>RTX 4090 ⚠️</th><th>Mac Studio ⚠️</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>qwq:32b</td><td>8.5 tok/s</td><td><strong>64.8 tok/s</strong></td><td>~40 tok/s</td><td>~28 tok/s</td></tr>
+        <tr><td>qwen2.5-coder:32b</td><td>7.3 tok/s</td><td><strong>62.2 tok/s</strong></td><td>~38 tok/s</td><td>~25 tok/s</td></tr>
+        <tr><td>deepseek-r1:70b</td><td>4.1 tok/s</td><td>❌ OOM</td><td>❌ OOM</td><td>~10 tok/s</td></tr>
+        <tr><td>qwen3.5:122b</td><td>15.1 tok/s</td><td>❌ OOM</td><td>❌ OOM</td><td>❌ OOM</td></tr>
+      </tbody>
+    </table>
+
+    <p class="data-note">✅ First-party data via <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener sponsored">RunPod</a>. ⚠️ RTX 4090 and Mac Studio figures sourced from community benchmarks (r/LocalLLaMA) — RTX 4090 allocation was unavailable on RunPod during testing.</p>
+
+    <p>Let's get the embarrassing stat out of the way first: speed. On a 32B model, the RTX 5090 is <strong>7.6× faster</strong> than the DGX Spark. We rented an RTX 5090 on <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener sponsored">RunPod</a> for a few dollars to get first-party numbers. This goes back to the bandwidth advantage. When a model fits entirely in VRAM, throughput is essentially equivalent to memory bandwidth. The GDDR7 at 1,792 GB/s clearly dominates the LPDDR5x at 273 GB/s. The RTX 4090 is roughly 5× faster and the Mac Studio about 3× faster on 32B models.</p>
+
+    <p>The Spark is not winning on speed. There's no way to spin that differently.</p>
+
+    <hr />
+
+    <h2>3. The 128GB Advantage</h2>
+
+    <p>What you also see in that table is that none of the alternatives can handle the 70B or 122B models at all. That's where the Spark's real advantage comes through.</p>
+
+    <p>The RTX 5090 smokes the Spark on 32B models. But once the model doesn't fit in VRAM anymore, the story changes completely. With partial CPU offload, models run 10–20× slower than full GPU processing. The VRAM cliff is a real problem.</p>
+
+    <p>The Spark handles large models without breaking a sweat. I loaded <code>claude-distilled</code> (16GB) and <code>QwQ-32B</code> (18GB) simultaneously and it handled both flawlessly. Try doing that on a 32GB GPU. R1-70B runs at 4.1 tok/s, which is slow, but usable for async tasks, research, or overnight batch jobs. My MoE model <code>Qwen3.5:122b</code> runs at 15.1 tok/s with ~10B active parameters per token. You simply can't load that on anything else on this list.</p>
+
+    <p>So yes, the 128GB of unified memory is the main selling point. Most other aspects are tradeoffs I'm willing to make.</p>
+
+    <hr />
+
+    <h2>4. The Real Competitor: Mac Studio M4 Max</h2>
+
+    <p>In my view, the true head-to-head is the Mac Studio M4 Max. If your primary use case is inference and you're already in the Mac ecosystem, it might just be the machine to get. Same RAM, 2× the bandwidth, $1,300 cheaper.</p>
+
+    <p>What you get with the Spark instead is CUDA. New models, inference engines, and research repos typically run on NVIDIA before anything else. Something that appealed to me specifically was training and fine-tuning my own models. Metal is improving, but it's not on par with CUDA yet. Most cutting-edge research code runs on Linux/CUDA and requires porting to run on Metal. CUDA just gives you less friction.</p>
+
+    <div class="callout">
+      <p><strong>Bottom line:</strong> The Mac Studio is the better inference appliance. The Spark is the better developer workstation.</p>
+    </div>
+
+    <hr />
+
+    <h2>5. Total Cost of Ownership</h2>
+
+    <table>
+      <thead>
+        <tr><th>Option</th><th>Upfront</th><th>Power/yr</th><th>3-Year Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>DGX Spark</strong></td><td>$5,000</td><td>~$80</td><td>~$5,240</td></tr>
+        <tr><td>RTX 5090 build</td><td>$3,800</td><td>~$200</td><td>~$4,400</td></tr>
+        <tr><td>RTX 4090 build</td><td>$2,800</td><td>~$180</td><td>~$3,340</td></tr>
+        <tr><td>Mac Studio 128GB</td><td>$3,699</td><td>~$60</td><td>~$3,879</td></tr>
+        <tr><td>Cloud (RunPod, 8h/day)</td><td>$0</td><td>—</td><td>~$15,768</td></tr>
+      </tbody>
+    </table>
+
+    <p>The Spark only draws about 22–45W at idle. That's generally less than a full high-end GPU desktop. Cloud at 8 hours a day breaks even with the Spark in under a year. If you're a heavy daily user, the hardware pays back fast. The question is how many hours a day you actually run inference.</p>
+
+    <p>On resale value, my guess is the Spark holds its value better than a GPU, but we'll see how that plays out.</p>
+
+    <hr />
+
+    <h2>6. Why I Bought It</h2>
+
+    <p>I wanted to run models that are too large to fit on anything else. I'll admit the speed difference on 32B models was a bit of a surprise. 8.5 tok/s vs 64.8 tok/s on the RTX 5090 is a massive gap and hard to ignore. But when I load R1-70B or run two models simultaneously, I don't regret the decision. That matters more to me than raw speed.</p>
+
+    <p>If you need to run large models locally and CUDA matters, the Spark is the only consumer option that gets you there. If you don't, there are cheaper ways.</p>
+
+    <hr />
+
+    <h2>7. Buy or Don't Buy?</h2>
+
+    <div class="verdict-card verdict-buy">
+      <h3>✅ Buy it if:</h3>
+      <ul>
+        <li>You want to run 70B+ models locally without VRAM limits</li>
+        <li>You need CUDA for training, fine-tuning, or custom inference pipelines</li>
+        <li>You want a quiet, compact, fanless Linux appliance with zero driver headaches</li>
+        <li>You're a developer who needs large models without cloud latency or cost</li>
+        <li>Privacy matters to you. Nothing ever leaves your machine</li>
+      </ul>
+    </div>
+
+    <div class="verdict-card verdict-pass">
+      <h3>❌ Don't buy it if:</h3>
+      <ul>
+        <li>You mostly run 7B–32B models. The RTX 4090/5090 is 5–7× faster for less money</li>
+        <li>You're already in the Mac ecosystem. The Mac Studio M4 Max is better value for pure inference</li>
+        <li>Speed is your priority. 4.1 tok/s on R1-70B is real friction for chat use</li>
+        <li>You're cost-sensitive. The premium is hard to justify unless you actually max out the 128GB</li>
+      </ul>
+    </div>
+
+    <div class="hw-cta">
+      <h3>Where to buy</h3>
+
+      <p style="margin-top:16px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;">DGX Spark GB10</p>
+      <p>Available directly from NVIDIA or on Amazon.</p>
+      <p style="margin-bottom:4px;"><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreferrer">→ Buy from NVIDIA directly</a></p>
+      <a href="https://www.amazon.com/dp/B0FWJ16CCH?tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">DGX Spark on Amazon →</a>
+      <div class="amazon-sub">Affiliate link · No extra cost to you</div>
+
+      <p style="margin-top:24px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;">RTX 5090</p>
+      <p>GPU-only card — you'll need a build to go with it. Benchmark data via <a href="https://runpod.io?ref=2lqmzyra" target="_blank" rel="noopener sponsored">RunPod</a>.</p>
+      <a href="https://www.amazon.com/s?k=RTX+5090&tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">RTX 5090 on Amazon →</a>
+      <div class="amazon-sub">Affiliate link · No extra cost to you</div>
+
+      <p style="margin-top:24px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;">RTX 4090</p>
+      <a href="https://www.amazon.com/s?k=RTX+4090&tag=ms5573-20" target="_blank" rel="sponsored nofollow noopener noreferrer" class="amazon-btn">RTX 4090 on Amazon →</a>
+      <div class="amazon-sub">Affiliate link · No extra cost to you</div>
+
+      <p style="margin-top:24px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;">Mac Studio M4 Max</p>
+      <p>Not available on Amazon. Buy direct from Apple.</p>
+      <p><a href="https://www.apple.com/shop/buy-mac/mac-studio" target="_blank" rel="noopener noreferrer">→ Buy Mac Studio from Apple</a></p>
+    </div>
+
+    <hr />
+
+    <div class="callout">
+      <p><strong>Up next, Part 3:</strong> I ran two instances of the same AI model against each other in a strategy game. Same weights, same architecture. They played completely differently. What that tells us about how temperature affects decision-making and what it means for training your own models on a Spark. Coming soon.</p>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>
