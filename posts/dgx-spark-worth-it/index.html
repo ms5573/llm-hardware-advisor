@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Is the DGX Spark Worth $5,000? — Part 2</title>
+<title>Is the DGX Spark Worth $4,700? — Part 2</title>
 <meta name="description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
 <link rel="canonical" href="https://llmpicker.blog/posts/dgx-spark-worth-it/">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Is the DGX Spark Worth $5,000? — Part 2">
+<meta property="og:title" content="Is the DGX Spark Worth $4,700? — Part 2">
 <meta property="og:description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
 <meta property="og:url" content="https://llmpicker.blog/posts/dgx-spark-worth-it/">
 <meta property="og:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Is the DGX Spark Worth $5,000? — Part 2">
+<meta name="twitter:title" content="Is the DGX Spark Worth $4,700? — Part 2">
 <meta name="twitter:description" content="How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference? First-party benchmarks, TCO analysis, and an honest verdict.">
 <meta name="twitter:image" content="https://llmpicker.blog/assets/dgx-spark-desk.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +101,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"Is the DGX Spark Worth $5,000? — Part 2","description":"How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference?","author":{"@type":"Person","name":"Marc Smith"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-08","dateModified":"2026-03-08","image":"https://llmpicker.blog/assets/dgx-spark-desk.jpg"}
+{"@context":"https://schema.org","@type":"Article","headline":"Is the DGX Spark Worth $4,700? — Part 2","description":"How does the NVIDIA DGX Spark compare to the RTX 5090, RTX 4090, and Mac Studio M4 Max for local LLM inference?","author":{"@type":"Person","name":"Marc Smith"},"publisher":{"@type":"Organization","name":"LLM Picker","url":"https://llmpicker.blog"},"datePublished":"2026-03-08","dateModified":"2026-03-08","image":"https://llmpicker.blog/assets/dgx-spark-desk.jpg"}
 </script>
 </head>
 <body>
@@ -120,7 +120,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
       <a href="/posts/dgx-spark-worth-it/" class="active">Part 2: Is It Worth It?</a>
     </div>
 
-    <h1>Is the DGX Spark Worth $5,000?</h1>
+    <h1>Is the DGX Spark Worth $4,700?</h1>
 
     <img src="/assets/dgx-spark-desk.jpg" alt="NVIDIA DGX Spark on desk" class="hero-img">
 
@@ -137,14 +137,14 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         <tr><th>Machine</th><th>Price</th><th>VRAM / RAM</th><th>Memory BW</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>DGX Spark GB10</strong></td><td>~$5,000</td><td>128GB unified</td><td>273 GB/s</td></tr>
+        <tr><td><strong>DGX Spark GB10</strong></td><td>~$4,700</td><td>128GB unified</td><td>273 GB/s</td></tr>
         <tr><td>RTX 5090 build</td><td>~$3,800</td><td>32GB GDDR7</td><td>1,792 GB/s</td></tr>
-        <tr><td>RTX 4090 build</td><td>~$2,800</td><td>24GB GDDR6</td><td>1,008 GB/s</td></tr>
+        <tr><td>RTX 4090 build</td><td>~$2,800</td><td>24GB GDDR6X</td><td>1,008 GB/s</td></tr>
         <tr><td>Mac Studio M4 Max</td><td>$3,699</td><td>128GB unified</td><td>546 GB/s</td></tr>
       </tbody>
     </table>
 
-    <p>The DGX is the most expensive machine on this list. The RTX 5090 has more than double the bandwidth for $1,200 less, which might make it the preferred choice for many hobbyists and AI practitioners. Even the Mac Studio, which a lot of people online treat as the obvious choice for running local models, has the same RAM and double the bandwidth for $1,300 less. Apple hardware being a value play is a relatively new phenomenon, but it really is competitive for local models right now.</p>
+    <p>The DGX is the most expensive machine on this list. The RTX 5090 has more than double the bandwidth for $900 less, which might make it the preferred choice for many hobbyists and AI practitioners. Even the Mac Studio, which a lot of people online treat as the obvious choice for running local models, has the same RAM and double the bandwidth for $1,000 less. Apple hardware being a value play is a relatively new phenomenon, but it really is competitive for local models right now.</p>
 
     <p>Where the DGX Spark obviously beats everyone is form factor. It's small enough to fit in a bag, though most people probably don't need their AI lab to be portable.</p>
 
@@ -203,7 +203,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         <tr><th>Option</th><th>Upfront</th><th>Power/yr</th><th>3-Year Total</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>DGX Spark</strong></td><td>$5,000</td><td>~$80</td><td>~$5,240</td></tr>
+        <tr><td><strong>DGX Spark</strong></td><td>$4,700</td><td>~$80</td><td>~$4,940</td></tr>
         <tr><td>RTX 5090 build</td><td>$3,800</td><td>~$200</td><td>~$4,400</td></tr>
         <tr><td>RTX 4090 build</td><td>$2,800</td><td>~$180</td><td>~$3,340</td></tr>
         <tr><td>Mac Studio 128GB</td><td>$3,699</td><td>~$60</td><td>~$3,879</td></tr>
