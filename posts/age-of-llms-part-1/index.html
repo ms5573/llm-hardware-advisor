@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forget Benchmarks. I Put LLMs in a Real-Time Strategy Game. — Age of LLMs Part 1</title>
+<meta name="description" content="I built a real-time strategy game where LLMs compete for territory, resources, and survival. Here's how it works — and why it tells you more than any benchmark.">
+<link rel="canonical" href="https://llmpicker.blog/posts/age-of-llms-part-1/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Forget Benchmarks. I Put LLMs in a Real-Time Strategy Game.">
+<meta property="og:description" content="I built a real-time strategy game where LLMs compete for territory, resources, and survival. Here's how it works — and why it tells you more than any benchmark.">
+<meta property="og:url" content="https://llmpicker.blog/posts/age-of-llms-part-1/">
+<meta property="og:image" content="https://llmpicker.blog/assets/age-of-llms-game-screenshot.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Forget Benchmarks. I Put LLMs in a Real-Time Strategy Game.">
+<meta name="twitter:description" content="I built a real-time strategy game where LLMs compete for territory, resources, and survival. Here's how it works — and why it tells you more than any benchmark.">
+<meta name="twitter:image" content="https://llmpicker.blog/assets/age-of-llms-game-screenshot.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQCGYR3DQJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CQCGYR3DQJ');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080d;--bg2:#0e0e18;--bg-card:rgba(14,14,26,0.88);
+  --border:rgba(255,255,255,0.06);--border-h:rgba(255,255,255,0.12);
+  --text:#e8e8f0;--text-dim:#8888a8;--text-muted:#555570;
+  --accent:#7c6aff;--accent-glow:rgba(124,106,255,0.25);
+  --amazon:#ff9900;--amazon-hover:#ffad33;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.bg-grad{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 45%,rgba(124,106,255,0.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(34,211,238,0.03) 0%,transparent 50%),
+  var(--bg)}
+.header{position:sticky;top:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,8,13,0.97) 0%,rgba(8,8,13,0) 100%);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#22d3ee);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;box-shadow:0 0 20px var(--accent-glow)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--text-dim);font-weight:400;font-size:14px}
+.content{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:40px 20px 100px}
+.series-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(124,106,255,0.12);border:1px solid rgba(124,106,255,0.25);color:#a78bfa;font-size:11px;padding:4px 12px;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;font-family:'JetBrains Mono',monospace}
+h1{font-size:36px;line-height:1.15;margin:0 0 16px;letter-spacing:-0.5px;font-weight:800}
+.subtitle{color:var(--text-dim);font-size:16px;line-height:1.65;margin:0 0 36px;max-width:600px}
+.post-meta{color:var(--text-muted);font-size:12px;margin-bottom:40px;display:flex;align-items:center;gap:12px}
+.post-meta span{display:flex;align-items:center;gap:4px}
+.post p{color:var(--text-dim);line-height:1.85;margin:0 0 22px;font-size:15.5px}
+.post h2{font-size:21px;font-weight:700;margin:48px 0 18px;padding-top:8px;border-top:1px solid var(--border);letter-spacing:-0.3px;color:var(--text)}
+.post ul{margin:4px 0 24px 22px;color:var(--text-dim);line-height:1.85}
+.post li{margin:10px 0;font-size:15.5px}
+.post a{color:var(--amazon);text-decoration:none;font-weight:500}
+.post a:hover{color:var(--amazon-hover);text-decoration:underline}
+.post strong{color:var(--text)}
+.pull-quote{background:rgba(124,106,255,0.07);border-left:3px solid var(--accent);padding:18px 22px;border-radius:0 8px 8px 0;margin:28px 0;font-size:16px;color:#c4b5fd;line-height:1.7;font-style:italic}
+.screenshot-block{margin:32px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.screenshot-block img{width:100%;display:block}
+.screenshot-caption{background:rgba(14,14,26,0.9);padding:10px 16px;font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.03em}
+.next-series{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.next-series-label{color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.next-series-title{color:var(--text);font-size:16px;font-weight:600}
+.next-series-arrow{color:var(--accent);font-size:22px;flex-shrink:0}
+.footer{position:relative;z-index:1;text-align:center;padding:40px 20px;color:var(--text-muted);font-size:13px;border-top:1px solid var(--border)}
+.footer a{color:var(--text-muted);text-decoration:none}
+.footer a:hover{color:var(--text-dim)}
+</style>
+</head>
+<body>
+<div class="bg-grad"></div>
+
+<header class="header">
+  <a class="logo" href="/">
+    <div class="logo-icon">LLM</div>
+    <div class="logo-text">llmpicker<span>.blog</span></div>
+  </a>
+  <a href="/posts/" style="color:var(--text-dim);font-size:13px;text-decoration:none;">← All posts</a>
+</header>
+
+<div class="content">
+  <div class="post">
+    <div class="series-tag">⚔ Age of LLMs · Part 1 of 5</div>
+    <h1>Forget benchmarks.<br>I put LLMs in a real-time strategy game.</h1>
+    <p class="subtitle">What happens when two AI models compete for territory, resources, and survival — with a clock ticking and no second chances?</p>
+    <div class="post-meta">
+      <span>March 10, 2026</span>
+      <span>·</span>
+      <span>~5 min read</span>
+    </div>
+
+    <p>As a kid I spent hours playing Age of Empires, building civilizations, managing armies, racing to control territory before the enemy reached my borders. To be successful you had to think about resource allocation, timing, and reading your opponent. The combination of strategy and live combat is what made it one of the most popular games of the 2000s.</p>
+
+    <p>Twenty years later I'm deeply fascinated by AI. And I keep seeing the same benchmarks recycled on X. MMLU scores. HumanEval scores. Math reasoning scores. All useful. None of them tell you how a model actually makes decisions under pressure, with limited time, against a real opponent.</p>
+
+    <p>So I built "Age of LLMs" to find out.</p>
+
+    <div class="pull-quote">
+      Unlike benchmarks, which test models in isolation, this is a zero-sum game. Every piece of land one player gains, another player loses. Every turn you spend building is a turn you're not attacking.
+    </div>
+
+    <h2>How It Works</h2>
+
+    <p>The system is a full-stack TypeScript application with three layers. The backend runs a Node.js game engine that manages a tick-based loop — every few seconds it creates a snapshot of the full game and sends each LLM a prompt describing the current state. The frontend is a React app that renders the game on an HTML5 Canvas in the style of the original Age of Empires. The AI layer sits between the engine and the model, supporting both local inference and any LLM provider via OpenRouter.</p>
+
+    <p>Once the models are set up, each agent gets a system prompt with its personality and returns a JSON array of actions. Here are the basic rules:</p>
+
+    <ul>
+      <li><strong>The map</strong> is a 20×20 grid of tiles. Each player starts in opposite corners with a patch of land. The goal is simple: control more territory than your opponent when time runs out.</li>
+      <li><strong>Each turn, the model receives a status update</strong> — how many tiles it controls, what age it's in (Dark, Feudal, Castle), its army size, available resources, and where the opponent was last spotted. It reads this like a briefing and writes back what it wants to do.</li>
+      <li><strong>A parser reads the model's decision and executes the move.</strong> The model says "expand east" — the game expands east. It says "train archers" — archers get trained. It's not that different from how you'd play: you look at the screen, decide what to do, and click. The model looks at a text summary, decides what to do, and types. Same loop. Different interface.</li>
+      <li><strong>Every player has a time limit per turn.</strong> Think too long and your turn is skipped. This matters more than you'd expect — a model that reasons carefully but slowly can fall behind a faster, more decisive opponent.</li>
+      <li><strong>The game runs for 100 turns.</strong> Whoever controls the most territory at tick 100 wins.</li>
+    </ul>
+
+    <p>Train villagers and your economy grows but your army stalls. Build army and you fall behind on resources. There's no right answer — only the choice you made and its consequences 100 turns later.</p>
+
+    <h2>Mid-Game — Tick 50 of 100</h2>
+
+    <div class="screenshot-block">
+      <img src="/assets/age-of-llms-game-screenshot.png" alt="Age of LLMs — game state at Tick 50 of 100" loading="lazy">
+      <div class="screenshot-caption">Tick 50/100 · Claude-A (blue): 39 tiles, army 121 · Claude-B (red): 36 tiles, army 147 · Both in Feudal Age · Running on DGX Spark local inference</div>
+    </div>
+
+    <p>I'm running all of this locally on a <a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">DGX Spark</a>. API costs compound fast when you're running hundreds of turns across multiple models. Running locally means I can run as many games as I want, iterate fast, and not have to worry about costs stacking up.</p>
+
+    <h2>What This Creates</h2>
+
+    <p>What this creates is a dynamic, zero-sum environment where model A's choices directly affect model B's options in real time. It's not a static test. It's a living game where decisions compound over 100 turns.</p>
+
+    <p>What I found across multiple games gave me a completely new perspective on how these models actually think — one you simply don't get from standard benchmarks. I'm already thinking about how to combine this with <a href="https://github.com/karpathy/autoresearch">Karpathy's autoresearch repo</a> to train a small model optimized on the game data I've collected so far.</p>
+
+    <p>Stay tuned for the results.</p>
+
+    <div class="next-series">
+      <div>
+        <div class="next-series-label">Next in the series</div>
+        <div class="next-series-title">Part 2: The first match — and the result that surprised me</div>
+      </div>
+      <div class="next-series-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p><a href="/">llmpicker.blog</a> · Honest LLM hardware reviews and benchmarks</p>
+</footer>
+</body>
+</html>
